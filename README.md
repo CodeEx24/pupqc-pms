@@ -1,3 +1,2 @@
 Update Files
-1.) Project Setup
-2.) Tailwind
+1.) Login Interface for Student and Teacher are already made
