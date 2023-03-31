@@ -1,9 +1,22 @@
 import DefaultLayout from '@/components/DefaultLayout';
+import loginAuth from '@/utils/authentication/loginAuth';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import { useForm } from 'react-hook-form';
+
 function FacultyLoginScreen() {
+  // React Hook Form
+  const {
+    // handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  // Submit Handler when click the submit button
+  // const submitHandler = async ({ email, password }) => {};
+
   return (
     <DefaultLayout title="Faculty Portal">
       <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-3/6 lg:pr-0">
@@ -13,13 +26,13 @@ function FacultyLoginScreen() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="w-6 h-6 mr-3"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
               />
             </svg>
@@ -43,7 +56,10 @@ function FacultyLoginScreen() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <form
+            className="flex flex-col gap-3"
+            // onSubmit={handleSubmit(submitHandler)}
+          >
             <div className="">
               <label
                 htmlFor="email"
@@ -55,7 +71,19 @@ function FacultyLoginScreen() {
                 id="email"
                 name="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                {...register('email', {
+                  required: 'Please enter email',
+                  pattern: {
+                    value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                    message: 'Please enter valid email',
+                  },
+                })}
               />
+              {errors.email && (
+                <div className="text-red-600 text-start text-sm mt-2">
+                  {errors.email.message}
+                </div>
+              )}
             </div>
 
             <div className="">
@@ -70,7 +98,19 @@ function FacultyLoginScreen() {
                 name="password"
                 type="password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                {...register('password', {
+                  required: 'Please enter password',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be more than 5 characters',
+                  },
+                })}
               />
+              {errors.password && (
+                <div className="text-red-600 text-start text-sm mt-2">
+                  {errors.password.message}
+                </div>
+              )}
             </div>
 
             <button
@@ -79,7 +119,7 @@ function FacultyLoginScreen() {
             >
               Sign In
             </button>
-          </div>
+          </form>
           <div>
             <p className=" text-red-600 font-medium mt-3 flex justify-center">
               <svg
@@ -109,4 +149,4 @@ function FacultyLoginScreen() {
   );
 }
 
-export default FacultyLoginScreen;
+export default loginAuth(FacultyLoginScreen);
