@@ -1,8 +1,9 @@
 import DefaultLayout from '@/components/DefaultLayout';
+import loginAuth from '@/utils/authentication/loginAuth';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() {
+function Home() {
   return (
     <DefaultLayout title="">
       <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-3/6 lg:pr-0">
@@ -48,3 +49,5 @@ export default function Home() {
     </DefaultLayout>
   );
 }
+
+export default loginAuth(Home);
