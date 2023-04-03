@@ -7,6 +7,8 @@ function withStudentAuth(Component) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
+    console.log('LOADING...');
+
     if (status === 'loading') {
       return <Loading />;
     }

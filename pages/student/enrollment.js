@@ -3,7 +3,7 @@ import StudentLayout from '@/components/StudentLayout';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
-function HomeScreen() {
+function EnrollmentScreen() {
   return (
     <StudentLayout title="Home">
       <div className="text-yellow-500 font-bold text-3xl">
@@ -22,8 +22,8 @@ function HomeScreen() {
   );
 }
 
-HomeScreen.auth = {
-  role: 'faculty',
+EnrollmentScreen.auth = {
+  role: 'student',
 };
 
-export default HomeScreen;
+export default EnrollmentScreen;

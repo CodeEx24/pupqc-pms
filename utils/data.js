@@ -1,6 +1,20 @@
 import bcrypt from 'bcryptjs';
 
-const data = {
+import {
+  AiFillHome,
+  AiFillIdcard,
+  AiFillCalendar,
+  AiFillSnippets,
+  AiFillDiff,
+} from 'react-icons/ai';
+
+import { RiContactsLine } from 'react-icons/ri';
+
+import { FaMoneyBillAlt } from 'react-icons/fa';
+
+import { TbReportAnalytics } from 'react-icons/tb';
+
+export const data = {
   students: [
     {
       name: 'John Doe',
@@ -52,4 +66,48 @@ const data = {
   // ],
 };
 
-export default data;
+export const studentLinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'home',
+        icon: <AiFillHome />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'enrollment',
+        icon: <AiFillIdcard />,
+      },
+      {
+        name: 'tuition',
+        icon: <FaMoneyBillAlt />,
+      },
+      {
+        name: 'schedules',
+        icon: <AiFillCalendar />,
+      },
+      {
+        name: 'grades',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'scores',
+        icon: <AiFillSnippets />,
+      },
+      {
+        name: 'forms',
+        icon: <AiFillDiff />,
+      },
+      {
+        name: 'hdf',
+        icon: <RiContactsLine />,
+      },
+    ],
+  },
+];
