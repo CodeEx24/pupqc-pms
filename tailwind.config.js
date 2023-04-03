@@ -13,6 +13,7 @@ module.exports = {
       fontFamily: {
         poppins: 'Poppins',
       },
+      // darkMode: false, // Set default mode to light
     },
   },
   plugins: [],

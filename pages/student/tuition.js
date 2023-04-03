@@ -1,9 +1,8 @@
 import StudentLayout from '@/components/StudentLayout';
-// import withStudentAuth from '@/utils/authentication/withStudentAuth';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import React from 'react';
 
-function HomeScreen() {
+function TuitionScreen() {
   return (
     <StudentLayout title="Home">
       <div className="text-yellow-500 font-bold text-3xl">
@@ -11,7 +10,6 @@ function HomeScreen() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              signOut();
             }}
           >
             Sign Out
@@ -22,8 +20,4 @@ function HomeScreen() {
   );
 }
 
-HomeScreen.auth = {
-  role: 'faculty',
-};
-
-export default HomeScreen;
+export default TuitionScreen;
