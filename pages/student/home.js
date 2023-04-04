@@ -18,23 +18,22 @@ function HomeScreen() {
 
   return (
     <StudentLayout title="Home">
-      <div>
+      <div className="bg-white p-10 rounded-xl">
         <h1 className="text-sky-400 font-bold text-3xl mb-5">Title Here</h1>
-
         <GridComponent
           dataSource={data}
           allowPaging={true}
           pageSettings={pageSettings}
         >
           <ColumnsDirective>
-            <ColumnDirective field="OrderID" width="100" textAlign="Right" />
+            <ColumnDirective field="OrderID" width="100" textAlign="Left" />
             <ColumnDirective field="CustomerID" width="100" />
-            <ColumnDirective field="EmployeeID" width="100" textAlign="Right" />
+            <ColumnDirective field="EmployeeID" width="100" textAlign="Left" />
             <ColumnDirective
               field="Freight"
               width="100"
               format="C2"
-              textAlign="Right"
+              textAlign="Left"
             />
             <ColumnDirective field="ShipCountry" width="100" />
           </ColumnsDirective>

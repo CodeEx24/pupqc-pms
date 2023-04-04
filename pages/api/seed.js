@@ -1,5 +1,5 @@
 import Student from '@/models/Student';
-import data from '@/utils/data';
+import { data } from '@/utils/data';
 import db from '@/utils/db';
 
 const handler = async (req, res) => {
