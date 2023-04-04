@@ -36,7 +36,7 @@ export const data = {
       placeOfBirth: 'Los Angeles',
       mobileNo: '0987654321',
       residentialAddress: '456 Elm Street, Los Angeles',
-      isAdmin: true,
+      isAdmin: false,
     },
     {
       name: 'Bob Smith',
@@ -47,7 +47,7 @@ export const data = {
       placeOfBirth: 'Chicago',
       mobileNo: '5551234567',
       residentialAddress: '789 Oak Street, Chicago',
-      isAdmin: false,
+      isAdmin: true,
     },
   ],
   // teachers: [

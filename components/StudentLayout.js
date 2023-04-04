@@ -26,7 +26,7 @@ function StudentLayout({ title, children }) {
 
       <ToastContainer position="bottom-center" limit={1} />
 
-      <div className="flex min-h-screen flex-col justify-between ">
+      <div className="flex min-h-screen flex-col justify-between bg-gray-100">
         <div className="flex relative ">
           {/* Button settings in the below right corner */}
           <div className="fixed right-4 bottom-4">
@@ -45,7 +45,7 @@ function StudentLayout({ title, children }) {
 
           {/* Sidebar Menu Condition */}
           {activeMenu ? (
-            <div className="w-72 fixed sidebar ">
+            <div className="w-72 fixed sidebar bg-white">
               <StudentSidebar />
             </div>
           ) : (
@@ -63,7 +63,7 @@ function StudentLayout({ title, children }) {
             <div className="fixed md:static bg-main-bg  navbar w-full">
               <StudentNavbar />
             </div>
-            <main className="container m-auto p-8 mt-4 flex min-h-screen flex-col justify-between bg-gray-100 rounded-xl">
+            <main className="mt-10 md:mt-0 px-4 md:px-8 pt-6 flex min-h-screen flex-col justify-between rounded-xl">
               {children}
             </main>
             <div className="flex justify-between align-middle p-2 md:mx-6 relative"></div>

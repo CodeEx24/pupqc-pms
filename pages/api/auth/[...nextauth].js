@@ -39,7 +39,6 @@ export default NextAuth({
         if (credentials.type === 'Student') {
           const student = await Student.findOne({ email: credentials.email });
 
-          console.log(student);
           await db.disconnect();
 
           if (
