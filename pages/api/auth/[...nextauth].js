@@ -1,4 +1,5 @@
 import Student from '@/models/Student';
+import Teacher from '@/models/Teacher';
 import bcryptjs from 'bcryptjs';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -16,8 +17,6 @@ export default NextAuth({
         token.isAdmin = user.isAdmin;
       }
 
-      // if (user?._id) token._id = user._id;
-      // if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return token;
     },
     async session({ session, token }) {
@@ -26,8 +25,6 @@ export default NextAuth({
         session.user.isAdmin = token.isAdmin;
       }
 
-      // if (token?._id) session.user._id = token._id;
-      // if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       return session;
     },
   },
@@ -36,31 +33,28 @@ export default NextAuth({
       async authorize(credentials) {
         await db.connect();
 
-        if (credentials.type === 'Student') {
-          const student = await Student.findOne({ email: credentials.email });
+        const userModel = credentials.type === 'Student' ? Student : Teacher;
 
-          await db.disconnect();
+        const user = await userModel.findOne({ email: credentials.email });
 
-          if (
-            student &&
-            bcryptjs.compareSync(credentials.password, student.password)
-          ) {
-            return {
-              _id: student._id,
-              name: student.name,
-              email: student.email,
-              gender: student.gender,
-              isAdmin: student.isAdmin,
-              dob: student.dateOfBirth,
-              pob: student.placeOfBirth,
-              mobileNo: student.mobileNo,
-              residentialAddress: student.resedentialAddress,
-            };
-          }
+        await db.disconnect();
 
-          // Throw an error if authentication is unsuccessful
-          throw new Error('Invalid email or password');
+        if (user && bcryptjs.compareSync(credentials.password, user.password)) {
+          return {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            gender: user.gender,
+            isAdmin: user.isAdmin,
+            dob: user.dateOfBirth,
+            pob: user.placeOfBirth,
+            mobileNo: user.mobileNo,
+            residentialAddress: user.resedentialAddress,
+          };
         }
+
+        // Throw an error if authentication is unsuccessful
+        throw new Error('Invalid email or password');
       },
     }),
   ],
