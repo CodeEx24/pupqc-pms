@@ -20,7 +20,7 @@ import { NavButton } from './NavButton';
 // import { Cart, Chat, Notification, UserProfile } from '.';
 // import { useStateContext } from '../contexts/ContextProvider';
 
-function StudentNavbar() {
+function FacultyNavbar() {
   const { data: session } = useSession();
 
   const menu = Store((state) => state.menu);
@@ -126,4 +126,4 @@ function StudentNavbar() {
   );
 }
 
-export default StudentNavbar;
+export default FacultyNavbar;

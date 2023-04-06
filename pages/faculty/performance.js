@@ -1,18 +1,18 @@
 import FacultyLayout from '@/components/FacultyLayout';
 // import withStudentAuth from '@/utils/authentication/withStudentAuth';
 
-function HomeScreen() {
+function PerformanceScreen() {
   return (
     <FacultyLayout title="Home">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-sky-400 font-bold text-3xl mb-5">Dashboard</h1>
+        <h1 className="text-sky-400 font-bold text-3xl mb-5">Performance</h1>
       </div>
     </FacultyLayout>
   );
 }
 
-HomeScreen.auth = {
+PerformanceScreen.auth = {
   role: 'faculty',
 };
 
-export default HomeScreen;
+export default PerformanceScreen;
