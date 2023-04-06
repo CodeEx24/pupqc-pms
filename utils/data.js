@@ -17,6 +17,7 @@ import { TbReportAnalytics } from 'react-icons/tb';
 export const data = {
   students: [
     {
+      _id: '609e16f7c2585b8a5f9ddc01',
       name: 'John Doe',
       email: 'student@gmail.com',
       password: bcrypt.hashSync('admin24'),
@@ -28,6 +29,7 @@ export const data = {
       isAdmin: false,
     },
     {
+      _id: '609e16f7c2585b8a5f9ddc02',
       name: 'Jocarl Basco',
       email: 'jocarlbasco24@gmail.com',
       password: bcrypt.hashSync('admin24'),
@@ -39,6 +41,7 @@ export const data = {
       isAdmin: false,
     },
     {
+      _id: '609e16f7c2585b8a5f9ddc03',
       name: 'Bob Smith',
       email: 'bobsmith@gmail.com',
       password: bcrypt.hashSync('password789'),
@@ -52,9 +55,10 @@ export const data = {
   ],
   teachers: [
     {
+      _id: '609e16f7c2585b8a5f9ddc04',
       name: 'Sarah Smith',
-      email: 'sarahsmith@gmail.com',
-      password: bcrypt.hashSync('sarah123'),
+      email: 'teacher@gmail.com',
+      password: bcrypt.hashSync('teacher123'),
       gender: 'Female',
       dateOfBirth: new Date('1990-03-25'),
       placeOfBirth: 'San Francisco',
@@ -63,6 +67,7 @@ export const data = {
       isAdmin: true,
     },
     {
+      _id: '609e16f7c2585b8a5f9ddc05',
       name: 'John Lee',
       email: 'johnlee@gmail.com',
       password: bcrypt.hashSync('john123'),
@@ -74,6 +79,7 @@ export const data = {
       isAdmin: true,
     },
     {
+      _id: '609e16f7c2585b8a5f9ddc06',
       name: 'Emily Chen',
       email: 'emilychen@gmail.com',
       password: bcrypt.hashSync('emily123'),
@@ -85,6 +91,7 @@ export const data = {
       isAdmin: true,
     },
     {
+      _id: '609e16f7c2585b8a5f9ddc07',
       name: 'David Kim',
       email: 'davidkim2@gmail.com',
       password: bcrypt.hashSync('david123'),
@@ -95,16 +102,127 @@ export const data = {
       residentialAddress: '321 Pine Street, Los Angeles',
       isAdmin: true,
     },
+  ],
+  criteria: [
     {
-      name: 'David Kim',
-      email: 'davidkim@gmail.com',
-      password: bcrypt.hashSync('david123'),
-      gender: 'Male',
-      dateOfBirth: new Date('1982-06-15'),
-      placeOfBirth: 'Los Angeles',
-      mobileNo: '5557778888',
-      residentialAddress: '321 Pine Street, Los Angeles',
-      isAdmin: true,
+      _id: '609e16f7c2585b8a5f9ddc24',
+      teacher_id: '609e16f7c2585b8a5f9ddc04',
+      criteria: {
+        lecture: {
+          short_quiz: {
+            weightage: 0.2,
+            description: 'Short quizzes administered during lecture',
+          },
+          seatwork: {
+            weightage: 0.15,
+            description: 'In-class assignments and exercises',
+          },
+          long_quiz: {
+            weightage: 0.25,
+            description: 'Longer quizzes and tests administered during lecture',
+          },
+          examination: {
+            weightage: 0.4,
+            description: 'Comprehensive final exam',
+          },
+        },
+        laboratory: {
+          lab_exercises: {
+            weightage: 0.4,
+            description: 'In-class lab exercises and experiments',
+          },
+          project: {
+            weightage: 0.35,
+            description: 'Final project or research paper',
+          },
+          practical_exam: {
+            weightage: 0.25,
+            description: 'Practical exams or demonstrations',
+          },
+        },
+        breakdown: {
+          lecture: 0.7,
+          laboratory: 0.3,
+        },
+      },
+    },
+  ],
+  course: [
+    {
+      _id: '606c80b0a6d0e64b130e6f01',
+      name: 'Bachelor Science in Information Technology',
+      description:
+        'This program provides students with a strong foundation in programming, database management, networking, and web development. Graduates are prepared for a variety of careers in the tech industry.',
+    },
+    {
+      _id: '606c80b0a6d0e64b130e6f02',
+      name: 'Bachelor of Science in Business Administration',
+      description:
+        'This program is designed to equip students with the knowledge and skills needed to succeed in the dynamic field of business. Students will gain a solid understanding of business principles, finance, marketing, and management.',
+    },
+    {
+      _id: '606c80b0a6d0e64b130e6f03',
+      name: 'Bachelor of Arts in Psychology',
+      description:
+        'This program focuses on the scientific study of human behavior and mental processes. Students will explore a range of topics, including personality, perception, learning, and social psychology.',
+    },
+    {
+      _id: '606c80b0a6d0e64b130e6f04',
+      name: 'Bachelor of Fine Arts in Graphic Design',
+      description:
+        'This program is ideal for students who are passionate about art and design. Students will develop their skills in typography, branding, digital media, and print design, and will have opportunities to create their own portfolio of work.',
+    },
+    {
+      _id: '606c80b0a6d0e64b130e6f05',
+      name: 'Bachelor of Science in Nursing',
+      description:
+        'This program prepares students for a career as a registered nurse. Students will learn about anatomy, physiology, pharmacology, and patient care, and will have the opportunity to gain practical experience through clinical rotations.',
+    },
+  ],
+  class: [
+    {
+      _id: '60971b780eaf050004123456',
+      course_id: '606c80b0a6d0e64b130e6f05',
+      name: 'BSIT',
+      year: 3,
+      section: 1,
+      batch: '2021',
+    },
+    {
+      _id: '60971b780eaf050004123457',
+      course_id: '606c80b0a6d0e64b130e6f04',
+      name: 'BFA in Graphic Design',
+      year: 4,
+      section: 2,
+      batch: '2022',
+    },
+  ],
+  classList: [
+    {
+      _id: '609f42e6c2585b8a5f9ddc05',
+      class_id: '60971b780eaf050004123456',
+      student_id: [
+        '609e16f7c2585b8a5f9ddc01',
+        '609e16f7c2585b8a5f9ddc02',
+        '609e16f7c2585b8a5f9ddc03',
+      ],
+    },
+    {
+      _id: '609f42e6c2585b8a5f9ddc06',
+      class_id: '60971b780eaf050004123457',
+      student_id: ['609e16f7c2585b8a5f9ddc01', '609e16f7c2585b8a5f9ddc03'],
+    },
+  ],
+  subject: [
+    {
+      _id: '609f42e6c2585b8a5f9ddc07',
+      name: 'Introduction to Computer Science',
+      description:
+        'This course provides an introduction to the fundamental concepts of computer science and programming.',
+      semester: 1,
+      classList_id: ['609f42e6c2585b8a5f9ddc05', '609f42e6c2585b8a5f9ddc06'],
+      teacher_id: '609e16f7c2585b8a5f9ddc04',
+      criteria_id: '609e16f7c2585b8a5f9ddc24',
     },
   ],
 };
@@ -151,6 +269,60 @@ export const studentLinks = [
         name: 'hdf',
         icon: <RiContactsLine />,
       },
+    ],
+  },
+];
+
+export const teacherLinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'home',
+        href: 'home',
+        icon: <AiFillHome />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'criteria',
+        href: 'criteria',
+        icon: <AiFillIdcard />,
+      },
+      {
+        name: 'section setup',
+        href: 'section-setup',
+        icon: <AiFillDiff />,
+      },
+      {
+        name: 'section',
+        href: 'section',
+        icon: <FaMoneyBillAlt />,
+      },
+      {
+        name: 'performance',
+        href: 'performance',
+        icon: <AiFillCalendar />,
+      },
+      {
+        name: 'attendance',
+        href: 'attendance',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'students grade',
+        href: 'students-grade',
+        icon: <AiFillSnippets />,
+      },
+
+      // {
+      //   name: 'hdf',
+      //   icon: <RiContactsLine />,
+      // },
     ],
   },
 ];

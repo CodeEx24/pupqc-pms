@@ -3,10 +3,11 @@ import React from 'react';
 import Store from '@/utils/Store';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import { FiSettings } from 'react-icons/fi';
-import StudentSidebar from './StudentSidebar';
-import StudentNavbar from './StudentNavbar';
+// import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+// import { FiSettings } from 'react-icons/fi';
+
+import FacultySidebar from './FacultySidebar';
+import FacultyNavbar from './FacultyNavbar';
 
 function FacultyLayout({ title, children }) {
   const menu = Store((state) => state.menu);
@@ -26,7 +27,7 @@ function FacultyLayout({ title, children }) {
       <div className="flex min-h-screen flex-col justify-between bg-gray-100">
         <div className="flex relative ">
           {/* Button settings in the below right corner */}
-          <div className="fixed right-4 bottom-4">
+          {/* <div className="fixed right-4 bottom-4">
             <TooltipComponent content="Settings" position="Top">
               <button
                 type="button"
@@ -38,16 +39,16 @@ function FacultyLayout({ title, children }) {
                 <FiSettings />
               </button>
             </TooltipComponent>
-          </div>
+          </div> */}
 
           {/* Sidebar Menu Condition */}
           {activeMenu ? (
             <div className="w-72 fixed sidebar bg-white">
-              <StudentSidebar />
+              <FacultySidebar />
             </div>
           ) : (
             <div className="w-0 ">
-              <StudentSidebar />
+              <FacultySidebar />
             </div>
           )}
 
@@ -58,7 +59,7 @@ function FacultyLayout({ title, children }) {
             }`}
           >
             <div className="fixed md:static bg-main-bg  navbar w-full">
-              <StudentNavbar />
+              <FacultyNavbar />
             </div>
             <main className="mt-10 md:mt-0 px-4 md:px-8 pt-6 flex min-h-screen flex-col justify-between rounded-xl">
               {children}

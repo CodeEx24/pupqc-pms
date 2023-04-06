@@ -15,6 +15,7 @@ function Home() {
               alt="PUPLogo"
               width={100}
               height={100}
+              loading="lazy"
               // Make the logo width responsive using Tailwind classes
               className="object-cover object-center rounded-lg mx-auto w-16 md:w-28 lg:w-32"
             />
