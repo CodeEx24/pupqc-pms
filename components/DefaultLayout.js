@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DefaultLayout({ title, children }) {
   return (

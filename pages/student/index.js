@@ -5,9 +5,9 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { getError } from '@/utils/error';
-import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import loginAuth from '@/utils/authentication/loginAuth';
+import { toast } from 'react-toastify';
 
 function StudentLoginScreen() {
   // React Hook Form
@@ -31,8 +31,6 @@ function StudentLoginScreen() {
 
       if (result.error) {
         toast.error(result.error);
-      } else {
-        // Save data in state management
       }
     } catch (error) {
       toast.error(getError(error));

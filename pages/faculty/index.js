@@ -1,21 +1,43 @@
 import DefaultLayout from '@/components/DefaultLayout';
-import loginAuth from '@/utils/authentication/loginAuth';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
+import { getError } from '@/utils/error';
+import { toast } from 'react-toastify';
+import { signIn } from 'next-auth/react';
+import loginAuth from '@/utils/authentication/loginAuth';
 
 function FacultyLoginScreen() {
   // React Hook Form
   const {
-    // handleSubmit,
+    handleSubmit,
     register,
     formState: { errors },
   } = useForm();
 
   // Submit Handler when click the submit button
-  // const submitHandler = async ({ email, password }) => {};
+  const submitHandler = async ({ email, password }) => {
+    try {
+      // First Parameter - Depending on provider it can be a google,github, facebook etc.
+      // The second parameter will be handle by NextAuth in [...nextauth].js file
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+        type: 'Teacher',
+      });
+
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        // Save data in state management
+      }
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
 
   return (
     <DefaultLayout title="Faculty Portal">
@@ -58,12 +80,12 @@ function FacultyLoginScreen() {
 
           <form
             className="flex flex-col gap-3"
-            // onSubmit={handleSubmit(submitHandler)}
+            onSubmit={handleSubmit(submitHandler)}
           >
             <div className="">
               <label
                 htmlFor="email"
-                className="block text-left mb-2 text-sm font-medium text-white "
+                className="flex text-left mb-2 font-medium text-white "
               >
                 Your email
               </label>
