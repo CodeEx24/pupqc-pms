@@ -11,6 +11,12 @@ const classSchema = new mongoose.Schema(
     year: { type: Number, required: true },
     section: { type: Number, required: true },
     batch: { type: String, required: true },
+    student_id: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
+      },
+    ],
   },
   {
     timestamps: true,

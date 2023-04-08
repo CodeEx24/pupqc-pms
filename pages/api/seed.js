@@ -1,5 +1,4 @@
 import Class from '@/models/Class';
-import ClassList from '@/models/ClassList';
 import Course from '@/models/Course';
 import Criteria from '@/models/Criteria';
 import Student from '@/models/Student';
@@ -23,8 +22,6 @@ const handler = async (req, res) => {
   await Course.insertMany(data.course);
   await Class.deleteMany();
   await Class.insertMany(data.class);
-  await ClassList.deleteMany();
-  await ClassList.insertMany(data.classList);
 
   await db.disconnect();
 
