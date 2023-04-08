@@ -186,7 +186,8 @@ export const data = {
       name: 'BSIT',
       year: 3,
       section: 1,
-      batch: '2021',
+      batch: '2022',
+      student_id: ['609e16f7c2585b8a5f9ddc01', '609e16f7c2585b8a5f9ddc03'],
     },
     {
       _id: '60971b780eaf050004123457',
@@ -194,25 +195,15 @@ export const data = {
       name: 'BFA in Graphic Design',
       year: 4,
       section: 2,
-      batch: '2022',
-    },
-  ],
-  classList: [
-    {
-      _id: '609f42e6c2585b8a5f9ddc05',
-      class_id: '60971b780eaf050004123456',
+      batch: '2023',
       student_id: [
         '609e16f7c2585b8a5f9ddc01',
         '609e16f7c2585b8a5f9ddc02',
         '609e16f7c2585b8a5f9ddc03',
       ],
     },
-    {
-      _id: '609f42e6c2585b8a5f9ddc06',
-      class_id: '60971b780eaf050004123457',
-      student_id: ['609e16f7c2585b8a5f9ddc01', '609e16f7c2585b8a5f9ddc03'],
-    },
   ],
+
   subject: [
     {
       _id: '609f42e6c2585b8a5f9ddc07',
@@ -220,7 +211,7 @@ export const data = {
       description:
         'This course provides an introduction to the fundamental concepts of computer science and programming.',
       semester: 1,
-      classList_id: ['609f42e6c2585b8a5f9ddc05', '609f42e6c2585b8a5f9ddc06'],
+      class_id: ['60971b780eaf050004123456', '60971b780eaf050004123457'],
       teacher_id: '609e16f7c2585b8a5f9ddc04',
       criteria_id: '609e16f7c2585b8a5f9ddc24',
     },
