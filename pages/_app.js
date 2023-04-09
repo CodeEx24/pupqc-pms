@@ -20,8 +20,8 @@ export default function App({
 }) {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <SessionProvider session={session}>
+      <SessionProvider session={session}>
+        <QueryClientProvider client={queryClient}>
           {Component.auth ? (
             <Auth role={Component.auth.role}>
               <Component {...pageProps} />
@@ -29,9 +29,9 @@ export default function App({
           ) : (
             <Component {...pageProps} />
           )}
-        </SessionProvider>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryClientProvider>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
+      </SessionProvider>
     </>
   );
 }
