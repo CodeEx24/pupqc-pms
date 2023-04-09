@@ -5,13 +5,11 @@ const subjectSchema = new mongoose.Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     semester: { type: Number, required: true },
-    class_id: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Class',
-        required: true,
-      },
-    ],
+    class_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Class',
+      required: true,
+    },
     teacher_id: {
       type: mongoose.Types.ObjectId,
       ref: 'Teacher',
