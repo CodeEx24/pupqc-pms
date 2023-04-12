@@ -41,3 +41,7 @@
     src: url('/fonts/Poppins-ExtraBold.ttf');
   }
 }
+
+.btn-primary {
+  @apply bg-sky-400  text-white w-full rounded-md py-2;
+}

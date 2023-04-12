@@ -4,14 +4,10 @@ import Cookies from 'js-cookie';
 const menuStore = create((set) => {
   const menu = Cookies.get('menu')
     ? JSON.parse(Cookies.get('menu'))
-    : { activeMenu: true, screenSize: undefined, activeLink: 'home' };
+    : { activeMenu: true, screenSize: undefined };
 
   return {
     menu,
-    setActiveLink: (newLink) =>
-      set((state) => {
-        return { ...state, menu: { ...state.menu, activeLink: newLink } };
-      }),
 
     setActiveMenu: (newMenu) =>
       set((state) => {

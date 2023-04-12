@@ -3,6 +3,8 @@ import React from 'react';
 import Store from '@/utils/Store';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 // import { FiSettings } from 'react-icons/fi';
 

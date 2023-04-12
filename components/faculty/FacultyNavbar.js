@@ -14,7 +14,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import avatar from '@/public/usericon/avatar.jpg';
-import { NavButton } from './NavButton';
+import { NavButton } from '../NavButton';
 
 // React Context
 // import { Cart, Chat, Notification, UserProfile } from '.';

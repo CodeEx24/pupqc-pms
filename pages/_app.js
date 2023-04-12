@@ -2,8 +2,8 @@ import '@/styles/globals.css';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { registerLicense } from '@syncfusion/ej2-base';
 
@@ -19,20 +19,18 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <>
-      <SessionProvider session={session}>
-        <QueryClientProvider client={queryClient}>
-          {Component.auth ? (
-            <Auth role={Component.auth.role}>
-              <Component {...pageProps} />
-            </Auth>
-          ) : (
+    <SessionProvider session={session}>
+      <QueryClientProvider client={queryClient}>
+        {Component.auth ? (
+          <Auth role={Component.auth.role}>
             <Component {...pageProps} />
-          )}
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-        </QueryClientProvider>
-      </SessionProvider>
-    </>
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }
 
