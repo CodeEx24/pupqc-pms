@@ -106,6 +106,7 @@ export const data = {
   criteria: [
     {
       _id: '609e16f7c2585b8a5f9ddc24',
+      name: 'CRIT-001',
       teacher_id: '609e16f7c2585b8a5f9ddc04',
       criteria: {
         lecture: {
@@ -140,9 +141,52 @@ export const data = {
             description: 'Practical exams or demonstrations',
           },
         },
-        breakdown: {
+        percentage: {
           lecture: 0.7,
           laboratory: 0.3,
+        },
+      },
+    },
+    {
+      _id: '609e16f7c2585b8a5f9ddc58',
+      name: 'CRIT-002',
+      teacher_id: '609e16f7c2585b8a5f9ddc04',
+      criteria: {
+        lecture: {
+          short_quiz: {
+            weightage: 0.2,
+            description: 'Short quizzes administered during lecture',
+          },
+          seatwork: {
+            weightage: 0.15,
+            description: 'In-class assignments and exercises',
+          },
+          long_quiz: {
+            weightage: 0.25,
+            description: 'Longer quizzes and tests administered during lecture',
+          },
+          examination: {
+            weightage: 0.4,
+            description: 'Comprehensive final exam',
+          },
+        },
+        laboratory: {
+          lab_exercises: {
+            weightage: 0.4,
+            description: 'In-class lab exercises and experiments',
+          },
+          project: {
+            weightage: 0.35,
+            description: 'Final project or research paper',
+          },
+          practical_exam: {
+            weightage: 0.25,
+            description: 'Practical exams or demonstrations',
+          },
+        },
+        percentage: {
+          lecture: 0.6,
+          laboratory: 0.2,
         },
       },
     },
@@ -196,7 +240,16 @@ export const data = {
       year: 4,
       section: 2,
       batch: '2023',
-      student_id: ['609e16f7c2585b8a5f9ddc02', '609e16f7c2585b8a5f9ddc03'],
+      student_id: ['609e16f7c2585b8a5f9ddc02'],
+    },
+    {
+      _id: '60971b780eaf050004123458',
+      course_id: '606c80b0a6d0e64b130e6f05',
+      name: 'BSIT',
+      year: 3,
+      section: 1,
+      batch: '2023',
+      student_id: ['609e16f7c2585b8a5f9ddc03'],
     },
   ],
 
@@ -291,6 +344,11 @@ export const teacherLinks = [
         icon: <AiFillIdcard />,
       },
       {
+        name: 'subject setup',
+        href: 'subject-setup',
+        icon: <AiFillDiff />,
+      },
+      {
         name: 'section setup',
         href: 'section-setup',
         icon: <AiFillDiff />,
@@ -323,3 +381,7 @@ export const teacherLinks = [
     ],
   },
 ];
+
+export const baseUrl = process.env.NEXTAUTH_URL
+  ? process.env.NEXTAUTH_URL
+  : 'http://localhost:3000';

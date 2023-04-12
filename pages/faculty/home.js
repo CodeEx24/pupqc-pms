@@ -1,4 +1,4 @@
-import FacultyLayout from '@/components/FacultyLayout';
+import FacultyLayout from '@/components/faculty/FacultyLayout';
 // import withStudentAuth from '@/utils/authentication/withStudentAuth';
 
 function HomeScreen() {

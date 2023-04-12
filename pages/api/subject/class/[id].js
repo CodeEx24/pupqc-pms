@@ -1,4 +1,4 @@
-// /api/subject/:id
+// /api/subject/class/:id
 
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
@@ -37,7 +37,7 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  res.status(200).json({ result: mergedData, count: mergedData.length });
+  res.status(200).json(mergedData);
 };
 
 export default handler;

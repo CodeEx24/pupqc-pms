@@ -1,85 +1,97 @@
-import { useMemo } from 'react';
-import FacultyLayout from '@/components/FacultyLayout';
-import { useClassDataQueries } from '@/components/hooks/useClassData';
-import { useSubjectData } from '@/components/hooks/useSubjectData';
+// import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import {
   ColumnDirective,
   ColumnsDirective,
-  Filter,
   GridComponent,
-  Group,
-  Inject,
   Page,
   Sort,
+  Edit,
+  Inject,
+  Toolbar,
 } from '@syncfusion/ej2-react-grids';
+import * as React from 'react';
+import FacultyLayout from '@/components/faculty/FacultyLayout';
 import { useSession } from 'next-auth/react';
+import { DataManager, UrlAdaptor } from '@syncfusion/ej2/data';
+import { baseUrl } from '../../utils/data';
 
 function SectionScreen() {
   const { data: session } = useSession();
-  const user_id = session?.user._id;
+  const user_id = session.user._id;
 
-  const { data: subjectData } = useSubjectData(user_id);
+  const editOptions = {
+    allowEditing: true,
+    allowAdding: true,
+    allowDeleting: true,
+  };
 
-  const class_ids = useMemo(
-    () => subjectData?.data?.map((subject) => subject.class_id),
-    [subjectData]
-  );
+  // const toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
 
-  const classData = useClassDataQueries(class_ids);
+  // function dataStateChange(state) {
+  //   console.log('ARAGS', state);
+  // }
 
-  const mergedData = useMemo(
-    () =>
-      subjectData?.data?.reduce((acc, curr) => {
-        const matchingClassIndex = classData?.findIndex(
-          (c) => c?._id === curr.class_id
-        );
+  // const dataSourceChanged = (state) => {
+  //   console.log('STATA', state);
+  // };
 
-        if (matchingClassIndex !== -1) {
-          const matchingClass = classData[matchingClassIndex];
-          const {
-            name: Name,
-            year: Year,
-            section: Section,
-            batch: Batch,
-          } = matchingClass;
-          const { _id: ID, name: Subject, semester: Semester } = curr;
-
-          acc.push({ Subject, Semester, Name, Year, Section, Batch, ID });
-        }
-
-        return acc;
-      }, []),
-    [classData, subjectData]
-  );
+  const subjectDataManager = new DataManager({
+    adaptor: new UrlAdaptor(),
+    url: baseUrl + `/api/subject/${user_id}`,
+    // insertUrl: 'http://localhost:3000' + `/api/subject/insert/${user_id}`,
+    // removeUrl: baseUrl + `/api/subject/delete/${user_id}`,
+    // updateUrl: baseUrl + `/api/subject/update/${user_id}`,
+  });
 
   return (
     <FacultyLayout title="Home">
       <div className="bg-white p-10 rounded-xl">
         <h1 className="text-sky-400 font-bold text-3xl mb-5">Section</h1>
-        {mergedData?.length === subjectData?.data.length && (
-          <GridComponent
-            dataSource={mergedData}
-            allowPaging={true}
-            pageSettings={{ pageSize: 10 }}
-            allowEditing={true}
-            editSettings={{
-              allowEditing: true,
-              allowAdding: true,
-              allowDeleting: true,
-            }}
-            toolbar={['Add', 'Edit', 'Delete', 'Update', 'Cancel']}
-          >
-            <ColumnsDirective>
-              <ColumnDirective field="Subject" width="200" textAlign="Left" />
-              <ColumnDirective field="Name" width="100" />
-              <ColumnDirective field="Year" width="100" textAlign="Left" />
-              <ColumnDirective field="Section" width="100" textAlign="Left" />
-              <ColumnDirective field="Semester" width="100" />
-              <ColumnDirective field="Batch" width="100" />
-            </ColumnsDirective>
-            <Inject services={[Page, Sort, Filter, Group]} />
-          </GridComponent>
-        )}
+        <GridComponent
+          dataSource={subjectDataManager}
+          editSettings={editOptions}
+          // toolbar={toolbarOptions}
+          pageSettings={{ pageSize: 6 }}
+          allowPaging={true}
+          allowSorting={true}
+          // dataSourceChanged={dataSourceChanged}
+          // dataStateChange={dataStateChange}
+        >
+          <ColumnsDirective>
+            <ColumnDirective
+              field="subject"
+              headerText="Subject"
+              width="150"
+              textAlign="Left"
+              isPrimaryKey={true}
+            />
+            <ColumnDirective
+              field="name"
+              headerText="Class Name"
+              width="100"
+              textAlign="Left"
+            />
+            <ColumnDirective
+              field="year"
+              headerText="Year"
+              width="100"
+              textAlign="Left"
+            />
+            <ColumnDirective
+              field="section"
+              headerText="Section"
+              width="100"
+              textAlign="Left"
+            />
+            <ColumnDirective
+              field="batch"
+              headerText="Batch"
+              width="100"
+              textAlign="Left"
+            />
+          </ColumnsDirective>
+          <Inject services={[Page, Edit, Sort, Toolbar]} />
+        </GridComponent>
       </div>
     </FacultyLayout>
   );

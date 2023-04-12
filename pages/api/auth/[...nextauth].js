@@ -6,28 +6,26 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 import db from '../../../utils/db';
 
-export default NextAuth({
+export const authOptions = {
   session: {
     strategy: 'jwt',
   },
+
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token._id = user._id;
-        token.isAdmin = user.isAdmin;
-      }
+      if (user?._id) token._id = user._id;
+      if (user?.isAdmin) token.isAdmin = user.isAdmin;
 
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user._id = token._id;
-        session.user.isAdmin = token.isAdmin;
-      }
+      if (token?._id) session.user._id = token._id;
+      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
 
       return session;
     },
   },
+
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -44,12 +42,7 @@ export default NextAuth({
             _id: user._id,
             name: user.name,
             email: user.email,
-            gender: user.gender,
             isAdmin: user.isAdmin,
-            dob: user.dateOfBirth,
-            pob: user.placeOfBirth,
-            mobileNo: user.mobileNo,
-            residentialAddress: user.resedentialAddress,
           };
         }
 
@@ -58,4 +51,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
