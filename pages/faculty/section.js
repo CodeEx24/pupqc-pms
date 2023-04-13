@@ -8,92 +8,52 @@ import {
   Edit,
   Inject,
   Toolbar,
+  CommandColumn,
+  PdfExport,
 } from '@syncfusion/ej2-react-grids';
 import * as React from 'react';
 import FacultyLayout from '@/components/faculty/FacultyLayout';
 import { useSession } from 'next-auth/react';
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2/data';
 import { baseUrl } from '../../utils/data';
+import { toast } from 'react-toastify';
 
 function SectionScreen() {
-  const { data: session } = useSession();
-  const user_id = session.user._id;
-
-  const editOptions = {
-    allowEditing: true,
-    allowAdding: true,
-    allowDeleting: true,
+  let grid;
+  const toolbar = ['PdfExport'];
+  const toolbarClick = (args) => {
+    if (grid && args.item.id === 'grid_pdfexport') {
+      grid.pdfExport();
+    }
   };
-
-  // const toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-
-  // function dataStateChange(state) {
-  //   console.log('ARAGS', state);
-  // }
-
-  // const dataSourceChanged = (state) => {
-  //   console.log('STATA', state);
-  // };
-
-  const subjectDataManager = new DataManager({
-    adaptor: new UrlAdaptor(),
-    url: baseUrl + `/api/subject/${user_id}`,
-    // insertUrl: 'http://localhost:3000' + `/api/subject/insert/${user_id}`,
-    // removeUrl: baseUrl + `/api/subject/delete/${user_id}`,
-    // updateUrl: baseUrl + `/api/subject/update/${user_id}`,
-  });
-
   return (
-    <FacultyLayout title="Home">
-      <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-sky-400 font-bold text-3xl mb-5">Section</h1>
-        <GridComponent
-          dataSource={subjectDataManager}
-          editSettings={editOptions}
-          // toolbar={toolbarOptions}
-          pageSettings={{ pageSize: 6 }}
-          allowPaging={true}
-          allowSorting={true}
-          // dataSourceChanged={dataSourceChanged}
-          // dataStateChange={dataStateChange}
-        >
-          <ColumnsDirective>
-            <ColumnDirective
-              field="subject"
-              headerText="Subject"
-              width="150"
-              textAlign="Left"
-              isPrimaryKey={true}
-            />
-            <ColumnDirective
-              field="name"
-              headerText="Class Name"
-              width="100"
-              textAlign="Left"
-            />
-            <ColumnDirective
-              field="year"
-              headerText="Year"
-              width="100"
-              textAlign="Left"
-            />
-            <ColumnDirective
-              field="section"
-              headerText="Section"
-              width="100"
-              textAlign="Left"
-            />
-            <ColumnDirective
-              field="batch"
-              headerText="Batch"
-              width="100"
-              textAlign="Left"
-            />
-          </ColumnsDirective>
-          <Inject services={[Page, Edit, Sort, Toolbar]} />
-        </GridComponent>
-      </div>
-    </FacultyLayout>
+    <div>
+      <GridComponent
+        id="grid"
+        dataSource={({ SAMPLE: 'SADA' }, { SAMPLE: 'SADWAS' })}
+        height={270}
+        toolbar={toolbar}
+        allowPdfExport={true}
+        allowPaging={true}
+        toolbarClick={toolbarClick}
+        ref={(g) => (grid = g)}
+      >
+        <ColumnsDirective>
+          <ColumnDirective
+            field="SAMPLE"
+            headerText="Order ID"
+            width="120"
+            textAlign="Right"
+          />
+          {/* <ColumnDirective field='CustomerID' headerText='Customer ID' width='150'/>
+              <ColumnDirective field='Freight' width='100' format='C2' textAlign='Right'/>
+              <ColumnDirective field='OrderDate' width='140' format='yMd' textAlign='Right'/>
+              <ColumnDirective field='ShipCity' headerText='Ship City' width='150'/>
+              <ColumnDirective field='ShipName' headerText='Ship Name' width='150' visible={false}/> */}
+        </ColumnsDirective>
+        <Inject services={[Toolbar, PdfExport]} />
+      </GridComponent>
+    </div>
   );
 }
 
