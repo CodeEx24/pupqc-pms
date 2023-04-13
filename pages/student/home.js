@@ -1,4 +1,4 @@
-import StudentLayout from '@/components/StudentLayout';
+import StudentLayout from '@/components/student/StudentLayout';
 // import withStudentAuth from '@/utils/authentication/withStudentAuth';
 
 import {
@@ -11,7 +11,7 @@ import {
   Page,
   Sort,
 } from '@syncfusion/ej2-react-grids';
-import { data } from '@/utils/datasource';
+import data from '@/utils/datasource';
 
 function HomeScreen() {
   const pageSettings = { pageSize: 6 };

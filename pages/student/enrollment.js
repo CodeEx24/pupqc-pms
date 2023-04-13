@@ -1,4 +1,4 @@
-import StudentLayout from '@/components/StudentLayout';
+import StudentLayout from '@/components/student/StudentLayout';
 // import withStudentAuth from '@/utils/authentication/withStudentAuth';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';

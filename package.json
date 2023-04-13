@@ -16,6 +16,7 @@
     "@syncfusion/ej2-react-popups": "^21.1.37",
     "@tanstack/react-query": "^4.29.1",
     "@tanstack/react-query-devtools": "^4.29.1",
+    "@types/whatwg-url": "^11.0.0",
     "axios": "^1.3.5",
     "bcryptjs": "^2.4.3",
     "eslint": "8.36.0",
@@ -30,6 +31,7 @@
     "react-icons": "^4.8.0",
     "react-toastify": "^9.1.2",
     "sharp": "^0.32.0",
+    "typescript": "^5.0.4",
     "zustand": "^4.3.6"
   },
   "devDependencies": {

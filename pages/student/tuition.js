@@ -1,4 +1,4 @@
-import StudentLayout from '@/components/StudentLayout';
+import StudentLayout from '@/components/student/StudentLayout';
 import Link from 'next/link';
 import React from 'react';
 
