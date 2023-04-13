@@ -17,23 +17,30 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 
-import { fetchSubjectClass } from '../../components/hooks/useSubjectData';
-import { useClassYearData } from '../../components/hooks/useClassData';
-import { useCriteriaData } from '../../components/hooks/useCriteriaData';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addSubjectData } from '../../components/hooks/FacultySubject/addSubjectData';
+import {
+  fetchClassYear,
+  fetchCriteria,
+  fetchSubjectClass,
+} from '../../components/hooks/FacultySubject/fetch';
 
 function SubjectSetupScreen() {
+  // Getting userID
   const { data: session } = useSession();
   const userId = session?.user?._id;
 
+  // Fetching userID with
   const { data: subjects, refetch: refetchSubject } = useQuery(
     ['subject', userId],
     fetchSubjectClass
   );
 
   const currentYear = new Date().getFullYear();
-  const { data: classYears } = useClassYearData(currentYear);
+  const { data: classYears } = useQuery(['class', currentYear], () =>
+    fetchClassYear(currentYear)
+  );
+
   const classYearElements = useMemo(() => {
     return classYears?.data.map((year) => (
       <option key={year.id} value={year.id}>
@@ -42,7 +49,10 @@ function SubjectSetupScreen() {
     ));
   }, [classYears]);
 
-  const { data: criteria } = useCriteriaData();
+  const { data: criteria } = useQuery({
+    queryKey: ['criteria'],
+    queryFn: fetchCriteria,
+  });
   const criteriaElements = useMemo(() => {
     return criteria?.data.map((criterion) => (
       <option key={criterion.id} value={criterion.id}>
