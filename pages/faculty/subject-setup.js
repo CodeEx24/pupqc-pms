@@ -4,18 +4,6 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 
 import FacultyLayout from '@/components/faculty/FacultyLayout';
-import {
-  GridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Page,
-  Sort,
-  Edit,
-  Toolbar,
-  Search,
-  Inject,
-} from '@syncfusion/ej2-react-grids';
-import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addSubjectData } from '../../components/hooks/FacultySubject/addSubjectData';
@@ -24,6 +12,7 @@ import {
   fetchCriteria,
   fetchSubjectClass,
 } from '../../components/hooks/FacultySubject/fetch';
+import ClassSubjectList from '../../components/faculty/ClassSubjectList';
 
 function SubjectSetupScreen() {
   // Getting userID
@@ -31,10 +20,11 @@ function SubjectSetupScreen() {
   const userId = session?.user?._id;
 
   // Fetching userID with
-  const { data: subjects, refetch: refetchSubject } = useQuery(
-    ['subject', userId],
-    fetchSubjectClass
-  );
+  const {
+    data: subjects,
+    refetch: refetchSubject,
+    isLoading,
+  } = useQuery(['subject', userId], fetchSubjectClass);
 
   const currentYear = new Date().getFullYear();
   const { data: classYears } = useQuery(['class', currentYear], () =>
@@ -61,11 +51,6 @@ function SubjectSetupScreen() {
     ));
   }, [criteria]);
 
-  const subjectDataManager = new DataManager({
-    adaptor: new RemoteSaveAdaptor(),
-    json: subjects?.data,
-  });
-
   const {
     register,
     handleSubmit,
@@ -89,9 +74,9 @@ function SubjectSetupScreen() {
         <h1 className="text-sky-400 font-bold text-3xl mb-5">Subject Setup</h1>
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className=" w-full">
-              <div className="flex gap-3 mb-3">
-                <div className="w-1/2">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
+              <div className=" gap-3 md:mb-3 md:flex ">
+                <div className="mb-3 md:w-1/2 md:mb-0">
                   <input
                     type="text"
                     placeholder="Subject Name"
@@ -106,7 +91,7 @@ function SubjectSetupScreen() {
                     })}
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="mb-3 md:w-1/2 md:mb-0">
                   <input
                     type="text"
                     placeholder="Subject Description"
@@ -124,8 +109,8 @@ function SubjectSetupScreen() {
                   />
                 </div>
               </div>
-              <div className="flex gap-3 mb-3">
-                <div className="w-2/6">
+              <div className="md:flex gap-3 mb-3 ">
+                <div className="w-full mb-3 md:w-2/6 md:mb-0">
                   <select
                     className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 ${
                       errors.semester ? 'border-red-300  ' : 'border-gray-300 '
@@ -140,7 +125,7 @@ function SubjectSetupScreen() {
                     <option value="3">Summer</option>
                   </select>
                 </div>
-                <div className="w-2/6">
+                <div className="w-full mb-3 md:w-2/6 md:mb-0">
                   <select
                     className={`w-full bg-gray-50 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ${
                       errors.class_id ? 'border-red-300  ' : 'border-gray-300 '
@@ -157,7 +142,7 @@ function SubjectSetupScreen() {
                     {classYearElements}
                   </select>
                 </div>
-                <div className="w-2/6">
+                <div className="w-full mb-3 md:w-2/6 md:mb-0">
                   <select
                     className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ${
                       errors.criteria_id
@@ -177,52 +162,16 @@ function SubjectSetupScreen() {
                   </select>
                 </div>
               </div>
-              <div className="w-2/6">
+              <div className="w-full md:w-2/6">
                 <input type="submit" className="btn-primary" />
               </div>
             </form>
             <div className="mt-6">
-              <GridComponent
-                dataSource={!subjects ? '' : subjectDataManager}
-                pageSettings={{ pageSize: 10 }}
-                allowPaging={true}
-                allowSorting={true}
-              >
-                <ColumnsDirective>
-                  <ColumnDirective
-                    field="subject"
-                    headerText="Subject"
-                    width="150"
-                    textAlign="Left"
-                    isPrimaryKey={true}
-                  />
-                  <ColumnDirective
-                    field="name"
-                    headerText="Class Name"
-                    width="100"
-                    textAlign="Left"
-                  />
-                  <ColumnDirective
-                    field="year"
-                    headerText="Year"
-                    width="100"
-                    textAlign="Left"
-                  />
-                  <ColumnDirective
-                    field="section"
-                    headerText="Section"
-                    width="100"
-                    textAlign="Left"
-                  />
-                  <ColumnDirective
-                    field="batch"
-                    headerText="Batch"
-                    width="100"
-                    textAlign="Left"
-                  />
-                </ColumnsDirective>
-                <Inject services={[Sort, Page, Edit, Toolbar, Search]} />
-              </GridComponent>
+              {isLoading ? (
+                'Loading...'
+              ) : (
+                <ClassSubjectList subjects={subjects} />
+              )}
             </div>
           </div>
         </div>

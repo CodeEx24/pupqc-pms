@@ -64,8 +64,6 @@ const handler = async (req, res) => {
     { batches: [], classNames: [] }
   );
 
-  console.log(uniqueValues.batches);
-
   res.json({
     data: flattenedStudentsRecordData,
     batchList: uniqueValues.batches,
