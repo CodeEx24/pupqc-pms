@@ -59,6 +59,12 @@ function ClassSubjectList({ subjects }) {
           textAlign="Left"
         />
         <ColumnDirective
+          field="semester"
+          headerText="Semester"
+          width="90"
+          textAlign="Left"
+        />
+        <ColumnDirective
           field="batch"
           headerText="Batch"
           width="90"

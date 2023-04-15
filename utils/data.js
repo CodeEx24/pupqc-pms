@@ -445,8 +445,8 @@ export const teacherLinks = [
         icon: <AiFillIdcard />,
       },
       {
-        name: 'subject setup',
-        href: 'subject-setup',
+        name: 'class subject',
+        href: 'class-subject',
         icon: <AiFillDiff />,
       },
       {
@@ -454,11 +454,7 @@ export const teacherLinks = [
         href: 'student-list',
         icon: <AiFillDiff />,
       },
-      {
-        name: 'section setup',
-        href: 'section-setup',
-        icon: <AiFillDiff />,
-      },
+
       {
         name: 'section',
         href: 'section',

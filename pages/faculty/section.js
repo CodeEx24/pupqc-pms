@@ -3,20 +3,11 @@ import {
   ColumnDirective,
   ColumnsDirective,
   GridComponent,
-  Page,
-  Sort,
-  Edit,
   Inject,
   Toolbar,
-  CommandColumn,
   PdfExport,
 } from '@syncfusion/ej2-react-grids';
 import * as React from 'react';
-import FacultyLayout from '@/components/faculty/FacultyLayout';
-import { useSession } from 'next-auth/react';
-import { DataManager, UrlAdaptor } from '@syncfusion/ej2/data';
-import { baseUrl } from '../../utils/data';
-import { toast } from 'react-toastify';
 
 function SectionScreen() {
   let grid;
