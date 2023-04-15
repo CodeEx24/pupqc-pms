@@ -14,7 +14,7 @@ import {
 } from '../../components/hooks/FacultySubject/fetch';
 import ClassSubjectList from '../../components/faculty/ClassSubjectList';
 
-function SubjectSetupScreen() {
+function ClassSubjectScreen() {
   // Getting userID
   const { data: session } = useSession();
   const userId = session?.user?._id;
@@ -71,7 +71,7 @@ function SubjectSetupScreen() {
   return (
     <FacultyLayout title="Subject Setup">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-sky-400 font-bold text-3xl mb-5">Subject Setup</h1>
+        <h1 className="text-sky-400 font-bold text-3xl mb-5">Class Subject</h1>
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
@@ -180,8 +180,8 @@ function SubjectSetupScreen() {
   );
 }
 
-SubjectSetupScreen.auth = {
+ClassSubjectScreen.auth = {
   role: 'faculty',
 };
 
-export default SubjectSetupScreen;
+export default ClassSubjectScreen;
