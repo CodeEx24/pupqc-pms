@@ -91,7 +91,7 @@ export const data = {
     {
       _id: '609e16f7c2585b8a5f9ddc07',
       name: 'John Doe',
-      email: 'student@gmail.com',
+      email: 'student2@gmail.com',
       password: bcrypt.hashSync('admin24'),
       gender: 'Male',
       dateOfBirth: new Date('1995-05-01'),
@@ -234,7 +234,7 @@ export const data = {
     {
       _id: '609e16f7c2585b8a5f9ddc58',
       name: 'CRIT-002',
-      teacher_id: '609e16f7c2585b8a5f9ddc54',
+      teacher_id: '609e16f7c2585b8a5f9ddc51',
       criteria: {
         lecture: {
           short_quiz: {
@@ -354,12 +354,10 @@ export const data = {
     },
   ],
 
-  subject: [
+  classSubject: [
     {
       _id: '609f42e6c2585b8a5f9ddc07',
-      name: 'Introduction to Computer Science',
-      description:
-        'This course provides an introduction to the fundamental concepts of computer science and programming.',
+      subject_id: 'ITCS-032',
       semester: 1,
       class_id: '60971b780eaf050004123456',
       teacher_id: '609e16f7c2585b8a5f9ddc51',
@@ -367,13 +365,45 @@ export const data = {
     },
     {
       _id: '609f42e6c2585b8a5f9ddc12',
-      name: 'Introduction to Computer Science',
-      description:
-        'This course provides an introduction to the fundamental concepts of computer science and programming.',
+      subject_id: 'DSAA-033',
       semester: 1,
       class_id: '60971b780eaf050004123457',
       teacher_id: '609e16f7c2585b8a5f9ddc51',
       criteria_id: '609e16f7c2585b8a5f9ddc24',
+    },
+  ],
+  subject: [
+    {
+      _id: 'ITCS-032',
+      name: 'Introduction to Computer Science',
+      description:
+        'This course provides an introduction to the fundamental concepts of computer science and programming.',
+    },
+    {
+      _id: 'DSAA-033',
+      name: 'Data Structures and Algorithms',
+      description:
+        'This course covers the fundamentals of data structures and algorithms, including arrays, linked lists, trees, graphs, sorting and searching algorithms, and their applications in problem-solving.',
+    },
+    {
+      _id: 'OSYS-512',
+      name: 'Operating Systems',
+      description:
+        'This course covers the design and implementation of operating systems, including process management, memory management, file systems, and device management.',
+    },
+
+    {
+      _id: 'SENG-516',
+      name: 'Software Engineering',
+      description:
+        'This course covers the principles and practices of software engineering, including requirements engineering, software design, coding, testing, and maintenance.',
+    },
+
+    {
+      _id: 'AINT-623',
+      name: 'Artificial Intelligence',
+      description:
+        'This course covers the fundamental concepts and techniques of artificial intelligence, including search algorithms, machine learning, natural language processing, and robotics.',
     },
   ],
 };
@@ -440,8 +470,8 @@ export const teacherLinks = [
     title: 'Pages',
     links: [
       {
-        name: 'criteria',
-        href: 'criteria',
+        name: 'subject',
+        href: 'subject',
         icon: <AiFillIdcard />,
       },
       {
@@ -454,7 +484,11 @@ export const teacherLinks = [
         href: 'student-list',
         icon: <AiFillDiff />,
       },
-
+      {
+        name: 'criteria',
+        href: 'criteria',
+        icon: <AiFillIdcard />,
+      },
       {
         name: 'section',
         href: 'section',

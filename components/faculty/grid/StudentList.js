@@ -72,6 +72,13 @@ function StudentList({ students }) {
     >
       <ColumnsDirective>
         <ColumnDirective
+          field="subject_id"
+          headerText="Subject Code"
+          width="100"
+          textAlign="Left"
+        />
+
+        <ColumnDirective
           field="student_id"
           headerText="Name"
           width="130"

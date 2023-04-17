@@ -1,5 +1,5 @@
 import FacultyLayout from '@/components/faculty/FacultyLayout';
-import StudentList from '@/components/faculty/StudentList';
+import StudentList from '@/components/faculty/grid/StudentList';
 import { useQuery } from '@tanstack/react-query';
 import { fetchStudents } from '../../components/hooks/FacultySubject/fetch';
 

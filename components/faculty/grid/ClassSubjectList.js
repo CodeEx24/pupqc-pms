@@ -1,23 +1,21 @@
-import React from 'react';
-
 import {
-  GridComponent,
-  ColumnsDirective,
   ColumnDirective,
-  Page,
-  Sort,
-  Edit,
-  Toolbar,
-  Search,
+  ColumnsDirective,
+  GridComponent,
   Inject,
+  Page,
+  Search,
+  Sort,
+  Toolbar,
 } from '@syncfusion/ej2-react-grids';
+import React from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 
-function ClassSubjectList({ subjects }) {
-  const subjectDataManager = new DataManager({
+function ClassSubjectList({ subjectClass }) {
+  const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
-    json: subjects.data,
+    json: subjectClass.data,
   });
 
   const pageOptions = {
@@ -27,51 +25,46 @@ function ClassSubjectList({ subjects }) {
 
   return (
     <GridComponent
-      dataSource={subjectDataManager}
+      dataSource={subjectClassDataManager}
       pageSettings={pageOptions}
       allowPaging={true}
       allowSorting={true}
+      toolbar={['Search']}
     >
       <ColumnsDirective>
         <ColumnDirective
-          field="subject"
-          headerText="Subject"
-          width="250"
+          field="subject_id"
+          headerText="Subject Code"
+          width="100"
           textAlign="Left"
           isPrimaryKey={true}
         />
         <ColumnDirective
-          field="name"
+          field="class_name"
           headerText="Class Name"
           width="100"
           textAlign="Left"
         />
         <ColumnDirective
-          field="year"
-          headerText="Year"
-          width="90"
-          textAlign="Left"
-        />
-        <ColumnDirective
-          field="section"
-          headerText="Section"
-          width="90"
+          field="criteria"
+          headerText="Criteria"
+          width="100"
           textAlign="Left"
         />
         <ColumnDirective
           field="semester"
           headerText="Semester"
-          width="90"
+          width="100"
           textAlign="Left"
         />
         <ColumnDirective
           field="batch"
           headerText="Batch"
-          width="90"
+          width="100"
           textAlign="Left"
         />
       </ColumnsDirective>
-      <Inject services={[Sort, Page, Edit, Toolbar, Search]} />
+      <Inject services={[Sort, Page, Search, Toolbar]} />
     </GridComponent>
   );
 }
