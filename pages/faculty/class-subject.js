@@ -1,71 +1,139 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSession } from 'next-auth/react';
-import { toast } from 'react-toastify';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import FacultyLayout from '@/components/faculty/FacultyLayout';
+import { fetchSubjectCode } from '@/components/hooks/FacultySubject/fetch';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { addSubjectData } from '../../components/hooks/FacultySubject/addSubjectData';
+import Select from 'react-select';
 import {
   fetchClassYear,
   fetchCriteria,
   fetchSubjectClass,
 } from '../../components/hooks/FacultySubject/fetch';
-import ClassSubjectList from '../../components/faculty/ClassSubjectList';
+import { useMemo } from 'react';
+import { addSubjectClassData } from '../../components/hooks/FacultySubject/addData';
+import { toast } from 'react-toastify';
+import ClassSubjectList from '../../components/faculty/grid/ClassSubjectList';
 
 function ClassSubjectScreen() {
-  // Getting userID
-  const { data: session } = useSession();
-  const userId = session?.user?._id;
-
-  // Fetching userID with
   const {
-    data: subjects,
-    refetch: refetchSubject,
+    register,
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm();
+
+  const {
+    data: subjectClass,
+    refetch: refetchSubjectClass,
     isLoading,
-  } = useQuery(['subject', userId], fetchSubjectClass);
+  } = useQuery(['subjectClass'], fetchSubjectClass);
+
+  // Fetch the data needed for selection
+  const { data: subjects } = useQuery(['subject'], fetchSubjectCode);
 
   const currentYear = new Date().getFullYear();
   const { data: classYears } = useQuery(['class', currentYear], () =>
     fetchClassYear(currentYear)
   );
 
-  const classYearElements = useMemo(() => {
-    return classYears?.data.map((year) => (
-      <option key={year.id} value={year.id}>
-        {year.name}
-      </option>
-    ));
+  const { data: criteria } = useQuery(['criteria'], fetchCriteria);
+
+  // Usestate for selected options
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [selectedSemester, setSelectedSemester] = useState(null);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedCriteria, setSelectedCriteria] = useState(null);
+
+  // Options for select
+  const subjectOptions = subjects?.data?.map((item) => ({
+    value: item._id,
+    label: item.name,
+  }));
+
+  const semesterOption = [
+    { value: 1, label: '1st Semester' },
+    { value: 2, label: '2nd Semester' },
+    { value: 3, label: 'Summer Term' },
+  ];
+
+  const classOptions = useMemo(() => {
+    return classYears?.data.map((classItem) => ({
+      value: classItem.id,
+      label: classItem.name,
+    }));
   }, [classYears]);
 
-  const { data: criteria } = useQuery({
-    queryKey: ['criteria'],
-    queryFn: fetchCriteria,
-  });
-  const criteriaElements = useMemo(() => {
-    return criteria?.data.map((criterion) => (
-      <option key={criterion.id} value={criterion.id}>
-        {criterion.name}
-      </option>
-    ));
+  const criteriaOptions = useMemo(() => {
+    return criteria?.data.map((criteriaItem) => ({
+      value: criteriaItem.id,
+      label: criteriaItem.name,
+    }));
   }, [criteria]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // Input Change
+  const handleInputChange = (name, e) => {
+    if (!e) {
+      return;
+    }
 
-  const addSubjectMutation = useMutation(addSubjectData);
+    setValue(name, e.value);
+    clearErrors(name);
+    if (name === 'semester') {
+      setSelectedSemester(e);
+    } else if (name === 'subject_id') {
+      setSelectedSubject(e);
+    } else if (name === 'class_id') {
+      setSelectedClass(e);
+    } else {
+      setSelectedCriteria(e);
+    }
+  };
+
+  // When data is submitted
+  const addClassMutation = useMutation(addSubjectClassData);
   const onSubmit = async (data) => {
     try {
-      await addSubjectMutation.mutateAsync(data);
-      refetchSubject();
+      await addClassMutation.mutateAsync(data);
+      refetchSubjectClass();
+      setSelectedSubject(null);
+      setSelectedSemester(null);
+      setSelectedClass(null);
+      setSelectedCriteria(null);
       toast.success('Subject added successfully');
     } catch (error) {
-      toast.error(error.message);
+      if (error.response && error.response.data.message) {
+        // Handle backend error message
+        toast.error(error.response.data.message);
+      } else {
+        // Handle other errors
+        toast.error('An error occurred while adding the subject');
+      }
     }
+  };
+
+  // Select styles
+  const selectStyles = (name) => {
+    return {
+      control: (baseStyles, state) => ({
+        ...baseStyles,
+        borderRadius: '0.5rem',
+        borderColor:
+          errors[name] && state.isFocused
+            ? '#f56565'
+            : state.isFocused
+            ? '#4299E1'
+            : errors[name]
+            ? '#f565658c'
+            : '#9CA3AF',
+        boxShadow: 'none',
+        '&:hover': {
+          borderColor: '',
+        },
+      }),
+    };
   };
 
   return (
@@ -75,105 +143,66 @@ function ClassSubjectScreen() {
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
-              <div className=" gap-3 md:mb-3 md:flex ">
-                <div className="mb-3 md:w-1/2 md:mb-0">
-                  <input
-                    type="text"
-                    placeholder="Subject Name"
-                    id="name"
-                    // onChange={(e) => setName(e.target.value)}
-                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 ${
-                      errors.name ? 'border-red-300  ' : 'border-gray-300 '
-                    }`}
-                    {...register('name', {
-                      required: true,
-                      maxLength: 50,
-                    })}
-                  />
-                </div>
-                <div className="mb-3 md:w-1/2 md:mb-0">
-                  <input
-                    type="text"
-                    placeholder="Subject Description"
-                    id="description"
-                    // onChange={(e) => setName(e.target.value)}
-                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 ${
-                      errors.description
-                        ? 'border-red-300  '
-                        : 'border-gray-300 '
-                    }`}
-                    {...register('description', {
-                      required: true,
-                      maxLength: 200,
-                    })}
-                  />
-                </div>
+              <div className="md:flex gap-3">
+                <Select
+                  value={selectedSubject}
+                  options={subjectOptions}
+                  isClearable
+                  placeholder="Select or type to search a subject"
+                  id="subject_id"
+                  {...register('subject_id', { required: true })}
+                  onChange={(e) => handleInputChange('subject_id', e)}
+                  className="mb-3 w-full lg:w-1/2 "
+                  styles={selectStyles('subject_id')}
+                />
+                <Select
+                  value={selectedSemester}
+                  options={semesterOption}
+                  isClearable
+                  placeholder="Select or type to search a semester"
+                  id="semester"
+                  {...register('semester', { required: true })}
+                  onChange={(e) => handleInputChange('semester', e)}
+                  className="mb-3 w-full lg:w-1/2 "
+                  styles={selectStyles('semester')}
+                />
               </div>
-              <div className="md:flex gap-3 mb-3 ">
-                <div className="w-full mb-3 md:w-2/6 md:mb-0">
-                  <select
-                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 ${
-                      errors.semester ? 'border-red-300  ' : 'border-gray-300 '
-                    }`}
-                    id="semester"
-                    {...register('semester', {
-                      required: true,
-                    })}
-                  >
-                    <option value="1">1st Semester</option>
-                    <option value="2">2nd Semester</option>
-                    <option value="3">Summer</option>
-                  </select>
-                </div>
-                <div className="w-full mb-3 md:w-2/6 md:mb-0">
-                  <select
-                    className={`w-full bg-gray-50 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ${
-                      errors.class_id ? 'border-red-300  ' : 'border-gray-300 '
-                    }`}
-                    id="class_id"
-                    defaultValue=""
-                    {...register('class_id', {
-                      required: true,
-                    })}
-                  >
-                    <option disabled value="">
-                      Select Class
-                    </option>
-                    {classYearElements}
-                  </select>
-                </div>
-                <div className="w-full mb-3 md:w-2/6 md:mb-0">
-                  <select
-                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ${
-                      errors.criteria_id
-                        ? 'border-red-300  '
-                        : 'border-gray-300 '
-                    }`}
-                    id="criteria_id"
-                    defaultValue=""
-                    {...register('criteria_id', {
-                      required: true,
-                    })}
-                  >
-                    <option disabled value="">
-                      Select Criteria
-                    </option>
-                    {criteriaElements}
-                  </select>
-                </div>
+              <div className="md:flex gap-3">
+                <Select
+                  value={selectedClass}
+                  options={classOptions}
+                  isClearable
+                  placeholder="Select or type to search a section"
+                  id="class_id"
+                  {...register('class_id', { required: true })}
+                  onChange={(e) => handleInputChange('class_id', e)}
+                  className="mb-3 w-full lg:w-1/2 "
+                  styles={selectStyles('class_id')}
+                />
+                <Select
+                  value={selectedCriteria}
+                  options={criteriaOptions}
+                  isClearable
+                  placeholder="Select or type to search a criteria"
+                  id="criteria_id"
+                  {...register('criteria_id', { required: true })}
+                  onChange={(e) => handleInputChange('criteria_id', e)}
+                  className="mb-3 w-full lg:w-1/2 "
+                  styles={selectStyles('criteria_id')}
+                />
               </div>
-              <div className="w-full md:w-2/6">
-                <input type="submit" className="btn-primary" />
+              <div className="lg:w-1/2  md:pr-1.5">
+                <input type="submit" className="btn-primary " />
               </div>
             </form>
-            <div className="mt-6">
-              {isLoading ? (
-                'Loading...'
-              ) : (
-                <ClassSubjectList subjects={subjects} />
-              )}
-            </div>
           </div>
+        </div>
+        <div className="w-full">
+          {isLoading ? (
+            'Loading...'
+          ) : (
+            <ClassSubjectList subjectClass={subjectClass} />
+          )}
         </div>
       </div>
     </FacultyLayout>
