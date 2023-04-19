@@ -11,7 +11,7 @@ import {
   Page,
   Sort,
 } from '@syncfusion/ej2-react-grids';
-import data from '@/utils/datasource';
+// import data from '@/utils/datasource';
 
 function HomeScreen() {
   const pageSettings = { pageSize: 6 };
@@ -21,7 +21,7 @@ function HomeScreen() {
       <div className="bg-white p-10 rounded-xl">
         <h1 className="text-sky-400 font-bold text-3xl mb-5">Title Here</h1>
         <GridComponent
-          dataSource={data}
+          // dataSource={data}
           allowPaging={true}
           pageSettings={pageSettings}
         >
