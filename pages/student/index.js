@@ -39,7 +39,7 @@ function StudentLoginScreen() {
 
   return (
     <DefaultLayout title="Student Portal">
-      <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-3/6 lg:pr-0">
+      <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-[42rem] lg:pr-0">
         <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg ">
           <Link href="/" className="text-white text-left font-medium flex">
             <svg
@@ -141,7 +141,10 @@ function StudentLoginScreen() {
             </button>
           </form>
           <div>
-            <p className=" text-red-600 font-medium mt-3 flex justify-center">
+            <Link
+              href="/student/forgot-password"
+              className=" text-red-600 font-medium mt-3 flex justify-center"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -157,7 +160,7 @@ function StudentLoginScreen() {
                 />
               </svg>
               I forgot my password
-            </p>
+            </Link>
             <p className="text-sm text-white mt-6">
               By using this service, you understood and agree to the PUP Online
               Services Terms of Use and Privacy Statement

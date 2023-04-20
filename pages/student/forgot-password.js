@@ -6,7 +6,7 @@ import ForgotPassword from '../../components/ForgotPassword';
 function FacultyForgotPassword() {
   return (
     <DefaultLayout title="Faculty Portal">
-      <ForgotPassword type="Faculty" />
+      <ForgotPassword type="Student" />
     </DefaultLayout>
   );
 }
