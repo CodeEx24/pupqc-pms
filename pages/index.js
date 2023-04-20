@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <DefaultLayout title="">
-      <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-3/6 lg:pr-0">
+      <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-[42rem] lg:pr-0">
         <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg ">
           {/* PUP Logo and Title */}
           <div>
