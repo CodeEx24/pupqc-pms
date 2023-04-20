@@ -140,8 +140,8 @@ export const data = {
   teachers: [
     {
       _id: '609e16f7c2585b8a5f9ddc51',
-      name: 'Sarah Smith',
-      email: 'teacher@gmail.com',
+      name: 'Jocarl Basco',
+      email: 'jocarlbasco24@gmail.com',
       password: bcrypt.hashSync('teacher123'),
       gender: 'Female',
       dateOfBirth: new Date('1990-03-25'),
@@ -518,6 +518,29 @@ export const teacherLinks = [
   },
 ];
 
-export const baseUrl = process.env.NEXTAUTH_URL
-  ? process.env.NEXTAUTH_URL
-  : 'http://localhost:3000';
+export const themeColors = [
+  {
+    name: 'blue-theme',
+    color: '#38bdf8',
+  },
+  {
+    name: 'green-theme',
+    color: '#4ade80',
+  },
+  {
+    name: 'purple-theme',
+    color: '#c084fc',
+  },
+  {
+    name: 'red-theme',
+    color: '#f87171',
+  },
+  {
+    name: 'indigo-theme',
+    color: '#818cf8',
+  },
+  {
+    name: 'orange-theme',
+    color: '#fb923c',
+  },
+];

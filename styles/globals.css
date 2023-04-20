@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  font-family: 'Poppins';
+} */
+
 @layer base {
   @font-face {
     font-family: 'Poppins';
@@ -44,4 +48,8 @@
 
 .btn-primary {
   @apply bg-sky-400  text-white w-full rounded-md py-2;
+}
+
+.title {
+  @apply text-sky-400 font-bold text-3xl mb-5 font-poppins;
 }
