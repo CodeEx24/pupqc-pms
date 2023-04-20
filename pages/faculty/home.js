@@ -5,7 +5,7 @@ function HomeScreen() {
   return (
     <FacultyLayout title="Home">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-sky-400 font-bold text-3xl mb-5">Dashboard</h1>
+        <h1 className="title">Dashboard</h1>
       </div>
     </FacultyLayout>
   );
