@@ -7,9 +7,13 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { getError } from '../../utils/error';
 
-function ForgotPassword({ type }) {
+function ResetPassword({ type }) {
   // React Hook Form
+  const router = useRouter();
+
   const {
     handleSubmit,
     register,
@@ -28,17 +32,27 @@ function ForgotPassword({ type }) {
       if (res.error) {
         toast.error(res.error);
       } else {
-        toast.success(res.data.message);
-        // Save data in state management
+        sessionStorage.setItem('forgotPasswordEmail', email);
+        setTimeout(() => {
+          // Remove the forgotPasswordEmail item from sessionStorage after 1 hour
+          sessionStorage.removeItem('forgotPasswordEmail');
+        }, 3600000);
+        router.push(
+          `${
+            type === 'Student'
+              ? '/student/forgot-password/reset-password'
+              : '/faculty/forgot-password/reset-password'
+          }`
+        );
       }
     } catch (error) {
-      //   toast.error(getError(error));
+      toast.error(getError(error));
     }
   };
 
   return (
     <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-[42rem] lg:pr-0">
-      <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg ">
+      <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg w-full">
         <Link
           href={`${type === 'Student' ? '/student' : '/faculty'}`}
           className="text-white text-left font-medium flex"
@@ -116,4 +130,4 @@ function ForgotPassword({ type }) {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

@@ -1,9 +1,9 @@
 import DefaultLayout from '@/components/DefaultLayout';
 import React from 'react';
 import loginAuth from '@/utils/authentication/loginAuth';
-import ForgotPassword from '../../components/ForgotPassword';
+import ForgotPassword from '@/components/password/ForgotPassword';
 
-function FacultyForgotPassword() {
+function ForgotPasswordScreen() {
   return (
     <DefaultLayout title="Faculty Portal">
       <ForgotPassword type="Faculty" />
@@ -11,4 +11,4 @@ function FacultyForgotPassword() {
   );
 }
 
-export default loginAuth(FacultyForgotPassword);
+export default loginAuth(ForgotPasswordScreen);

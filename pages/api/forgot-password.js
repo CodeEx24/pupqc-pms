@@ -11,14 +11,14 @@ export default async function handler(req, res) {
   }
 
   const { email, type } = req.body;
-
-  const userType = type === 'Teacher' ? Teacher : Student;
+  console.log(email);
+  const userType = type === 'Faculty' ? Teacher : Student;
 
   await db.connect();
 
   // Check if email exists in the database
   const user = await userType.findOne({ email });
-
+  console.log(user);
   if (!user) {
     await db.disconnect();
     return res.status(404).json({ message: 'Email not found' });
