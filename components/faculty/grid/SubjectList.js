@@ -4,23 +4,18 @@ import {
   GridComponent,
   Inject,
   Page,
-  Search,
-  Sort,
-  Toolbar,
 } from '@syncfusion/ej2-react-grids';
 import React from 'react';
 
-import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
+import { DataManager, WebApiAdaptor } from '@syncfusion/ej2/data';
 
-function SubjectList({ subjects }) {
+function SubjectList() {
   const subjectDataManager = new DataManager({
-    adaptor: new RemoteSaveAdaptor(),
-    json: subjects.data,
+    adaptor: new WebApiAdaptor(),
+    url: '/api/subject',
   });
-
   const pageOptions = {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
+    pageSize: 5,
   };
 
   return (
@@ -28,7 +23,6 @@ function SubjectList({ subjects }) {
       dataSource={subjectDataManager}
       pageSettings={pageOptions}
       allowPaging={true}
-      allowSorting={true}
       toolbar={['Search']}
     >
       <ColumnsDirective>
@@ -52,7 +46,7 @@ function SubjectList({ subjects }) {
           textAlign="Left"
         />
       </ColumnsDirective>
-      <Inject services={[Sort, Page, Search, Toolbar]} />
+      <Inject services={[Page]} />
     </GridComponent>
   );
 }

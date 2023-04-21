@@ -19,7 +19,7 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  res.status(200).json(subjects);
+  res.status(200).json({ Items: subjects, Count: subjects.length });
 };
 
 export default handler;

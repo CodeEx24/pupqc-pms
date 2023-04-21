@@ -9,11 +9,10 @@ import { addSubjectData } from '../../components/hooks/FacultySubject/addData';
 
 function SubjectScreen() {
   //  Get the subject code and the subject name
-  const {
-    data: subjects,
-    isLoading,
-    refetch: refetchSubject,
-  } = useQuery(['subject'], fetchAllSubject);
+  const { isLoading, refetch: refetchSubject } = useQuery(
+    ['subject'],
+    fetchAllSubject
+  );
 
   const {
     register,
@@ -105,7 +104,7 @@ function SubjectScreen() {
               </div>
             </form>
             <div className="mt-6">
-              {isLoading ? 'Loading...' : <SubjectList subjects={subjects} />}
+              {isLoading ? 'Loading...' : <SubjectList />}
             </div>
           </div>
         </div>
