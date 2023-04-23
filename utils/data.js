@@ -10,7 +10,7 @@ import {
 
 import { RiContactsLine } from 'react-icons/ri';
 
-import { FaMoneyBillAlt } from 'react-icons/fa';
+import { FaMoneyBillAlt, FaUser } from 'react-icons/fa';
 
 import { TbReportAnalytics } from 'react-icons/tb';
 
@@ -416,6 +416,10 @@ export const studentLinks = [
         name: 'home',
         icon: <AiFillHome />,
       },
+      {
+        name: 'profile',
+        icon: <FaUser />,
+      },
     ],
   },
 
@@ -508,6 +512,11 @@ export const teacherLinks = [
         name: 'students grade',
         href: 'students-grade',
         icon: <AiFillSnippets />,
+      },
+      {
+        name: 'profile',
+        href: 'profile',
+        icon: <FaUser />,
       },
 
       // {

@@ -15,6 +15,7 @@ import Image from 'next/image';
 
 import avatar from '@/public/usericon/avatar.jpg';
 import { NavButton } from '../NavButton';
+import Link from 'next/link';
 
 // React Context
 // import { Cart, Chat, Notification, UserProfile } from '.';
@@ -91,28 +92,29 @@ function FacultyNavbar() {
             icon={<FiLogOut />}
           />
 
-          <TooltipComponent content="Profile" position="BottomCenter">
-            <div
-              className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-              // onClick={() => handleClick('userProfile')}
-            >
-              <Image
-                height={50}
-                width={50}
-                className="rounded-full w-8 h-8"
-                src={avatar}
-                alt="avatar.jpg"
-              />
-              <p>
-                <span className="text-gray-400 text-14">Hi, </span>
-                <span className="text-gray-400 font-bold ml-1 text-14">
-                  {session?.user.name.split(' ')[0]}
-                </span>
-              </p>
-              <MdKeyboardArrowDown className="text-gray-400 text-14" />
-            </div>
-          </TooltipComponent>
-
+          <Link href="/faculty/profile">
+            <TooltipComponent content="Profile" position="BottomCenter">
+              <div
+                className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+                // onClick={() => handleClick('userProfile')}
+              >
+                <Image
+                  height={50}
+                  width={50}
+                  className="rounded-full w-8 h-8"
+                  src={avatar}
+                  alt="avatar.jpg"
+                />
+                <p>
+                  <span className="text-gray-400 text-14">Hi, </span>
+                  <span className="text-gray-400 font-bold ml-1 text-14">
+                    {session?.user.name.split(' ')[0]}
+                  </span>
+                </p>
+                <MdKeyboardArrowDown className="text-gray-400 text-14" />
+              </div>
+            </TooltipComponent>
+          </Link>
           {/* {isClicked.cart && <Cart />}
         {isClicked.chat && <Chat />}
         {isClicked.notification && <Notification />}

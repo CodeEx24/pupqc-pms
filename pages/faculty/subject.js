@@ -9,10 +9,11 @@ import { addSubjectData } from '../../components/hooks/FacultySubject/addData';
 
 function SubjectScreen() {
   //  Get the subject code and the subject name
-  const { isLoading, refetch: refetchSubject } = useQuery(
-    ['subject'],
-    fetchAllSubject
-  );
+  const {
+    data: subjects,
+    isLoading,
+    refetch: refetchSubject,
+  } = useQuery(['subject'], fetchAllSubject);
 
   const {
     register,
@@ -34,7 +35,7 @@ function SubjectScreen() {
   return (
     <FacultyLayout title="Subject Setup">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="title">Subject Lists</h1>
+        <h1 className="text-sky-400 font-bold text-3xl mb-5">Subject Lists</h1>
 
         <p className="mb-3 text-black-600">
           <span className="font-semibold"> NOTES:</span> Subject Code must be in
@@ -104,7 +105,7 @@ function SubjectScreen() {
               </div>
             </form>
             <div className="mt-6">
-              {isLoading ? 'Loading...' : <SubjectList />}
+              {isLoading ? 'Loading...' : <SubjectList subjects={subjects} />}
             </div>
           </div>
         </div>
