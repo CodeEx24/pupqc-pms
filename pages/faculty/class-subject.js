@@ -60,14 +60,15 @@ function ClassSubjectScreen() {
   ];
 
   const classOptions = useMemo(() => {
-    return classYears?.data.map((classItem) => ({
+    return classYears?.data?.map((classItem) => ({
       value: classItem.id,
       label: classItem.name,
     }));
   }, [classYears]);
 
   const criteriaOptions = useMemo(() => {
-    return criteria?.data.map((criteriaItem) => ({
+    if (!criteria?.data) return []; // add a conditional statement to check if criteria has a value
+    return criteria.data.map((criteriaItem) => ({
       value: criteriaItem.id,
       label: criteriaItem.name,
     }));

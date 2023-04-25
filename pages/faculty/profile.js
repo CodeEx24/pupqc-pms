@@ -12,7 +12,7 @@ function ProfileScreen() {
   // Get user info
   const { data: user, status } = useQuery(['user'], fetchCurrentUser);
 
-  const [editProfile, setEditProfile] = useState(true);
+  const [editProfile, setEditProfile] = useState(false);
 
   return (
     <FacultyLayout title="Subject Setup">
