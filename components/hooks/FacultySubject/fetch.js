@@ -6,7 +6,7 @@ export const fetchStudents = () => {
 
 // UPDATED FETCH
 export const fetchAllSubject = () => {
-  return axios.get('/api/subject');
+  return axios.get(`/api/subject`);
 };
 
 export const fetchSubjectCode = () => {

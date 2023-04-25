@@ -67,7 +67,6 @@ function UserEdit({ user }) {
             />
           </div>
         </div>
-
         <div className="pl-3 lg:pt-3 lg:p-0 col-span-4 row-span-2 my-auto md:my-0 md:row-span-1 md:col-span-3 md:col-start-3 lg:col-span-4 lg:col-start-2 lg:my-auto lg:pl-4">
           <h4 className="font-semibold text-lg lg:text-2xl">
             {user.data.name}
