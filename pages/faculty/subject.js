@@ -106,7 +106,7 @@ function SubjectScreen() {
               </div>
             </form>
             <div className="mt-6">
-              {isLoading ? <Loading /> : <SubjectList subjects={subjects} />}
+              {isLoading ? 'Loading...' : <SubjectList subjects={subjects} />}
             </div>
           </div>
         </div>
