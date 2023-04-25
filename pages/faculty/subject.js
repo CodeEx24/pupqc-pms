@@ -6,7 +6,6 @@ import { fetchAllSubject } from '../../components/hooks/FacultySubject/fetch';
 import { toast } from 'react-toastify';
 import SubjectList from '../../components/faculty/grid/SubjectList';
 import { addSubjectData } from '../../components/hooks/FacultySubject/addData';
-import Loading from '../../components/Loading';
 
 function SubjectScreen() {
   //  Get the subject code and the subject name
