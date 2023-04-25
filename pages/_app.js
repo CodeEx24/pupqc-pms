@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { registerLicense } from '@syncfusion/ej2-base';
+import Loading from '../components/Loading';
 
 // Registering Syncfusion license key
 registerLicense(
@@ -44,7 +45,7 @@ function Auth({ children, role }) {
   });
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (role === 'faculty' && !session.user.isAdmin) {

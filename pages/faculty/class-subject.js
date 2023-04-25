@@ -15,6 +15,7 @@ import { useMemo } from 'react';
 import { addSubjectClassData } from '../../components/hooks/FacultySubject/addData';
 import { toast } from 'react-toastify';
 import ClassSubjectList from '../../components/faculty/grid/ClassSubjectList';
+import Loading from '../../components/Loading';
 
 function ClassSubjectScreen() {
   const {
@@ -200,7 +201,7 @@ function ClassSubjectScreen() {
         </div>
         <div className="w-full">
           {isLoading ? (
-            'Loading...'
+            <Loading />
           ) : (
             <ClassSubjectList subjectClass={subjectClass} />
           )}

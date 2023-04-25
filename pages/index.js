@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 function Home() {
-  console.log('RENDER');
-
   return (
     <DefaultLayout title="">
       <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-[42rem] lg:pr-0">
