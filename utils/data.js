@@ -20,7 +20,7 @@ export const data = {
       _id: '609e16f7c2585b8a5f9ddc01',
       name: 'John Doe',
       email: 'student@gmail.com',
-      password: bcrypt.hashSync('admin24'),
+      password: bcrypt.hashSync('student123'),
       gender: 'Male',
       dateOfBirth: new Date('1995-05-01'),
       placeOfBirth: 'New York',
@@ -141,7 +141,7 @@ export const data = {
     {
       _id: '609e16f7c2585b8a5f9ddc51',
       name: 'Jocarl Basco',
-      email: 'jocarlbasco24@gmail.com',
+      email: 'teacher@gmail.com',
       password: bcrypt.hashSync('teacher123'),
       gender: 'Female',
       dateOfBirth: new Date('1990-03-25'),

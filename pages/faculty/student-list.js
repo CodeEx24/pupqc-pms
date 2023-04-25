@@ -2,7 +2,6 @@ import FacultyLayout from '@/components/faculty/FacultyLayout';
 import StudentList from '@/components/faculty/grid/StudentList';
 import { useQuery } from '@tanstack/react-query';
 import { fetchStudents } from '../../components/hooks/FacultySubject/fetch';
-import Loading from '../../components/Loading';
 
 function StudentsListScreen() {
   const { data: students, isLoading } = useQuery(['students'], fetchStudents);
