@@ -13,7 +13,7 @@ function StudentsListScreen() {
         <h1 className="text-sky-400 font-bold text-3xl mb-5">Students Lists</h1>
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
-            {isLoading ? <Loading /> : <StudentList students={students} />}
+            {isLoading ? 'Loading...' : <StudentList students={students} />}
           </div>
         </div>
       </div>
