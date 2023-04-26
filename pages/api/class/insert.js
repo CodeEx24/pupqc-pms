@@ -28,7 +28,8 @@ const handler = async (req, res) => {
   if (isExist) {
     await db.disconnect();
     return res.status(409).send({
-      message: 'Subject cannot be added it because it is duplicated',
+      message:
+        'Subject cannot be added because it is currently duplicated in the class',
     });
   }
 

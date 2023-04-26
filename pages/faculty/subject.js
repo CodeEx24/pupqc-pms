@@ -28,7 +28,11 @@ function SubjectScreen() {
       refetchSubject();
       toast.success('Subject added successfully');
     } catch (error) {
-      toast.error(error.message);
+      if (error.response && error.response.status === 409) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error.message);
+      }
     }
   };
 

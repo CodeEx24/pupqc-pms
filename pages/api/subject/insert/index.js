@@ -17,6 +17,15 @@ const handler = async (req, res) => {
 
   const { code: _id, name, description } = req.body;
 
+  const subjectExist = await Subject.find({ _id });
+
+  if (subjectExist) {
+    await db.disconnect();
+    return res.status(409).send({
+      message: 'Subject code already exist',
+    });
+  }
+
   const newSubject = new Subject({
     _id,
     name,
@@ -27,7 +36,9 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  res.status(201).send({ message: 'Subject created successfully', subject });
+  return res
+    .status(201)
+    .send({ message: 'Subject created successfully', subject });
 };
 
 export default handler;
