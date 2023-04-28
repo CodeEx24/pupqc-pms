@@ -4,6 +4,7 @@ import {
   GridComponent,
   Inject,
   Page,
+  Search,
   Sort,
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
@@ -63,7 +64,7 @@ function ClassSubjectList({ subjectClass }) {
           textAlign="Left"
         />
       </ColumnsDirective>
-      <Inject services={[Sort, Page, Toolbar]} />
+      <Inject services={[Sort, Page, Search, Toolbar]} />
     </GridComponent>
   );
 }
