@@ -29,7 +29,9 @@ function ClassSubjectScreen() {
     data: subjectClass,
     refetch: refetchSubjectClass,
     isLoading,
-  } = useQuery(['subjectClass'], fetchSubjectClass);
+  } = useQuery(['subjectClass'], fetchSubjectClass, {
+    refetchOnWindowFocus: false,
+  });
 
   // Fetch the data needed for selection
   const { data: subjects } = useQuery(['subject'], fetchSubjectCode);
@@ -139,6 +141,11 @@ function ClassSubjectScreen() {
     };
   };
 
+  const SubjectClassMemoized = useMemo(
+    () => <ClassSubjectList subjectClass={subjectClass} />,
+    [subjectClass]
+  );
+
   return (
     <FacultyLayout title="Subject Setup">
       <div className="bg-white p-10 rounded-xl">
@@ -201,11 +208,7 @@ function ClassSubjectScreen() {
           </div>
         </div>
         <div className="w-full">
-          {isLoading ? (
-            'Loading...'
-          ) : (
-            <ClassSubjectList subjectClass={subjectClass} />
-          )}
+          {isLoading ? 'Loading...' : SubjectClassMemoized}
         </div>
       </div>
     </FacultyLayout>

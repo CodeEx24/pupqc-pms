@@ -11,8 +11,16 @@ import {
 import React from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function ClassSubjectList({ subjectClass }) {
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    setKey(key + 1);
+  }, [subjectClass.data]);
+
   const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
     json: subjectClass.data,

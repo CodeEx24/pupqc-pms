@@ -6,6 +6,7 @@ import { fetchAllSubject } from '../../components/hooks/FacultySubject/fetch';
 import { toast } from 'react-toastify';
 import SubjectList from '../../components/faculty/grid/SubjectList';
 import { addSubjectData } from '../../components/hooks/FacultySubject/addData';
+import { useMemo } from 'react';
 
 function SubjectScreen() {
   //  Get the subject code and the subject name
@@ -13,7 +14,7 @@ function SubjectScreen() {
     data: subjects,
     isLoading,
     refetch: refetchSubject,
-  } = useQuery(['subject'], fetchAllSubject);
+  } = useQuery(['subject'], fetchAllSubject, { refetchOnWindowFocus: false });
 
   const {
     register,
@@ -35,6 +36,11 @@ function SubjectScreen() {
       }
     }
   };
+
+  const SubjectListMemoized = useMemo(
+    () => <SubjectList subjects={subjects} />,
+    [subjects]
+  );
 
   return (
     <FacultyLayout title="Subject Setup">
@@ -109,7 +115,7 @@ function SubjectScreen() {
               </div>
             </form>
             <div className="mt-6">
-              {isLoading ? 'Loading...' : <SubjectList subjects={subjects} />}
+              {isLoading ? 'Loading...' : SubjectListMemoized}
             </div>
           </div>
         </div>
