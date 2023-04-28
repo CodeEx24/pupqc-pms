@@ -128,7 +128,9 @@ function ClassSubjectScreen() {
             ? '#4299E1'
             : errors[name]
             ? '#f565658c'
-            : '#9CA3AF',
+            : '#CBD5E0',
+        backgroundColor: '#F9FAFB',
+        padding: '2px',
         boxShadow: 'none',
         '&:hover': {
           borderColor: '',

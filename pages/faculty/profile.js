@@ -12,7 +12,7 @@ function ProfileScreen() {
   // Get user info
   const { data: user, status } = useQuery(['user'], fetchCurrentUser);
 
-  const [editProfile, setEditProfile] = useState(false);
+  const [editProfile, setEditProfile] = useState(true);
 
   return (
     <FacultyLayout title="Subject Setup">
@@ -32,7 +32,7 @@ function ProfileScreen() {
         </div>
         {status === 'success' && !editProfile ? (
           <div className="grid grid-rows-3 grid-cols-6 grid-flow-col gap-4">
-            <div className=" col-span-2 row-span-2 my-auto md:row-span-3 md:m-0 lg:col-span-1">
+            <div className=" col-span-2 row-span-1 my-auto md:row-span-3 md:m-0 lg:col-span-1">
               <Image
                 height={500}
                 width={100}
@@ -42,7 +42,7 @@ function ProfileScreen() {
               />
             </div>
 
-            <div className="pl-3 lg:pt-3 lg:p-0 col-span-4 row-span-2 my-auto md:my-0 md:row-span-1 md:col-span-3 md:col-start-3 lg:col-span-4 lg:col-start-2 lg:my-auto lg:pl-4">
+            <div className="pl-3 lg:pt-3 lg:p-0 col-span-4 row-span-1 col-start-3 my-auto md:my-0 md:row-span-1 md:col-span-3 md:col-start-3 lg:col-span-4 lg:col-start-2 lg:my-auto lg:pl-4">
               <h4 className="font-semibold text-lg lg:text-2xl">
                 {user.data.name}
               </h4>
@@ -57,7 +57,7 @@ function ProfileScreen() {
               </button>
             </div>
 
-            <div className=" row-start-3 col-start-1 col-span-6 row-span-4 md:row-start-2 md:col-start-3 md:row-span-2 lg:col-span-6 lg:pl-4">
+            <div className=" row-start-2 col-start-1 col-span-6 row-span-4 md:row-start-2 md:col-start-3 md:row-span-2 lg:col-span-6 lg:pl-4">
               <hr className="ml-3 md:m-0" />
               <div className="p-3 lg:pt-3 lg:p-0">
                 <div className=" flex mb-2">

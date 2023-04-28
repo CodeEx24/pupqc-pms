@@ -298,8 +298,8 @@ export const data = {
     },
     {
       _id: '609e16f7c2585b8a5f9ddc52',
-      name: 'John Lee',
-      email: 'johnlee@gmail.com',
+      name: 'Jocarl Basco',
+      email: 'jocarlbasco24@gmail.com',
       password: bcrypt.hashSync('john123'),
       gender: 'Male',
       dateOfBirth: new Date('1985-08-10'),

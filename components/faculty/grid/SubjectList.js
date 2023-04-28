@@ -13,6 +13,13 @@ import React from 'react';
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 
 function SubjectList({ subjects }) {
+  const [key, setKey] = React.useState(0); // add state to hold the key value
+
+  // update the key whenever the data changes
+  React.useEffect(() => {
+    setKey(key + 1);
+  }, [subjects.data]);
+
   const subjectDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
     json: subjects.data,

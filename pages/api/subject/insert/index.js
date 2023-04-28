@@ -17,7 +17,7 @@ const handler = async (req, res) => {
 
   const { code: _id, name, description } = req.body;
 
-  const subjectExist = await Subject.find({ _id });
+  const subjectExist = await Subject.findOne({ _id });
 
   if (subjectExist) {
     await db.disconnect();
