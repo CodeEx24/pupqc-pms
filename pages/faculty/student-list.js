@@ -4,7 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchStudents } from '../../components/hooks/FacultySubject/fetch';
 
 function StudentsListScreen() {
-  const { data: students, isLoading } = useQuery(['students'], fetchStudents);
+  const { data: students, isLoading } = useQuery(['students'], fetchStudents, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <FacultyLayout title="Home">
