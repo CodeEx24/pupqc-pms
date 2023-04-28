@@ -56,11 +56,11 @@ function StudentList({ students }) {
       grid.pdfExport();
     }
   };
-
   return (
     <GridComponent
       id="grid"
       dataSource={studentsDataManager}
+      height={270}
       toolbar={toolbar}
       allowPdfExport={true}
       allowPaging={true}

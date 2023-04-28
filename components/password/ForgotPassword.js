@@ -11,9 +11,9 @@ import { useRouter } from 'next/router';
 import { getError } from '../../utils/error';
 
 function ResetPassword({ type }) {
+  // React Hook Form
   const router = useRouter();
 
-  // React Hook Form
   const {
     handleSubmit,
     register,
