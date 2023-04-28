@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { getError } from '@/utils/error';
+import { useEffect } from 'react';
 
 const OtpComponent = ({ type, setIsOtpVerified }) => {
   const email =
@@ -12,6 +13,8 @@ const OtpComponent = ({ type, setIsOtpVerified }) => {
     sessionStorage.getItem('forgotPasswordEmail');
 
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [isOtpSent, setIsOtpSent] = useState(false);
+
   const refs = [
     useRef(null),
     useRef(null),
@@ -21,11 +24,16 @@ const OtpComponent = ({ type, setIsOtpVerified }) => {
     useRef(null),
   ];
 
-  const handleChange = (index, event) => {
-    if (isNaN(parseInt(event.target.value))) {
-      return;
+  useEffect(() => {
+    if (isOtpSent) {
+      const timer = setTimeout(() => {
+        setIsOtpSent(false);
+      }, 60000);
+      return () => clearTimeout(timer);
     }
+  }, [isOtpSent]);
 
+  const handleChange = (index, event) => {
     const newOtp = [...otp];
     newOtp[index] = event.target.value;
 
@@ -38,6 +46,34 @@ const OtpComponent = ({ type, setIsOtpVerified }) => {
       // Update the value of the current input without moving focus
       const currentRef = refs[index].current;
       currentRef.value = newOtp[index];
+    }
+  };
+
+  const handleKeyDown = (index, event) => {
+    const allowedKeys = ['Backspace', 'Tab'];
+    const allowedChars = /^[0-9]+$/;
+    const key = event.key;
+
+    if (!key.match(allowedChars) && !allowedKeys.includes(key)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleResentOTP = async () => {
+    const res = await axios.post('/api/forgot-password', {
+      email,
+      type,
+    });
+    if (res.error) {
+      toast.error(res.error);
+    } else {
+      sessionStorage.setItem('forgotPasswordEmail', email);
+      setTimeout(() => {
+        // Remove the forgotPasswordEmail item from sessionStorage after 1 hour
+        sessionStorage.removeItem('forgotPasswordEmail');
+      }, 3600000);
+      setIsOtpSent(true);
+      toast.success('OTP send successfully');
     }
   };
 
@@ -112,19 +148,22 @@ const OtpComponent = ({ type, setIsOtpVerified }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="flex justify-between w-full mb-8">
-            {refs.map((ref, index) => (
-              <input
-                key={index}
-                type="text"
-                name="otp"
-                value={otp[index]}
-                onChange={(event) => handleChange(index, event)}
-                maxLength="1"
-                className="shadow appearance-none border rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-12  text-center"
-                ref={ref}
-              />
-            ))}
+          <div className="">
+            <div className=" flex justify-between w-full mb-8">
+              {refs.map((ref, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  name="otp"
+                  value={otp[index]}
+                  onChange={(event) => handleChange(index, event)}
+                  onKeyDown={(event) => handleKeyDown(index, event)}
+                  maxLength="1"
+                  className="shadow appearance-none  rounded-lg py-3 px-3 text-white leading-tight focus:outline-none focus:shadow-outline w-12  text-center mt-5 bg-transparent font-bold text-lg border-2"
+                  ref={ref}
+                />
+              ))}
+            </div>
           </div>
           <div className="w-full">
             <button
@@ -135,6 +174,20 @@ const OtpComponent = ({ type, setIsOtpVerified }) => {
             </button>
           </div>
         </form>
+        <div className="text-white mt-4">
+          <p className="mb-2">
+            {isOtpSent
+              ? 'You have already requested an OTP. Please wait for 1 minute before requesting a new one.'
+              : 'Have you received your OTP code?'}
+          </p>
+          <button
+            className={`font-bold text-blue-500 ${isOtpSent && 'opacity-20'}`}
+            onClick={() => handleResentOTP()}
+            disabled={isOtpSent}
+          >
+            RESEND NEW OTP
+          </button>
+        </div>
       </div>
     </div>
   );
