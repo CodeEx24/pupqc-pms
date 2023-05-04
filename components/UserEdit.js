@@ -1,47 +1,77 @@
 import React, { useState } from 'react';
-import avatar from '@/public/usericon/avatar.jpg';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Select from 'react-select';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-// import { Cloudinary } from 'cloudinary-core';
-
-// const cloudinary = new Cloudinary({
-//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
-
-function UserEdit({ user }) {
+function UserEdit({ user, setEditProfile, refetchUser }) {
   const {
     handleSubmit,
     register,
-    setValue,
-    clearErrors,
     formState: { errors },
   } = useForm();
 
-  // Submit Handler when click the submit button
+  const [avatar, setAvatar] = useState(user.data.profileImageUrl);
+
   const submitHandler = async (data) => {
-    const formData = new FormData();
-    formData.append('file', data.profile[0]);
+    // Check if a profile image exists
+    if (data.profile?.length) {
+      const formData = new FormData();
+      formData.append('file', data.profile[0]);
+      formData.append('upload_preset', 'pupqc_upload_avatar');
 
-    // try {
-    //   const result = await cloudinary.v2.uploader.upload(formData.get('file'), {
-    //     folder: 'avatars',
-    //     use_filename: true,
-    //   });
+      try {
+        // Upload the profile image to Cloudinary
+        const res = await fetch(
+          'https://api.cloudinary.com/v1_1/daevedaio/image/upload',
+          {
+            method: 'POST',
+            body: formData,
+          }
+        );
+        const file = await res.json();
 
-    //   setAvatar(result.secure_url);
-    //   router.push('/profile');
-    // } catch (error) {
-    //   console.log(error);
-    // }
+        // Update user profile image URL with Cloudinary URL
+        const updatedUser = {
+          ...user,
+          data: {
+            ...data,
+            profileImageUrl: file.secure_url,
+          },
+        };
+
+        // Update user profile
+        const userDataUpdate = await axios.post('/api/user/update', {
+          ...updatedUser.data,
+          type: 'Teacher',
+        });
+        const image = userDataUpdate.data.result.profileImageUrl;
+        setAvatar(image);
+        toast.success('Information updated successfully');
+      } catch (error) {
+        toast.error(error);
+      }
+    } else {
+      try {
+        // If no profile image exists, update the user profile with the existing profileImageUrl
+        await axios.post(`/api/user/update`, {
+          data,
+          type: 'Teacher',
+        });
+        toast.success('Information updated successfully');
+      } catch (error) {
+        toast.error(error);
+      }
+    }
+    refetchUser();
+    // Set the profile back to the user and also update the
+    setEditProfile(false);
   };
 
   const dateOfBirth = new Date(user.data.dateOfBirth);
+  dateOfBirth.setDate(dateOfBirth.getDate() + 1); // In format
   const formattedDate = dateOfBirth.toISOString().substring(0, 10);
-
   const formattedDOB = formattedDate.toString();
 
   // Select styles
@@ -73,23 +103,6 @@ function UserEdit({ user }) {
     { value: 'Female', label: 'Female' },
   ];
 
-  const [selectedGender, setSelectedGender] = useState({
-    label: user.data.gender,
-    value: user.data.gender,
-  });
-
-  console.log(selectedGender);
-
-  const handleInputChange = (name, e) => {
-    if (!e) {
-      return;
-    }
-
-    setValue(name, e.value);
-    clearErrors(name);
-    setSelectedGender(e);
-  };
-
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className="grid grid-rows-6 grid-cols-6 gap-1 md:grid-rows-4 lg:grid-rows-12 lg:grid-cols-12">
@@ -101,6 +114,7 @@ function UserEdit({ user }) {
               width={150}
               className="rounded-full w-full "
               src={avatar}
+              decoding="async"
               alt="avatar.jpg"
             />
           </label>
@@ -119,9 +133,10 @@ function UserEdit({ user }) {
           <div className="w-full px-3">
             <input
               type="file"
-              id="file"
-              name="file"
+              id="profile"
+              name="profile"
               className="opacity-0 absolute "
+              {...register('profile')}
             />
             <div className="flex items-center justify-center h-10 lg:h-11 rounded-lg border-dashed border-gray-300 border-2 cursor-pointer hover:bg-gray-100 s">
               <svg
@@ -148,15 +163,12 @@ function UserEdit({ user }) {
             <div className=" block mb-2">
               <h3 className="text-gray-700 w-full md:w-2/6">Gender:</h3>
               <Select
-                value={selectedGender}
+                value={{ value: user.data.gender, label: user.data.gender }}
                 options={genderOptions}
-                defaultValue={{ value: selectedGender, label: selectedGender }}
                 isClearable
-                id="gender"
-                {...register('gender', { required: true })}
-                onChange={(e) => handleInputChange('gender', e)}
-                className=" w-full lg:w-1/2"
+                className=" w-full "
                 styles={selectStyles('gender')}
+                isDisabled={true}
               />
             </div>
             <div className="block mb-2 my-6">
@@ -174,12 +186,13 @@ function UserEdit({ user }) {
               <h3 className="text-gray-700 w-full md:w-2/6">Birth Date:</h3>
               <input
                 type="date"
-                id="start"
-                name="trip-start"
+                id="dateOfBirth"
+                name="dateOfBirth"
                 className="w-full border px-2 bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block p-2.5"
                 defaultValue={formattedDOB}
                 // min="2018-01-01"
                 // max="2018-12-31"
+                {...register('dateOfBirth')}
               />
             </div>
             <div className=" block mb-2 my-6">
