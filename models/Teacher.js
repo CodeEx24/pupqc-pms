@@ -11,6 +11,12 @@ const teacherSchema = new mongoose.Schema(
     mobileNo: { type: String, required: true },
     residentialAddress: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
+    profileImageUrl: {
+      type: String,
+      required: true,
+      default:
+        'https://res.cloudinary.com/daevedaio/image/upload/v1683093300/hm19yu8dnpiolkcyrkq7.jpg',
+    },
   },
   {
     timestamps: true,

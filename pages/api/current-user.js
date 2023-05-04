@@ -21,7 +21,9 @@ export default async function handler(req, res) {
   // Check if email exists in the database
   const user = await userType
     .findById(userId)
-    .select('name email gender dateOfBirth mobileNo residentialAddress')
+    .select(
+      'name email gender dateOfBirth mobileNo residentialAddress profileImageUrl'
+    )
     .lean();
 
   user.dateOfBirth = new Date(user.dateOfBirth).toLocaleDateString('en-US', {

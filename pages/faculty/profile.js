@@ -4,13 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchCurrentUser } from '../../components/hooks/FacultySubject/fetch';
 import Image from 'next/image';
 
-import avatar from '@/public/usericon/avatar.jpg';
-
 import UserEdit from '../../components/UserEdit';
 
 function ProfileScreen() {
   // Get user info
-  const { data: user, status } = useQuery(['user'], fetchCurrentUser);
+  const {
+    data: user,
+    status,
+    refetch: refetchUser,
+  } = useQuery(['user'], fetchCurrentUser);
 
   const [editProfile, setEditProfile] = useState(true);
 
@@ -37,7 +39,7 @@ function ProfileScreen() {
                 height={500}
                 width={100}
                 className="rounded-full w-full"
-                src={avatar}
+                src={user.data.profileImageUrl}
                 alt="avatar.jpg"
               />
             </div>
@@ -82,7 +84,11 @@ function ProfileScreen() {
             </div>
           </div>
         ) : status === 'success' && editProfile ? (
-          <UserEdit user={user} />
+          <UserEdit
+            user={user}
+            setEditProfile={setEditProfile}
+            refetchUser={refetchUser}
+          />
         ) : (
           'Loading'
         )}
