@@ -25,6 +25,14 @@ export const fetchSubjectClass = () => {
   return axios.get(`/api/subject/class`);
 };
 
+export const fetchSubjectClassforCriteria = () => {
+  return axios.get(`/api/subject/class/criteria-management`);
+};
+
 export const fetchCurrentUser = () => {
   return axios.get(`/api/current-user`);
+};
+
+export const fetchCriteriaOverallList = (id) => {
+  return axios.get(`/api/criteria/overall/${id}`);
 };
