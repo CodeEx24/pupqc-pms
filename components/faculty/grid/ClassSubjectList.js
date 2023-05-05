@@ -13,6 +13,7 @@ import React from 'react';
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 function ClassSubjectList({ subjectClass }) {
   const [key, setKey] = useState(0);
@@ -70,6 +71,17 @@ function ClassSubjectList({ subjectClass }) {
           headerText="Batch"
           width="100"
           textAlign="Left"
+        />
+        <ColumnDirective field="classSubject_id" width="0" textAlign="Left" />
+        <ColumnDirective
+          field=""
+          headerText="Manage Criteria Overall"
+          width="150"
+          template={(rowData) => (
+            <Link href={`/faculty/class-subject/${rowData.classSubject_id}`}>
+              Manage
+            </Link>
+          )}
         />
       </ColumnsDirective>
       <Inject services={[Sort, Page, Search, Toolbar]} />

@@ -100,25 +100,30 @@ export const teacherLinks = [
         icon: <AiFillIdcard />,
       },
       {
-        name: 'section',
-        href: 'section',
-        icon: <FaMoneyBillAlt />,
+        name: 'criteria management',
+        href: 'criteria-management',
+        icon: <AiFillIdcard />,
       },
-      {
-        name: 'performance',
-        href: 'performance',
-        icon: <AiFillCalendar />,
-      },
-      {
-        name: 'attendance',
-        href: 'attendance',
-        icon: <TbReportAnalytics />,
-      },
-      {
-        name: 'students grade',
-        href: 'students-grade',
-        icon: <AiFillSnippets />,
-      },
+      // {
+      //   name: 'section',
+      //   href: 'section',
+      //   icon: <FaMoneyBillAlt />,
+      // },
+      // {
+      //   name: 'performance',
+      //   href: 'performance',
+      //   icon: <AiFillCalendar />,
+      // },
+      // {
+      //   name: 'attendance',
+      //   href: 'attendance',
+      //   icon: <TbReportAnalytics />,
+      // },
+      // {
+      //   name: 'students grade',
+      //   href: 'students-grade',
+      //   icon: <AiFillSnippets />,
+      // },
       {
         name: 'profile',
         href: 'profile',

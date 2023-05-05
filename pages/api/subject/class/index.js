@@ -31,7 +31,9 @@ const handler = async (req, res) => {
       const classes = await Class.findOne({ _id: item.class_id });
 
       return {
+        classSubject_id: item._id,
         subject_id: item.subject_id,
+        class_id: classes._id,
         class_name: classes.name + ' ' + classes.year + '-' + classes.section,
         criteria: criteria.name,
         semester:

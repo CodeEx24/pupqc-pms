@@ -10,13 +10,19 @@ import {
   fetchClassYear,
   fetchCriteria,
   fetchSubjectClass,
-} from '../../components/hooks/FacultySubject/fetch';
+} from '../../../components/hooks/FacultySubject/fetch';
 import { useMemo } from 'react';
-import { addSubjectClassData } from '../../components/hooks/FacultySubject/addData';
+import { addSubjectClassData } from '../../../components/hooks/FacultySubject/addData';
 import { toast } from 'react-toastify';
-import ClassSubjectList from '../../components/faculty/grid/ClassSubjectList';
+import ClassSubjectList from '../../../components/faculty/grid/ClassSubjectList';
 
 function ClassSubjectScreen() {
+  // Usestate for selected options
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [selectedSemester, setSelectedSemester] = useState(null);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedCriteria, setSelectedCriteria] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -42,12 +48,6 @@ function ClassSubjectScreen() {
   );
 
   const { data: criteria } = useQuery(['criteria'], fetchCriteria);
-
-  // Usestate for selected options
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [selectedSemester, setSelectedSemester] = useState(null);
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedCriteria, setSelectedCriteria] = useState(null);
 
   // Options for select
   const subjectOptions = subjects?.data?.map((item) => ({
