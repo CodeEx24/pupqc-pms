@@ -13,7 +13,12 @@ function CriteriaManagementIDScreen() {
   const { data: criteriaOverallList, isLoading } = useQuery(
     ['criteria', router.query.id],
     () => fetchCriteriaOverallList(router.query.id),
-    { enabled: !!router.query.id } // Only enable the query when query.id is truthy
+    {
+      enabled: !!router.query.id,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
   // After mapping push in the criteriaOverALL value  (BUTTON)
