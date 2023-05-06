@@ -50,6 +50,14 @@
   @apply bg-sky-400  text-white w-full rounded-md py-2;
 }
 
+.btn-primary-no-width {
+  @apply bg-sky-400  text-white rounded-md py-2;
+}
+
+.btn-danger-no-width {
+  @apply bg-red-500  text-white rounded-md py-2;
+}
+
 .title {
   @apply text-sky-400 font-bold text-3xl mb-5 font-poppins;
 }

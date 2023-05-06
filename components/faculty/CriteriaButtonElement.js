@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import { updateCriteriaOverallScores } from '../hooks/FacultySubject/updateData';
+import {
+  updateAddItemCriteriaOverallScores,
+  updateDeleteItemCriteriaOverallScoresDelete,
+} from '../hooks/FacultySubject/updateData';
 
 import { useForm } from 'react-hook-form';
+
+import {
+  TabComponent,
+  TabItemDirective,
+  TabItemsDirective,
+} from '@syncfusion/ej2-react-navigations';
+import TabsContent from './tabs/TabsContent';
+import { toast } from 'react-toastify';
 
 function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
   const {
@@ -24,7 +35,33 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
     return capitalizedWords.join(' '); // join the words back into a string with a space between them
   });
 
+  const headerText = criteriaAssessmentFormatted.map((item) => {
+    return {
+      text: item,
+    };
+  });
+
+  const tabItemDirectiveElement = criteriaAssessment.map((item, index) => {
+    return (
+      <TabItemDirective
+        key={item}
+        header={headerText[index]}
+        // pass the item
+        content={() => (
+          <TabsContent
+            assessment={item}
+            criteriaOverall={criteriaOverallList.data.criteria_overall[item]}
+            handleAddCriteriaClick={handleAddCriteriaClick}
+            handleDeleteCriteriaClick={handleDeleteCriteriaClick}
+          />
+        )}
+      />
+    );
+  });
+
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const [item, setItem] = useState('');
 
   const [length, setLength] = useState(0);
@@ -38,42 +75,79 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
     clearErrors('number');
   };
 
-  const handleSubmitOverallScore = (data) => {
-    console.log('INPUT BVALUE: ', data.number);
-    const inputValue = data.number;
-    updateCriteriaOverallScores({
-      classSubject_id,
-      item,
-      inputValue,
-      length,
-    });
-    setValue('number', null);
-    handleCloseModal();
+  const handleDeleteModal = () => {
+    setShowDeleteModal(true);
   };
 
-  const handleCriteriaClick = (item) => {
-    const keyItem = item.toLowerCase().replace(' ', '_');
+  const handleDeleteCloseModal = () => {
+    setShowDeleteModal(false);
+  };
 
+  const handleSubmitOverallScore = async (data) => {
+    console.log('INPUT BVALUE: ', data.number);
+    console.log('ITEM IN SUBMIT: ', item);
+    try {
+      const inputValue = data.number;
+      await updateAddItemCriteriaOverallScores({
+        classSubject_id,
+        item,
+        inputValue,
+        length,
+      });
+      // If success update the data in frontend manually
+      criteriaOverallList.data.criteria_overall[item] = [
+        ...criteriaOverallList.data.criteria_overall[item],
+      ];
+      setValue('number', null);
+      handleCloseModal();
+      toast.success('Overall score item added successfully');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDeleteOverallScore = async () => {
+    console.log('ITEM: ', item);
+    console.log('length: ', length - 1);
+    try {
+      await updateDeleteItemCriteriaOverallScoresDelete({
+        item,
+        length,
+        classSubject_id,
+      });
+      criteriaOverallList.data.criteria_overall[item] =
+        criteriaOverallList.data.criteria_overall[item].slice(0, -1);
+
+      handleDeleteCloseModal();
+      toast.success('Overall score item deleted successfully');
+    } catch (error) {
+      handleDeleteCloseModal();
+      toast.error(error);
+    }
+  };
+
+  const handleDeleteCriteriaClick = (item) => {
+    const keyItem = item.toLowerCase().replace(' ', '_');
+    setItem(item);
+    setLength(criteriaOverallList.data.criteria_overall[keyItem].length);
+    // console.log('ITEM: ', item);
+    // console.log('length: ', length);
+    handleDeleteModal();
+  };
+
+  const handleAddCriteriaClick = () => {
+    const keyItem = item.toLowerCase().replace(' ', '_');
     setItem(item);
     setLength(criteriaOverallList.data.criteria_overall[keyItem].length + 1);
     handleOpenModal();
   };
 
-  const addCriteriaElement = criteriaAssessmentFormatted.map((assessment) => {
-    return (
-      <button
-        key={assessment}
-        className="text-white bg-sky-500 w-40 py-2  rounded-md"
-        onClick={() => handleCriteriaClick(assessment)}
-      >
-        Add {`${assessment}`}
-      </button>
-    );
-  });
-
   return (
-    <div className="flex flex-wrap items-end gap-5">
-      {addCriteriaElement}
+    <div className="flex flex-wrap items-end gap-5 mb-80">
+      <TabComponent heightAdjustMode="Auto">
+        <TabItemsDirective>{tabItemDirectiveElement}</TabItemsDirective>
+      </TabComponent>
+
       {showModal && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-md p-6">
@@ -109,6 +183,33 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {showDeleteModal && (
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <form onSubmit={handleSubmit(handleDeleteOverallScore)}>
+            <div className="bg-white rounded-md p-6">
+              <h2 className="text-lg font-medium mb-2">
+                Are you sure you want to delete the last item?
+              </h2>
+              <div className="flex justify-end mt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(false)}
+                  className="mr-4 text-gray-500 hover:text-gray-700"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-red-500 text-white rounded-md px-4 py-2"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       )}
     </div>

@@ -4,9 +4,8 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import CriteriaOverallScores from '../../../../../models/CriteriaOverallScores';
 import ClassSubject from '../../../../../models/ClassSubject';
-import Class from '../../../../../models/Class';
+import CriteriaOverallScores from '../../../../../models/CriteriaOverallScores';
 import StudentRecords from '../../../../../models/StudentRecords';
 
 const handler = async (req, res) => {
@@ -19,7 +18,7 @@ const handler = async (req, res) => {
   const classSubject_id = req.query.classSubject_id;
   // console.log('CLASS SUBJECT 2 UPDATE: ', classSubject_id);
 
-  const { item, inputValue: value, length } = req.body;
+  const { item, inputValue: value } = req.body;
 
   await db.connect();
 

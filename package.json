@@ -13,6 +13,7 @@
     "@syncfusion/ej2-base": "^21.1.38",
     "@syncfusion/ej2-data": "^21.1.38",
     "@syncfusion/ej2-react-grids": "^21.1.38",
+    "@syncfusion/ej2-react-navigations": "^21.2.3",
     "@syncfusion/ej2-react-popups": "^21.1.37",
     "@tanstack/react-query": "^4.29.1",
     "@tanstack/react-query-devtools": "^4.29.1",
