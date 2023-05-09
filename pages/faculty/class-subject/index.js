@@ -142,7 +142,7 @@ function ClassSubjectScreen() {
   };
 
   const SubjectClassMemoized = useMemo(
-    () => <ClassSubjectList subjectClass={subjectClass} />,
+    () => <ClassSubjectList subjectClass={subjectClass?.data} />,
     [subjectClass]
   );
 

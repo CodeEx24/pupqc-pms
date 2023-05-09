@@ -41,24 +41,6 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
     };
   });
 
-  const tabItemDirectiveElement = criteriaAssessment.map((item, index) => {
-    return (
-      <TabItemDirective
-        key={item}
-        header={headerText[index]}
-        // pass the item
-        content={() => (
-          <TabsContent
-            assessment={item}
-            criteriaOverall={criteriaOverallList.data.criteria_overall[item]}
-            handleAddCriteriaClick={handleAddCriteriaClick}
-            handleDeleteCriteriaClick={handleDeleteCriteriaClick}
-          />
-        )}
-      />
-    );
-  });
-
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -97,6 +79,7 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
       // If success update the data in frontend manually
       criteriaOverallList.data.criteria_overall[item] = [
         ...criteriaOverallList.data.criteria_overall[item],
+        data.number,
       ];
       setValue('number', null);
       handleCloseModal();
@@ -135,12 +118,31 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
     handleDeleteModal();
   };
 
-  const handleAddCriteriaClick = () => {
+  const handleAddCriteriaClick = (item) => {
     const keyItem = item.toLowerCase().replace(' ', '_');
     setItem(item);
     setLength(criteriaOverallList.data.criteria_overall[keyItem].length + 1);
+    console.log(item, length);
     handleOpenModal();
   };
+
+  const tabItemDirectiveElement = criteriaAssessment.map((item, index) => {
+    return (
+      <TabItemDirective
+        key={item}
+        header={headerText[index]}
+        // pass the item
+        content={() => (
+          <TabsContent
+            assessment={item}
+            criteriaOverall={criteriaOverallList.data.criteria_overall[item]}
+            handleAddCriteriaClick={handleAddCriteriaClick}
+            handleDeleteCriteriaClick={handleDeleteCriteriaClick}
+          />
+        )}
+      />
+    );
+  });
 
   return (
     <div className="flex flex-wrap items-end gap-5 mb-80">
@@ -152,7 +154,7 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-md p-6">
             <h2 className="text-lg font-medium mb-2">
-              Enter overall scores for {item} {length}:
+              Enter overall scores for {item.replace(/_/g, ' ')} #{length}:
             </h2>
             <form onSubmit={handleSubmit(handleSubmitOverallScore)}>
               <input
