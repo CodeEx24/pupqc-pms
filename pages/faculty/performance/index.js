@@ -15,8 +15,6 @@ function PerformanceScreen() {
     refetchOnWindowFocus: false,
   });
 
-  console.log(studentClass);
-
   // Student ID, Profile, Name, Subject ID, Batch, Semester, Button for managing students grade
 
   // Pages for student in which the teacher can be able to save
