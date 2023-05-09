@@ -35,6 +35,8 @@ const handler = async (req, res) => {
 
   const itemFormatted = item.toLowerCase().replace(' ', '_');
 
+  console.log('ITEM FORMAT: ', itemFormatted);
+
   const criteriaOverallScores = await CriteriaOverallScores.findOne({
     classSubject_id,
   });
@@ -53,14 +55,14 @@ const handler = async (req, res) => {
 
   // For eact students record length and provide 0 for everytime teacher add something
 
-  console.log('CLASSD OVERALL ID: ', criteriaOverallScores._id);
+  // console.log('CLASSD OVERALL ID: ', criteriaOverallScores._id);
 
   const studentRecordsData = await StudentRecords.find({
     criteriaOverallScores_id: criteriaOverallScores._id,
   });
 
   // Map this students and update their records with initially 0 scores of their score.
-  console.log('ALL STUDENTS: ', studentRecordsData);
+  // console.log('ALL STUDENTS: ', studentRecordsData);
 
   const studentRecordsUpdate = studentRecordsData.map((item) => {
     item.records = {

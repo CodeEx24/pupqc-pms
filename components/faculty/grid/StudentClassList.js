@@ -90,6 +90,9 @@ function StudentClassList({ studentClass }) {
               <TabsContentStudentManagement
                 assessment={item}
                 assessmentItem={[...assessment[item]]}
+                setShowPerformanceModal={setShowPerformanceModal}
+                studentId={studentId}
+                classSubjectId={classSubjectId}
               />
             )}
           />
@@ -174,7 +177,7 @@ function StudentClassList({ studentClass }) {
       </GridComponent>
 
       {showperformanceModal && (
-        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
           <div className="bg-white rounded-md p-10 h-1/2">
             <div className="flex gap-10">
               <h2 className="text-lg font-medium mb-2">
@@ -184,14 +187,12 @@ function StudentClassList({ studentClass }) {
                 Email: <span className="font-normal">{studentData.email}</span>
               </h2>
             </div>
-            <div className="pb-10 h-full">
-              <form action="" className="overflow-scroll h-full">
-                <div className="h-5/6">
-                  <TabComponent heightAdjustMode="Auto">
-                    <TabItemsDirective>{tabDirectiveElement}</TabItemsDirective>
-                  </TabComponent>
-                </div>
-              </form>
+            <div className="h-full ">
+              <div className="h-5/6 overflow-y-auto">
+                <TabComponent heightAdjustMode="Auto">
+                  <TabItemsDirective>{tabDirectiveElement}</TabItemsDirective>
+                </TabComponent>
+              </div>
             </div>
             {/* <form onSubmit={handleSubmit(handleSubmitOverallScore)}>
               <input
