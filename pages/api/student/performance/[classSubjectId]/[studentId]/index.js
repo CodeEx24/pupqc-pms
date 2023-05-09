@@ -2,9 +2,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import CriteriaOverallScores from '../../../../../models/CriteriaOverallScores';
-import StudentRecords from '../../../../../models/StudentRecords';
-import Student from '../../../../../models/Student';
+import CriteriaOverallScores from '@/models/CriteriaOverallScores';
+import StudentRecords from '@/models/StudentRecords';
+import Student from '@/models/Student';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -14,9 +14,6 @@ const handler = async (req, res) => {
   }
 
   const { studentId, classSubjectId } = req.query;
-
-  console.log('CLASS SUBJECT ID: ', classSubjectId);
-  console.log('STUDENT ID: ', studentId);
 
   await db.connect();
 
