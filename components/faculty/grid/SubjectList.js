@@ -8,18 +8,18 @@ import {
   Sort,
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 
 function SubjectList({ subjects }) {
-  const [key, setKey] = useState(0);
+  // const [key, setKey] = useState(0);
 
-  useEffect(() => {
-    setKey(key + 1);
-  }, [subjects.data]);
+  // useEffect(() => {
+  //   setKey(key + 1);
+  // }, [subjects.data]);
 
-  console.log('RENDER: ', key);
+  // console.log('RENDER: ', key);
 
   const subjectDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
