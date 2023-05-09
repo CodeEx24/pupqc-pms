@@ -11,17 +11,17 @@ import {
 import React from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
-import { useEffect } from 'react';
-import { useState } from 'react';
+// import { useEffect } from 'react';
+// import { useState } from 'react';
 import Link from 'next/link';
 
 function ClassSubjectList({ subjectClass }) {
-  console.log(subjectClass);
-  const [key, setKey] = useState(0);
+  // console.log(subjectClass);
+  // const [key, setKey] = useState(0);
 
-  useEffect(() => {
-    setKey(key + 1);
-  }, [subjectClass]);
+  // useEffect(() => {
+  //   setKey(key + 1);
+  // }, [subjectClass]);
 
   const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),

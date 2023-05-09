@@ -9,7 +9,7 @@ function PerformanceScreen() {
 
   const {
     data: studentClass,
-    refetch: refetchSubjectClass,
+    // refetch: refetchSubjectClass,
     isLoading,
   } = useQuery(['subjectClass'], fetchStudentsClass, {
     refetchOnWindowFocus: false,
