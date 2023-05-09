@@ -4,6 +4,10 @@ export const fetchStudents = () => {
   return axios.get(`/api/student/`);
 };
 
+export const fetchStudentsClass = () => {
+  return axios.get(`/api/student/class`);
+};
+
 // UPDATED FETCH
 export const fetchAllSubject = () => {
   return axios.get(`/api/subject`);

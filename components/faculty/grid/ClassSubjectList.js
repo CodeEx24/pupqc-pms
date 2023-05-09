@@ -16,15 +16,16 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 function ClassSubjectList({ subjectClass }) {
+  console.log(subjectClass);
   const [key, setKey] = useState(0);
 
   useEffect(() => {
     setKey(key + 1);
-  }, [subjectClass.data]);
+  }, [subjectClass]);
 
   const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
-    json: subjectClass.data,
+    json: subjectClass,
   });
 
   const pageOptions = {
@@ -78,7 +79,10 @@ function ClassSubjectList({ subjectClass }) {
           headerText="Manage Criteria Overall"
           width="150"
           template={(rowData) => (
-            <Link href={`/faculty/class-subject/${rowData.classSubject_id}`}>
+            <Link
+              href={`/faculty/class-subject/${rowData.classSubject_id}`}
+              className="btn-primary-no-width px-3"
+            >
               Manage
             </Link>
           )}

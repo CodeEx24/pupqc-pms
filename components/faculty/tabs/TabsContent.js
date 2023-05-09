@@ -8,15 +8,19 @@ function TabsContent({
 }) {
   const criteriaListElement = criteriaOverall?.map((item, index) => {
     return (
-      <div className="flex flex-col gap-2" key={index}>
+      <div
+        className="flex flex-col gap-2 shadow-sm p-5 rounded-md border border-gray-200 text-center"
+        key={index}
+      >
+        <p className="text-2xl font-semibold text-center text-sky-500">
+          {criteriaOverall[index]}
+        </p>
         <p className="text-lg text-gray-800">
           {assessment
             .replace(/_/g, ' ')
             .replace(/\b\w/g, (c) => c.toUpperCase())}{' '}
-          {index + 1}:
+          {index + 1}
         </p>
-
-        <p className="text-lg">{criteriaOverall[index]}</p>
       </div>
     );
   });

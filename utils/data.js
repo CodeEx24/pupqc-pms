@@ -95,6 +95,11 @@ export const teacherLinks = [
         icon: <AiFillDiff />,
       },
       {
+        name: 'performance',
+        href: 'performance',
+        icon: <AiFillCalendar />,
+      },
+      {
         name: 'criteria',
         href: 'criteria',
         icon: <AiFillIdcard />,
@@ -104,16 +109,13 @@ export const teacherLinks = [
         href: 'criteria-management',
         icon: <AiFillIdcard />,
       },
+
       // {
       //   name: 'section',
       //   href: 'section',
       //   icon: <FaMoneyBillAlt />,
       // },
-      // {
-      //   name: 'performance',
-      //   href: 'performance',
-      //   icon: <AiFillCalendar />,
-      // },
+
       // {
       //   name: 'attendance',
       //   href: 'attendance',
@@ -788,4 +790,8 @@ export const data = {
         'This course covers the concepts and techniques of progressive web applications, including web app architecture, offline functionality, push notifications, and service workers.',
     },
   ],
+};
+
+export const capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1);
 };
