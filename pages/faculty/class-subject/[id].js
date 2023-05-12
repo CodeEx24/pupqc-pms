@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import FacultyLayout from '@/components/faculty/FacultyLayout';
-import { fetchCriteriaOverallList } from '../../../components/hooks/FacultySubject/fetch';
+import { fetchCriteriaOverallList } from '@/components/hooks/FacultySubject/fetch';
 import { useQuery } from '@tanstack/react-query';
-import CriteriaButtonElement from '../../../components/faculty/CriteriaButtonElement';
+import CriteriaButtonElement from '@/components/faculty/CriteriaButtonElement';
 
 function CriteriaManagementIDScreen() {
   const router = useRouter();

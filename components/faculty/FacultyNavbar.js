@@ -23,8 +23,6 @@ import Link from 'next/link';
 function FacultyNavbar() {
   const { data: session } = useSession();
 
-  console.log(session.user.profile);
-
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
 
@@ -103,7 +101,7 @@ function FacultyNavbar() {
                   height={50}
                   width={50}
                   className="rounded-full w-8 h-8"
-                  src={session.user.profile}
+                  src={session?.user.profile}
                   alt="avatar.jpg"
                 />
                 <p>
