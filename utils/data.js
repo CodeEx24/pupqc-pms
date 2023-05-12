@@ -100,15 +100,20 @@ export const teacherLinks = [
         icon: <AiFillCalendar />,
       },
       {
-        name: 'criteria',
-        href: 'criteria',
-        icon: <AiFillIdcard />,
+        name: 'grades',
+        href: 'grades',
+        icon: <AiFillSnippets />,
       },
-      {
-        name: 'criteria management',
-        href: 'criteria-management',
-        icon: <AiFillIdcard />,
-      },
+      // {
+      //   name: 'criteria',
+      //   href: 'criteria',
+      //   icon: <AiFillIdcard />,
+      // },
+      // {
+      //   name: 'criteria management',
+      //   href: 'criteria-management',
+      //   icon: <AiFillIdcard />,
+      // },
 
       // {
       //   name: 'section',
@@ -121,11 +126,7 @@ export const teacherLinks = [
       //   href: 'attendance',
       //   icon: <TbReportAnalytics />,
       // },
-      // {
-      //   name: 'students grade',
-      //   href: 'students-grade',
-      //   icon: <AiFillSnippets />,
-      // },
+
       {
         name: 'profile',
         href: 'profile',
@@ -328,15 +329,27 @@ export const data = {
       isAdmin: true,
     },
     {
-      _id: '609e16f7c2585b8a5f9ddc54',
-      name: 'David Kim',
-      email: 'davidkim2@gmail.com',
+      _id: '609e16f7c2585b8a5f9ddc81',
+      name: 'David Ymor Illustre',
+      email: 'david.ilustre@gmail.com',
       password: bcrypt.hashSync('david123'),
       gender: 'Male',
       dateOfBirth: new Date('1982-06-15'),
       placeOfBirth: 'Los Angeles',
       mobileNo: '5557778888',
       residentialAddress: '321 Pine Street, Los Angeles',
+      isAdmin: true,
+    },
+    {
+      _id: '609e16f7c2585b8a5f9ddc82',
+      name: 'Eugene Privaldos',
+      email: 'eugene.privaldos.9@gmail.com',
+      password: bcrypt.hashSync('eugene123'),
+      gender: 'Female',
+      dateOfBirth: new Date('1990-03-25'),
+      placeOfBirth: 'San Francisco',
+      mobileNo: '5551112222',
+      residentialAddress: '123 Main Street, San Francisco',
       isAdmin: true,
     },
   ],
@@ -795,3 +808,32 @@ export const data = {
 export const capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
+
+export const getGrade = (percentage) => {
+  if (percentage >= 97 && percentage <= 100) {
+    return 1.0;
+  } else if (percentage >= 94 && percentage <= 96) {
+    return 1.25;
+  } else if (percentage >= 91 && percentage <= 93) {
+    return 1.5;
+  } else if (percentage >= 88 && percentage <= 90) {
+    return 1.75;
+  } else if (percentage >= 85 && percentage <= 87) {
+    return 2.0;
+  } else if (percentage >= 82 && percentage <= 84) {
+    return 2.25;
+  } else if (percentage >= 79 && percentage <= 81) {
+    return 2.5;
+  } else if (percentage >= 76 && percentage <= 78) {
+    return 2.75;
+  } else if (percentage === 75) {
+    return 3.0;
+  } else if (percentage >= 65 && percentage <= 74) {
+    return 4.0;
+  } else {
+    return 5.0;
+  }
+};
+
+export const defaultImage =
+  'https://res.cloudinary.com/daevedaio/image/upload/v1683821196/user-min_mae8s5.jpg';

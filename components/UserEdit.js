@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Select from 'react-select';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { defaultImage } from '../utils/data';
 
 function UserEdit({ user, setEditProfile, refetchUser }) {
   const {
@@ -15,6 +16,19 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
   const [avatar, setAvatar] = useState(user.data.profileImageUrl);
 
   const submitHandler = async (data) => {
+    if (avatar !== defaultImage && data.profile?.length) {
+      try {
+        // Delete the old profile image from Cloudinary
+        const response = await axios.post('/api/cloudinary/delete', {
+          public_id: user.data.profileImageUrl.split('/').pop().split('.')[0],
+        });
+        console.log(response.data.message);
+      } catch (error) {
+        toast.error(error);
+        return;
+      }
+    }
+
     // Check if a profile image exists
     if (data.profile?.length) {
       const formData = new FormData();
@@ -31,7 +45,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
           }
         );
         const file = await res.json();
-
+        console.log('SECURE URL ', file.secure_url);
         // Update user profile image URL with Cloudinary URL
         const updatedUser = {
           ...user,
@@ -43,7 +57,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
 
         // Update user profile
         const userDataUpdate = await axios.post('/api/user/update', {
-          ...updatedUser.data,
+          data: { ...updatedUser.data },
           type: 'Teacher',
         });
         const image = userDataUpdate.data.result.profileImageUrl;
@@ -64,8 +78,8 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
         toast.error(error);
       }
     }
-    refetchUser();
-    // Set the profile back to the user and also update the
+
+    await refetchUser();
     setEditProfile(false);
   };
 
