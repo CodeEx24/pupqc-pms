@@ -6,6 +6,8 @@ import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
 import ClassSubject from '@/models/ClassSubject';
 import Criteria from '@/models/Criteria';
+import StudentGrade from '../../../../../../models/StudentGrade';
+import { getGrade } from '../../../../../../utils/data';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -50,7 +52,7 @@ const handler = async (req, res) => {
     })
   );
 
-  console.log('SCORES ACCUMULATED: ', scoresAccumulated);
+  // console.log('SCORES ACCUMULATED: ', scoresAccumulated);
 
   const overallAccumulatedData = Object.entries(
     criteriaOverallData.criteria_overall
@@ -60,7 +62,7 @@ const handler = async (req, res) => {
 
   const overallAccumulated = Object.assign({}, ...overallAccumulatedData);
 
-  console.log('OVERALL ACCUMULATED', overallAccumulated);
+  // console.log('OVERALL ACCUMULATED', overallAccumulated);
 
   // With those accumulated I want to know the percentage of it in the criteria table
 
@@ -72,7 +74,7 @@ const handler = async (req, res) => {
     _id: classSubjectData.criteria_id,
   });
 
-  //   console.log('CRITERIA DATA: ', criteriaData);
+  // console.log('CRITERIA DATA: ', criteriaData);
 
   // Get the percentage in the
   const criteriaPercentageData = Object.keys(
@@ -96,7 +98,7 @@ const handler = async (req, res) => {
     {}
   );
 
-  console.log('RESULT: ', criteriaPercentage);
+  // console.log('RESULT: ', criteriaPercentage);
 
   const assessmentGrade = Object.entries(scoresAccumulated).reduce(
     (acc, [key, value]) => {
@@ -115,11 +117,11 @@ const handler = async (req, res) => {
     {}
   );
 
-  console.log('ASSESSMENT GRADE: ', assessmentGrade);
+  // console.log('ASSESSMENT GRADE: ', assessmentGrade);
 
   const criteriaFirstLayer = criteriaData.criteria.percentage;
 
-  console.log(criteriaFirstLayer);
+  // console.log(criteriaFirstLayer);
 
   const groupCriteria = Object.keys(criteriaFirstLayer)
     .reduce((acc, item) => {
@@ -135,7 +137,7 @@ const handler = async (req, res) => {
       return acc;
     }, {});
 
-  console.log(groupCriteria);
+  // console.log(groupCriteria);
 
   //   Add up all the per
   const resultAdded = Object.keys(groupCriteria).reduce((acc, item) => {
@@ -146,7 +148,22 @@ const handler = async (req, res) => {
     return acc;
   }, {});
 
-  console.log('Result Added: ', resultAdded);
+  // console.log('Result Added: ', resultAdded);
+
+  // console.log(classSubjectData);
+
+  const percentage = Object.values(resultAdded).reduce(
+    (total, current) => total + current,
+    0
+  );
+
+  const studentGrade = new StudentGrade({
+    classSubject_id: classSubjectId,
+    student_id: studentId,
+    grade: getGrade(percentage),
+  });
+
+  await studentGrade.save();
 
   await db.disconnect();
 
