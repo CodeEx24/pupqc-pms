@@ -29,6 +29,7 @@ const handler = async (req, res) => {
           const studentData = await Student.findOne({ _id: id });
           return {
             subject_id,
+            profileImageUrl: studentData.profileImageUrl,
             student_id: studentData.name,
             email: studentData.email,
             mobileNo: studentData.mobileNo,

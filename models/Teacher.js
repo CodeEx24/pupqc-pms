@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { defaultImage } from '../utils/data';
 
 const teacherSchema = new mongoose.Schema(
   {
@@ -14,8 +15,7 @@ const teacherSchema = new mongoose.Schema(
     profileImageUrl: {
       type: String,
       required: true,
-      default:
-        'https://res.cloudinary.com/daevedaio/image/upload/v1683093300/hm19yu8dnpiolkcyrkq7.jpg',
+      default: defaultImage,
     },
   },
   {

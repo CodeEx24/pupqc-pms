@@ -15,7 +15,8 @@ import {
 import { DropDownList } from '@syncfusion/ej2/dropdowns';
 import Image from 'next/image';
 
-function StudentList({ students }) {
+function StudentGradeList({ students }) {
+  console.log(students.data);
   const templateOptions = {
     create: () => {
       const dd = document.createElement('input');
@@ -94,25 +95,21 @@ function StudentList({ students }) {
           width="130"
           textAlign="Left"
         />
-        <ColumnDirective
-          field="email"
-          headerText="Email"
-          width="200"
-          format="C2"
-          textAlign="Left"
-        />
-        <ColumnDirective
-          field="mobileNo"
-          headerText="Mobile Number"
-          width="130"
-          format="C2"
-          textAlign="Left"
-        />
+
         <ColumnDirective
           field="subject_id"
           headerText="Subject Code"
           width="100"
           textAlign="Left"
+        />
+        <ColumnDirective
+          field="grade"
+          headerText="Grade"
+          width="130"
+          textAlign="Left"
+          template={(rowData) => (
+            <p className="text-blue-500">{rowData.grade}</p>
+          )}
         />
         <ColumnDirective
           field="class_name"
@@ -134,4 +131,4 @@ function StudentList({ students }) {
   );
 }
 
-export default StudentList;
+export default StudentGradeList;

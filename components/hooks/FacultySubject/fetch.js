@@ -40,3 +40,11 @@ export const fetchCurrentUser = () => {
 export const fetchCriteriaOverallList = (id) => {
   return axios.get(`/api/criteria/overall/${id}`);
 };
+
+export const fetchStudentsGrade = () => {
+  return axios.get(`/api/student/grade/teacher-list`);
+};
+
+export const fetchcriteria = () => {
+  return axios.get(`/api/faculty/criteria-list`);
+};
