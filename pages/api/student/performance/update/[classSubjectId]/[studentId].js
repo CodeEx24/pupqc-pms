@@ -98,20 +98,28 @@ const handler = async (req, res) => {
     {}
   );
 
-  // console.log('RESULT: ', criteriaPercentage);
-
   const assessmentGrade = Object.entries(scoresAccumulated).reduce(
     (acc, [key, value]) => {
       const overAllItem = Object.keys(overallAccumulated).find(
         (item) => item === key
       );
+      // console.log('OVERALL ITEM', overAllItem);
+      // console.log('ITEM SPECIFIC: ', overallAccumulated[overAllItem]);
+
       if (overAllItem) {
-        acc[key] = (
-          (value / overallAccumulated[overAllItem]) *
-          criteriaPercentage[overAllItem] *
-          100
-        ).toFixed(2);
+        if (overallAccumulated[overAllItem] == 0) {
+          acc[key] = ((1 / 1) * criteriaPercentage[overAllItem] * 100).toFixed(
+            2
+          );
+        } else {
+          acc[key] = (
+            (value / overallAccumulated[overAllItem]) *
+            criteriaPercentage[overAllItem] *
+            100
+          ).toFixed(2);
+        }
       }
+
       return acc;
     },
     {}
@@ -148,20 +156,17 @@ const handler = async (req, res) => {
     return acc;
   }, {});
 
-  // console.log('Result Added: ', resultAdded);
-
-  // console.log(classSubjectData);
-
   const percentage = Object.values(resultAdded).reduce(
     (total, current) => total + current,
     0
   );
 
-  const studentGrade = new StudentGrade({
+  const studentGrade = await StudentGrade.findOne({
     classSubject_id: classSubjectId,
     student_id: studentId,
-    grade: getGrade(percentage),
   });
+
+  studentGrade.grade = getGrade(percentage);
 
   await studentGrade.save();
 

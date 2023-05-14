@@ -60,7 +60,7 @@ function FacultyLayout({ title, children }) {
           {/* Navbar */}
           <div
             className={` bg-main-bg min-h-screen w-full ${
-              activeMenu ? 'md:ml-72 ' : 'flex-2'
+              activeMenu ? 'lg:ml-72 ' : 'flex-2'
             }`}
           >
             <div className="fixed md:static bg-main-bg navbar w-full z-2 shadow-sm md:shadow-none">

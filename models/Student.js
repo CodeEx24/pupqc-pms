@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { defaultImage } from '../utils/data';
 
 const studentSchema = new mongoose.Schema(
   {
@@ -11,6 +12,11 @@ const studentSchema = new mongoose.Schema(
     mobileNo: { type: String, required: true },
     residentialAddress: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
+    profileImageUrl: {
+      type: String,
+      required: true,
+      default: defaultImage,
+    },
   },
   {
     timestamps: true,

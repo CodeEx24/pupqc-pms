@@ -36,11 +36,12 @@ function ProfileScreen() {
           <div className="grid grid-rows-3 grid-cols-6 grid-flow-col gap-4">
             <div className=" col-span-2 row-span-1 my-auto md:row-span-3 md:m-0 lg:col-span-1">
               <Image
+                src={user.data.profileImageUrl}
                 height={500}
                 width={100}
                 className="rounded-full w-full"
-                src={user.data.profileImageUrl}
                 alt="avatar.jpg"
+                decoding="async"
               />
             </div>
 

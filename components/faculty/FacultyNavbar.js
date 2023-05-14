@@ -10,18 +10,20 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import Store from '@/utils/Store';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 import { NavButton } from '../NavButton';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { fetchCurrentUser } from '../hooks/FacultySubject/fetch';
 
 // React Context
 // import { Cart, Chat, Notification, UserProfile } from '.';
 // import { useStateContext } from '../contexts/ContextProvider';
 
 function FacultyNavbar() {
-  const { data: session } = useSession();
+  const { data: user, status } = useQuery(['user'], fetchCurrentUser);
 
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
@@ -49,6 +51,10 @@ function FacultyNavbar() {
       setActiveMenu(true);
     }
   }, [screenSize]);
+
+  if (status === 'loading') {
+    return null; // or show a loading indicator
+  }
 
   return (
     <>
@@ -101,13 +107,13 @@ function FacultyNavbar() {
                   height={50}
                   width={50}
                   className="rounded-full w-8 h-8"
-                  src={session?.user.profile}
+                  src={user.data.profileImageUrl}
                   alt="avatar.jpg"
                 />
                 <p>
                   <span className="text-gray-400 text-14">Hi, </span>
                   <span className="text-gray-400 font-bold ml-1 text-14">
-                    {session?.user.name.split(' ')[0]}
+                    {user?.data.name.split(' ')[0]}
                   </span>
                 </p>
                 <MdKeyboardArrowDown className="text-gray-400 text-14" />

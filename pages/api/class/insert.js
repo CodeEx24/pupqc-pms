@@ -9,6 +9,7 @@ import CriteriaOverallScores from '../../../models/CriteriaOverallScores';
 import Criteria from '../../../models/Criteria';
 import Class from '../../../models/Class';
 import StudentRecords from '../../../models/StudentRecords';
+import StudentGrade from '../../../models/StudentGrade';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -79,12 +80,21 @@ const handler = async (req, res) => {
         records: criteriaOverallScores.criteria_overall,
       });
 
+      const newStudentGrades = new StudentGrade({
+        student_id: id,
+        classSubject_id: classSubject._id,
+        grade: 5.0,
+      });
+
+      await newStudentGrades.save();
       const records = await newStudentRecords.save();
       return records;
     })
   );
 
   console.log('STUDENT RECORDS: ', studentsRecords);
+
+  // Generate the grades for students once added
 
   await db.disconnect();
 

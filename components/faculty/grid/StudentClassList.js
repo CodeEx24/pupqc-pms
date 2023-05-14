@@ -37,7 +37,7 @@ function StudentClassList({ studentClass }) {
     },
     write: () => {
       const DropDownListObj = new DropDownList({
-        dataSource: ['All', ...studentClass.data.classList],
+        dataSource: ['All', ...(studentClass.data.classList || [])],
         placeholder: 'Select a value',
         popupHeight: '200px',
         change: (e) => {

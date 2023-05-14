@@ -80,6 +80,11 @@ export const teacherLinks = [
     title: 'Pages',
     links: [
       {
+        name: 'criteria',
+        href: 'criteria',
+        icon: <AiFillIdcard />,
+      },
+      {
         name: 'subject',
         href: 'subject',
         icon: <AiFillIdcard />,
@@ -104,11 +109,7 @@ export const teacherLinks = [
         href: 'grades',
         icon: <AiFillSnippets />,
       },
-      // {
-      //   name: 'criteria',
-      //   href: 'criteria',
-      //   icon: <AiFillIdcard />,
-      // },
+
       // {
       //   name: 'criteria management',
       //   href: 'criteria-management',
@@ -436,7 +437,7 @@ export const data = {
         },
         percentage: {
           lecture: 0.6,
-          laboratory: 0.2,
+          laboratory: 0.4,
         },
       },
     },
@@ -812,23 +813,23 @@ export const capitalize = function () {
 export const getGrade = (percentage) => {
   if (percentage >= 97 && percentage <= 100) {
     return 1.0;
-  } else if (percentage >= 94 && percentage <= 96) {
+  } else if (percentage >= 94 && percentage < 97) {
     return 1.25;
-  } else if (percentage >= 91 && percentage <= 93) {
+  } else if (percentage >= 91 && percentage < 94) {
     return 1.5;
-  } else if (percentage >= 88 && percentage <= 90) {
+  } else if (percentage >= 88 && percentage < 91) {
     return 1.75;
-  } else if (percentage >= 85 && percentage <= 87) {
+  } else if (percentage >= 85 && percentage < 88) {
     return 2.0;
-  } else if (percentage >= 82 && percentage <= 84) {
+  } else if (percentage >= 82 && percentage < 85) {
     return 2.25;
-  } else if (percentage >= 79 && percentage <= 81) {
+  } else if (percentage >= 79 && percentage < 82) {
     return 2.5;
-  } else if (percentage >= 76 && percentage <= 78) {
+  } else if (percentage >= 76 && percentage < 79) {
     return 2.75;
   } else if (percentage === 75) {
     return 3.0;
-  } else if (percentage >= 65 && percentage <= 74) {
+  } else if (percentage >= 65 && percentage < 75) {
     return 4.0;
   } else {
     return 5.0;
@@ -836,4 +837,4 @@ export const getGrade = (percentage) => {
 };
 
 export const defaultImage =
-  'https://res.cloudinary.com/daevedaio/image/upload/v1683821196/user-min_mae8s5.jpg';
+  'https://res.cloudinary.com/daevedaio/image/upload/v1683957466/user_zao3gw.jpg';
