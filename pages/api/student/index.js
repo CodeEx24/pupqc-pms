@@ -3,9 +3,10 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
 
-import Class from '../../../models/Class';
-import Student from '../../../models/Student';
-import ClassSubject from '../../../models/ClassSubject';
+import Class from '@/models/Class';
+import Student from '@/models/Student';
+import ClassSubject from '@/models/ClassSubject';
+import Course from '@/models/Course';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -23,6 +24,9 @@ const handler = async (req, res) => {
   const allStudentRecords = await Promise.all(
     classSubject.map(async ({ class_id, subject_id }) => {
       const classData = await Class.findOne({ _id: class_id });
+      const { course_code } = await Course.findOne({
+        _id: classData.course_id,
+      });
 
       return await Promise.all(
         classData.student_id.map(async (id) => {
@@ -34,7 +38,7 @@ const handler = async (req, res) => {
             email: studentData.email,
             mobileNo: studentData.mobileNo,
             class_name:
-              classData.name + ' ' + classData.year + '-' + classData.section,
+              course_code + ' ' + classData.year + '-' + classData.section,
             batch: classData.batch,
           };
         })

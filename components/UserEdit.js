@@ -12,13 +12,15 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
     register,
     formState: { errors },
   } = useForm();
-
   const [avatar, setAvatar] = useState(user.data.profileImageUrl);
 
   const submitHandler = async (data) => {
+    data.profile = data.profile1?.length ? data.profile1 : data.profile2;
+    console.log(data);
+    console.log('SUBMITTED DATA PROFILE:', data.profile);
+
     if (user.data.profileImageUrl !== defaultImage && data.profile?.length) {
       try {
-        // Delete the old profile image from Cloudinary
         await axios.post('/api/cloudinary/delete', {
           public_id: user.data.profileImageUrl.split('/').pop().split('.')[0],
         });
@@ -28,14 +30,13 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
       }
     }
 
-    // Check if a profile image exists
     if (data.profile?.length) {
       const formData = new FormData();
       formData.append('file', data.profile[0]);
       formData.append('upload_preset', 'pupqc_upload_avatar');
 
       try {
-        // Upload the profile image to Cloudinary
+        console.log('RESULT PENDING:');
         const res = await fetch(
           'https://api.cloudinary.com/v1_1/daevedaio/image/upload',
           {
@@ -45,7 +46,10 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
         );
         const file = await res.json();
 
-        // Update user profile image URL with Cloudinary URL
+        if (res) {
+          console.log('RESULT:', res);
+        }
+
         const updatedUser = {
           ...user,
           data: {
@@ -54,7 +58,6 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
           },
         };
 
-        // Update user profile
         const userDataUpdate = await axios.post('/api/user/update', {
           data: { ...updatedUser.data },
           type: 'Teacher',
@@ -67,7 +70,6 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
       }
     } else {
       try {
-        // If no profile image exists, update the user profile with the existing profileImageUrl
         await axios.post(`/api/user/update`, {
           data,
           type: 'Teacher',
@@ -83,33 +85,30 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
   };
 
   const dateOfBirth = new Date(user.data.dateOfBirth);
-  dateOfBirth.setDate(dateOfBirth.getDate() + 1); // In format
+  dateOfBirth.setDate(dateOfBirth.getDate() + 1);
   const formattedDate = dateOfBirth.toISOString().substring(0, 10);
   const formattedDOB = formattedDate.toString();
 
-  // Select styles
-  const selectStyles = (name) => {
-    return {
-      control: (baseStyles, state) => ({
-        ...baseStyles,
-        borderRadius: '0.5rem',
-        borderColor:
-          errors[name] && state.isFocused
-            ? '#f56565'
-            : state.isFocused
-            ? '#4299E1'
-            : errors[name]
-            ? '#f565658c'
-            : '#CBD5E0',
-        backgroundColor: '#F9FAFB',
-        padding: '2px',
-        boxShadow: 'none',
-        '&:hover': {
-          borderColor: '',
-        },
-      }),
-    };
-  };
+  const selectStyles = (name) => ({
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      borderRadius: '0.5rem',
+      borderColor:
+        errors[name] && state.isFocused
+          ? '#f56565'
+          : state.isFocused
+          ? '#4299E1'
+          : errors[name]
+          ? '#f565658c'
+          : '#CBD5E0',
+      backgroundColor: '#F9FAFB',
+      padding: '2px',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: '',
+      },
+    }),
+  });
 
   const genderOptions = [
     { value: 'Male', label: 'Male' },
@@ -130,10 +129,10 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
   return (
     <>
       <form
-        className="md:flex md:flex-nowrap"
+        className="md:flex md:flex-nowrap hidden"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <div className="w-full flex-col items-center  md:w-5/12 lg:w-3/12 hidden md:flex md:flex-col">
+        <div className="w-full flex-col items-center  md:w-5/12 lg:w-3/12  md:flex md:flex-col">
           <label htmlFor="profile" className="w-10/12">
             <Image
               src={avatar}
@@ -149,10 +148,10 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
           <div className="md:px-3 w-full px-3">
             <input
               type="file"
-              id="profile"
-              name="profile"
+              id="profile1"
+              name="profile1"
               className="opacity-0 absolute w-full md:w-3/12 md:pr-8 lg:w-2/12 pr-36 h-12"
-              {...register('profile')}
+              {...register('profile1')}
               onChange={(e) => handleFileUpload(e)}
             />
             <div className="flex items-center justify-center h-10 lg:h-11 rounded-lg border-dashed border-gray-300 border-2 cursor-pointer hover:bg-gray-100 s">
@@ -258,9 +257,11 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
             </div>
           </div>
         </div>
+      </form>
 
-        {/* MOBILE NAVIGATION */}
-        <div className="w-full flex flex-wrap items-center md:hidden">
+      {/* MOBILE NAVIGATION */}
+      <form className="md:hidden" onSubmit={handleSubmit(submitHandler)}>
+        <div className="w-full flex flex-wrap items-center ">
           <label htmlFor="profile" className="w-4/12">
             <Image
               src={avatar}
@@ -281,10 +282,10 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
           <div className="w-full px-3 mt-3">
             <input
               type="file"
-              id="profile"
-              name="profile"
+              id="profile2"
+              name="profile2"
               className="opacity-0 absolute w-full pr-36 h-12"
-              {...register('profile')}
+              {...register('profile2')}
               onChange={(e) => handleFileUpload(e)}
             />
             <div className="flex items-center justify-center h-10 rounded-lg border-dashed border-gray-300 border-2 cursor-pointer hover:bg-gray-100">

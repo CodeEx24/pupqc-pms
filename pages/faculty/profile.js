@@ -14,7 +14,7 @@ function ProfileScreen() {
     refetch: refetchUser,
   } = useQuery(['user'], fetchCurrentUser);
 
-  const [editProfile, setEditProfile] = useState(true);
+  const [editProfile, setEditProfile] = useState(false);
 
   return (
     <FacultyLayout title="Subject Setup">

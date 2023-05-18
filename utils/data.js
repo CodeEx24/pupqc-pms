@@ -445,30 +445,35 @@ export const data = {
   course: [
     {
       _id: '606c80b0a6d0e64b130e6f01',
+      course_code: 'BSIT',
       name: 'Bachelor Science in Information Technology',
       description:
         'This program provides students with a strong foundation in programming, database management, networking, and web development. Graduates are prepared for a variety of careers in the tech industry.',
     },
     {
       _id: '606c80b0a6d0e64b130e6f02',
+      course_code: 'BSBA',
       name: 'Bachelor of Science in Business Administration',
       description:
         'This program is designed to equip students with the knowledge and skills needed to succeed in the dynamic field of business. Students will gain a solid understanding of business principles, finance, marketing, and management.',
     },
     {
       _id: '606c80b0a6d0e64b130e6f03',
+      course_code: 'BAP',
       name: 'Bachelor of Arts in Psychology',
       description:
         'This program focuses on the scientific study of human behavior and mental processes. Students will explore a range of topics, including personality, perception, learning, and social psychology.',
     },
     {
       _id: '606c80b0a6d0e64b130e6f04',
+      course_code: 'BFAGD',
       name: 'Bachelor of Fine Arts in Graphic Design',
       description:
         'This program is ideal for students who are passionate about art and design. Students will develop their skills in typography, branding, digital media, and print design, and will have opportunities to create their own portfolio of work.',
     },
     {
       _id: '606c80b0a6d0e64b130e6f05',
+      course_code: 'BSN',
       name: 'Bachelor of Science in Nursing',
       description:
         'This program prepares students for a career as a registered nurse. Students will learn about anatomy, physiology, pharmacology, and patient care, and will have the opportunity to gain practical experience through clinical rotations.',
@@ -478,7 +483,6 @@ export const data = {
     {
       _id: '60971b780eaf050004123456',
       course_id: '606c80b0a6d0e64b130e6f05',
-      name: 'BSIT',
       year: 3,
       section: 1,
       batch: '2022',
@@ -491,7 +495,6 @@ export const data = {
     {
       _id: '60971b780eaf050004123457',
       course_id: '606c80b0a6d0e64b130e6f04',
-      name: 'BFA',
       year: 4,
       section: 2,
       batch: '2023',
@@ -504,7 +507,6 @@ export const data = {
     {
       _id: '60971b780eaf050004123458',
       course_id: '606c80b0a6d0e64b130e6f05',
-      name: 'BSIT',
       year: 3,
       section: 1,
       batch: '2023',
@@ -513,7 +515,6 @@ export const data = {
     {
       _id: '60971b780eaf050004123459',
       course_id: '606c80b0a6d0e64b130e6f04',
-      name: 'BFA',
       year: 3,
       section: 1,
       batch: '2023',

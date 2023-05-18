@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const fetchStudents = () => {
-  return axios.get(`/api/student/`);
+  return axios.get(`/api/student`);
 };
 
 export const fetchStudentsClass = () => {
