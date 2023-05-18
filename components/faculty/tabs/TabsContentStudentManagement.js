@@ -9,25 +9,43 @@ function TabsContentStudentManagement({
   setShowPerformanceModal,
   studentId,
   classSubjectId,
+  criteriaOverall,
 }) {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm();
 
   const assessmentInputElement = assessmentItem.map((item, index) => {
+    const fieldName = `${assessment}${index}`; // Field name for error messages
+
     return (
       <div key={index} className="p-3">
-        <p className="text-black z-99 w-full">
-          {assessment.toUpperCase().replace('_', ' ')} {index + 1}
+        <p className="text-black z-99 w-full font-semibold">
+          {assessment.toUpperCase().replace('_', ' ')} {index + 1}:{' '}
+          <span className="font-normal">
+            */ {criteriaOverall[assessment][index]}
+          </span>
         </p>
         <input
           type="number"
           className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-[28]"
           defaultValue={item}
-          {...register(`${assessment}${index}`, { required: true })}
+          id={fieldName}
+          {...register(fieldName, {
+            required: true,
+            max: {
+              value: criteriaOverall[assessment][index],
+              message: `Maximum value is ${criteriaOverall[assessment][index]}`,
+            },
+          })}
         />
+        {errors[fieldName] && (
+          <div className="text-red-600 text-start text-sm mt-2 ml-1">
+            {errors[fieldName].message}
+          </div>
+        )}
       </div>
     );
   });

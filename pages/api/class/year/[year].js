@@ -5,6 +5,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
 import Class from '@/models/Class';
+import Course from '@/models/Course';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -15,15 +16,19 @@ const handler = async (req, res) => {
 
   await db.connect();
 
+  // Get the current class for the current year
   const classList = await Class.find({ batch: req.query.year });
 
-  const classListRecord = classList.map((cls) => {
-    return {
-      name: cls.name + ' ' + cls.year + '-' + cls.section,
-      id: cls._id,
-      batch: cls.batch,
-    };
-  });
+  const classListRecord = await Promise.all(
+    classList.map(async (cls) => {
+      const { course_code } = await Course.findOne({ _id: cls.course_id });
+      return {
+        name: course_code + ' ' + cls.year + '-' + cls.section,
+        id: cls._id,
+        batch: cls.batch,
+      };
+    })
+  );
 
   res.send(classListRecord);
 };

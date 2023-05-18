@@ -7,6 +7,7 @@ import Class from '@/models/Class';
 import Student from '@/models/Student';
 import ClassSubject from '@/models/ClassSubject';
 import StudentGrade from '@/models/StudentGrade';
+import Course from '@/models/Course';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -24,7 +25,9 @@ const handler = async (req, res) => {
   const allStudentRecords = await Promise.all(
     classSubject.map(async ({ class_id, subject_id, _id: classSubject_id }) => {
       const classData = await Class.findOne({ _id: class_id });
-
+      const { course_code } = await Course.findOne({
+        _id: classData.course_id,
+      });
       return await Promise.all(
         classData.student_id.map(async (id) => {
           const studentData = await Student.findOne({ _id: id });
@@ -41,9 +44,9 @@ const handler = async (req, res) => {
             profileImageUrl: studentData.profileImageUrl,
             student_id: studentData.name,
             class_name:
-              classData.name + ' ' + classData.year + '-' + classData.section,
+              course_code + ' ' + classData.year + '-' + classData.section,
             batch: classData.batch,
-            grade: studentGrades.grade,
+            grade: studentGrades.grade.toFixed(2),
           };
         })
       );

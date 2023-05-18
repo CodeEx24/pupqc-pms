@@ -17,16 +17,18 @@ const handler = async (req, res) => {
 
   await db.connect();
 
-  const criteriaOverall = await CriteriaOverallScores.findOne({
-    classSubject_id: classSubjectId,
-  }).select('_id');
-
+  const { _id: criteriaOverallId, criteria_overall: criteriaOverall } =
+    await CriteriaOverallScores.findOne({
+      classSubject_id: classSubjectId,
+    });
   const { name, email } = await Student.findOne({ _id: studentId }).select(
     'name email'
   );
 
+  console.log('CRITERIA OVERALL: ', criteriaOverall);
+
   const studentRecord = await StudentRecords.findOne({
-    criteriaOverallScores_id: criteriaOverall._id,
+    criteriaOverallScores_id: criteriaOverallId,
     student_id: studentId,
   });
 
@@ -40,7 +42,7 @@ const handler = async (req, res) => {
     email: email,
   };
 
-  res.json({ studentRecord: updatedStudentRecord });
+  res.json({ studentRecord: updatedStudentRecord, criteriaOverall });
 };
 
 export default handler;

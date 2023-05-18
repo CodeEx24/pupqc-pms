@@ -7,7 +7,7 @@ const classSchema = new mongoose.Schema(
       ref: 'Course',
       required: true,
     },
-    name: { type: String, required: true },
+    // name: { type: String, required: true },
     year: { type: Number, required: true },
     section: { type: Number, required: true },
     batch: { type: String, required: true },

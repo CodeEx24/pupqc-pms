@@ -80,6 +80,8 @@ function StudentClassList({ studentClass }) {
       console.log(res.data);
 
       const assessment = await res.data.studentRecord.records;
+      const criteriaOverall = await res.data.criteriaOverall;
+      console.log('CRITERIA OVERALL: ', criteriaOverall);
       // console.log('ASSESSMENT: ', assessment[0]);
       const tabElement = Object.keys(assessment).map((item, index) => {
         return (
@@ -91,6 +93,7 @@ function StudentClassList({ studentClass }) {
                 assessment={item}
                 assessmentItem={[...assessment[item]]}
                 setShowPerformanceModal={setShowPerformanceModal}
+                criteriaOverall={criteriaOverall}
                 studentId={studentId}
                 classSubjectId={classSubjectId}
               />

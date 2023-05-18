@@ -4,9 +4,10 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import ClassSubject from '../../../../models/ClassSubject';
-import Criteria from '../../../../models/Criteria';
-import Class from '../../../../models/Class';
+import ClassSubject from '@/models/ClassSubject';
+import Criteria from '@/models/Criteria';
+import Class from '@/models/Class';
+import Course from '@/models/Course';
 
 // Required results:
 // subjectid, className, batch, criteria, semester
@@ -29,12 +30,12 @@ const handler = async (req, res) => {
     classList.map(async (item) => {
       const criteria = await Criteria.findOne({ _id: item.criteria_id });
       const classes = await Class.findOne({ _id: item.class_id });
-
+      const { course_code } = await Course.findOne({ _id: classes.course_id });
       return {
         classSubject_id: item._id,
         subject_id: item.subject_id,
         class_id: classes._id,
-        class_name: classes.name + ' ' + classes.year + '-' + classes.section,
+        class_name: course_code + ' ' + classes.year + '-' + classes.section,
         criteria: criteria.name,
         semester:
           item.semester === 1
