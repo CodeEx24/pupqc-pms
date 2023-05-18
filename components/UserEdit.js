@@ -284,7 +284,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
               type="file"
               id="profile2"
               name="profile2"
-              className="opacity-0 absolute w-full pr-36 h-12"
+              className="opacity-0 w-full pr-36 h-12" // absolute deleted
               {...register('profile2')}
               onChange={(e) => handleFileUpload(e)}
             />
