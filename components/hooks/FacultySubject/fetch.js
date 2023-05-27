@@ -48,3 +48,8 @@ export const fetchStudentsGrade = () => {
 export const fetchcriteria = () => {
   return axios.get(`/api/faculty/criteria-list`);
 };
+
+// UPDATED FETCH
+export const fetchStudentsByYearLevel = (year, month) => {
+  return axios.get(`/api/faculty/student/${year}/${month}`);
+};
