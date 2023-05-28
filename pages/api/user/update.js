@@ -8,7 +8,7 @@ import Student from '../../../models/Student';
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (!session.user) {
     return res.status(401).send('Signin required');
   }
 

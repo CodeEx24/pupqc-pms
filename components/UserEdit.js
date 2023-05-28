@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { defaultImage } from '../utils/data';
 
 function UserEdit({ user, setEditProfile, refetchUser }) {
+  console.log(user.data.isAdmin);
+
   const {
     handleSubmit,
     register,
@@ -60,7 +62,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
 
         const userDataUpdate = await axios.post('/api/user/update', {
           data: { ...updatedUser.data },
-          type: 'Teacher',
+          type: user.data.isAdmin ? 'Teacher' : 'Student',
         });
         const image = userDataUpdate.data.result.profileImageUrl;
         setAvatar(image);
@@ -72,7 +74,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
       try {
         await axios.post(`/api/user/update`, {
           data,
-          type: 'Teacher',
+          type: user.data.isAdmin ? 'Teacher' : 'Student',
         });
         toast.success('Information updated successfully');
       } catch (error) {
@@ -129,11 +131,11 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
   return (
     <>
       <form
-        className="md:flex md:flex-nowrap hidden"
+        className="md:flex md:flex-nowrap"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <div className="w-full flex-col items-center  md:w-5/12 lg:w-3/12  md:flex md:flex-col">
-          <label htmlFor="profile" className="w-10/12">
+        <div className="w-full flex-row flex-wrap items-center  md:w-5/12 lg:w-3/12  md:flex md:flex-col">
+          <label htmlFor="profile" className="w-5/12 md:w-10/12">
             <Image
               src={avatar}
               priority={true}
@@ -145,12 +147,20 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
               style={{ objectFit: 'cover' }}
             />
           </label>
-          <div className="md:px-3 w-full px-3">
+          <div className="md:hidden w-7/12">
+            <h4 className=" text-center font-semibold text-2xl  lg:text-2xl md:mt-10 md:text-start md:px-3">
+              {user.data.name}
+            </h4>
+            <h4 className=" text-center text-md md:text-lg md:text-start md:px-3">
+              {user.data.email}
+            </h4>
+          </div>
+          <div className="md:px-3 w-full px-3 relative">
             <input
               type="file"
               id="profile1"
               name="profile1"
-              className="opacity-0 absolute w-full md:w-3/12 md:pr-8 lg:w-2/12 pr-36 h-12"
+              className="opacity-0 absolute w-full pr-5 pb-2 h-12"
               {...register('profile1')}
               onChange={(e) => handleFileUpload(e)}
             />
@@ -171,14 +181,16 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
             </div>
           </div>
         </div>
-        <div className="md:w-10/12 w-full flex-col items-center hidden md:flex">
+        <div className="md:w-10/12 w-full flex-col items-center md:flex">
           <div className="flex flex-col md:ml-5 w-full">
-            <h4 className=" text-center font-semibold text-2xl mt-5 lg:text-2xl md:mt-10 md:text-start md:px-3">
-              {user.data.name}
-            </h4>
-            <h4 className=" text-center text-md md:text-lg md:text-start md:px-3">
-              {user.data.email}
-            </h4>
+            <div className="hidden md:block">
+              <h4 className=" text-center font-semibold text-2xl mt-5 lg:text-2xl md:mt-10 md:text-start md:px-3">
+                {user.data.name}
+              </h4>
+              <h4 className=" text-center text-md md:text-lg md:text-start md:px-3">
+                {user.data.email}
+              </h4>
+            </div>
             <hr className="ml-3 md:mx-2 mt-5" />
             <div className="p-3 lg:pt-3 lg:p-3">
               <div className=" block mb-2">
@@ -259,7 +271,7 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
         </div>
       </form>
 
-      {/* MOBILE NAVIGATION */}
+      {/* MOBILE NAVIGATION
       <form className="md:hidden" onSubmit={handleSubmit(submitHandler)}>
         <div className="w-full flex flex-wrap items-center ">
           <label htmlFor="profile" className="w-4/12">
@@ -386,10 +398,8 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
             </div>
           </div>
         </div>
-      </form>
+      </form> */}
     </>
   );
 }
 export default UserEdit;
-
-//

@@ -33,10 +33,6 @@ export const fetchSubjectClassforCriteria = () => {
   return axios.get(`/api/subject/class/criteria-management`);
 };
 
-export const fetchCurrentUser = () => {
-  return axios.get(`/api/current-user`);
-};
-
 export const fetchCriteriaOverallList = (id) => {
   return axios.get(`/api/criteria/overall/${id}`);
 };
@@ -52,4 +48,9 @@ export const fetchcriteria = () => {
 // UPDATED FETCH
 export const fetchStudentsByYearLevel = (year, month) => {
   return axios.get(`/api/faculty/student/${year}/${month}`);
+};
+
+// FACULTY && STUDENT
+export const fetchCurrentUser = () => {
+  return axios.get(`/api/current-user`);
 };
