@@ -20,48 +20,57 @@ export const studentLinks = [
     links: [
       {
         name: 'home',
+        href: 'home',
         icon: <AiFillHome />,
       },
       {
         name: 'profile',
+        href: 'profile',
         icon: <FaUser />,
+      },
+      {
+        name: 'grades',
+        href: 'grades',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'performance',
+        href: 'performance',
+        icon: <TbReportAnalytics />,
       },
     ],
   },
 
-  {
-    title: 'Pages',
-    links: [
-      {
-        name: 'enrollment',
-        icon: <AiFillIdcard />,
-      },
-      {
-        name: 'tuition',
-        icon: <FaMoneyBillAlt />,
-      },
-      {
-        name: 'schedules',
-        icon: <AiFillCalendar />,
-      },
-      {
-        name: 'grades',
-        icon: <TbReportAnalytics />,
-      },
-      {
-        name: 'scores',
-        icon: <AiFillSnippets />,
-      },
-      {
-        name: 'forms',
-        icon: <AiFillDiff />,
-      },
-      {
-        name: 'hdf',
-        icon: <RiContactsLine />,
-      },
-    ],
-  },
+  // {
+  //   title: 'Pages',
+  //   links: [
+  //     {
+  //       name: 'enrollment',
+  //       icon: <AiFillIdcard />,
+  //     },
+  //     {
+  //       name: 'tuition',
+  //       icon: <FaMoneyBillAlt />,
+  //     },
+  //     {
+  //       name: 'schedules',
+  //       icon: <AiFillCalendar />,
+  //     },
+
+  //     {
+  //       name: 'scores',
+  //       icon: <AiFillSnippets />,
+  //     },
+  //     {
+  //       name: 'forms',
+  //       icon: <AiFillDiff />,
+  //     },
+  //     {
+  //       name: 'hdf',
+  //       icon: <RiContactsLine />,
+  //     },
+  //   ],
+  // },
 ];
 
 export const teacherLinks = [

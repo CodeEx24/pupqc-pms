@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   const user = await userType
     .findById(userId)
     .select(
-      'name email gender dateOfBirth mobileNo residentialAddress profileImageUrl'
+      'name email gender dateOfBirth mobileNo residentialAddress profileImageUrl isAdmin'
     )
     .lean();
 
