@@ -98,4 +98,8 @@ function StudentProfileScreen() {
   );
 }
 
+StudentProfileScreen.auth = {
+  role: 'student',
+};
+
 export default StudentProfileScreen;

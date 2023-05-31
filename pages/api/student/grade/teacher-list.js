@@ -67,6 +67,8 @@ const handler = async (req, res) => {
     { batches: [], classNames: [] }
   );
 
+  await db.disconnect();
+
   res.json({
     data: flattenedStudentsRecordData,
     batchList: uniqueValues.batches,
