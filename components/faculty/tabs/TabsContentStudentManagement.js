@@ -39,6 +39,10 @@ function TabsContentStudentManagement({
               value: criteriaOverall[assessment][index],
               message: `Maximum value is ${criteriaOverall[assessment][index]}`,
             },
+            min: {
+              value: 0,
+              message: `Minimum value is 0`,
+            },
           })}
         />
         {errors[fieldName] && (
