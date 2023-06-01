@@ -52,6 +52,29 @@ function StudentClassList({ studentClass }) {
     },
   };
 
+  const semesterOptions = {
+    create: () => {
+      const dd = document.createElement('input');
+      dd.id = 'semester';
+      return dd;
+    },
+    write: () => {
+      const DropDownListObj = new DropDownList({
+        dataSource: ['All', '1st Semester', '2nd Semester', 'Summer Term'],
+        placeholder: 'Select a value',
+        popupHeight: '200px',
+        change: (e) => {
+          const gridObj =
+            document.getElementsByClassName('e-grid')[0].ej2_instances[0];
+          e.value === 'All'
+            ? gridObj.removeFilteredColsByField('semester')
+            : gridObj.filterByColumn('semester', 'equal', e.value);
+        },
+      });
+      DropDownListObj.appendTo('#semester');
+    },
+  };
+
   const pageOptions = {
     pageSize: 10,
     pageSizes: [10, 25, 50, 100],
@@ -134,14 +157,12 @@ function StudentClassList({ studentClass }) {
             width="100"
             textAlign="Left"
           />
-
           <ColumnDirective
             field="student_name"
             headerText="Name"
             width="130"
             textAlign="Left"
           />
-
           <ColumnDirective
             field="class_name"
             headerText="Class"
@@ -149,6 +170,14 @@ function StudentClassList({ studentClass }) {
             filterBarTemplate={templateOptions}
             textAlign="Left"
           />
+          <ColumnDirective
+            field="semester"
+            headerText="Semester"
+            width="90"
+            filterBarTemplate={semesterOptions}
+            textAlign="Left"
+          />
+
           <ColumnDirective
             field="batch"
             headerText="Batch"

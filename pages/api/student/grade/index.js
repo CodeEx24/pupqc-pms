@@ -45,10 +45,11 @@ const handler = async (req, res) => {
         if (semesterSubjects.length !== 0) {
           const modifiedSubjects = await Promise.all(
             semesterSubjects.map(async (clsSubject) => {
-              const { name: subject_name, _id } = await Subject.findOne({
-                _id: clsSubject.subject_id,
-              });
-              console.log('TEACHERID: ', clsSubject.teacher_id);
+              const { name: subject_name, _id: subject_id } =
+                await Subject.findOne({
+                  _id: clsSubject.subject_id,
+                });
+
               const { name: teacher_name } = await Teacher.findOne({
                 _id: clsSubject.teacher_id,
               });
@@ -57,7 +58,13 @@ const handler = async (req, res) => {
                 classSubject_id: clsSubject._id,
                 student_id: studentID,
               });
-              return { subject_name, _id, grade, teacher_name };
+              return {
+                subject_name,
+                subject_id,
+                classSubject_id: clsSubject._id,
+                grade,
+                teacher_name,
+              };
             })
           );
 

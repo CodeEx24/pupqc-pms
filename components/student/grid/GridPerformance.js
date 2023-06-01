@@ -4,10 +4,9 @@ import {
   ColumnsDirective,
   GridComponent,
 } from '@syncfusion/ej2-react-grids';
+import Link from 'next/link';
 
-function GridGrade({ title, semester, studentClassGrade, sectionCode }) {
-  console.log('STUDENT CLASS GRADE: ', studentClassGrade);
-
+function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
   return (
     <div className=" pb-14 ">
       <h3 className="font-bold text-white bg-sky-400 p-3">
@@ -57,10 +56,18 @@ function GridGrade({ title, semester, studentClassGrade, sectionCode }) {
             template={() => <p>{sectionCode}</p>}
           />
           <ColumnDirective
-            field="grade"
-            headerText="Grade"
+            field="classSubject_id"
+            headerText="Performance"
             width="100"
             format="N2"
+            template={(rowData) => (
+              <Link
+                href={`/student/performance/${rowData.classSubject_id}`}
+                className="btn-primary-no-width px-3"
+              >
+                Performamce
+              </Link>
+            )}
           />
         </ColumnsDirective>
       </GridComponent>
@@ -69,4 +76,4 @@ function GridGrade({ title, semester, studentClassGrade, sectionCode }) {
   );
 }
 
-export default GridGrade;
+export default GridPerformance;
