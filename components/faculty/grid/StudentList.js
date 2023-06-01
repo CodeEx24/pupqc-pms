@@ -76,6 +76,7 @@ function StudentList({ students }) {
           headerText="Profile Image"
           width="80"
           headerTextAlign="Center"
+          allowFiltering={false}
           template={(rowData) => (
             <Image
               src={rowData.profileImageUrl}

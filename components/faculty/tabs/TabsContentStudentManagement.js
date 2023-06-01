@@ -55,13 +55,7 @@ function TabsContentStudentManagement({
   });
 
   const submitScores = async (data) => {
-    console.log('DATA SCORES: ', data);
     const values = Object.values(data).map(Number);
-
-    console.log('VALUES', values);
-    console.log('ASSESSMENT: ', assessment);
-    console.log('STUDENT ID: ', studentId);
-    console.log('CLASS SUBJECT ID: ', classSubjectId);
 
     // Update the scores of students in backend
     try {

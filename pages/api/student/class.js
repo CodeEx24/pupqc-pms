@@ -28,6 +28,13 @@ const handler = async (req, res) => {
         const { course_code } = await Course.findOne({
           _id: classData.course_id,
         });
+        const semesterString =
+          semester === 1
+            ? '1st Semester'
+            : semester === 2
+            ? '2nd Semester'
+            : 'Summer Term';
+
         return await Promise.all(
           classData.student_id.map(async (id) => {
             const studentData = await Student.findOne({ _id: id });
@@ -39,7 +46,7 @@ const handler = async (req, res) => {
               class_name:
                 course_code + ' ' + classData.year + '-' + classData.section,
               batch: classData.batch,
-              semester,
+              semester: semesterString,
             };
           })
         );
