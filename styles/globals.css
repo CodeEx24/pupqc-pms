@@ -46,18 +46,48 @@
   }
 }
 
+/* TEXT */
+.text-h1 {
+  @apply text-8xl font-poppins font-bold;
+}
+
+.text-h2 {
+  @apply text-7xl font-poppins font-bold;
+}
+
+.text-h3 {
+  @apply text-6xl font-poppins font-bold;
+}
+
+.text-h4 {
+  @apply text-5xl font-poppins font-bold;
+}
+
+.text-h5 {
+  @apply text-4xl font-poppins font-bold;
+}
+
+.text-h6 {
+  @apply text-3xl font-poppins font-bold;
+}
+
+.text-p {
+  @apply text-base font-poppins;
+}
+
+/* BUTTON  */
 .btn-primary {
-  @apply bg-sky-400  text-white w-full rounded-md py-2;
+  @apply px-5 py-2 rounded-md bg-primary text-white font-roboto;
 }
 
-.btn-primary-no-width {
-  @apply bg-sky-400  text-white rounded-md py-2;
+.btn-secondary {
+  @apply px-5 py-2 rounded-md bg-secondary text-white font-roboto;
 }
 
-.btn-danger-no-width {
-  @apply bg-red-500  text-white rounded-md py-2;
+.btn-update {
+  @apply px-5 py-2 rounded-md bg-brand text-white font-roboto;
 }
 
-.title {
-  @apply text-sky-400 font-bold text-3xl mb-5 font-poppins;
+.smooth-transition {
+  @apply transition-all duration-300 ease-in-out;
 }

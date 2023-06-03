@@ -12,8 +12,10 @@ function loginAuth(Component) {
     }
 
     if (session) {
-      if (session.user.isAdmin) {
+      if (session.user.isAdmin === 1) {
         router.push('/faculty/home');
+      } else if (session.user.isAdmin === 2) {
+        router.push('/admin/home');
       } else router.push('/student/home');
 
       return null;

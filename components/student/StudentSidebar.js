@@ -35,7 +35,7 @@ function StudentSidebar() {
           <div className="flex justify-between items-center">
             <Link
               href="/"
-              className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight  text-slate-900"
+              className="items-center gap-3 ml-3 mt-4 flex text-xl font-poppins font-extrabold tracking-tight  text-slate-900"
             >
               <SiShopware /> PUPQC PMS
             </Link>
