@@ -263,7 +263,10 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
                 )}
               </div>
 
-              <button type="submit" className="btn-primary mt-3">
+              <button
+                type="submit"
+                className="btn-primary hover:bg-opacity-60 smooth-transition mt-3 "
+              >
                 Save Changes
               </button>
             </div>
