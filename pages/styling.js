@@ -4,7 +4,7 @@ function styling() {
   return (
     <div>
       <h1 className="text-8xl font-poppins font-bold text-sky-500">
-        Hello World
+        Hello World UPDATED
       </h1>
       <h2 className="text-7xl font-poppins font-bold text-sky-500">
         Hello World
