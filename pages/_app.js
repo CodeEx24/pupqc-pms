@@ -48,13 +48,21 @@ function Auth({ children, role }) {
     return <Loading />;
   }
 
-  if (role === 'faculty' && !session.user.isAdmin) {
+  if ((role === 'faculty' || role === 'admin') && session.user.isAdmin === 0) {
     router.push('/student/home');
     return null;
   }
 
-  if (role === 'student' && session.user.isAdmin) {
+  if ((role === 'student' || role === 'admin') && session.user.isAdmin === 1) {
     router.push('/faculty/home');
+    return null;
+  }
+
+  if (
+    (role === 'student' || role === 'faculty') &&
+    session.user.isAdmin === 2
+  ) {
+    router.push('/admin/home');
     return null;
   }
 

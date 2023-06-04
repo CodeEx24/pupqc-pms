@@ -13,18 +13,22 @@ export const fetchAllSubject = () => {
   return axios.get(`/api/subject`);
 };
 
+// DELETE BELOW
 export const fetchSubjectCode = () => {
   return axios.get('/api/subject/code');
 };
 
+// DELETE BELOW - DELETED DIRECTORY ALREADY
 export const fetchClassYear = (year) => {
   return axios.get(`/api/class/year/${year}`);
 };
 
+// DELETE BELOW
 export const fetchCriteria = () => {
   return axios.get(`/api/criteria/`);
 };
 
+// DELETE BELOW IF NOT USED
 export const fetchSubjectClass = () => {
   return axios.get(`/api/subject/class`);
 };

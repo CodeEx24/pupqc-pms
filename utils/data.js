@@ -8,11 +8,51 @@ import {
   AiFillDiff,
 } from 'react-icons/ai';
 
-import { RiContactsLine } from 'react-icons/ri';
-
-import { FaMoneyBillAlt, FaUser } from 'react-icons/fa';
-
 import { TbReportAnalytics } from 'react-icons/tb';
+import { FaUser } from 'react-icons/fa';
+
+export const adminLinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'home',
+        href: 'home',
+        icon: <AiFillHome />,
+      },
+      {
+        name: 'profile',
+        href: 'profile',
+        icon: <FaUser />,
+      },
+      {
+        name: 'subject',
+        href: 'subject',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'criteria',
+        href: 'criteria',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'current class',
+        href: 'current-class',
+        icon: <AiFillDiff />,
+      },
+      {
+        name: 'manage class',
+        href: 'manage-class',
+        icon: <TbReportAnalytics />,
+      },
+      {
+        name: 'teacher list',
+        href: 'teacher-list',
+        icon: <TbReportAnalytics />,
+      },
+    ],
+  },
+];
 
 export const studentLinks = [
   {
@@ -34,8 +74,8 @@ export const studentLinks = [
         icon: <TbReportAnalytics />,
       },
       {
-        name: 'performance',
-        href: 'performance',
+        name: 'class subject',
+        href: 'class-subject',
         icon: <TbReportAnalytics />,
       },
     ],
@@ -190,7 +230,7 @@ export const data = {
       placeOfBirth: 'New York',
       mobileNo: '1234567890',
       residentialAddress: '123 Main Street, New York',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc02',
@@ -202,7 +242,7 @@ export const data = {
       placeOfBirth: 'Los Angeles',
       mobileNo: '0987654321',
       residentialAddress: '456 Elm Street, Los Angeles',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc03',
@@ -214,7 +254,7 @@ export const data = {
       placeOfBirth: 'Chicago',
       mobileNo: '5551234567',
       residentialAddress: '789 Oak Street, Chicago',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc04',
@@ -226,7 +266,7 @@ export const data = {
       placeOfBirth: 'Los Angeles',
       mobileNo: '9876543210',
       residentialAddress: '456 Pine Street, Los Angeles',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc05',
@@ -238,7 +278,7 @@ export const data = {
       placeOfBirth: 'San Francisco',
       mobileNo: '8765432109',
       residentialAddress: '789 Maple Street, San Francisco',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc06',
@@ -250,7 +290,7 @@ export const data = {
       placeOfBirth: 'Houston',
       mobileNo: '3456789012',
       residentialAddress: '567 Elm Street, Houston',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc07',
@@ -262,7 +302,7 @@ export const data = {
       placeOfBirth: 'New York',
       mobileNo: '1234567890',
       residentialAddress: '123 Main Street, New York',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc08',
@@ -274,7 +314,7 @@ export const data = {
       placeOfBirth: 'Los Angeles',
       mobileNo: '9876543210',
       residentialAddress: '456 Elm Street, Los Angeles',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc09',
@@ -286,7 +326,7 @@ export const data = {
       placeOfBirth: 'Houston',
       mobileNo: '9876543211',
       residentialAddress: '789 Maple Street, Houston',
-      isAdmin: false,
+      isAdmin: 0,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc10',
@@ -298,7 +338,7 @@ export const data = {
       placeOfBirth: 'San Francisco',
       mobileNo: '1234567891',
       residentialAddress: '456 Oak Street, San Francisco',
-      isAdmin: false,
+      isAdmin: 0,
     },
   ],
   teachers: [
@@ -312,7 +352,8 @@ export const data = {
       placeOfBirth: 'San Francisco',
       mobileNo: '5551112222',
       residentialAddress: '123 Main Street, San Francisco',
-      isAdmin: true,
+      isActive: true,
+      isAdmin: 1,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc52',
@@ -324,7 +365,8 @@ export const data = {
       placeOfBirth: 'Seattle',
       mobileNo: '5553334444',
       residentialAddress: '456 Elm Street, Seattle',
-      isAdmin: true,
+      isActive: false,
+      isAdmin: 1,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc53',
@@ -336,7 +378,8 @@ export const data = {
       placeOfBirth: 'New York',
       mobileNo: '5555555555',
       residentialAddress: '789 Oak Street, New York',
-      isAdmin: true,
+      isActive: false,
+      isAdmin: 1,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc81',
@@ -348,7 +391,8 @@ export const data = {
       placeOfBirth: 'Los Angeles',
       mobileNo: '5557778888',
       residentialAddress: '321 Pine Street, Los Angeles',
-      isAdmin: true,
+      isActive: true,
+      isAdmin: 1,
     },
     {
       _id: '609e16f7c2585b8a5f9ddc82',
@@ -360,14 +404,41 @@ export const data = {
       placeOfBirth: 'San Francisco',
       mobileNo: '5551112222',
       residentialAddress: '123 Main Street, San Francisco',
-      isAdmin: true,
+      isActive: true,
+      isAdmin: 1,
+    },
+  ],
+  admins: [
+    {
+      _id: '609e16f7c2585b8a5f9ddc91',
+      name: 'Jocarl Basco',
+      email: 'admin@gmail.com',
+      password: bcrypt.hashSync('admin123'),
+      gender: 'Female',
+      dateOfBirth: new Date('1990-03-25'),
+      placeOfBirth: 'San Francisco',
+      mobileNo: '5551112222',
+      residentialAddress: '123 Main Street, San Francisco',
+      isAdmin: 2,
+    },
+    {
+      _id: '609e16f7c2585b8a5f9ddc92',
+      name: 'Jocarl Basco',
+      email: 'jocarlbasco24@gmail.com',
+      password: bcrypt.hashSync('admin123'),
+      gender: 'Female',
+      dateOfBirth: new Date('1990-03-25'),
+      placeOfBirth: 'San Francisco',
+      mobileNo: '5551112222',
+      residentialAddress: '123 Main Street, San Francisco',
+      isAdmin: 2,
     },
   ],
   criteria: [
     {
       _id: '609e16f7c2585b8a5f9ddc24',
       name: 'CRIT-001',
-      teacher_id: '609e16f7c2585b8a5f9ddc51',
+      // teacher_id: '609e16f7c2585b8a5f9ddc51',
       criteria: {
         lecture: {
           short_quiz: {
@@ -410,7 +481,7 @@ export const data = {
     {
       _id: '609e16f7c2585b8a5f9ddc58',
       name: 'CRIT-002',
-      teacher_id: '609e16f7c2585b8a5f9ddc51',
+      // teacher_id: '609e16f7c2585b8a5f9ddc51',
       criteria: {
         lecture: {
           short_quiz: {

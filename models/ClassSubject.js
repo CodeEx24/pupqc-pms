@@ -25,6 +25,10 @@ const classSubjectSchema = new mongoose.Schema(
       ref: 'Criteria',
       required: true,
     },
+    isGradeFinalized: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

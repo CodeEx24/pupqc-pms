@@ -4,6 +4,7 @@ import db from '../../utils/db';
 
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import Admin from '../../models/Admin';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -14,7 +15,12 @@ export default async function handler(req, res) {
 
   const userId = session.user._id;
 
-  const userType = session.user.isAdmin ? Teacher : Student;
+  const userType =
+    session.user.isAdmin === 1
+      ? Teacher
+      : session.user.isAdmin === 0
+      ? Student
+      : Admin;
 
   await db.connect();
 

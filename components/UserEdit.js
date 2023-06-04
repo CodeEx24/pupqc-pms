@@ -62,7 +62,12 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
 
         const userDataUpdate = await axios.post('/api/user/update', {
           data: { ...updatedUser.data },
-          type: user.data.isAdmin ? 'Teacher' : 'Student',
+          type:
+            user.data.isAdmin === 1
+              ? 'Teacher'
+              : user.data.isAdmin === 0
+              ? 'Student'
+              : 'Admin',
         });
         const image = userDataUpdate.data.result.profileImageUrl;
         setAvatar(image);
@@ -74,7 +79,12 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
       try {
         await axios.post(`/api/user/update`, {
           data,
-          type: user.data.isAdmin ? 'Teacher' : 'Student',
+          type:
+            user.data.isAdmin === 1
+              ? 'Teacher'
+              : user.data.isAdmin === 0
+              ? 'Student'
+              : 'Admin',
         });
         toast.success('Information updated successfully');
       } catch (error) {

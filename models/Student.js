@@ -11,7 +11,7 @@ const studentSchema = new mongoose.Schema(
     placeOfBirth: { type: String, required: true },
     mobileNo: { type: String, required: true },
     residentialAddress: { type: String, required: true },
-    isAdmin: { type: Boolean, required: true },
+    isAdmin: { type: Number, required: true },
     profileImageUrl: {
       type: String,
       required: true,

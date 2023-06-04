@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { defaultImage } from '../utils/data';
 
-const teacherSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -12,7 +12,6 @@ const teacherSchema = new mongoose.Schema(
     mobileNo: { type: String, required: true },
     residentialAddress: { type: String, required: true },
     isAdmin: { type: Number, required: true },
-    isActive: { type: Boolean, required: true },
     profileImageUrl: {
       type: String,
       required: true,
@@ -25,7 +24,6 @@ const teacherSchema = new mongoose.Schema(
 );
 
 // Check if User Model already created. But if null it will create a model name and the schema (type) as second parameter
-const Teacher =
-  mongoose.models.Teacher || mongoose.model('Teacher', teacherSchema);
+const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema);
 
-export default Teacher;
+export default Admin;
