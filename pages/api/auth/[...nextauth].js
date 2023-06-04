@@ -3,6 +3,7 @@ import Teacher from '@/models/Teacher';
 import bcryptjs from 'bcryptjs';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import Admin from '../../../models/Admin';
 
 import db from '../../../utils/db';
 
@@ -32,7 +33,12 @@ export const authOptions = {
       async authorize(credentials) {
         await db.connect();
 
-        const userModel = credentials.type === 'Student' ? Student : Teacher;
+        const userModel =
+          credentials.type === 'Student'
+            ? Student
+            : credentials.type === 'Teacher'
+            ? Teacher
+            : Admin;
 
         const user = await userModel.findOne({ email: credentials.email });
 

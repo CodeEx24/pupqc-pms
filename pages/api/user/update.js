@@ -2,8 +2,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import Teacher from '../../../models/Teacher';
-import Student from '../../../models/Student';
+import Teacher from '@/models/Teacher';
+import Student from '@/models/Student';
+import Admin from '@/models/Admin';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -14,7 +15,8 @@ const handler = async (req, res) => {
 
   const { data, type } = req.body;
   console.log(data);
-  const userType = type === 'Teacher' ? Teacher : Student;
+  const userType =
+    type === 'Teacher' ? Teacher : type === 'Student' ? Student : Admin;
   console.log(userType);
   await db.connect();
 

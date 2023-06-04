@@ -48,27 +48,27 @@
 
 /* TEXT */
 .text-h1 {
-  @apply text-8xl font-poppins font-bold;
-}
-
-.text-h2 {
-  @apply text-7xl font-poppins font-bold;
-}
-
-.text-h3 {
   @apply text-6xl font-poppins font-bold;
 }
 
-.text-h4 {
+.text-h2 {
   @apply text-5xl font-poppins font-bold;
 }
 
-.text-h5 {
+.text-h3 {
   @apply text-4xl font-poppins font-bold;
 }
 
-.text-h6 {
+.text-h4 {
   @apply text-3xl font-poppins font-bold;
+}
+
+.text-h5 {
+  @apply text-2xl font-poppins font-bold;
+}
+
+.text-h6 {
+  @apply text-xl font-poppins font-bold;
 }
 
 .text-p {
@@ -77,17 +77,89 @@
 
 /* BUTTON  */
 .btn-primary {
-  @apply px-5 py-2 rounded-md bg-primary text-white font-roboto;
+  @apply px-5 py-2 rounded-md bg-primary text-white font-poppins;
 }
 
 .btn-secondary {
-  @apply px-5 py-2 rounded-md bg-secondary text-white font-roboto;
+  @apply px-5 py-2 rounded-md bg-secondary text-white font-poppins;
+}
+
+.btn-warning {
+  @apply px-5 py-2 rounded-md bg-warning text-white font-poppins;
 }
 
 .btn-update {
-  @apply px-5 py-2 rounded-md bg-brand text-white font-roboto;
+  @apply px-5 py-2 rounded-md bg-warning text-white font-poppins;
 }
 
 .smooth-transition {
   @apply transition-all duration-300 ease-in-out;
+}
+
+/* COLORS USED:
+text-slate-900 
+
+
+*/
+
+/* CONFIGURATION IN SYNCFUSION */
+.e-grid {
+  @apply font-poppins text-base;
+}
+
+.e-grid .e-gridheader {
+  @apply font-bold  border text-gray-700;
+} /* Use the below CSS to customize the Grid header root element. Using this, you can override the thin line between header and content of the grid.*/
+
+/* .e-grid .e-headercell {
+  @apply;
+}  */
+/* You can customize the Grid header cell elements using this CSS.*/
+
+.e-grid .e-headercelldiv {
+  @apply text-sm font-bold;
+} /* customize the Grid header cell div element. Using this CSS, you can customize the header text content. */
+
+/* .e-grid .e-filterbarcell {
+  @apply bg-red-600;
+} */
+
+.e-grid .e-gridheader .e-sortfilter .e-headercelldiv {
+  @apply pr-2;
+}
+
+/* GRID PAGINATION */
+.e-grid .e-gridpager .e-currentitem,
+.e-pager .e-currentitem,
+.e-pager .e-currentitem.e-numericitem.e-focused {
+  @apply bg-primary;
+}
+
+.e-pager .e-pagerdropdown {
+  @apply mb-2;
+}
+
+.e-pager .e-pagerconstant {
+  @apply mb-2;
+}
+
+.e-grid .e-gridpager {
+  @apply text-sm font-poppins;
+}
+/* 
+.e-grid .e-gridpager .e-currentitem {
+  @apply bg-yellow-400 align-middle mx-auto block;
+} */
+
+.e-dropdownbase .e-list-item.e-active {
+  @apply text-primary;
+}
+
+.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(
+    .e-float-input
+  )::before,
+.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(
+    .e-float-input
+  )::after {
+  @apply bg-primary;
 }

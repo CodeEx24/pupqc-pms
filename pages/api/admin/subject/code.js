@@ -1,4 +1,4 @@
-// /api/subject/code - DELETE THIS
+// /api/admin/subject/code - USED
 
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
@@ -9,13 +9,17 @@ import Subject from '@/models/Subject';
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (session) {
+    if (session.user.isAdmin === 1 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 
   await db.connect();
 
-  const subjects = await Subject.find({}, { _id: 1, name: 1 });
+  const subjects = await Subject.find({});
 
   await db.disconnect();
 

@@ -25,14 +25,14 @@ module.exports = {
         primary: 'var(--color-red-800)', // Use the same color as sky-800
       },
       textColor: {
-        primary: '#FF69b4', // Can always use CSS variables too e.g. "var(--color-primary)",
-        secondary: '#333333',
+        primary: '#38BDF8', // Can always use CSS variables too e.g. "var(--color-primary)",
+        secondary: '#B91C1C',
         brand: '#243c5a',
       }, // Define custom text colors
       backgroundColor: {
         primary: '#0EA5E9',
         secondary: '#B91C1C', // Custom secondary color
-        brand: '#FFDD00', // Custom brand color
+        warning: '#FFB717', // Custom brand color
       },
       // Define custom background colors
       borderColor: {}, // Define custom border colors
