@@ -8,6 +8,10 @@ export const fetchSubjectCode = () => {
   return axios.get('/api/admin/subject/code');
 };
 
+export const fetchSubjectList = () => {
+  return axios.get('/api/admin/subject');
+};
+
 export const fetchClassYear = (year) => {
   return axios.get(`/api/admin/class/year/${year}`);
 };

@@ -1,10 +1,10 @@
-// /api/criteria - USED
+// /api/admin/subject/code - USED
 
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import Criteria from '../../../models/Criteria';
+import Subject from '@/models/Subject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -19,11 +19,11 @@ const handler = async (req, res) => {
 
   await db.connect();
 
-  const criteria = await Criteria.find({}).select('name criteria');
+  const subjects = await Subject.find({}).select('name description');
 
   await db.disconnect();
 
-  res.send(criteria);
+  res.status(200).json(subjects);
 };
 
 export default handler;

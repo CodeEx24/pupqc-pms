@@ -13,12 +13,6 @@ import React from 'react';
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import { useMutation } from '@tanstack/react-query';
 import { updateAllClassSubject } from '../../hooks/Admin/updateData';
-// import { useEffect } from 'react';
-// import { useState } from 'react';
-
-// import { useForm } from 'react-hook-form';
-// import { deleteClassSubject } from '../../hooks/Admin/deleteData';
-// import { toast } from 'react-toastify';
 
 function ClassList({ classList }) {
   console.log('CLASS LIST: ', classList);
