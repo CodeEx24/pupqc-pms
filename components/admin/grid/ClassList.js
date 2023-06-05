@@ -58,7 +58,7 @@ function ClassList({ classList }) {
             textAlign="Left"
           /> */}
           <ColumnDirective
-            field="class"
+            field="class_name"
             headerText="Class Name"
             width="100"
             textAlign="Left"

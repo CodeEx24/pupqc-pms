@@ -16,43 +16,49 @@ export default async function handler(req, res) {
   // console.log('CLASSES:', classes);
 
   const classSubjectData = await Promise.all(
-    classes.map(async (item) => {
-      const { course_code } = await Course.findOne({ _id: item.course_id })
-        .select('course_code')
-        .lean();
-      const clsSubject = await ClassSubject.findOne({ class_id: item._id })
+    classes.map(async (classItem) => {
+      const { course_code } = await Course.findOne({
+        _id: classItem.course_id,
+      }).lean();
+      const clsSubject = await ClassSubject.find({ class_id: classItem._id })
         .select('semester isGradeFinalized')
         .lean();
-      // console.log('clsSubhec: ', clsSubject);
-      return clsSubject
-        ? {
-            ...item,
-            course_code,
-            semester: clsSubject.semester,
-            isGradeFinalized: clsSubject.isGradeFinalized,
-          }
-        : { _id: null };
+      console.log('clsSubhec: ', clsSubject);
+      const clsSubjectData = clsSubject.map((classSubjectItem) => {
+        return {
+          ...classSubjectItem,
+          // course_code,
+          batch: classItem.batch,
+          class_name:
+            course_code + ' ' + classItem.year + '-' + classItem.section,
+          // semester: item.semester,
+          // isGradeFinalized: item.isGradeFinalized,
+        };
+      });
+      console.log('clsSubjectData', clsSubjectData);
+      return clsSubjectData;
     })
   );
 
-  const filteredClsSubject = classSubjectData.filter(
-    (item) => item._id !== null
-  );
-  console.log('FILTERED: ', filteredClsSubject);
+  let seenData = new Set();
+  let filteredData = [];
 
-  const fixedClass = filteredClsSubject.map((item) => {
-    console.log(item);
-    return {
-      class_id: item._id,
-      course_id: item.course_id,
-      class: `${item.course_code} ${item.year}-${item.section}`,
-      batch: item.batch,
-      semester: item.semester,
-      isGradeFinalized: item.isGradeFinalized,
-    };
-  });
+  for (let sublist of classSubjectData) {
+    let filteredSublist = [];
+    for (let data of sublist) {
+      let key = `${data.semester}_${data.class_name}_${data.batch}`;
+      if (!seenData.has(key)) {
+        seenData.add(key);
+        filteredSublist.push(data);
+      }
+    }
+    filteredData.push(filteredSublist);
+  }
+
+  let flattenedData = filteredData.flat();
+  console.log(flattenedData);
 
   await db.disconnect();
 
-  return res.status(200).json(fixedClass);
+  return res.status(200).json(flattenedData);
 }
