@@ -22,7 +22,7 @@ import { fetchCurrentUser } from '../hooks/FacultySubject/fetch';
 // import { useStateContext } from '../contexts/ContextProvider';
 
 function StudentNavbar() {
-  const { data: user, status } = useQuery(['user'], fetchCurrentUser);
+  const { data: user, isLoading } = useQuery(['user'], fetchCurrentUser);
 
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
@@ -51,7 +51,7 @@ function StudentNavbar() {
     }
   }, [screenSize]);
 
-  if (status === 'loading') {
+  if (isLoading) {
     return null; // or show a loading indicator
   }
 

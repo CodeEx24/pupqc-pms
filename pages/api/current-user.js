@@ -1,10 +1,10 @@
-import Student from '../../models/Student';
-import Teacher from '../../models/Teacher';
-import db from '../../utils/db';
+import Student from '@/models/Student';
+import Teacher from '@/models/Teacher';
+import Admin from '@/models/Admin';
+import db from '@/utils/db';
 
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import Admin from '../../models/Admin';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -14,19 +14,19 @@ export default async function handler(req, res) {
   }
 
   const userId = session.user._id;
-
+  console.log(userId);
   const userType =
-    session.user.isAdmin === 1
+    session.user.isAdmin === 2
+      ? Admin
+      : session.user.isAdmin === 1
       ? Teacher
-      : session.user.isAdmin === 0
-      ? Student
-      : Admin;
+      : Student;
 
   await db.connect();
 
   // Check if email exists in the database
   const user = await userType
-    .findById(userId)
+    .findOne({ _id: userId })
     .select(
       'name email gender dateOfBirth mobileNo residentialAddress profileImageUrl isAdmin'
     )
