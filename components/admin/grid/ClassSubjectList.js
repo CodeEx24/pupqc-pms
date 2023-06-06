@@ -1,13 +1,16 @@
 import {
   ColumnDirective,
   ColumnsDirective,
+  Filter,
   GridComponent,
   Inject,
   Page,
-  Search,
+  PdfExport,
   Sort,
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
+import { DropDownList } from '@syncfusion/ej2/dropdowns';
+
 import React, { useState } from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
@@ -37,7 +40,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
 
   const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
-    json: subjectClass,
+    json: subjectClass.classDataRecord,
   });
 
   const pageOptions = {
@@ -45,20 +48,77 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
     pageSizes: [10, 25, 50, 100],
   };
 
+  const semesterOptions2 = {
+    create: () => {
+      const dd = document.createElement('input');
+      dd.id = 'semester';
+      return dd;
+    },
+    write: () => {
+      const DropDownListObj = new DropDownList({
+        dataSource: ['All', '1st Semester', '2nd Semester', 'Summer Term'],
+        placeholder: 'Select a value',
+        popupHeight: '200px',
+        change: (e) => {
+          const gridObj =
+            document.getElementsByClassName('e-grid')[0].ej2_instances[0];
+          e.value === 'All'
+            ? gridObj.removeFilteredColsByField('semester')
+            : gridObj.filterByColumn('semester', 'equal', e.value);
+        },
+      });
+      DropDownListObj.appendTo('#semester');
+    },
+  };
+
+  const classNameOptions = {
+    create: () => {
+      const dd = document.createElement('input');
+      dd.id = 'class_name';
+      return dd;
+    },
+    write: () => {
+      const DropDownListObj = new DropDownList({
+        dataSource: ['All', ...(subjectClass.classNameList || [])],
+        placeholder: 'Select a value',
+        popupHeight: '200px',
+        change: (e) => {
+          const gridObj =
+            document.getElementsByClassName('e-grid')[0].ej2_instances[0];
+          e.value === 'All'
+            ? gridObj.removeFilteredColsByField('class_name')
+            : gridObj.filterByColumn('class_name', 'equal', e.value);
+        },
+      });
+      DropDownListObj.appendTo('#class_name');
+    },
+  };
+
   const deleteAction = (id) => {
     console.log('ID OF IT: ', id);
     setClassId(id);
     setShowDeleteModal(true);
   };
-
+  let grid;
+  const toolbar = ['PdfExport'];
+  const toolbarClick = (args) => {
+    if (grid && args.item.id === 'grid_pdfexport') {
+      grid.pdfExport();
+    }
+  };
   return (
     <>
       <GridComponent
+        id="grid2"
         dataSource={subjectClassDataManager}
-        pageSettings={pageOptions}
+        toolbar={toolbar}
+        allowPdfExport={true}
         allowPaging={true}
+        toolbarClick={toolbarClick}
+        ref={(g) => (grid = g)}
         allowSorting={true}
-        toolbar={['Search']}
+        allowFiltering={true}
+        pageSettings={pageOptions}
       >
         <ColumnsDirective>
           <ColumnDirective
@@ -72,6 +132,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             headerText="Class Name"
             width="70"
             textAlign="Left"
+            filterBarTemplate={classNameOptions}
           />
           <ColumnDirective
             field="subject_id"
@@ -92,6 +153,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             headerText="Semester"
             width="80"
             textAlign="Left"
+            filterBarTemplate={semesterOptions2}
           />
           <ColumnDirective
             field="batch"
@@ -105,6 +167,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             headerText="Delete"
             width="100"
             textAlign="Left"
+            allowSearching={false}
             template={(rowData) => (
               <button
                 className="btn-secondary"
@@ -115,7 +178,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             )}
           />
         </ColumnsDirective>
-        <Inject services={[Sort, Page, Search, Toolbar]} />
+        <Inject services={[Sort, Filter, Page, PdfExport, Toolbar]} />
       </GridComponent>
       {showDeleteModal && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">

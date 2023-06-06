@@ -49,7 +49,7 @@ const handler = async (req, res) => {
             ? '1st Semester'
             : item.semester === 2
             ? '2nd Semester'
-            : 'Summer',
+            : 'Summer Term',
         batch: classes.batch,
       };
     })
@@ -59,7 +59,11 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  res.status(200).json(classDataRecord);
+  const classNameList = [
+    ...new Set(classDataRecord.map((item) => item.class_name)),
+  ];
+
+  res.status(200).json({ classDataRecord, classNameList });
 };
 
 export default handler;

@@ -22,8 +22,6 @@ const handler = async (req, res) => {
 
   const { class_subject_id } = req.query;
 
-  console.log('class_subect_id:', class_subject_id);
-
   await db.connect();
 
   const criteriaOverallScore = await CriteriaOverallScores.findOne({
@@ -35,8 +33,6 @@ const handler = async (req, res) => {
   await CriteriaOverallScores.deleteOne({ classSubject_id: class_subject_id });
 
   await StudentGrade.deleteMany({ classSubject_id: class_subject_id });
-
-  console.log('I HAVE VAKLUE OF THIS: ', criteriaOverallScore);
 
   await StudentRecords.deleteMany({
     criteriaOverallScores_id: criteriaOverallScore._id,

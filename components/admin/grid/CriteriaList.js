@@ -8,9 +8,10 @@ import {
   Sort,
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 // import { useEffect } from 'react';
 // import { useState } from 'react';
@@ -20,7 +21,8 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 // import { toast } from 'react-toastify';
 
 function CriteriaList({ criteriaList }) {
-  console.log('CLASS LIST: ', criteriaList);
+  const [showCriteriaModal, setshowCriteriaModal] = useState(false);
+  const [criteriaElement, setcriteriaElement] = useState();
 
   const criteriaListDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
@@ -30,6 +32,50 @@ function CriteriaList({ criteriaList }) {
   const pageOptions = {
     pageSize: 10,
     pageSizes: [10, 25, 50, 100],
+  };
+
+  const handleViewCriteria = async (criteriaId) => {
+    const data = criteriaList.find((item) => item._id === criteriaId);
+
+    // Get all key of first level in criteria.
+    const keys = Object.keys(data.criteria.percentage);
+
+    // Map the keys to get the child of it (assessment)
+    const criteriaAssessmentElement = keys.map((item) => {
+      const assessmentElement = Object.keys(data.criteria[item]).map(
+        (assessment) => {
+          return (
+            <p key={assessment}>
+              {assessment.toUpperCase().replace('_', ' ')}:{' '}
+              {data.criteria[item][assessment].weightage * 100}%
+            </p>
+          );
+        }
+      );
+      return (
+        <div key={item}>
+          <h1 className="text-lg font-semibold">
+            {item.toUpperCase().replace('_', ' ')}:{' '}
+            {data.criteria.percentage[item] * 100}%
+          </h1>
+          <div className="p-3">{assessmentElement}</div>
+        </div>
+      );
+    });
+
+    const criteriaElement = (
+      <>
+        <h1 className="text-2xl font-bold text-sky-500 mb-3">{data.name}:</h1>
+        {criteriaAssessmentElement}
+      </>
+    );
+
+    setcriteriaElement(criteriaElement);
+    setshowCriteriaModal(true);
+  };
+
+  const handleModalClose = () => {
+    setshowCriteriaModal(false);
   };
 
   return (
@@ -43,25 +89,34 @@ function CriteriaList({ criteriaList }) {
       >
         <ColumnsDirective>
           <ColumnDirective
-            field="_id"
-            headerText="Subject Code"
+            headerText="Criteria ID"
             width="100"
             textAlign="Left"
+            template={({ index }) => {
+              return <span>{Number(index) + 1}</span>;
+            }}
           />
+
           <ColumnDirective
             field="name"
-            headerText="Subject Name"
+            headerText="Criteria Code"
             width="100"
             textAlign="Left"
           />
           <ColumnDirective
             field=""
-            headerText="Subject Description"
+            headerText="View Criteria"
             width="100"
             textAlign="Left"
-            template={() => {
-              return <button className="btn-secondary">Delete</button>;
-            }}
+            template={(rowData) => (
+              <button
+                // This should open modal with data of the student
+                onClick={() => handleViewCriteria(rowData._id)}
+                className="btn-primary px-3"
+              >
+                Criteria
+              </button>
+            )}
           />
 
           {/* <ColumnDirective
@@ -73,6 +128,27 @@ function CriteriaList({ criteriaList }) {
         </ColumnsDirective>
         <Inject services={[Sort, Page, Search, Toolbar]} />
       </GridComponent>
+      {showCriteriaModal && (
+        <div
+          className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          onClick={handleModalClose}
+        >
+          <div
+            className="bg-white rounded-md p-10 w-4/12 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              className="absolute top-0 right-0 p-5 cursor-pointer"
+              onClick={() => setshowCriteriaModal(false)}
+            >
+              <AiOutlineCloseCircle size={24} />
+            </div>
+            <div className="h-full">
+              <div className="h-5/6 overflow-y-auto">{criteriaElement}</div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

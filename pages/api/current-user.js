@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   const userId = session.user._id;
-  console.log(userId);
+
   const userType =
     session.user.isAdmin === 2
       ? Admin

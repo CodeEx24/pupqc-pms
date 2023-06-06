@@ -23,7 +23,13 @@ const handler = async (req, res) => {
     return res.status(401).send('Signin required');
   }
 
-  const { semester, subject_id, class_id, criteria_id, teacher_id } = req.body;
+  const {
+    semesterVal: semester,
+    subject_id,
+    class_id,
+    criteria_id,
+    teacher_id,
+  } = req.body;
 
   console.log('SEMESTER:', semester);
   console.log('subject_id:', subject_id);

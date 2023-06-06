@@ -45,7 +45,7 @@ function SubjectList({ subjectList }) {
           <ColumnDirective
             field="_id"
             headerText="Subject Code"
-            width="100"
+            width="70"
             textAlign="Left"
           />
           <ColumnDirective

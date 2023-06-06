@@ -71,7 +71,7 @@ function ClassManagementScreen() {
     label: item.name,
   }));
 
-  const semesterOption = [
+  const semesterValOption = [
     { value: 1, label: '1st Semester' },
     { value: 2, label: '2nd Semester' },
     { value: 3, label: 'Summer Term' },
@@ -130,7 +130,7 @@ function ClassManagementScreen() {
 
     setValue(name, e.value);
     clearErrors(name);
-    if (name === 'semester') {
+    if (name === 'semesterVal') {
       setSelectedSemester(e);
     } else if (name === 'subject_id') {
       setSelectedSubject(e);
@@ -247,19 +247,19 @@ function ClassManagementScreen() {
                 />
                 <Select
                   value={selectedSemester}
-                  options={semesterOption}
+                  options={semesterValOption}
                   isClearable
                   placeholder="Select or type to search a semester"
-                  id="semester"
-                  {...register('semester', {
+                  id="semesterVal"
+                  {...register('semesterVal', {
                     required: {
                       value: true,
                       message: 'Semester is required',
                     },
                   })}
-                  onChange={(e) => handleInputChange('semester', e)}
+                  onChange={(e) => handleInputChange('semesterVal', e)}
                   className="text-p mb-1 w-full lg:w-4/12 "
-                  styles={selectStyles('semester')}
+                  styles={selectStyles('semesterVal')}
                 />
 
                 <Select
@@ -289,9 +289,9 @@ function ClassManagementScreen() {
                 </div>
 
                 <div className="w-1/2">
-                  {errors.semester && (
+                  {errors.semesterVal && (
                     <p className="text-sm font-poppins text-red-500 ">
-                      {errors.semester.message}
+                      {errors.semesterVal.message}
                     </p>
                   )}
                 </div>

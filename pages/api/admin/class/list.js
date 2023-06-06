@@ -13,7 +13,6 @@ export default async function handler(req, res) {
 
   await db.connect();
   const classes = await Class.find({}, 'year section batch course_id').lean();
-  // console.log('CLASSES:', classes);
 
   const classSubjectData = await Promise.all(
     classes.map(async (classItem) => {
@@ -23,11 +22,12 @@ export default async function handler(req, res) {
       const clsSubject = await ClassSubject.find({ class_id: classItem._id })
         .select('semester isGradeFinalized')
         .lean();
-      console.log('clsSubhec: ', clsSubject);
+
       const clsSubjectData = clsSubject.map((classSubjectItem) => {
         return {
           ...classSubjectItem,
           // course_code,
+          class_id: classItem._id,
           batch: classItem.batch,
           class_name:
             course_code + ' ' + classItem.year + '-' + classItem.section,
@@ -35,7 +35,6 @@ export default async function handler(req, res) {
           // isGradeFinalized: item.isGradeFinalized,
         };
       });
-      console.log('clsSubjectData', clsSubjectData);
       return clsSubjectData;
     })
   );
@@ -56,7 +55,6 @@ export default async function handler(req, res) {
   }
 
   let flattenedData = filteredData.flat();
-  console.log(flattenedData);
 
   await db.disconnect();
 
