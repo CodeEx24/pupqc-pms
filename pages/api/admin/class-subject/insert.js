@@ -8,7 +8,7 @@ import ClassSubject from '@/models/ClassSubject';
 import Criteria from '@/models/Criteria';
 import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import Class from '@/models/Class';
 import AverageClassGrade from '../../../../models/AverageClassGrade';
 
@@ -96,13 +96,13 @@ const handler = async (req, res) => {
         records: criteriaOverallScores.criteria_overall,
       });
 
-      const newStudentGrades = new StudentGrade({
+      const newStudentClassSubjectGrades = new StudentClassSubjectGrade({
         student_id: id,
         classSubject_id: classSubject._id,
         grade: 5.0,
       });
 
-      await newStudentGrades.save();
+      await newStudentClassSubjectGrades.save();
       // Generate for STUDENT RECORDS
       const records = await newStudentRecords.save();
       return records;

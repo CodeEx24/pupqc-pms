@@ -5,7 +5,7 @@ import Class from '@/models/Class';
 import ClassSubject from '@/models/ClassSubject';
 import Course from '@/models/Course';
 import Subject from '@/models/Subject';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import Teacher from '../../../../models/Teacher';
 
 const handler = async (req, res) => {
@@ -54,7 +54,7 @@ const handler = async (req, res) => {
                 _id: clsSubject.teacher_id,
               });
 
-              const { grade } = await StudentGrade.findOne({
+              const { grade } = await StudentClassSubjectGrade.findOne({
                 classSubject_id: clsSubject._id,
                 student_id: studentID,
               });

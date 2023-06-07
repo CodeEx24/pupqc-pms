@@ -6,7 +6,7 @@ import db from '@/utils/db';
 import Class from '@/models/Class';
 import Student from '@/models/Student';
 import ClassSubject from '@/models/ClassSubject';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import Course from '@/models/Course';
 
 const handler = async (req, res) => {
@@ -32,7 +32,7 @@ const handler = async (req, res) => {
         classData.student_id.map(async (id) => {
           const studentData = await Student.findOne({ _id: id });
 
-          const studentGrades = await StudentGrade.findOne({
+          const studentGrades = await StudentClassSubjectGrade.findOne({
             student_id: studentData._id,
             classSubject_id,
           });

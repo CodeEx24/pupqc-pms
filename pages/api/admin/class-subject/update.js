@@ -3,7 +3,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
 import ClassSubject from '@/models/ClassSubject';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import AverageClassGrade from '@/models/AverageClassGrade';
 
 const handler = async (req, res) => {
@@ -23,25 +23,27 @@ const handler = async (req, res) => {
   await db.connect();
 
   const classSubjects = await ClassSubject.find({ class_id, semester });
-  // console.log('classSubjects: ', classSubjects);
+  console.log('classSubjects: ', classSubjects);
 
-  const averageClassGrade = await Promise.all(
+  const averageClassSubjectGrade = await Promise.all(
     classSubjects.map(async (classSubjectItem) => {
-      const studentGrades = await StudentGrade.find({
+      console.log('classSubjectItem._id: ', classSubjectItem._id);
+      const studentClassSubjectGrade = await StudentClassSubjectGrade.find({
         classSubject_id: classSubjectItem._id,
       });
-      // console.log('studentGrades: ', studentGrades);
+      console.log('studentClassSubjectGrade: ', studentClassSubjectGrade);
 
-      const gradeSum = studentGrades.reduce(
-        (sum, grade) => sum + grade.grade,
+      const gradeSum = studentClassSubjectGrade.reduce(
+        (sum, grade) => Number(sum) + Number(grade.grade),
         0
       );
-      const grade = gradeSum / studentGrades.length;
-
-      const passed = studentGrades.filter(
+      console.log('gradeSum: ', gradeSum);
+      const grade = gradeSum / studentClassSubjectGrade.length;
+      console.log('grade: ', grade);
+      const passed = studentClassSubjectGrade.filter(
         (gradeItem) => gradeItem.grade <= 3
       ).length;
-      const failed = studentGrades.filter(
+      const failed = studentClassSubjectGrade.filter(
         (gradeItem) => gradeItem.grade > 3
       ).length;
 
@@ -54,25 +56,27 @@ const handler = async (req, res) => {
     })
   );
 
-  // console.log('averageClassGrade: ', averageClassGrade);
+  // console.log('averageClassSubjectGrade: ', averageClassSubjectGrade);
 
   await Promise.all(
-    averageClassGrade.map(async (averageClassItem) => {
-      // console.log(
-      //   'averageClassItem.classSubjectId: ',
-      //   averageClassItem.classSubject_id
-      // );
+    averageClassSubjectGrade.map(async (averageClassItem) => {
+      console.log(
+        'averageClassItem.classSubjectId: ',
+        averageClassItem.classSubject_id
+      );
       const averageClassExist = await AverageClassGrade.findOne({
         classSubject_id: averageClassItem.classSubject_id,
       });
       console.log('averageClassExist: ', averageClassExist);
       if (averageClassExist) {
+        console.log('IT EXIST');
         // Update existing averageClassItem with the new average grade
-        averageClassExist.grade = averageClassItem.grade;
-        averageClassExist.passed = averageClassItem.passed;
-        averageClassExist.failed = averageClassItem.failed;
+        averageClassExist.grade = Number(averageClassItem.grade);
+        averageClassExist.passed = Number(averageClassItem.passed);
+        averageClassExist.failed = Number(averageClassItem.failed);
         await averageClassExist.save();
       } else {
+        console.log('NOTss EXIST');
         // Create a new averageClassItem and save it in the database
         const newAverageClassItem = new AverageClassGrade({
           ...averageClassItem,

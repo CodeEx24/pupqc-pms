@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const studentGradeSchema = new mongoose.Schema(
+const studentClassSubjectGradeSchema = new mongoose.Schema(
   {
     classSubject_id: {
       type: mongoose.Types.ObjectId,
@@ -22,7 +22,7 @@ const studentGradeSchema = new mongoose.Schema(
   }
 );
 
-const StudentGrade =
-  mongoose.models.StudentGrade ||
-  mongoose.model('StudentGrade', studentGradeSchema);
-export default StudentGrade;
+const StudentClassSubjectGrade =
+  mongoose.models.StudentClassSubjectGrade ||
+  mongoose.model('StudentClassSubjectGrade', studentClassSubjectGradeSchema);
+export default StudentClassSubjectGrade;

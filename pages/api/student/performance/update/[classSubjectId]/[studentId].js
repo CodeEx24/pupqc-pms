@@ -6,7 +6,7 @@ import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
 import ClassSubject from '@/models/ClassSubject';
 import Criteria from '@/models/Criteria';
-import StudentGrade from '../../../../../../models/StudentGrade';
+import StudentClassSubjectGrade from '../../../../../../models/StudentClassSubjectGrade';
 import { getGrade } from '../../../../../../utils/data';
 
 const handler = async (req, res) => {
@@ -165,7 +165,7 @@ const handler = async (req, res) => {
     0
   );
 
-  const studentGrade = await StudentGrade.findOne({
+  const studentGrade = await StudentClassSubjectGrade.findOne({
     classSubject_id: classSubjectId,
     student_id: studentId,
   });

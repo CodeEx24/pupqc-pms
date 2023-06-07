@@ -6,7 +6,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
 import ClassSubject from '../../../../models/ClassSubject';
 import CriteriaOverallScores from '../../../../models/CriteriaOverallScores';
-import StudentGrade from '../../../../models/StudentGrade';
+import StudentClassSubjectGrade from '../../../../models/StudentClassSubjectGrade';
 import StudentRecords from '../../../../models/StudentRecords';
 
 const handler = async (req, res) => {
@@ -32,7 +32,9 @@ const handler = async (req, res) => {
 
   await CriteriaOverallScores.deleteOne({ classSubject_id: class_subject_id });
 
-  await StudentGrade.deleteMany({ classSubject_id: class_subject_id });
+  await StudentClassSubjectGrade.deleteMany({
+    classSubject_id: class_subject_id,
+  });
 
   await StudentRecords.deleteMany({
     criteriaOverallScores_id: criteriaOverallScore._id,

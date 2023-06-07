@@ -11,7 +11,7 @@ import Admin from '@/models/Admin';
 import ClassSubject from '@/models/ClassSubject';
 import AverageClassGrade from '@/models/AverageClassGrade';
 import CriteriaOverallScores from '@/models/CriteriaOverallScores';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import StudentRecords from '@/models/StudentRecords';
 import Otp from '@/models/Otp';
 
@@ -37,7 +37,7 @@ const handler = async (req, res) => {
   await ClassSubject.deleteMany();
   await CriteriaOverallScores.deleteMany();
   await Otp.deleteMany();
-  await StudentGrade.deleteMany();
+  await StudentClassSubjectGrade.deleteMany();
   await StudentRecords.deleteMany();
   // await ClassSubject.insertMany(data.classSubject);
 

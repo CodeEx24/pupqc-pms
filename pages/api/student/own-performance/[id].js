@@ -3,7 +3,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
 import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
-import StudentGrade from '@/models/StudentGrade';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import ClassSubject from '@/models/ClassSubject';
 import Class from '@/models/Class';
 import Course from '@/models/Course';
@@ -32,7 +32,7 @@ const handler = async (req, res) => {
     criteriaOverallScores_id: criteriaOverallScores_id,
   });
 
-  const { grade } = await StudentGrade.findOne({
+  const { grade } = await StudentClassSubjectGrade.findOne({
     classSubject_id: classSubjectId,
     student_id: session.user._id,
   });
