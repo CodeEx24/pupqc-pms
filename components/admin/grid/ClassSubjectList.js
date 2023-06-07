@@ -94,7 +94,8 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
     },
   };
 
-  const deleteAction = (id) => {
+  const deleteAction = (e, id) => {
+    e.preventDefault();
     console.log('ID OF IT: ', id);
     setClassId(id);
     setShowDeleteModal(true);
@@ -171,7 +172,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             template={(rowData) => (
               <button
                 className="btn-secondary"
-                onClick={() => deleteAction(rowData.classSubject_id)}
+                onClick={(e) => deleteAction(e, rowData.classSubject_id)}
               >
                 Delete
               </button>

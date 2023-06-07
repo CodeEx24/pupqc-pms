@@ -11,14 +11,14 @@ const averageClassGrade = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // passed: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // failed: {
-    //   type: Number,
-    //   default: 0,
-    // },
+    passed: {
+      type: Number,
+      default: 0,
+    },
+    failed: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

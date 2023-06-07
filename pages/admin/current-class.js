@@ -4,14 +4,31 @@ import ClassList from '../../components/admin/grid/ClassList';
 import { fetchAllClass } from '../../components/hooks/Admin/fetch';
 
 function CurrentClassScreen() {
-  const { data: classList, isLoading } = useQuery(['all-class'], fetchAllClass);
+  const {
+    data: classList,
+    isLoading,
+    refetch: refetchClassList,
+  } = useQuery(['all-class'], fetchAllClass, {
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <AdminLayout title="Current Class">
       <div className="bg-white p-10 rounded-xl">
         <h1 className="text-h4 text-primary">Current Class</h1>
         <div>
-          {isLoading ? 'Loading...' : <ClassList classList={classList.data} />}
+          {isLoading ? (
+            'Loading...'
+          ) : (
+            <ClassList
+              classList={classList.data}
+              refetchClassList={refetchClassList}
+            />
+          )}
         </div>
       </div>
     </AdminLayout>
