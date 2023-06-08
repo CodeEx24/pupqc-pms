@@ -16,10 +16,11 @@ import {
 } from '../../hooks/Admin/updateData';
 import { toast } from 'react-toastify';
 // import { useRef } from 'react';
+import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import { useMemo } from 'react';
 
-function ClassList({ classList }) {
-  const [gridDataSource, setGridDataSource] = useState(classList);
+function ClassList({ classList, refetchClassList }) {
+  // const [gridDataSource, setGridDataSource] = useState(classList);
   const [isActionInProgress, setIsActionInProgress] = useState(false);
 
   const pageOptions = useMemo(() => {
@@ -29,6 +30,11 @@ function ClassList({ classList }) {
       currentPage: 1,
     };
   }, []);
+
+  const classListDataManager = new DataManager({
+    adaptor: new RemoteSaveAdaptor(),
+    json: classList,
+  });
 
   const finalizeSomeClassSubjectMutation = useMutation(
     finalizeSomeClassSubject
@@ -46,14 +52,7 @@ function ClassList({ classList }) {
       const updateFinalizeGrade =
         await finalizeSomeClassSubjectMutation.mutateAsync({ id, semester });
       console.log('updateFinalizeGrade: ', updateFinalizeGrade);
-      setGridDataSource((prevData) =>
-        prevData.map((item) => {
-          if (id === item.class_id && semester === item.semester) {
-            return { ...item, isGradeFinalized: true };
-          }
-          return item;
-        })
-      );
+      await refetchClassList();
 
       toast.success('Finalization of grade is successful.');
     } catch (error) {
@@ -73,14 +72,7 @@ function ClassList({ classList }) {
       const updateFinalizeGrade =
         await revokeSomeClassSubjectMutation.mutateAsync({ id, semester });
       console.log('updateFinalizeGrade: ', updateFinalizeGrade);
-      setGridDataSource((prevData) =>
-        prevData.map((item) => {
-          if (id === item.class_id && semester === item.semester) {
-            return { ...item, isGradeFinalized: false };
-          }
-          return item;
-        })
-      );
+      await refetchClassList();
 
       toast.success('Revoke the finalization of grade is successful.');
     } catch (error) {
@@ -93,7 +85,7 @@ function ClassList({ classList }) {
   return (
     <>
       <GridComponent
-        dataSource={gridDataSource}
+        dataSource={classListDataManager}
         pageSettings={pageOptions}
         allowPaging={true}
         allowSorting={true}

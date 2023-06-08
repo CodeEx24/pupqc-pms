@@ -171,7 +171,10 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
             allowSearching={false}
             template={(rowData) => (
               <button
-                className="btn-secondary"
+                className={`btn-secondary ${
+                  rowData.isGradeFinalized ? 'opacity-60' : ''
+                }`}
+                disabled={rowData.isGradeFinalized}
                 onClick={(e) => deleteAction(e, rowData.classSubject_id)}
               >
                 Delete

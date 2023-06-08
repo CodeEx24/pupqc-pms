@@ -9,17 +9,17 @@ function CurrentClassScreen() {
     isLoading,
     refetch: refetchClassList,
   } = useQuery(['all-class'], fetchAllClass, {
-    refetchInterval: false,
-    refetchIntervalInBackground: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
+    // refetchInterval: false,
+    // refetchIntervalInBackground: false,
+    // refetchOnMount: false,
+    // refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
 
   return (
-    <AdminLayout title="Current Class">
+    <AdminLayout title="Classes">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-h4 text-primary">Current Class</h1>
+        <h1 className="text-h4 text-primary">Classes</h1>
         <div>
           {isLoading ? (
             'Loading...'

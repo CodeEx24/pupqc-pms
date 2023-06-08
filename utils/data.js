@@ -36,8 +36,8 @@ export const adminLinks = [
         icon: <TbReportAnalytics />,
       },
       {
-        name: 'current class',
-        href: 'current-class',
+        name: 'classes',
+        href: 'classes',
         icon: <AiFillDiff />,
       },
       {

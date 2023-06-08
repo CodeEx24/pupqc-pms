@@ -161,6 +161,8 @@ const handler = async (req, res) => {
     })
   );
 
+  // Calculate StudentClassSubjectGrades
+
   await db.disconnect();
   res.send(updatedClassSubjects);
 };

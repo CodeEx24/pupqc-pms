@@ -27,10 +27,10 @@ const handler = async (req, res) => {
   await db.connect();
 
   // Get the classlist
-  const classList = await ClassSubject.find({});
+  const classSubjectList = await ClassSubject.find({});
 
   const classDataRecord = await Promise.all(
-    classList.map(async (item) => {
+    classSubjectList.map(async (item) => {
       const criteria = await Criteria.findOne({ _id: item.criteria_id });
       const classes = await Class.findOne({ _id: item.class_id });
       const teacher = await Teacher.findOne({ _id: item.teacher_id }).select(
@@ -40,6 +40,7 @@ const handler = async (req, res) => {
       return {
         teacher: teacher.name,
         classSubject_id: item._id,
+        isGradeFinalized: item.isGradeFinalized,
         subject_id: item.subject_id,
         class_id: classes._id,
         class_name: course_code + ' ' + classes.year + '-' + classes.section,
