@@ -79,11 +79,8 @@ function ClassSubjectList({ subjectClass }) {
           headerText="Manage Criteria Overall"
           width="150"
           template={(rowData) => (
-            <Link
-              href={`/faculty/class-subject/${rowData.classSubject_id}`}
-              className="btn-primary-no-width px-3"
-            >
-              Manage
+            <Link href={`/faculty/class-subject/${rowData.classSubject_id}`}>
+              <button className="btn-primary px-3">Manage</button>
             </Link>
           )}
         />

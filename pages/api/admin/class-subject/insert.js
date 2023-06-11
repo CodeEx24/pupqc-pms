@@ -39,6 +39,13 @@ const handler = async (req, res) => {
 
   await db.connect();
 
+  const { isGradeFinalized } = await ClassSubject.findOne({ class_id });
+  if (isGradeFinalized) {
+    return res
+      .status(400)
+      .send({ message: 'Subject cannot be added. Grade is already finalized' });
+  }
+
   const isExist = await ClassSubject.findOne({
     semester,
     subject_id,

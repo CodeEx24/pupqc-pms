@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// DELETE BELOW
 export const addSubjectData = (data) => {
   return axios.post(`/api/subject/insert`, data);
 };

@@ -10,7 +10,7 @@ export const fetchStudentsClass = () => {
 
 // UPDATED FETCH
 export const fetchAllSubject = () => {
-  return axios.get(`/api/subject`);
+  return axios.get(`/api/faculty/subject`);
 };
 
 // DELETE BELOW

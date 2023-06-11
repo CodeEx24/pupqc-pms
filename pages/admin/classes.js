@@ -19,7 +19,7 @@ function CurrentClassScreen() {
   return (
     <AdminLayout title="Classes">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-h4 text-primary">Classes</h1>
+        <h1 className="text-h4 text-primary mb-5">Classes</h1>
         <div>
           {isLoading ? (
             'Loading...'

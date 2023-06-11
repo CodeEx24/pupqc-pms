@@ -15,15 +15,17 @@ import Image from 'next/image';
 
 import { NavButton } from '../NavButton';
 import Link from 'next/link';
-import { useQuery } from '@tanstack/react-query';
-import { fetchCurrentUser } from '../hooks/FacultySubject/fetch';
+// import { useQuery } from '@tanstack/react-query';
+// import { fetchCurrentUser } from '../hooks/FacultySubject/fetch';
+
+import { useSession } from 'next-auth/react';
 
 // React Context
 // import { Cart, Chat, Notification, UserProfile } from '.';
 // import { useStateContext } from '../contexts/ContextProvider';
 
 function AdminNavbar() {
-  const { data: user, status } = useQuery(['user'], fetchCurrentUser);
+  const { data: session, status } = useSession();
 
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
@@ -53,7 +55,7 @@ function AdminNavbar() {
   }, [screenSize]);
 
   if (status === 'loading') {
-    return null; // or show a loading indicator
+    return null;
   }
 
   return (
@@ -107,13 +109,13 @@ function AdminNavbar() {
                   height={50}
                   width={50}
                   className="rounded-full w-8 h-8"
-                  src={user.data.profileImageUrl}
+                  src={session?.user.profile}
                   alt="avatar.jpg"
                 />
                 <p>
                   <span className="text-sm text-gray-400 text-14">Hi, </span>
                   <span className="text-sm text-gray-400 font-bold ml-1 text-14">
-                    {user?.data.name.split(' ')[0]}
+                    {session?.user.name.split(' ')[0]}
                   </span>
                 </p>
                 <MdKeyboardArrowDown className="text-gray-400 text-14" />

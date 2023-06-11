@@ -5,6 +5,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
 import Subject from '@/models/Subject';
+import ClassSubject from '../../../../models/ClassSubject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -15,7 +16,23 @@ const handler = async (req, res) => {
 
   await db.connect();
 
-  const subjects = await Subject.find();
+  const classSubject = await ClassSubject.find({
+    teacher_id: session.user._id,
+  }).select('subject_id');
+
+  const uniqueSubjectIds = [
+    ...new Set(classSubject.map((item) => item.subject_id)),
+  ];
+  console.log(uniqueSubjectIds);
+
+  const subjects = await Promise.all(
+    uniqueSubjectIds.map(async (subjectId) => {
+      const subjectItem = await Subject.findOne({ _id: subjectId }).select(
+        'name description'
+      );
+      return subjectItem;
+    })
+  );
 
   await db.disconnect();
 

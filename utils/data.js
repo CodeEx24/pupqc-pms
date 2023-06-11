@@ -129,11 +129,6 @@ export const teacherLinks = [
     title: 'Pages',
     links: [
       {
-        name: 'criteria',
-        href: 'criteria',
-        icon: <AiFillIdcard />,
-      },
-      {
         name: 'subject',
         href: 'subject',
         icon: <AiFillIdcard />,
@@ -159,34 +154,11 @@ export const teacherLinks = [
         icon: <AiFillSnippets />,
       },
 
-      // {
-      //   name: 'criteria management',
-      //   href: 'criteria-management',
-      //   icon: <AiFillIdcard />,
-      // },
-
-      // {
-      //   name: 'section',
-      //   href: 'section',
-      //   icon: <FaMoneyBillAlt />,
-      // },
-
-      // {
-      //   name: 'attendance',
-      //   href: 'attendance',
-      //   icon: <TbReportAnalytics />,
-      // },
-
       {
         name: 'profile',
         href: 'profile',
         icon: <FaUser />,
       },
-
-      // {
-      //   name: 'hdf',
-      //   icon: <RiContactsLine />,
-      // },
     ],
   },
 ];

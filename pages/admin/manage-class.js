@@ -91,7 +91,7 @@ function ClassManagementScreen() {
         refetchSubjectClass={refetchSubjectClass}
       />
     ),
-    [subjectClass]
+    [subjectClass, refetchSubjectClass]
   );
 
   // Select styles
@@ -149,7 +149,8 @@ function ClassManagementScreen() {
     try {
       setSubmitting(true); // Disable the submit button
 
-      await addClassSubjectMutation.mutateAsync(data);
+      const res = await addClassSubjectMutation.mutateAsync(data);
+      console.log(res.message);
       refetchSubjectClass();
       setSelectedSubject(null);
       setSelectedSemester(null);

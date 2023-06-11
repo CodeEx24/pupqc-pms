@@ -30,11 +30,16 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
   const handleDeletingClass = async () => {
     try {
       setShowDeleteModal(false);
-      await deleteClassSubject(classId);
+      const res = await deleteClassSubject(classId);
       await refetchSubjectClass();
-      toast.success('Subject deleted successfully.');
+      toast.success(res.message);
     } catch (error) {
       console.error(error);
+      if (error.response && error.response.status === 409) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred while deleting the subject.');
+      }
     }
   };
 

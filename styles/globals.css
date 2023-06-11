@@ -163,3 +163,32 @@ text-slate-900
   )::after {
   @apply bg-primary;
 }
+
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text,
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-icon {
+  @apply text-primary;
+}
+
+.e-tab .e-tab-header .e-indicator {
+  @apply bg-primary;
+}
+
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-wrap:hover .e-tab-text {
+  @apply text-primary;
+}
+.e-tab .e-tab-header .e-toolbar-item .e-tab-wrap:hover,
+.e-tab.e-focused > .e-tab-header .e-toolbar-item .e-tab-wrap:focus {
+  @apply bg-primary bg-opacity-10;
+}
+
+/* .e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text,
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-icon {
+  @apply bg-primary;
+} */
+
+/* .e-tab .e-tab-header .e-toolbar-item.e-active {
+ @aa
+} */
+/* .e-tab .e-tab-header .e-toolbar-item .e-tab-wrap:hover {
+  @apply bg-secondary;
+} */

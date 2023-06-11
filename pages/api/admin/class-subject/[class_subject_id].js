@@ -49,6 +49,12 @@ const handler = async (req, res) => {
     await AverageClassGrade.deleteOne({
       classSubject_id: class_subject_id,
     });
+  } else {
+    res
+      .status(409)
+      .send({
+        message: 'Class subject cannot be deleted because it is finalized',
+      });
   }
 
   await db.disconnect();

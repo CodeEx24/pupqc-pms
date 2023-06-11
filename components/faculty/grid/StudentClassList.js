@@ -198,7 +198,7 @@ function StudentClassList({ studentClass }) {
                     rowData.class_subject_id
                   )
                 }
-                className="btn-primary-no-width px-3"
+                className="btn-primary px-3"
               >
                 Manage Grades
               </button>

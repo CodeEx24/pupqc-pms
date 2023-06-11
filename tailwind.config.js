@@ -25,7 +25,7 @@ module.exports = {
         primary: 'var(--color-red-800)', // Use the same color as sky-800
       },
       textColor: {
-        primary: '#38BDF8', // Can always use CSS variables too e.g. "var(--color-primary)",
+        primary: '#0EA5E9', // Can always use CSS variables too e.g. "var(--color-primary)",
         secondary: '#B91C1C',
         brand: '#243c5a',
       }, // Define custom text colors

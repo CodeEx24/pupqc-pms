@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 function FacultySidebar() {
   const router = useRouter();
 
-  const activeLink = router.pathname.substring('/faculty/'.length);
+  const activeLink = router.pathname.substring('/admin/'.length);
 
   const menu = Store((state) => state.menu);
   const { activeMenu } = menu;
@@ -26,6 +26,10 @@ function FacultySidebar() {
   const normalLinkClass =
     'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700  hover:bg-light-gray m-2';
 
+  const isClassSubjectLink = (link) => {
+    return link.href.includes('class-subject');
+  };
+
   return (
     <div className="pl-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 shadow-lg shadow-right">
       {activeMenu && (
@@ -33,7 +37,7 @@ function FacultySidebar() {
           <div className="flex justify-between items-center">
             <Link
               href="/"
-              className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight  text-slate-900"
+              className="text-h6 items-center gap-3 ml-3 mt-4 flex  font-poppins font-extrabold tracking-tight "
             >
               <SiShopware /> PUPQC PMS
             </Link>
@@ -51,23 +55,19 @@ function FacultySidebar() {
           <div className="mt-10">
             {teacherLinks.map((item) => (
               <div key={item.title}>
-                <p className="text-black-900 m-3 mt-4 uppercase">
-                  {item.title}
-                </p>
+                <p className="text-p m-3 mt-4 uppercase">{item.title}</p>
                 {item.links.map((link) => (
                   <Link
-                    href={`/faculty/${link.href}`}
+                    href={`/admin/${link.href}`}
                     key={link.name}
                     className={
-                      activeLink === link.href
+                      isClassSubjectLink(link) || activeLink === link.href
                         ? activeLinkClass
                         : normalLinkClass
                     }
                   >
                     {link.icon}
-                    <span className="capitalize text-black-900">
-                      {link.name}
-                    </span>
+                    <span className="text-p capitalize">{link.name}</span>
                   </Link>
                 ))}
               </div>
