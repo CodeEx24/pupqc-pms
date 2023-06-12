@@ -198,7 +198,10 @@ function StudentClassList({ studentClass }) {
                     rowData.class_subject_id
                   )
                 }
-                className="btn-primary px-3"
+                disabled={rowData.isGradeFinalized}
+                className={`btn-primary px-3 ${
+                  rowData.isGradeFinalized && 'opacity-60'
+                }`}
               >
                 Manage Grades
               </button>

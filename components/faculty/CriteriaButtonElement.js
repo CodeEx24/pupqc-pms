@@ -14,7 +14,11 @@ import {
 import TabsContent from './tabs/TabsContent';
 import { toast } from 'react-toastify';
 
-function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
+function CriteriaButtonElement({
+  criteriaOverallList,
+  classSubject_id,
+  isGradeFinalized,
+}) {
   const {
     register,
     handleSubmit,
@@ -24,7 +28,7 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
   } = useForm();
 
   const criteriaAssessment = Object?.keys(
-    criteriaOverallList?.data.criteria_overall
+    criteriaOverallList?.data.criteriaOverallScores.criteria_overall
   );
 
   const criteriaAssessmentFormatted = criteriaAssessment.map((item) => {
@@ -77,8 +81,10 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
         length,
       });
       // If success update the data in frontend manually
-      criteriaOverallList.data.criteria_overall[item] = [
-        ...criteriaOverallList.data.criteria_overall[item],
+      criteriaOverallList.data.criteriaOverallScores.criteria_overall[item] = [
+        ...criteriaOverallList.criteriaOverallScores.data.criteria_overall[
+          item
+        ],
         data.number,
       ];
       setValue('number', null);
@@ -98,8 +104,10 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
         length,
         classSubject_id,
       });
-      criteriaOverallList.data.criteria_overall[item] =
-        criteriaOverallList.data.criteria_overall[item].slice(0, -1);
+      criteriaOverallList.data.criteriaOverallScores.criteria_overall[item] =
+        criteriaOverallList.data.criteriaOverallScores.criteria_overall[
+          item
+        ].slice(0, -1);
 
       handleDeleteCloseModal();
       toast.success('Overall score item deleted successfully');
@@ -112,7 +120,10 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
   const handleDeleteCriteriaClick = (item) => {
     const keyItem = item.toLowerCase().replace(' ', '_');
     setItem(item);
-    setLength(criteriaOverallList.data.criteria_overall[keyItem].length);
+    setLength(
+      criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
+        .length
+    );
     // console.log('ITEM: ', item);
     // console.log('length: ', length);
     handleDeleteModal();
@@ -121,7 +132,10 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
   const handleAddCriteriaClick = (item) => {
     const keyItem = item.toLowerCase().replace(' ', '_');
     setItem(item);
-    setLength(criteriaOverallList.data.criteria_overall[keyItem].length + 1);
+    setLength(
+      criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
+        .length + 1
+    );
     console.log(item, length);
     handleOpenModal();
   };
@@ -135,9 +149,14 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
         content={() => (
           <TabsContent
             assessment={item}
-            criteriaOverall={criteriaOverallList.data.criteria_overall[item]}
+            criteriaOverall={
+              criteriaOverallList.data.criteriaOverallScores.criteria_overall[
+                item
+              ]
+            }
             handleAddCriteriaClick={handleAddCriteriaClick}
             handleDeleteCriteriaClick={handleDeleteCriteriaClick}
+            isGradeFinalized={isGradeFinalized}
           />
         )}
       />
@@ -172,13 +191,13 @@ function CriteriaButtonElement({ criteriaOverallList, classSubject_id }) {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="mr-4 text-gray-500 hover:text-gray-700"
+                  className="mr-4 btn-secondary"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-sky-500 text-white rounded-md px-4 py-2"
+                  className="btn-primary rounded-md px-4 py-2"
                 >
                   Save
                 </button>

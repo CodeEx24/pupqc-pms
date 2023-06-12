@@ -5,7 +5,9 @@ function TabsContent({
   criteriaOverall,
   handleAddCriteriaClick,
   handleDeleteCriteriaClick,
+  isGradeFinalized,
 }) {
+  // console.log('isGradeFinalized: ', isGradeFinalized);
   const criteriaListElement = criteriaOverall?.map((item, index) => {
     return (
       <div
@@ -40,18 +42,26 @@ function TabsContent({
           )}
         </div>
         <div className="flex gap-5">
-          <button
-            className="btn-primary-no-width px-3 mt-3"
-            onClick={() => handleAddCriteriaClick(assessment)}
-          >
-            ADD {assessment.toUpperCase().replace(/_/g, ' ')}
-          </button>
-          <button
-            className="btn-danger-no-width px-3 mt-3"
-            onClick={() => handleDeleteCriteriaClick(assessment)}
-          >
-            DELETE LAST {assessment.toUpperCase().replace(/_/g, ' ')}
-          </button>
+          {isGradeFinalized ? (
+            <p className="text-p text-secondary">
+              The Grades has been already finalized.
+            </p>
+          ) : (
+            <>
+              <button
+                className={`btn-primary px-3 mt-3 `}
+                onClick={() => handleAddCriteriaClick(assessment)}
+              >
+                ADD {assessment.toUpperCase().replace(/_/g, ' ')}
+              </button>
+              <button
+                className={`btn-secondary px-3 mt-3 `}
+                onClick={() => handleDeleteCriteriaClick(assessment)}
+              >
+                DELETE LAST {assessment.toUpperCase().replace(/_/g, ' ')}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

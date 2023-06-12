@@ -1,11 +1,12 @@
 import FacultyLayout from '@/components/faculty/FacultyLayout';
 
 // import withStudentAuth from '@/utils/authentication/withStudentAuth';
-import Select from 'react-select';
+// import Select from 'react-select';
 import PassingRate from '@/components/faculty/charts/PassingRate';
 import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
 import { useQuery } from '@tanstack/react-query';
 import { fetchStudentsByYearLevel } from '../../components/hooks/FacultySubject/fetch';
+import Card from '../../components/admin/card';
 
 function HomeScreen() {
   const currentDate = new Date();
@@ -42,11 +43,16 @@ function HomeScreen() {
 
   return (
     <FacultyLayout title="Home">
-      <div className="bg-white  p-10 rounded-xl">
-        <h1 className="title rounded-md ">Dashboard</h1>
+      <div className=" px-10 rounded-xl">
+        <h1 className="text-h4 text-primary mb-5">Home</h1>
+        <div className="flex lg:flex-nowrap flex-wrap gap-3 ">
+          <Card title={'Earnings'} value={25} words={'Wew'} />
+          <Card title={'Earnings'} value={25} words={'Wew'} />
+          <Card title={'Earnings'} value={25} words={'Wew'} />
+        </div>
 
-        <div className="grid grid-cols-12 grid-rows-12 gap-4">
-          <div className="col-span-3 row-span-2 border rounded-md  flex flex-col p-5">
+        <div className="grid grid-cols-12 grid-rows-12 gap-3">
+          {/* <div className="col-span-3 row-span-2 border rounded-md  flex flex-col p-5">
             <label className="font-semibold text-gray-800">Year</label>
             <Select
               // value={selectedSemester}
@@ -82,11 +88,11 @@ function HomeScreen() {
               <h3 className="font-semibold">Subject Handled</h3>
               <p className="text-3xl">3,000 Students</p>
             </div>
-          </div>
-          <div className="col-span-3 row-span-1 col-start-10 border rounded-md ">
+          </div> */}
+          {/* <div className="col-span-3 row-span-1 col-start-10  rounded-md ">
             5
-          </div>
-          <div className="col-span-5 row-span-5 row-start-3 border rounded-md p-5">
+          </div> */}
+          <div className="col-span-5 row-span-5 row-start-3  rounded-xl p-8 bg-white">
             <h3 className="font-semibold ">
               Students by Year Level{' '}
               <span className="text-gray-600">
@@ -103,18 +109,16 @@ function HomeScreen() {
               'Loading...'
             ) : (
               <StudentsbyYear
-                studentCurrentYearLevel={
-                  studentCurrentYearLevel.data.studentByYearLevel
-                }
+                studentCurrentYearLevel={studentCurrentYearLevel.data.result}
               />
             )}
           </div>
-          <div className="col-span-7 row-span-5 col-start-6 row-start-3 border rounded-md p-5">
+          <div className="col-span-7 row-span-5 col-start-6 row-start-3  rounded-md p-5 bg-white">
             <h3 className="font-semibold ">Passing Rate (Previous Years)</h3>
             <PassingRate />
           </div>
-          <div className="col-span-9 row-span-5 row-start-8 border rounded-md ">
-            8
+          <div className="col-span-12 row-span-5 row-start-8  rounded-xl bg-white ">
+            SUP IM CHART
           </div>
         </div>
       </div>

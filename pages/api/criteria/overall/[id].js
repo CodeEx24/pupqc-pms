@@ -20,6 +20,10 @@ const handler = async (req, res) => {
 
   const classSubject = await ClassSubject.findOne({ _id: classSubject_id });
 
+  console.log('classSubject: ', classSubject);
+  const isGradeFinalized = classSubject.isGradeFinalized;
+  console.log('isGradeFinalized: ', isGradeFinalized);
+
   const teacherId = classSubject.teacher_id.toString();
 
   if (teacherId !== session.user._id) {
@@ -33,7 +37,7 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  res.status(200).json(criteriaOverallScores);
+  res.status(200).json({ criteriaOverallScores, isGradeFinalized });
 };
 
 export default handler;

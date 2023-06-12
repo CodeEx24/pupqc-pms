@@ -30,7 +30,7 @@ export const fetchCriteria = () => {
 
 // DELETE BELOW IF NOT USED
 export const fetchSubjectClass = () => {
-  return axios.get(`/api/subject/class`);
+  return axios.get(`/api/faculty/subject/class`);
 };
 
 export const fetchSubjectClassforCriteria = () => {

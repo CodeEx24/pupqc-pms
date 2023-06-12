@@ -11,10 +11,6 @@ function TeacherListScreen() {
     // refetch: refetchTeacherList,
   } = useQuery(['teachers'], fetchTeacherList);
 
-  if (teacherList) {
-    console.log(teacherList.data);
-  }
-
   return (
     <AdminLayout title="Teacher List">
       <div className="bg-white p-10 rounded-xl">

@@ -21,6 +21,7 @@ function CriteriaManagementIDScreen() {
     }
   );
 
+  console.log(criteriaOverallList);
   // After mapping push in the criteriaOverALL value  (BUTTON)
   // Once click show the modal
 
@@ -38,7 +39,10 @@ function CriteriaManagementIDScreen() {
           ) : (
             <CriteriaButtonElement
               criteriaOverallList={criteriaOverallList}
-              classSubject_id={criteriaOverallList.data.classSubject_id}
+              classSubject_id={
+                criteriaOverallList.data.criteriaOverallScores.classSubject_id
+              }
+              isGradeFinalized={criteriaOverallList.data.isGradeFinalized}
             />
           )}
         </div>

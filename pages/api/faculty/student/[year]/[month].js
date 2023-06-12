@@ -40,6 +40,8 @@ const handler = async (req, res) => {
     },
   });
 
+  console.log('subject_classID: ', subject_classID);
+
   // DESIRED RESULT
   //   const resultMustBe = [
   //     { x: '1st Year', y: AccumulatedStudentLengthPerYearLevel },
@@ -51,6 +53,7 @@ const handler = async (req, res) => {
   const studentByYearLevel = await Promise.all(
     subject_classID.map(async (id) => {
       const classObj = await Class.findById(id.toString());
+      console.log('classObj: ', classObj);
       if (classObj.year === 1) {
         const accumulatedLength = classObj.student_id.reduce(
           (totalLength, studentID) => totalLength + studentID.length,
@@ -64,13 +67,26 @@ const handler = async (req, res) => {
       } else if (classObj.year === 4) {
         return { x: '4th Year', y: classObj.student_id.length };
       }
-      return { classObj };
+      return null;
     })
   );
 
+  const mergedResults = {};
+  studentByYearLevel.forEach(({ x, y }) => {
+    if (mergedResults[x]) {
+      mergedResults[x].y += y;
+    } else {
+      mergedResults[x] = { x, y };
+    }
+  });
+
+  const result = Object.values(mergedResults);
+
+  console.log(result);
+
   await db.disconnect();
 
-  res.status(200).json({ studentByYearLevel });
+  res.status(200).json({ result });
 };
 
 export default handler;

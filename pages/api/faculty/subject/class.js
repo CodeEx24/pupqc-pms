@@ -44,6 +44,7 @@ const handler = async (req, res) => {
             ? '2nd Semester'
             : 'Summer',
         batch: classes.batch,
+        isGradeFinalized: item.isGradeFinalized,
       };
     })
   );

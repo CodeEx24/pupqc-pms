@@ -16,7 +16,6 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import Link from 'next/link';
 
 function ClassSubjectList({ subjectClass }) {
-  // console.log(subjectClass);
   // const [key, setKey] = useState(0);
 
   // useEffect(() => {
@@ -78,11 +77,17 @@ function ClassSubjectList({ subjectClass }) {
           field=""
           headerText="Manage Criteria Overall"
           width="150"
-          template={(rowData) => (
-            <Link href={`/faculty/class-subject/${rowData.classSubject_id}`}>
-              <button className="btn-primary px-3">Manage</button>
-            </Link>
-          )}
+          template={(rowData) => {
+            return rowData.isGradeFinalized ? (
+              <button className="btn-primary px-3 opacity-60" disabled>
+                Manage
+              </button>
+            ) : (
+              <Link href={`/faculty/class-subject/${rowData.classSubject_id}`}>
+                <button className="btn-primary px-3">Manage</button>
+              </Link>
+            );
+          }}
         />
       </ColumnsDirective>
       <Inject services={[Sort, Page, Search, Toolbar]} />

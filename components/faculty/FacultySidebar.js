@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 function FacultySidebar() {
   const router = useRouter();
 
-  const activeLink = router.pathname.substring('/admin/'.length);
+  const activeLink = router.pathname.substring('/faculty/'.length);
 
   const menu = Store((state) => state.menu);
   const { activeMenu } = menu;
@@ -25,10 +25,6 @@ function FacultySidebar() {
     'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2 bg-sky-400';
   const normalLinkClass =
     'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700  hover:bg-light-gray m-2';
-
-  const isClassSubjectLink = (link) => {
-    return link.href.includes('class-subject');
-  };
 
   return (
     <div className="pl-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 shadow-lg shadow-right">
@@ -58,10 +54,10 @@ function FacultySidebar() {
                 <p className="text-p m-3 mt-4 uppercase">{item.title}</p>
                 {item.links.map((link) => (
                   <Link
-                    href={`/admin/${link.href}`}
+                    href={`/faculty/${link.href}`}
                     key={link.name}
                     className={
-                      isClassSubjectLink(link) || activeLink === link.href
+                      activeLink === link.href
                         ? activeLinkClass
                         : normalLinkClass
                     }

@@ -71,6 +71,11 @@ module.exports = {
       // transitionDelay: {}, // Define custom transition delays
 
       // darkMode: false, // Set default mode to light
+
+      backgroundImage: {
+        'hero-pattern':
+          "url('https://flexy-next-js-dashboard.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwelcome-bg2-2x-svg.67cde987.svg&w=640&q=75')",
+      },
     },
   },
 

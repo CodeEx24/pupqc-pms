@@ -39,8 +39,8 @@ const handler = async (req, res) => {
 
   await db.connect();
 
-  const { isGradeFinalized } = await ClassSubject.findOne({ class_id });
-  if (isGradeFinalized) {
+  const clsItem = await ClassSubject.findOne({ class_id });
+  if (clsItem?.isGradeFinalized) {
     return res
       .status(400)
       .send({ message: 'Subject cannot be added. Grade is already finalized' });

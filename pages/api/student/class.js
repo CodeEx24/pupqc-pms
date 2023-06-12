@@ -23,7 +23,13 @@ const handler = async (req, res) => {
 
   const allStudentRecords = await Promise.all(
     classSubject.map(
-      async ({ _id: class_subject_id, class_id, subject_id, semester }) => {
+      async ({
+        _id: class_subject_id,
+        class_id,
+        subject_id,
+        semester,
+        isGradeFinalized,
+      }) => {
         const classData = await Class.findOne({ _id: class_id });
         const { course_code } = await Course.findOne({
           _id: classData.course_id,
@@ -47,6 +53,7 @@ const handler = async (req, res) => {
                 course_code + ' ' + classData.year + '-' + classData.section,
               batch: classData.batch,
               semester: semesterString,
+              isGradeFinalized,
             };
           })
         );
