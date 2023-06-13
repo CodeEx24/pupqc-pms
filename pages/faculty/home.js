@@ -6,7 +6,7 @@ import PassingRate from '@/components/faculty/charts/PassingRate';
 import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
 import { useQuery } from '@tanstack/react-query';
 import { fetchStudentsByYearLevel } from '../../components/hooks/FacultySubject/fetch';
-import Card from '../../components/admin/card';
+import Card from '@/components/admin/Card';
 
 function HomeScreen() {
   const currentDate = new Date();
