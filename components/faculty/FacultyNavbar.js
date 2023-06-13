@@ -43,7 +43,7 @@ function FacultyNavbar() {
 
     // Removing the event listener because it is already get the size of window
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [setScreenSize]);
 
   // Setting the menu if it is visible or not
   useEffect(() => {
@@ -52,7 +52,7 @@ function FacultyNavbar() {
     } else {
       setActiveMenu(true);
     }
-  }, [screenSize]);
+  }, [screenSize, setActiveMenu]);
 
   if (status === 'loading') {
     return null;
