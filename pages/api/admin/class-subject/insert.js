@@ -39,7 +39,7 @@ const handler = async (req, res) => {
 
   await db.connect();
 
-  const clsItem = await ClassSubject.findOne({ class_id });
+  const clsItem = await ClassSubject.findOne({ class_id, semester });
   if (clsItem?.isGradeFinalized) {
     return res
       .status(400)

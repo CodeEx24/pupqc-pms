@@ -10,19 +10,7 @@ import {
   DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
-function AveragePerformance() {
-  const data = [
-    { year: 2013, averageGrade: 85 },
-    { year: 2014, averageGrade: 83 },
-    { year: 2015, averageGrade: 90 },
-    { year: 2016, averageGrade: 93 },
-    { year: 2017, averageGrade: 90 },
-    { year: 2018, averageGrade: 87 },
-    { year: 2019, averageGrade: 85 },
-    { year: 2020, averageGrade: 88 },
-    { year: 2021, averageGrade: 90 },
-    { year: 2022, averageGrade: 91 },
-  ];
+function AveragePerformance({ averagePercentage }) {
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
     title: 'Percentage',
@@ -55,9 +43,9 @@ function AveragePerformance() {
       />
       <SeriesCollectionDirective>
         <SeriesDirective
-          dataSource={data}
+          dataSource={averagePercentage}
           xName="year"
-          yName="averageGrade"
+          yName="averagePercentage"
           name="Performance"
           marker={{ dataLabel: { visible: true }, visible: true }}
         />

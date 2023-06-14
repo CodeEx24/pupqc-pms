@@ -5,6 +5,8 @@ import FacultyLayout from '@/components/faculty/FacultyLayout';
 import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
 import { useQuery } from '@tanstack/react-query';
 import {
+  fetchAverageClassGradeYearly,
+  fetchPassedFailedStudent,
   // fetchPassedFailedStudent,
   fetchStudentsByYearLevel,
 } from '../../components/hooks/FacultySubject/fetch';
@@ -31,17 +33,27 @@ function HomeScreen() {
     }
   );
 
-  // const {
-  //   data: passedFailedStudent,
-  //   isLoading: isLoadingPassedFailedStudent,
-  //   // refetch: refetchStudentData,
-  // } = useQuery(
-  //   ['passedFailedStudent'],
-  //   () => fetchPassedFailedStudent(currentYear),
-  //   {
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const {
+    data: passedFailedStudentYearly,
+    isLoading: isLoadingPassedFailedStudent,
+  } = useQuery(
+    ['passedFailedStudentYearly'],
+    () => fetchPassedFailedStudent(currentYear),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const {
+    data: averageClassGradeYearly,
+    isLoading: isLoadingAverageClassGradeYearly,
+  } = useQuery(
+    ['averageClassGradeYearly'],
+    () => fetchAverageClassGradeYearly(currentYear),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <FacultyLayout title="Home">
@@ -79,13 +91,29 @@ function HomeScreen() {
             <h3 className="font-semibold text-h6 mb-3">
               Passed/Failed Students
             </h3>
-            <PassedFailed />
+            {isLoadingPassedFailedStudent ? (
+              'Loading...'
+            ) : (
+              <PassedFailed
+                passed={passedFailedStudentYearly.data.passedFailed}
+                highest={passedFailedStudentYearly.data.highestValue}
+                interval={passedFailedStudentYearly.data.interval}
+              />
+            )}
           </div>
           <div className="col-span-12 row-span-5 row-start-6 rounded-xl p-8 bg-white">
             <h3 className="font-semibold text-h6 mb-3">
               Average Class Grade per Year
             </h3>
-            <AveragePerformance />
+            {isLoadingAverageClassGradeYearly ? (
+              'Loading...'
+            ) : (
+              <AveragePerformance
+                averagePercentage={
+                  averageClassGradeYearly.data.averagePercentage
+                }
+              />
+            )}
           </div>
         </div>
       </div>

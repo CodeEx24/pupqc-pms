@@ -10,6 +10,7 @@ function TabsContentStudentManagement({
   studentId,
   classSubjectId,
   criteriaOverall,
+  isGradeFinalized,
 }) {
   const {
     register,
@@ -55,6 +56,13 @@ function TabsContentStudentManagement({
   });
 
   const submitScores = async (data) => {
+    if (isGradeFinalized) {
+      toast.error(
+        'Subject cannot be submitted. The grade is already finalized.'
+      );
+      return;
+    }
+
     const values = Object.values(data).map(Number);
 
     // Update the scores of students in backend

@@ -5,6 +5,7 @@ import db from '@/utils/db';
 import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
 import Student from '@/models/Student';
+import ClassSubject from '../../../../../../models/ClassSubject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -16,6 +17,10 @@ const handler = async (req, res) => {
   const { studentId, classSubjectId } = req.query;
 
   await db.connect();
+
+  const { isGradeFinalized } = await ClassSubject.findOne({
+    _id: classSubjectId,
+  });
 
   const { _id: criteriaOverallId, criteria_overall: criteriaOverall } =
     await CriteriaOverallScores.findOne({
@@ -40,6 +45,7 @@ const handler = async (req, res) => {
     ...studentRecord.toObject(),
     name: name,
     email: email,
+    isGradeFinalized,
   };
 
   res.json({ studentRecord: updatedStudentRecord, criteriaOverall });

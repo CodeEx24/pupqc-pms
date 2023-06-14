@@ -38,7 +38,7 @@ function StudentsbyYear({ studentCurrentYearLevel }) {
   };
   return (
     <AccumulationChartComponent
-      id="charts"
+      id="charts-accumulation"
       tooltip={tooltip}
       legendSettings={legendSettings}
       tooltipRender={tooltipRender}

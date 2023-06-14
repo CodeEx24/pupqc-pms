@@ -21,13 +21,7 @@ const handler = async (req, res) => {
 
   const teacher_id = session.user._id;
 
-  const years = [];
-
-  for (let i = req.query.year; i >= req.query.year - 4; i--) {
-    years.push(i);
-  }
-  console.log('years: ', years);
-  console.log('teacher_id: ', teacher_id);
+  const years = Array.from({ length: 5 }, (_, i) => req.query.year - i);
 
   await db.connect();
   const classBatch = await Promise.all(
@@ -42,45 +36,53 @@ const handler = async (req, res) => {
     return acc;
   }, {});
 
-  console.log('classBatch:', transformedClassBatch);
+  const columnData = await Promise.all(
+    Object.entries(transformedClassBatch).map(async ([year, classIds]) => {
+      let passedCount = 0;
+      let failedCount = 0;
 
-  const yearsVal = Object.keys(transformedClassBatch);
-  const columnData = [];
+      for (const classId of classIds) {
+        const classSubjectList = await ClassSubject.find({
+          teacher_id,
+          class_id: classId,
+          isGradeFinalized: true,
+        });
 
-  for (const year of yearsVal) {
-    const classIds = transformedClassBatch[year];
-    let passedCount = 0;
-    let failedCount = 0;
+        if (classSubjectList.length === 0) {
+          continue;
+        }
 
-    for (const classId of classIds) {
-      const classSubjectList = await ClassSubject.find({
-        teacher_id,
-        class_id: classId,
-        isGradeFinalized: true,
-      });
+        for (const clsSubjectItem of classSubjectList) {
+          const averageClassSubjectGrade = await AverageClassGrade.findOne({
+            classSubject_id: clsSubjectItem._id,
+          }).select('passed failed');
 
-      if (classSubjectList.length === 0) {
-        continue;
+          passedCount += averageClassSubjectGrade.passed || 0;
+          failedCount += averageClassSubjectGrade.failed || 0;
+        }
       }
 
-      for (const clsSubjectItem of classSubjectList) {
-        const averageClassSubjectGrade = await AverageClassGrade.findOne({
-          classSubject_id: clsSubjectItem._id,
-        }).select('passed failed');
+      return { year, passed: passedCount, failed: failedCount };
+    })
+  );
 
-        passedCount += averageClassSubjectGrade.passed || 0;
-        failedCount += averageClassSubjectGrade.failed || 0;
-      }
-    }
+  const passedValues = columnData.map((item) => item.passed);
+  const failedValues = columnData.map((item) => item.failed);
 
-    columnData.push({ year, passed: passedCount, failed: failedCount });
-  }
+  const highestValue = Math.max(...passedValues, ...failedValues);
 
-  console.log('columnData:', columnData);
+  const range = highestValue - 0;
+
+  const interval = Math.ceil(range / 5);
+  const increment = Math.ceil(interval / 2);
 
   await db.disconnect();
 
-  res.status(200).json('HELLO');
+  res.status(200).json({
+    passedFailed: columnData,
+    highestValue: highestValue + increment,
+    interval,
+  });
 };
 
 export default handler;

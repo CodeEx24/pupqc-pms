@@ -104,6 +104,7 @@ function StudentClassList({ studentClass }) {
 
       const assessment = await res.data.studentRecord.records;
       const criteriaOverall = await res.data.criteriaOverall;
+      const isGradeFinalized = await res.data.studentRecord.isGradeFinalized;
       console.log('CRITERIA OVERALL: ', criteriaOverall);
       // console.log('ASSESSMENT: ', assessment[0]);
       const tabElement = Object.keys(assessment).map((item, index) => {
@@ -113,6 +114,7 @@ function StudentClassList({ studentClass }) {
             header={{ text: item.toLocaleUpperCase().replace('_', ' ') }}
             content={() => (
               <TabsContentStudentManagement
+                isGradeFinalized={isGradeFinalized}
                 assessment={item}
                 assessmentItem={[...assessment[item]]}
                 setShowPerformanceModal={setShowPerformanceModal}
