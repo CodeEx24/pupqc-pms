@@ -6,9 +6,9 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
 
 import ClassSubject from '@/models/ClassSubject';
-import Class from '../../../../../models/Class';
-import AverageClassGrade from '../../../../../models/AverageClassGrade';
-import { convertGradeToPercentage } from '../../../../../utils/data';
+import Class from '@/models/Class';
+import AverageClassGrade from '@/models/AverageClassGrade';
+import { convertGradeToPercentage } from '@/utils/data';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -73,15 +73,16 @@ const handler = async (req, res) => {
 
     const gradeAve = length > 0 ? grade / length : 0;
     //   console.log('gradeAve: ', gradeAve);
-    const averagePercentage = convertGradeToPercentage(gradeAve.toFixed(2));
+    const averagePercentage = await convertGradeToPercentage(
+      gradeAve.toFixed(2)
+    );
     columnData.push({ year, averagePercentage });
-    console.log('averagePercentage: ', averagePercentage);
   }
 
   await db.disconnect();
 
   res.status(200).json({
-    averagePercentage: columnData,
+    averagePercentageColumn: columnData,
   });
 };
 

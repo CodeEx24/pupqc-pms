@@ -55,6 +55,15 @@ function HomeScreen() {
     }
   );
 
+  if (isLoadingAverageClassGradeYearly) {
+    console.log(
+      'isLoadingAverageClassGradeYearly: ',
+      isLoadingAverageClassGradeYearly
+    );
+  } else {
+    console.log('notLoadingAnymore');
+  }
+
   return (
     <FacultyLayout title="Home">
       <div className=" px-10 rounded-xl">
@@ -110,7 +119,7 @@ function HomeScreen() {
             ) : (
               <AveragePerformance
                 averagePercentage={
-                  averageClassGradeYearly.data.averagePercentage
+                  averageClassGradeYearly.data.averagePercentageColumn
                 }
               />
             )}
