@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   updateAddItemCriteriaOverallScores,
   updateDeleteItemCriteriaOverallScoresDelete,
@@ -18,6 +18,7 @@ function CriteriaButtonElement({
   criteriaOverallList,
   classSubject_id,
   isGradeFinalized,
+  refetchCriteriaOverallList,
 }) {
   const {
     register,
@@ -32,11 +33,11 @@ function CriteriaButtonElement({
   );
 
   const criteriaAssessmentFormatted = criteriaAssessment.map((item) => {
-    const words = item.split('_'); // split the string into an array of words
+    const words = item.split('_');
     const capitalizedWords = words.map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
-    }); // capitalize the first letter of each word
-    return capitalizedWords.join(' '); // join the words back into a string with a space between them
+    });
+    return capitalizedWords.join(' ');
   });
 
   const headerText = criteriaAssessmentFormatted.map((item) => {
@@ -47,10 +48,13 @@ function CriteriaButtonElement({
 
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
   const [item, setItem] = useState('');
-
   const [length, setLength] = useState(0);
+
+  useEffect(() => {
+    // Refetch criteriaOverallList whenever it changes
+    console.log('criteriaOverallList:', criteriaOverallList);
+  }, [criteriaOverallList]);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -80,13 +84,7 @@ function CriteriaButtonElement({
         inputValue,
         length,
       });
-      // If success update the data in frontend manually
-      criteriaOverallList.data.criteriaOverallScores.criteria_overall[item] = [
-        ...criteriaOverallList.criteriaOverallScores.data.criteria_overall[
-          item
-        ],
-        data.number,
-      ];
+      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
       setValue('number', null);
       handleCloseModal();
       toast.success('Overall score item added successfully');
@@ -104,11 +102,7 @@ function CriteriaButtonElement({
         length,
         classSubject_id,
       });
-      criteriaOverallList.data.criteriaOverallScores.criteria_overall[item] =
-        criteriaOverallList.data.criteriaOverallScores.criteria_overall[
-          item
-        ].slice(0, -1);
-
+      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
       handleDeleteCloseModal();
       toast.success('Overall score item deleted successfully');
     } catch (error) {
@@ -150,7 +144,7 @@ function CriteriaButtonElement({
           <TabsContent
             assessment={item}
             criteriaOverall={
-              criteriaOverallList.data.criteriaOverallScores.criteria_overall[
+              criteriaOverallList?.data.criteriaOverallScores.criteria_overall[
                 item
               ]
             }

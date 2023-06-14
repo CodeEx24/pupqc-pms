@@ -10,7 +10,11 @@ function CriteriaManagementIDScreen() {
 
   // Render the criteria with matching class_id
   // Fetch the data needed for criteria
-  const { data: criteriaOverallList, isLoading } = useQuery(
+  const {
+    data: criteriaOverallList,
+    isLoading,
+    refetch: refetchCriteriaOverallList,
+  } = useQuery(
     ['criteria', router.query.id],
     () => fetchCriteriaOverallList(router.query.id),
     {
@@ -45,6 +49,7 @@ function CriteriaManagementIDScreen() {
               classSubject_id={
                 criteriaOverallList?.data.criteriaOverallScores.classSubject_id
               }
+              refetchCriteriaOverallList={refetchCriteriaOverallList}
               isGradeFinalized={criteriaOverallList?.data.isGradeFinalized}
             />
           )}

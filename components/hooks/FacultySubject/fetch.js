@@ -54,6 +54,10 @@ export const fetchStudentsByYearLevel = (year, month) => {
   return axios.get(`/api/faculty/student/${year}/${month}`);
 };
 
+export const fetchPassedFailedStudent = (year) => {
+  return axios.get(`/api/faculty/subject/passed-failed/${year}`);
+};
+
 // FACULTY && STUDENT
 export const fetchCurrentUser = () => {
   return axios.get(`/api/current-user`);
