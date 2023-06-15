@@ -5,9 +5,6 @@ function TabsContentPerformance({
   assessmentItem,
   criteriaOverall,
 }) {
-  console.log('ASSESSMENT ', assessment);
-  console.log('ASSESSMENT ITEM', assessmentItem);
-  console.log('ASSESSMENT OVERALL', criteriaOverall);
   const assessmentElement = assessmentItem.map((item, index) => {
     console.log('ITEM: ', item);
     return (

@@ -22,7 +22,7 @@ import { NavButton } from '../NavButton';
 function StudentNavbar() {
   const { data: session, status } = useSession();
 
-  console.log('NAVBAR USER: ', session.user);
+  // console.log('NAVBAR USER: ', session.user);
 
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
@@ -104,7 +104,7 @@ function StudentNavbar() {
                 height={50}
                 width={50}
                 className="rounded-full w-8 h-8"
-                src={session.user.profileImageUrl}
+                src={session?.user.profileImageUrl}
                 alt="avatar.jpg"
               />
               <p>
