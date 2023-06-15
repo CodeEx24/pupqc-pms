@@ -17,13 +17,14 @@ export const authOptions = {
       if (user?._id) token._id = user._id;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
       if (user?.profile) token.profile = user.profile;
+      // Add data you want to recieve in session.user
       return token;
     },
     async session({ session, token }) {
       if (token?._id) session.user._id = token._id;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       if (token?.profile) session.user.profile = token.profile;
-
+      // Add data you want to recieve in session.user
       return session;
     },
   },

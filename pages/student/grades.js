@@ -20,7 +20,7 @@ function StudentGradeScreen() {
   return (
     <StudentLayout title="Grades">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="title">Grades</h1>
+        <h1 className="text-h4 text-primary mb-5">Grades</h1>
 
         <div className="flex gap-10 font-semibold text-gray-600 mb-8">
           {status === 'loading' ? (

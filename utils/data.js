@@ -74,6 +74,11 @@ export const studentLinks = [
         icon: <TbReportAnalytics />,
       },
       {
+        name: 'performance',
+        href: 'performance',
+        icon: <TbReportAnalytics />,
+      },
+      {
         name: 'class subject',
         href: 'class-subject',
         icon: <TbReportAnalytics />,

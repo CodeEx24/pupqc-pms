@@ -10,19 +10,19 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import Store from '@/utils/Store';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import { NavButton } from '../NavButton';
-import { useQuery } from '@tanstack/react-query';
-import { fetchCurrentUser } from '../hooks/FacultySubject/fetch';
 
 // React Context
 // import { Cart, Chat, Notification, UserProfile } from '.';
 // import { useStateContext } from '../contexts/ContextProvider';
 
 function StudentNavbar() {
-  const { data: user, isLoading } = useQuery(['user'], fetchCurrentUser);
+  const { data: session, status } = useSession();
+
+  console.log('NAVBAR USER: ', session.user);
 
   const menu = Store((state) => state.menu);
   const { screenSize, activeMenu } = menu;
@@ -51,10 +51,9 @@ function StudentNavbar() {
     }
   }, [screenSize, setActiveMenu]);
 
-  if (isLoading) {
-    return null; // or show a loading indicator
+  if (status === 'loading') {
+    return null;
   }
-
   return (
     <>
       <div className="flex justify-between align-middle p-2 md:mx-6 relative">
@@ -105,13 +104,13 @@ function StudentNavbar() {
                 height={50}
                 width={50}
                 className="rounded-full w-8 h-8"
-                src={user.data.profileImageUrl}
+                src={session.user.profileImageUrl}
                 alt="avatar.jpg"
               />
               <p>
                 <span className="text-gray-400 text-14">Hi, </span>
                 <span className="text-gray-400 font-bold ml-1 text-14">
-                  {user?.data.name.split(' ')[0]}
+                  {session?.user.name.split(' ')[0]}
                 </span>
               </p>
               <MdKeyboardArrowDown className="text-gray-400 text-14" />

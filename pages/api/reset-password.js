@@ -1,5 +1,6 @@
 import Student from '../../models/Student';
 import Teacher from '../../models/Teacher';
+import Admin from '../../models/Admin';
 import db from '../../utils/db';
 import bcrypt from 'bcryptjs';
 
@@ -10,7 +11,8 @@ export default async function handler(req, res) {
 
   const { email, type, password } = req.body;
 
-  const userType = type === 'Faculty' ? Teacher : Student;
+  const userType =
+    type === 'Faculty' ? Teacher : type === 'Admin' ? Admin : Student;
   console.log(userType);
   await db.connect();
 
