@@ -1,31 +1,31 @@
 import FacultyLayout from '@/components/faculty/FacultyLayout';
 import Card from '@/components/admin/Card';
 
-import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
-import { useQuery } from '@tanstack/react-query';
-import {
-  // fetchAverageClassGradeYearly,
-  // fetchPassedFailedStudent,
-  fetchStudentsByYearLevel,
-} from '../../components/hooks/FacultySubject/fetch';
+// import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
+// import { useQuery } from '@tanstack/react-query';
+// import {
+//   // fetchAverageClassGradeYearly,
+//   // fetchPassedFailedStudent,
+//   fetchStudentsByYearLevel,
+// } from '../../components/hooks/FacultySubject/fetch';
 // import AveragePerformance from '../../components/faculty/charts/AveragePerformance';
 // import PassedFailed from '../../components/faculty/charts/PassedFailed';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
 function HomeScreen() {
-  const currentDate = useMemo(() => new Date(), []);
-  const currentYear = useMemo(() => currentDate.getFullYear(), [currentDate]);
-  const currentMonth = useMemo(() => currentDate.getMonth() + 1, [currentDate]);
+  // const currentDate = useMemo(() => new Date(), []);
+  // const currentYear = useMemo(() => currentDate.getFullYear(), [currentDate]);
+  // const currentMonth = useMemo(() => currentDate.getMonth() + 1, [currentDate]);
 
-  // Fetch the student data by year level
-  const studentQuery = useQuery(
-    ['studentCurrentYearLevelSemester'],
-    () => fetchStudentsByYearLevel(currentYear, currentMonth),
-    {
-      refetchOnMount: false, // Avoid refetching on component mount
-      refetchOnWindowFocus: false,
-    }
-  );
+  // // Fetch the student data by year level
+  // const studentQuery = useQuery(
+  //   ['studentCurrentYearLevelSemester'],
+  //   () => fetchStudentsByYearLevel(currentYear, currentMonth),
+  //   {
+  //     refetchOnMount: false, // Avoid refetching on component mount
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   // Fetch the passed/failed student data
   // const passedFailedQuery = useQuery(
@@ -49,14 +49,14 @@ function HomeScreen() {
   //   }
   // );
 
-  if (
-    studentQuery.isLoading
-    // ||
-    // passedFailedQuery.isLoading
-    // || averageClassGradeQuery.isLoading
-  ) {
-    return null;
-  }
+  // if (
+  //   studentQuery.isLoading
+  //   // ||
+  //   // passedFailedQuery.isLoading
+  //   // || averageClassGradeQuery.isLoading
+  // ) {
+  //   return null;
+  // }
 
   return (
     <FacultyLayout title="Home">
@@ -68,7 +68,7 @@ function HomeScreen() {
           <Card title={'Earnings'} value={25} words={'Wew'} />
         </div>
 
-        <div className="grid grid-cols-12 grid-rows-12 gap-3 mt-3">
+        {/*   <div className="grid grid-cols-12 grid-rows-12 gap-3 mt-3">
           <div className="col-span-5 row-span-5 row-start-1  rounded-xl p-8 bg-white">
             <h3 className="font-semibold text-h6 mb-3">
               Students by Year Level
@@ -90,7 +90,7 @@ function HomeScreen() {
               />
             )}
           </div>
-          {/* <div className="col-span-7 row-span-5 col-start-6 row-start-1  rounded-xl p-8 bg-white">
+          <div className="col-span-7 row-span-5 col-start-6 row-start-1  rounded-xl p-8 bg-white">
             <h3 className="font-semibold text-h6 mb-3">
               Passed/Failed Students
             </h3>
@@ -105,7 +105,7 @@ function HomeScreen() {
               />
             )}
           </div> */}
-          {/* <div className="col-span-12 row-span-5 row-start-6 rounded-xl p-8 bg-white">
+        {/* <div className="col-span-12 row-span-5 row-start-6 rounded-xl p-8 bg-white">
             <h3 className="font-semibold text-h6 mb-3">
               Average Class Grade per Year
             </h3>
@@ -118,8 +118,8 @@ function HomeScreen() {
                 }
               />
             )}
-          </div> */}
-        </div>
+          </div> 
+        </div>*/}
       </div>
     </FacultyLayout>
   );
