@@ -59,13 +59,13 @@ const handler = async (req, res) => {
   );
 
   const mergedResults = {};
-  studentByYearLevel.forEach(({ x, y }) => {
+  for (const { x, y } of studentByYearLevel) {
     if (mergedResults[x]) {
       mergedResults[x].y += y;
     } else {
       mergedResults[x] = { x, y };
     }
-  });
+  }
 
   const result = Object.values(mergedResults);
 

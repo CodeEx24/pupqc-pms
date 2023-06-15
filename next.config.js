@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     domains: ['res.cloudinary.com'],
   },
-  pageDataCollectionTimeout: 120000, // Increase the timeout to 2 minutes (120,000 milliseconds)
 };
 
 module.exports = nextConfig;

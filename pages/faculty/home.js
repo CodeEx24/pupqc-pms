@@ -13,11 +13,12 @@ import {
 import Card from '@/components/admin/Card';
 import AveragePerformance from '../../components/faculty/charts/AveragePerformance';
 import PassedFailed from '../../components/faculty/charts/PassedFailed';
+import { useMemo } from 'react';
 
 function HomeScreen() {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
+  const currentDate = useMemo(() => new Date(), []);
+  const currentYear = useMemo(() => currentDate.getFullYear(), [currentDate]);
+  const currentMonth = useMemo(() => currentDate.getMonth() + 1, [currentDate]);
 
   // Fetch the student data by year level
   const studentQuery = useQuery(
@@ -51,19 +52,9 @@ function HomeScreen() {
     }
   );
 
-  // Destructure the data and loading states from the queries
-  const { data: studentCurrentYearLevel, isLoading: isLoadingStudentData } =
-    studentQuery;
-
-  const {
-    data: passedFailedStudentYearly,
-    isLoading: isLoadingPassedFailedStudent,
-  } = passedFailedQuery;
-
-  const {
-    data: averageClassGradeYearly,
-    isLoading: isLoadingAverageClassGradeYearly,
-  } = averageClassGradeQuery;
+  if (!studentQuery.isLoading) {
+    console.log(studentQuery.data);
+  }
 
   return (
     <FacultyLayout title="Home">
@@ -89,11 +80,11 @@ function HomeScreen() {
                 )
               </span>
             </h3>
-            {isLoadingStudentData ? (
+            {studentQuery.isLoading ? (
               'Loading...'
             ) : (
               <StudentsbyYear
-                studentCurrentYearLevel={studentCurrentYearLevel.data.result}
+                studentCurrentYearLevel={studentQuery.data.data.result}
               />
             )}
           </div>
@@ -101,13 +92,14 @@ function HomeScreen() {
             <h3 className="font-semibold text-h6 mb-3">
               Passed/Failed Students
             </h3>
-            {isLoadingPassedFailedStudent ? (
+
+            {passedFailedQuery.isLoading ? (
               'Loading...'
             ) : (
               <PassedFailed
-                passed={passedFailedStudentYearly.data.passedFailed}
-                highest={passedFailedStudentYearly.data.highestValue}
-                interval={passedFailedStudentYearly.data.interval}
+                passed={passedFailedQuery.data.data.passedFailed}
+                highest={passedFailedQuery.data.data.highestValue}
+                interval={passedFailedQuery.data.data.interval}
               />
             )}
           </div>
@@ -115,12 +107,12 @@ function HomeScreen() {
             <h3 className="font-semibold text-h6 mb-3">
               Average Class Grade per Year
             </h3>
-            {isLoadingAverageClassGradeYearly ? (
+            {averageClassGradeQuery.isLoading ? (
               'Loading...'
             ) : (
               <AveragePerformance
                 averagePercentage={
-                  averageClassGradeYearly.data.averagePercentageColumn
+                  averageClassGradeQuery.data.data.averagePercentageColumn
                 }
               />
             )}
