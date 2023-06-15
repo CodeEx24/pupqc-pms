@@ -17,52 +17,53 @@ import PassedFailed from '../../components/faculty/charts/PassedFailed';
 function HomeScreen() {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1; // Adding 1 to get the month in the range of 1-12
-  console.log(currentYear); // Output: e.g., 2023
-  console.log(currentMonth); // Output: e.g., 5
+  const currentMonth = currentDate.getMonth() + 1;
 
-  const {
-    data: studentCurrentYearLevel,
-    isLoading: isLoadingStudentData,
-    // refetch: refetchStudentData,
-  } = useQuery(
+  // Fetch the student data by year level
+  const studentQuery = useQuery(
     ['studentCurrentYearLevelSemester'],
     () => fetchStudentsByYearLevel(currentYear, currentMonth),
     {
+      refetchOnMount: false, // Avoid refetching on component mount
       refetchOnWindowFocus: false,
     }
   );
+
+  // Fetch the passed/failed student data
+  const passedFailedQuery = useQuery(
+    ['passedFailedStudentYearly'],
+    () => fetchPassedFailedStudent(currentYear),
+    {
+      enabled: studentQuery.isSuccess, // Enable the query only when the studentQuery has succeeded
+      refetchOnMount: false, // Avoid refetching on component mount
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  // Fetch the average class grade data
+  const averageClassGradeQuery = useQuery(
+    ['averageClassGradeYearly'],
+    () => fetchAverageClassGradeYearly(currentYear),
+    {
+      enabled: passedFailedQuery.isSuccess, // Enable the query only when the passedFailedQuery has succeeded
+      refetchOnMount: false, // Avoid refetching on component mount
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  // Destructure the data and loading states from the queries
+  const { data: studentCurrentYearLevel, isLoading: isLoadingStudentData } =
+    studentQuery;
 
   const {
     data: passedFailedStudentYearly,
     isLoading: isLoadingPassedFailedStudent,
-  } = useQuery(
-    ['passedFailedStudentYearly'],
-    () => fetchPassedFailedStudent(currentYear),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  } = passedFailedQuery;
 
   const {
     data: averageClassGradeYearly,
     isLoading: isLoadingAverageClassGradeYearly,
-  } = useQuery(
-    ['averageClassGradeYearly'],
-    () => fetchAverageClassGradeYearly(currentYear),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  if (isLoadingAverageClassGradeYearly) {
-    console.log(
-      'isLoadingAverageClassGradeYearly: ',
-      isLoadingAverageClassGradeYearly
-    );
-  } else {
-    console.log('notLoadingAnymore');
-  }
+  } = averageClassGradeQuery;
 
   return (
     <FacultyLayout title="Home">

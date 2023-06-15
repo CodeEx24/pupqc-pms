@@ -41,7 +41,7 @@ const handler = async (req, res) => {
   const columnData = [];
 
   for (const [year, classIds] of Object.entries(transformedClassBatch)) {
-    console.log('YEAR: ', year);
+    // console.log('YEAR: ', year);
 
     let grade = 0;
     let length = 0;
@@ -57,7 +57,7 @@ const handler = async (req, res) => {
         continue;
       }
 
-      console.log('classSubjectList: ', classSubjectList);
+      // console.log('classSubjectList: ', classSubjectList);
 
       for (const clsSubjectItem of classSubjectList) {
         const averageClassSubjectGrade = await AverageClassGrade.findOne({

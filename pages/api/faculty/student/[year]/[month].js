@@ -19,15 +19,12 @@ const handler = async (req, res) => {
   const { year, month } = req.query; // Extract year and month from URL parameters
 
   // Convert year and month to numbers if needed
-  const yearNumber = Number(year);
   const semester =
     month > 9 || (month >= 1 && month <= 3)
       ? 1
       : month >= 3 && month <= 7
       ? 2
       : 3;
-
-  console.log('YEAR NUMBER & MONTH: ', yearNumber, semester, teacher_id);
 
   await db.connect();
 
@@ -40,20 +37,10 @@ const handler = async (req, res) => {
     },
   });
 
-  console.log('subject_classID: ', subject_classID);
-
-  // DESIRED RESULT
-  //   const resultMustBe = [
-  //     { x: '1st Year', y: AccumulatedStudentLengthPerYearLevel },
-  //     { x: '2nd Year', y: AccumulatedStudentLengthPerYearLevel },
-  //     { x: '3rd Year', y: AccumulatedStudentLengthPerYearLevel },
-  //     { x: '4th Year', y: AccumulatedStudentLengthPerYearLevel },
-  //   ];
-
   const studentByYearLevel = await Promise.all(
     subject_classID.map(async (id) => {
       const classObj = await Class.findById(id.toString());
-      console.log('classObj: ', classObj);
+
       if (classObj.year === 1) {
         const accumulatedLength = classObj.student_id.reduce(
           (totalLength, studentID) => totalLength + studentID.length,
@@ -81,8 +68,6 @@ const handler = async (req, res) => {
   });
 
   const result = Object.values(mergedResults);
-
-  console.log(result);
 
   await db.disconnect();
 
