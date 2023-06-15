@@ -1,77 +1,77 @@
-// // /api/faculty/student/year/month - USED
+// /api/faculty/student/year/month - USED
 
-// import { getServerSession } from 'next-auth/next';
-// import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-// import db from '@/utils/db';
-// import ClassSubject from '@/models/ClassSubject';
-// import Class from '@/models/Class';
+import db from '@/utils/db';
+import ClassSubject from '@/models/ClassSubject';
+import Class from '@/models/Class';
 
-// const handler = async (req, res) => {
-//   const session = await getServerSession(req, res, authOptions);
+const handler = async (req, res) => {
+  const session = await getServerSession(req, res, authOptions);
 
-//   if (!session.user.isAdmin) {
-//     return res.status(401).send('Signin required');
-//   }
+  if (!session.user.isAdmin) {
+    return res.status(401).send('Signin required');
+  }
 
-//   const teacher_id = session.user._id;
+  const teacher_id = session.user._id;
 
-//   const { year, month } = req.query; // Extract year and month from URL parameters
+  const { year, month } = req.query; // Extract year and month from URL parameters
 
-//   // Convert year and month to numbers if needed
-//   const semester =
-//     month > 9 || (month >= 1 && month <= 3)
-//       ? 1
-//       : month >= 3 && month <= 7
-//       ? 2
-//       : 3;
+  // Convert year and month to numbers if needed
+  const semester =
+    month > 9 || (month >= 1 && month <= 3)
+      ? 1
+      : month >= 3 && month <= 7
+      ? 2
+      : 3;
 
-//   await db.connect();
+  await db.connect();
 
-//   const subject_classID = await ClassSubject.distinct('class_id', {
-//     teacher_id,
-//     semester,
-//     createdAt: {
-//       $gte: new Date(`${year}-01-01`), // Start of the year - Greater than or equal (gte)
-//       $lt: new Date(`${year + 1}-01-01`), // Start of the next year - Lesser than (lesser than)
-//     },
-//   });
+  const subject_classID = await ClassSubject.distinct('class_id', {
+    teacher_id,
+    semester,
+    createdAt: {
+      $gte: new Date(`${year}-01-01`), // Start of the year - Greater than or equal (gte)
+      $lt: new Date(`${year + 1}-01-01`), // Start of the next year - Lesser than (lesser than)
+    },
+  });
 
-//   const studentByYearLevel = await Promise.all(
-//     subject_classID.map(async (id) => {
-//       const classObj = await Class.findById(id.toString());
+  const studentByYearLevel = await Promise.all(
+    subject_classID.map(async (id) => {
+      const classObj = await Class.findById(id.toString());
 
-//       if (classObj.year === 1) {
-//         const accumulatedLength = classObj.student_id.reduce(
-//           (totalLength, studentID) => totalLength + studentID.length,
-//           0
-//         );
-//         return { x: '1st Year', y: accumulatedLength };
-//       } else if (classObj.year === 2) {
-//         return { x: '2nd Year', y: classObj.student_id.length };
-//       } else if (classObj.year === 3) {
-//         return { x: '3rd Year', y: classObj.student_id.length };
-//       } else if (classObj.year === 4) {
-//         return { x: '4th Year', y: classObj.student_id.length };
-//       }
-//       return null;
-//     })
-//   );
+      if (classObj.year === 1) {
+        const accumulatedLength = classObj.student_id.reduce(
+          (totalLength, studentID) => totalLength + studentID.length,
+          0
+        );
+        return { x: '1st Year', y: accumulatedLength };
+      } else if (classObj.year === 2) {
+        return { x: '2nd Year', y: classObj.student_id.length };
+      } else if (classObj.year === 3) {
+        return { x: '3rd Year', y: classObj.student_id.length };
+      } else if (classObj.year === 4) {
+        return { x: '4th Year', y: classObj.student_id.length };
+      }
+      return null;
+    })
+  );
 
-//   const mergedResults = {};
-//   for (const { x, y } of studentByYearLevel) {
-//     if (mergedResults[x]) {
-//       mergedResults[x].y += y;
-//     } else {
-//       mergedResults[x] = { x, y };
-//     }
-//   }
+  const mergedResults = {};
+  for (const { x, y } of studentByYearLevel) {
+    if (mergedResults[x]) {
+      mergedResults[x].y += y;
+    } else {
+      mergedResults[x] = { x, y };
+    }
+  }
 
-//   const result = Object.values(mergedResults);
+  const result = Object.values(mergedResults);
 
-//   await db.disconnect();
+  await db.disconnect();
 
-//   res.status(200).json({ result });
-// };
+  res.status(200).json({ result });
+};
 
-// export default handler;
+export default handler;
