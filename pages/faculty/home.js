@@ -3,14 +3,14 @@ import Card from '@/components/admin/Card';
 
 import { useQuery } from '@tanstack/react-query';
 import {
-  // fetchAverageClassGradeYearly,
+  fetchAverageClassGradeYearly,
   fetchPassedFailedStudent,
   fetchStudentsByYearLevel,
 } from '../../components/hooks/FacultySubject/fetch';
 
 import StudentsbyYear from '../../components/faculty/charts/StudentsbyYear';
 import PassedFailed from '../../components/faculty/charts/PassedFailed';
-// import AveragePerformance from '../../components/faculty/charts/AveragePerformance';
+import AveragePerformance from '../../components/faculty/charts/AveragePerformance';
 
 // import { useMemo } from 'react';
 
@@ -41,20 +41,20 @@ function HomeScreen() {
   );
 
   // Fetch the average class grade data
-  // const averageClassGradeQuery = useQuery(
-  //   ['averageClassGradeYearly'],
-  //   () => fetchAverageClassGradeYearly(currentYear),
-  //   {
-  //     enabled: passedFailedQuery.isSuccess, // Enable the query only when the passedFailedQuery has succeeded
-  //     refetchOnMount: false, // Avoid refetching on component mount
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const averageClassGradeQuery = useQuery(
+    ['averageClassGradeYearly'],
+    () => fetchAverageClassGradeYearly(currentYear),
+    {
+      enabled: passedFailedQuery.isSuccess, // Enable the query only when the passedFailedQuery has succeeded
+      refetchOnMount: false, // Avoid refetching on component mount
+      refetchOnWindowFocus: false,
+    }
+  );
 
   if (
     studentQuery.isLoading ||
-    passedFailedQuery.isLoading
-    // || averageClassGradeQuery.isLoading
+    passedFailedQuery.isLoading ||
+    averageClassGradeQuery.isLoading
   ) {
     return null;
   }
@@ -106,7 +106,7 @@ function HomeScreen() {
               />
             )}
           </div>
-          {/* <div className="col-span-12 row-span-5 row-start-6 rounded-xl p-8 bg-white">
+          <div className="col-span-12 row-span-5 row-start-6 rounded-xl p-8 bg-white">
             <h3 className="font-semibold text-h6 mb-3">
               Average Class Grade per Year
             </h3>
@@ -119,7 +119,7 @@ function HomeScreen() {
                 }
               />
             )}
-          </div>  */}
+          </div>
         </div>
       </div>
     </FacultyLayout>
