@@ -73,8 +73,12 @@ module.exports = {
       // darkMode: false, // Set default mode to light
 
       backgroundImage: {
-        'hero-pattern':
-          "url('https://flexy-next-js-dashboard.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwelcome-bg2-2x-svg.67cde987.svg&w=640&q=75')",
+        class:
+          "url('https://img.freepik.com/free-psd/education-concept-with-school-supplies_23-2149935206.jpg?w=1380&t=st=1686931155~exp=1686931755~hmac=291e456d50ed30fb533d20e6735983664486e76c82c91fc16235034a9e4607e1')",
+        subject:
+          "url('https://img.freepik.com/free-psd/education-concept-with-supplies_23-2149935204.jpg?w=1380&t=st=1686931243~exp=1686931843~hmac=dd4ab65c22ba938e8b28c1624265fbb1bcc30148e0aea71e44ecaef38c400592')",
+        semester:
+          "url('https://img.freepik.com/free-photo/purple-calendar-clock-icon-3d-reminder-notification-concept-website-ui-purple-background-3d-rendering-illustration_56104-1317.jpg?w=996&t=st=1686931396~exp=1686931996~hmac=42f103de9d8e04652beabe3888f7b95fc52f1ab9953223abba92dbac5ad8d8b5')",
       },
     },
   },

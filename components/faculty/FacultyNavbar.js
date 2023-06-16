@@ -60,7 +60,7 @@ function FacultyNavbar() {
 
   return (
     <>
-      <div className="flex justify-between align-middle p-2 md:mx-6 relative bg-white md:bg-gray-100">
+      <div className="flex justify-between align-middle p-2 md:mx-6 relative bg-white md:bg-gray-100 z-2">
         <NavButton
           title="Menu"
           customFunc={() => setActiveMenu(!activeMenu)}

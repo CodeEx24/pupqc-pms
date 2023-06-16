@@ -66,3 +66,9 @@ export const fetchPassedFailedStudent = (year) => {
 export const fetchAverageClassGradeYearly = (year) => {
   return axios.get(`/api/faculty/class/grade/${year}`);
 };
+
+export const fetchHandleClassAndSubject = (year, semester) => {
+  return axios.get(`/api/faculty/class/subject/count`, {
+    params: { year, semester },
+  });
+};

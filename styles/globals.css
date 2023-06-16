@@ -192,3 +192,15 @@ text-slate-900
 /* .e-tab .e-tab-header .e-toolbar-item .e-tab-wrap:hover {
   @apply bg-secondary;
 } */
+
+/* .chart-container {
+  @apply w-full;
+}
+
+#charts-accumulation_SeriesCollection {
+  @apply z-0;
+}
+
+#charts-accumulation_svg {
+  z-index: 1;
+} */

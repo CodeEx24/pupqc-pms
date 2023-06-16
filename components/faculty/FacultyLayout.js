@@ -11,8 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import FacultySidebar from './FacultySidebar';
 import FacultyNavbar from './FacultyNavbar';
 // import ThemeSettings from '../ThemeSettings';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import { FiSettings } from 'react-icons/fi';
+// import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+// import { FiSettings } from 'react-icons/fi';
 
 function FacultyLayout({ title, children }) {
   const menu = Store((state) => state.menu);
@@ -32,7 +32,7 @@ function FacultyLayout({ title, children }) {
       <div className="min-h-screen flex-col justify-between bg-gray-100">
         <div className="flex relative ">
           {/* Button settings in the below right corner */}
-          <div className="fixed right-4 bottom-4 z-10">
+          {/* <div className="fixed right-4 bottom-4 z-10">
             <TooltipComponent content="Settings" position="Top">
               <button
                 type="button"
@@ -44,7 +44,7 @@ function FacultyLayout({ title, children }) {
                 <FiSettings />
               </button>
             </TooltipComponent>
-          </div>
+          </div> */}
 
           {/* Sidebar Menu Condition */}
           {activeMenu ? (
@@ -63,7 +63,7 @@ function FacultyLayout({ title, children }) {
               activeMenu ? 'lg:ml-72 ' : 'flex-2'
             }`}
           >
-            <div className="fixed md:static bg-main-bg navbar w-full z-2 shadow-sm md:shadow-none">
+            <div className="fixed md:static bg-main-bg navbar w-full z-10 shadow-sm md:shadow-none">
               <FacultyNavbar />
             </div>
             <div className="">

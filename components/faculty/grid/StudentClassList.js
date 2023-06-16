@@ -231,34 +231,6 @@ function StudentClassList({ studentClass }) {
                 </TabComponent>
               </div>
             </div>
-            {/* <form onSubmit={handleSubmit(handleSubmitOverallScore)}>
-              <input
-                type="number"
-                id="number"
-                className={`border text-black bg-gray-50 outline-none rounded-md p-2 w-full ${
-                  errors.number
-                    ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
-                }`}
-                min={0}
-                {...register('number', { required: true })}
-              />
-              <div className="flex justify-end mt-4">
-                <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="mr-4 text-gray-500 hover:text-gray-700"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-sky-500 text-white rounded-md px-4 py-2"
-                >
-                  Save
-                </button>
-              </div>
-            </form> */}
           </div>
         </div>
       )}
