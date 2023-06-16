@@ -67,7 +67,7 @@ function FacultyNavbar() {
           // color={currentColor}
           icon={<AiOutlineMenu />}
         />
-        <div className="text-h5 font-poppins my-auto">
+        <div className="font-bold hidden md:flex lg:text-1xl md:text-lg my-auto">
           Polytechnic University of the Philippines
         </div>
         <div className="flex align-middle">
