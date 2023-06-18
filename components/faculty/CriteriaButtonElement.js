@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   updateAddItemCriteriaOverallScores,
-  updateDeleteItemCriteriaOverallScoresDelete,
+  updateCriteriaOverallScores,
+  updateDeleteItemCriteriaOverallScores,
 } from '../hooks/FacultySubject/updateData';
 
 import { useForm } from 'react-hook-form';
@@ -13,6 +14,8 @@ import {
 } from '@syncfusion/ej2-react-navigations';
 import TabsContent from './tabs/TabsContent';
 import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
+import Processing from '../Processing';
 
 function CriteriaButtonElement({
   criteriaOverallList,
@@ -47,7 +50,7 @@ function CriteriaButtonElement({
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [item, setItem] = useState('');
   const [length, setLength] = useState(0);
 
@@ -61,68 +64,42 @@ function CriteriaButtonElement({
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
     clearErrors('number');
+    setValue('number', null);
+    setShowModal(false);
   };
 
-  const handleDeleteModal = () => {
-    setShowDeleteModal(true);
-  };
+  // const handleDeleteOverallScore = async () => {
+  //   console.log('ITEM: ', item);
+  //   console.log('length: ', length - 1);
+  //   try {
+  //     await updateDeleteItemCriteriaOverallScoresDelete({
+  //       item,
+  //       length,
+  //       classSubject_id,
+  //     });
+  //     await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+  //     handleDeleteCloseModal();
+  //     toast.success('Overall score item deleted successfully');
+  //   } catch (error) {
+  //     handleDeleteCloseModal();
+  //     toast.error(error);
+  //   }
+  // };
 
-  const handleDeleteCloseModal = () => {
-    setShowDeleteModal(false);
-  };
+  // const handleDeleteCriteriaClick = (item) => {
+  //   const keyItem = item.toLowerCase().replace(' ', '_');
+  //   setItem(item);
+  //   setLength(
+  //     criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
+  //       .length
+  //   );
+  //   // console.log('ITEM: ', item);
+  //   // console.log('length: ', length);
+  //   handleDeleteModal();
+  // };
 
-  const handleSubmitOverallScore = async (data) => {
-    console.log('INPUT BVALUE: ', data.number);
-    console.log('ITEM IN SUBMIT: ', item);
-    try {
-      const inputValue = data.number;
-      await updateAddItemCriteriaOverallScores({
-        classSubject_id,
-        item,
-        inputValue,
-        length,
-      });
-      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
-      setValue('number', null);
-      handleCloseModal();
-      toast.success('Overall score item added successfully');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDeleteOverallScore = async () => {
-    console.log('ITEM: ', item);
-    console.log('length: ', length - 1);
-    try {
-      await updateDeleteItemCriteriaOverallScoresDelete({
-        item,
-        length,
-        classSubject_id,
-      });
-      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
-      handleDeleteCloseModal();
-      toast.success('Overall score item deleted successfully');
-    } catch (error) {
-      handleDeleteCloseModal();
-      toast.error(error);
-    }
-  };
-
-  const handleDeleteCriteriaClick = (item) => {
-    const keyItem = item.toLowerCase().replace(' ', '_');
-    setItem(item);
-    setLength(
-      criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
-        .length
-    );
-    // console.log('ITEM: ', item);
-    // console.log('length: ', length);
-    handleDeleteModal();
-  };
-
+  // For saving score (Connected to the next function)
   const handleAddCriteriaClick = (item) => {
     const keyItem = item.toLowerCase().replace(' ', '_');
     setItem(item);
@@ -132,6 +109,91 @@ function CriteriaButtonElement({
     );
     console.log(item, length);
     handleOpenModal();
+  };
+
+  const handleSubmitOverallScore = async (data) => {
+    console.log('INPUT BVALUE: ', data.number);
+    console.log('ITEM IN SUBMIT: ', item);
+    try {
+      setIsProcessing(true);
+      handleCloseModal();
+
+      const inputValue = data.number;
+      await updateAddItemCriteriaOverallScores({
+        classSubject_id,
+        item,
+        inputValue,
+        length,
+      });
+
+      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      setValue('number', null);
+      toast.success('Overall score item added successfully');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      }
+
+      toast.error(error.response.data.message); // Show the error message in toast
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // Update clicker
+  const updateCriteriaScoreMutation = useMutation(updateCriteriaOverallScores);
+  const handleEditCriteriaClick = async (assessment, value, index) => {
+    try {
+      setIsProcessing(true);
+      await updateCriteriaScoreMutation.mutateAsync({
+        classSubject_id,
+        assessment,
+        value: Number(value),
+        index,
+      });
+
+      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      setValue('number', null);
+      handleCloseModal();
+      toast.success('Overall score item deleted successfully');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      }
+      toast.error(error.response.data.message); // Show the error message in toast
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const deleteCriteriaMutation = useMutation(
+    updateDeleteItemCriteriaOverallScores
+  );
+
+  const handleDeleteCriteriaClick = async (assessment, index) => {
+    console.log('handleDeleteCriteriaClick Item: ', assessment, index);
+    // console.log('ASSESSMENT IN CRITERIA CLICK: ', assessment);
+    // console.log('INDEX IN CRITERIA CLICK: ', index);
+    try {
+      setIsProcessing(true);
+      await deleteCriteriaMutation.mutateAsync({
+        classSubject_id,
+        assessment,
+        index,
+      });
+
+      await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      setValue('number', null);
+      handleCloseModal();
+      toast.success('Overall score item deleted successfully');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
+      }
+      toast.error(error.response.data.message); // Show the error message in toast
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const tabItemDirectiveElement = criteriaAssessment.map((item, index) => {
@@ -148,9 +210,11 @@ function CriteriaButtonElement({
                 item
               ]
             }
-            handleAddCriteriaClick={handleAddCriteriaClick}
-            handleDeleteCriteriaClick={handleDeleteCriteriaClick}
             isGradeFinalized={isGradeFinalized}
+            handleAddCriteriaClick={handleAddCriteriaClick}
+            handleEditCriteriaClick={handleEditCriteriaClick}
+            handleDeleteCriteriaClick={handleDeleteCriteriaClick}
+            // handleDeleteCriteriaClick={handleDeleteCriteriaClick}
           />
         )}
       />
@@ -158,8 +222,8 @@ function CriteriaButtonElement({
   });
 
   return (
-    <div className="flex flex-wrap items-end gap-5 mb-80">
-      <TabComponent heightAdjustMode="Auto">
+    <div className="flex flex-wrap items-end gap-5 ">
+      <TabComponent heightAdjustMode="Content">
         <TabItemsDirective>{tabItemDirectiveElement}</TabItemsDirective>
       </TabComponent>
 
@@ -178,9 +242,19 @@ function CriteriaButtonElement({
                     ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
                     : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
                 }`}
-                min={0}
-                {...register('number', { required: true })}
+                {...register('number', {
+                  required: 'Overall score is required',
+                  min: {
+                    value: 0,
+                    message: 'Minimum value must be 0', // Update the minimum value message here
+                  },
+                })}
               />
+              {errors.number && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.number.message}
+                </p>
+              )}
               <div className="flex justify-end mt-4">
                 <button
                   type="button"
@@ -201,32 +275,7 @@ function CriteriaButtonElement({
         </div>
       )}
 
-      {showDeleteModal && (
-        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <form onSubmit={handleSubmit(handleDeleteOverallScore)}>
-            <div className="bg-white rounded-md p-6">
-              <h2 className="text-lg font-medium mb-2">
-                Are you sure you want to delete the last item?
-              </h2>
-              <div className="flex justify-end mt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowDeleteModal(false)}
-                  className="mr-4 text-gray-500 hover:text-gray-700"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-red-500 text-white rounded-md px-4 py-2"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      )}
+      {isProcessing && <Processing text={'Processing the Criteria'} />}
     </div>
   );
 }

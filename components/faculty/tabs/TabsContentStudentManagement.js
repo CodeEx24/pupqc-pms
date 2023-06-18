@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import Processing from '../../Processing';
 
 function TabsContentStudentManagement({
   assessment,
@@ -10,7 +12,7 @@ function TabsContentStudentManagement({
   studentId,
   classSubjectId,
   criteriaOverall,
-  isGradeFinalized,
+  refetchStudentClass,
 }) {
   const {
     register,
@@ -18,9 +20,32 @@ function TabsContentStudentManagement({
     formState: { errors },
   } = useForm();
 
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const submitScores = async (data) => {
+    const values = Object.values(data).map(Number);
+    // Update the scores of students in backend
+
+    try {
+      setIsProcessing(true);
+      const result = await axios.post(
+        `/api/student/performance/update/${classSubjectId}/${studentId}`,
+        { assessment, values }
+      );
+      toast.success(result.data.message);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        await refetchStudentClass();
+        setShowPerformanceModal(false);
+      }
+      toast.error(error.response.data.message); // Show the error message in toast
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const assessmentInputElement = assessmentItem.map((item, index) => {
     const fieldName = `${assessment}${index}`; // Field name for error messages
-
     return (
       <div key={index} className="p-3">
         <p className="text-black z-99 w-full font-semibold">
@@ -35,7 +60,11 @@ function TabsContentStudentManagement({
           defaultValue={item}
           id={fieldName}
           {...register(fieldName, {
-            required: true,
+            pattern: {
+              value: /^[0-9]*$/, // Regular expression to match numbers only
+              message: 'Please enter a valid number',
+            },
+            required: 'This field is required',
             max: {
               value: criteriaOverall[assessment][index],
               message: `Maximum value is ${criteriaOverall[assessment][index]}`,
@@ -54,28 +83,6 @@ function TabsContentStudentManagement({
       </div>
     );
   });
-
-  const submitScores = async (data) => {
-    if (isGradeFinalized) {
-      toast.error(
-        'Subject cannot be submitted. The grade is already finalized.'
-      );
-      return;
-    }
-
-    const values = Object.values(data).map(Number);
-
-    // Update the scores of students in backend
-    try {
-      const result = await axios.post(
-        `/api/student/performance/update/${classSubjectId}/${studentId}`,
-        { assessment, values }
-      );
-      toast.success(result.data.message);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
 
   return (
     <>
@@ -101,6 +108,7 @@ function TabsContentStudentManagement({
           </button>
         </div>
       </form>
+      {isProcessing && <Processing text="Processing the Score" />}
     </>
   );
 }

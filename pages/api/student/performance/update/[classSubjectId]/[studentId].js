@@ -26,6 +26,16 @@ const handler = async (req, res) => {
 
   await db.connect();
 
+  const classSubject = await ClassSubject.findOne({ _id: classSubjectId });
+
+  if (classSubject.isGradeFinalized) {
+    await db.disconnect();
+    return res.status(401).send({
+      message:
+        'Submission score is denied. The grades have already been finalized.',
+    });
+  }
+
   const criteriaOverallData = await CriteriaOverallScores.findOne({
     classSubject_id: classSubjectId,
   });

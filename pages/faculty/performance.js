@@ -2,22 +2,15 @@ import FacultyLayout from '@/components/faculty/FacultyLayout';
 import { useQuery } from '@tanstack/react-query';
 import StudentClassList from '@/components/faculty/grid/StudentClassList';
 import { fetchStudentsClass } from '@/components/hooks/FacultySubject/fetch';
-// import withStudentAuth from '@/utils/authentication/withStudentAuth';
 
 function PerformanceScreen() {
-  // Student, subject, batch, semester
-
   const {
     data: studentClass,
-    // refetch: refetchSubjectClass,
+    refetch: refetchStudentClass,
     isLoading,
   } = useQuery(['subjectClass'], fetchStudentsClass, {
     refetchOnWindowFocus: false,
   });
-
-  // Student ID, Profile, Name, Subject ID, Batch, Semester, Button for managing students grade
-
-  // Pages for student in which the teacher can be able to save
 
   return (
     <FacultyLayout title="Home">
@@ -28,7 +21,10 @@ function PerformanceScreen() {
             {isLoading ? (
               'Loading...'
             ) : (
-              <StudentClassList studentClass={studentClass} />
+              <StudentClassList
+                studentClass={studentClass}
+                refetchStudentClass={refetchStudentClass}
+              />
             )}
           </div>
         </div>

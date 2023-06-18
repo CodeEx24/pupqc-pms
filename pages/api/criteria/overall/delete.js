@@ -4,33 +4,38 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import ClassSubject from '../../../../../models/ClassSubject';
-import CriteriaOverallScores from '../../../../../models/CriteriaOverallScores';
-import StudentRecords from '../../../../../models/StudentRecords';
-import Criteria from '../../../../../models/Criteria';
-import StudentClassSubjectGrade from '../../../../../models/StudentClassSubjectGrade';
-import { getGrade } from '../../../../../utils/data';
+import ClassSubject from '../../../../models/ClassSubject';
+import CriteriaOverallScores from '../../../../models/CriteriaOverallScores';
+import StudentRecords from '../../../../models/StudentRecords';
+import StudentClassSubjectGrade from '../../../../models/StudentClassSubjectGrade';
+import Criteria from '../../../../models/Criteria';
+import { getGrade } from '../../../../utils/data';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (session) {
+    if (session.user.isAdmin === 2 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 
-  const classSubject_id = req.query.classSubject_id;
   // console.log('CLASS SUBJECT 2 UPDATE: ', classSubject_id);
 
-  const { item, inputValue: value } = req.body;
+  const { classSubject_id, assessment, index } = req.body;
+
+  console.log('ASSESSMENT: ', assessment);
 
   await db.connect();
 
+  // To check if the user is authorize to delete the assessment
   const classSubject = await ClassSubject.findOne({ _id: classSubject_id });
-
   const teacherId = classSubject.teacher_id.toString();
   if (teacherId !== session.user._id) {
     await db.disconnect();
-    return res.status(401).send({ message: 'Unauthorized user' });
+    return res.status(401).send('Unauthorized user');
   }
 
   if (classSubject.isGradeFinalized) {
@@ -40,46 +45,40 @@ const handler = async (req, res) => {
       .send({ message: 'The grades have already been finalized.' });
   }
 
-  // console.log('3 VALUES: ', item, value, length);
-
-  const itemFormatted = item.toLowerCase().replace(' ', '_');
-
-  console.log('ITEM FORMAT: ', itemFormatted);
-
   const criteriaOverallScores = await CriteriaOverallScores.findOne({
     classSubject_id,
   });
 
+  // console.log('criteriaOverallScores: ', criteriaOverallScores);
+
   if (criteriaOverallScores) {
     criteriaOverallScores.criteria_overall = {
       ...criteriaOverallScores.criteria_overall,
-      [itemFormatted]: [
-        ...criteriaOverallScores.criteria_overall[itemFormatted],
-        Number(value),
+      [assessment]: [
+        ...criteriaOverallScores.criteria_overall[assessment].slice(0, index),
+        ...criteriaOverallScores.criteria_overall[assessment].slice(index + 1),
       ],
     };
   }
 
   await criteriaOverallScores.save();
 
-  // For eact students record length and provide 0 for everytime teacher add something
-
-  // console.log('CLASSD OVERALL ID: ', criteriaOverallScores._id);
-
   const studentRecordsData = await StudentRecords.find({
     criteriaOverallScores_id: criteriaOverallScores._id,
   });
 
-  // Map this students and update their records with initially 0 scores of their score.
-  // console.log('ALL STUDENTS: ', studentRecordsData);
-
-  const studentRecordsUpdate = studentRecordsData.map((item) => {
-    item.records = {
-      ...item.records,
-      [itemFormatted]: [...item.records[itemFormatted], 0],
-    };
-    return item;
-  });
+  const studentRecordsUpdate = await Promise.all(
+    studentRecordsData.map(async (item) => {
+      item.records = {
+        ...item.records,
+        [assessment]: [
+          ...item.records[assessment].slice(0, index),
+          ...item.records[assessment].slice(index + 1),
+        ],
+      };
+      return item;
+    })
+  );
 
   for (const record of studentRecordsUpdate) {
     await record.save();

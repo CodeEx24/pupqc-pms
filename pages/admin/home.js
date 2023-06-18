@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import AdminLayout from '../../components/admin/AdminLayout';
-import Card from '@/components/admin/Card';
+import Card from '@/components/Card';
 import TeacherList from '../../components/admin/grid/TeacherList';
 import { fetchTeacherList } from '../../components/hooks/Admin/fetch';
 

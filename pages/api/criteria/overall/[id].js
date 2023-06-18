@@ -24,9 +24,9 @@ const handler = async (req, res) => {
 
   const classSubject = await ClassSubject.findOne({ _id: classSubject_id });
 
-  console.log('classSubject: ', classSubject);
+  // console.log('classSubject: ', classSubject);
   const isGradeFinalized = classSubject.isGradeFinalized;
-  console.log('isGradeFinalized: ', isGradeFinalized);
+  // console.log('isGradeFinalized: ', isGradeFinalized);
 
   const teacherId = classSubject.teacher_id.toString();
 

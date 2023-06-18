@@ -10,6 +10,7 @@ function GradeScreen() {
     ['students'],
     fetchStudentsGrade,
     {
+      refetchOnMount: 'always',
       refetchOnWindowFocus: false,
     }
   );

@@ -27,7 +27,7 @@ module.exports = {
       textColor: {
         primary: '#0EA5E9', // Can always use CSS variables too e.g. "var(--color-primary)",
         secondary: '#B91C1C',
-        brand: '#243c5a',
+        brand: '#FFB717',
       }, // Define custom text colors
       backgroundColor: {
         primary: '#0EA5E9',

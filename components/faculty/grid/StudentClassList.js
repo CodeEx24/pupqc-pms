@@ -23,7 +23,7 @@ import {
 import axios from 'axios';
 import TabsContentStudentManagement from '../tabs/TabsContentStudentManagement';
 
-function StudentClassList({ studentClass }) {
+function StudentClassList({ studentClass, refetchStudentClass }) {
   console.log(studentClass);
   const [showperformanceModal, setShowPerformanceModal] = useState(false);
   const [tabDirectiveElement, setTabDirectiveElement] = useState(() => {});
@@ -104,7 +104,7 @@ function StudentClassList({ studentClass }) {
 
       const assessment = await res.data.studentRecord.records;
       const criteriaOverall = await res.data.criteriaOverall;
-      const isGradeFinalized = await res.data.studentRecord.isGradeFinalized;
+
       console.log('CRITERIA OVERALL: ', criteriaOverall);
       // console.log('ASSESSMENT: ', assessment[0]);
       const tabElement = Object.keys(assessment).map((item, index) => {
@@ -114,13 +114,13 @@ function StudentClassList({ studentClass }) {
             header={{ text: item.toLocaleUpperCase().replace('_', ' ') }}
             content={() => (
               <TabsContentStudentManagement
-                isGradeFinalized={isGradeFinalized}
                 assessment={item}
                 assessmentItem={[...assessment[item]]}
                 setShowPerformanceModal={setShowPerformanceModal}
                 criteriaOverall={criteriaOverall}
                 studentId={studentId}
                 classSubjectId={classSubjectId}
+                refetchStudentClass={refetchStudentClass}
               />
             )}
           />
