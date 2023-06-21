@@ -36,13 +36,13 @@ export const adminLinks = [
         icon: <TbReportAnalytics />,
       },
       {
-        name: 'classes',
-        href: 'classes',
+        name: 'class list',
+        href: 'class-list',
         icon: <AiFillDiff />,
       },
       {
-        name: 'manage class',
-        href: 'manage-class',
+        name: 'class assign',
+        href: 'class-assign',
         icon: <TbReportAnalytics />,
       },
       {

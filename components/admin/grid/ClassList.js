@@ -145,9 +145,15 @@ function ClassList({ classList, refetchClassList }) {
                 </button>
                 <button
                   className={`btn-warning ${
-                    rowData.isGradeFinalized ? '' : 'opacity-60'
+                    rowData.isGradeFinalized && rowData.isRevokable
+                      ? ''
+                      : 'opacity-60'
                   }`}
-                  disabled={!rowData.isGradeFinalized}
+                  disabled={
+                    rowData.isGradeFinalized && rowData.isRevokable
+                      ? true
+                      : false
+                  }
                   onClick={(e) => {
                     // e.preventDefault();
                     handleRevokeFinalizedGradeClick(

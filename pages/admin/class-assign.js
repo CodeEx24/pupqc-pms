@@ -172,9 +172,9 @@ function ClassManagementScreen() {
   };
 
   return (
-    <AdminLayout title="Manage Class">
+    <AdminLayout title="Class Assign">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-h4 text-primary mb-5">Manage Class</h1>
+        <h1 className="text-h4 text-primary mb-5">Class Assign</h1>
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
