@@ -2243,3 +2243,26 @@ export const convertGradeToPercentage = (grade) => {
 
 export const defaultImage =
   'https://res.cloudinary.com/daevedaio/image/upload/v1683957466/user_zao3gw.jpg';
+
+export const getCurrentSemesterData = () => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  let semester;
+
+  if (currentMonth >= 10 || (currentMonth >= 1 && currentMonth <= 3)) {
+    semester = 1;
+  } else if (currentMonth >= 3 && currentMonth <= 7) {
+    semester = 2;
+  } else {
+    semester = 3;
+  }
+
+  return {
+    currentDate: currentDate,
+    currentYear: currentYear,
+    currentMonth: currentMonth,
+    semester: semester,
+  };
+};

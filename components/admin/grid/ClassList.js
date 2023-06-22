@@ -151,8 +151,8 @@ function ClassList({ classList, refetchClassList }) {
                   }`}
                   disabled={
                     rowData.isGradeFinalized && rowData.isRevokable
-                      ? true
-                      : false
+                      ? false
+                      : true
                   }
                   onClick={(e) => {
                     // e.preventDefault();

@@ -31,3 +31,15 @@ export const fetchSubjectClass = () => {
 export const fetchAllClass = () => {
   return axios.get(`/api/admin/class/list`);
 };
+
+export const fetchAllActiveData = () => {
+  return axios.get(`/api/admin/all-active`);
+};
+
+export const fetchCourseStudentCount = () => {
+  return axios.get(`/api/admin/course/student/count`);
+};
+
+export const fetchGradeYearly = () => {
+  return axios.get(`/api/admin/grade/yearly`);
+};

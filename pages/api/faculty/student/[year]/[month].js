@@ -37,16 +37,21 @@ const handler = async (req, res) => {
     },
   });
 
+  console.log('subject_classID: ', subject_classID);
+
   const studentByYearLevel = await Promise.all(
     subject_classID.map(async (id) => {
       const classObj = await Class.findById(id.toString());
+      console.log('=====================================');
+      console.log('classObj: ', classObj);
 
       if (classObj.year === 1) {
-        const accumulatedLength = classObj.student_id.reduce(
-          (totalLength, studentID) => totalLength + studentID.length,
-          0
-        );
-        return { x: '1st Year', y: accumulatedLength };
+        // const accumulatedLength = classObj.student_id.reduce(
+        //   (totalLength, studentID) =>
+        //     Number(totalLength) + Number(studentID.length),
+        //   0
+        // );
+        return { x: '1st Year', y: classObj.student_id.length };
       } else if (classObj.year === 2) {
         return { x: '2nd Year', y: classObj.student_id.length };
       } else if (classObj.year === 3) {
@@ -57,6 +62,8 @@ const handler = async (req, res) => {
       return null;
     })
   );
+
+  console.log('studentByYearLevel: ', studentByYearLevel);
 
   const mergedResults = {};
   for (const { x, y } of studentByYearLevel) {
