@@ -1,15 +1,68 @@
 import bcrypt from 'bcryptjs';
 
-import {
-  AiFillHome,
-  AiFillIdcard,
-  AiFillCalendar,
-  AiFillSnippets,
-  AiFillDiff,
-} from 'react-icons/ai';
+import { AiFillHome, AiFillSnippets } from 'react-icons/ai';
 
-import { TbReportAnalytics } from 'react-icons/tb';
-import { FaUser } from 'react-icons/fa';
+import {
+  FaUser,
+  FaBook,
+  FaAddressBook,
+  FaIdCard,
+  FaChartBar,
+  FaFileMedicalAlt,
+  FaFolderMinus,
+  FaUserTie,
+} from 'react-icons/fa';
+import { IoMdPeople } from 'react-icons/io';
+
+export const teacherLinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'home',
+        href: 'home',
+        icon: <AiFillHome />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'subject',
+        href: 'subject',
+        icon: <FaBook />,
+      },
+      {
+        name: 'class subject',
+        href: 'class-subject',
+        icon: <FaAddressBook />,
+      },
+      {
+        name: 'student list',
+        href: 'student-list',
+        icon: <FaIdCard />,
+      },
+      {
+        name: 'performance',
+        href: 'performance',
+        icon: <FaChartBar />,
+      },
+      {
+        name: 'grades',
+        href: 'grades',
+        icon: <AiFillSnippets />,
+      },
+
+      {
+        name: 'profile',
+        href: 'profile',
+        icon: <FaUser />,
+      },
+    ],
+  },
+];
 
 export const adminLinks = [
   {
@@ -25,30 +78,35 @@ export const adminLinks = [
         href: 'profile',
         icon: <FaUser />,
       },
+    ],
+  },
+  {
+    title: 'Pages',
+    links: [
       {
         name: 'subject',
         href: 'subject',
-        icon: <TbReportAnalytics />,
+        icon: <FaBook />,
       },
       {
         name: 'criteria',
         href: 'criteria',
-        icon: <TbReportAnalytics />,
+        icon: <FaFileMedicalAlt />,
       },
       {
         name: 'class list',
         href: 'class-list',
-        icon: <AiFillDiff />,
+        icon: <IoMdPeople />,
       },
       {
         name: 'class assign',
         href: 'class-assign',
-        icon: <TbReportAnalytics />,
+        icon: <FaFolderMinus />,
       },
       {
         name: 'teacher list',
         href: 'teacher-list',
-        icon: <TbReportAnalytics />,
+        icon: <FaUserTie />,
       },
     ],
   },
@@ -68,20 +126,21 @@ export const studentLinks = [
         href: 'profile',
         icon: <FaUser />,
       },
+
+      {
+        name: 'class subject',
+        href: 'class-subject',
+        icon: <FaAddressBook />,
+      },
       {
         name: 'grades',
         href: 'grades',
-        icon: <TbReportAnalytics />,
+        icon: <AiFillSnippets />,
       },
       {
         name: 'performance',
         href: 'performance',
-        icon: <TbReportAnalytics />,
-      },
-      {
-        name: 'class subject',
-        href: 'class-subject',
-        icon: <TbReportAnalytics />,
+        icon: <FaChartBar />,
       },
     ],
   },
@@ -116,56 +175,6 @@ export const studentLinks = [
   //     },
   //   ],
   // },
-];
-
-export const teacherLinks = [
-  {
-    title: 'Dashboard',
-    links: [
-      {
-        name: 'home',
-        href: 'home',
-        icon: <AiFillHome />,
-      },
-    ],
-  },
-
-  {
-    title: 'Pages',
-    links: [
-      {
-        name: 'subject',
-        href: 'subject',
-        icon: <AiFillIdcard />,
-      },
-      {
-        name: 'class subject',
-        href: 'class-subject',
-        icon: <AiFillDiff />,
-      },
-      {
-        name: 'student list',
-        href: 'student-list',
-        icon: <AiFillDiff />,
-      },
-      {
-        name: 'performance',
-        href: 'performance',
-        icon: <AiFillCalendar />,
-      },
-      {
-        name: 'grades',
-        href: 'grades',
-        icon: <AiFillSnippets />,
-      },
-
-      {
-        name: 'profile',
-        href: 'profile',
-        icon: <FaUser />,
-      },
-    ],
-  },
 ];
 
 export const themeColors = [

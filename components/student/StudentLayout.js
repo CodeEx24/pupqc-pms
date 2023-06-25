@@ -1,4 +1,3 @@
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import Head from 'next/head';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -7,8 +6,6 @@ import StudentNavbar from './StudentNavbar';
 import StudentSidebar from './StudentSidebar';
 
 import Store from '@/utils/Store';
-
-import { FiSettings } from 'react-icons/fi';
 
 function StudentLayout({ title, children }) {
   const menu = Store((state) => state.menu);
@@ -28,21 +25,6 @@ function StudentLayout({ title, children }) {
 
       <div className="flex min-h-screen flex-col justify-between bg-gray-100">
         <div className="flex relative ">
-          {/* Button settings in the below right corner */}
-          <div className="fixed right-4 bottom-4">
-            <TooltipComponent content="Settings" position="Top">
-              <button
-                type="button"
-                className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white rounded-full bg-red-600"
-                // onClick={() => setThemeSettings(true)}
-                // // For dynamic theming of background
-                // style={{ background: currentColor }}
-              >
-                <FiSettings />
-              </button>
-            </TooltipComponent>
-          </div>
-
           {/* Sidebar Menu Condition */}
           {activeMenu ? (
             <div className="w-72 fixed sidebar bg-white">

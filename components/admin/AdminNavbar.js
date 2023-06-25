@@ -3,9 +3,6 @@ import React, { useEffect } from 'react';
 // Icons
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FiLogOut } from 'react-icons/fi';
-import { BsChatLeft } from 'react-icons/bs';
-import { RiNotification3Line } from 'react-icons/ri';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -71,38 +68,10 @@ function AdminNavbar() {
           Polytechnic University of the Philippines
         </div>
         <div className="flex align-middle">
-          <NavButton
-            title="Chat"
-            dotColor="#03C9D7"
-            //   customFunc={() => handleClick('chat')}
-            //   color={currentColor}
-            icon={<BsChatLeft />}
-          />
-
-          <NavButton
-            title="Notifications"
-            dotColor="#03C9D7"
-            //   customFunc={() => handleClick('notification')}
-            //   color={currentColor}
-            icon={<RiNotification3Line />}
-          />
-
-          <NavButton
-            title="Logout"
-            customFunc={(e) => {
-              e.preventDefault();
-              // console.log('LogOut');
-              signOut();
-            }}
-            //   customFunc={() => handleClick('cart')}
-            //   color={currentColor}
-            icon={<FiLogOut />}
-          />
-
-          <Link href="/faculty/profile">
+          <Link href="/faculty/profile" className="flex items-center mt-1">
             <TooltipComponent content="Profile" position="BottomCenter">
               <div
-                className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+                className="flex items-center gap-2 cursor-pointer hover:bg-light-gray rounded-lg "
                 // onClick={() => handleClick('userProfile')}
               >
                 <Image
@@ -118,19 +87,22 @@ function AdminNavbar() {
                     {session?.user.name.split(' ')[0]}
                   </span>
                 </p>
-                <MdKeyboardArrowDown className="text-gray-400 text-14" />
+                {/* <MdKeyboardArrowDown className="text-gray-400 text-14" /> */}
               </div>
             </TooltipComponent>
           </Link>
-          {/* {isClicked.cart && <Cart />}
-        {isClicked.chat && <Chat />}
-        {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />} */}
+
+          <NavButton
+            title="Logout"
+            customFunc={(e) => {
+              e.preventDefault();
+
+              signOut();
+            }}
+            icon={<FiLogOut />}
+          />
         </div>
       </div>
-      {/* <div className="font-bold text-2xl flex justify-center lg:hidden">
-        Polytechnic University of the Philippines
-      </div> */}
     </>
   );
 }
