@@ -77,29 +77,29 @@ const handler = async (req, res) => {
   await db.connect();
   const transformedClassBatch = await getClassBatch(years);
 
-  // const columnData = [];
+  const columnData = [];
 
-  // for (const [year, classIds] of Object.entries(transformedClassBatch)) {
-  //   const averagePercentage = await calculateAveragePercentage(
-  //     teacher_id,
-  //     classIds
-  //   );
+  for (const [year, classIds] of Object.entries(transformedClassBatch)) {
+    const averagePercentage = await calculateAveragePercentage(
+      teacher_id,
+      classIds
+    );
 
-  //   columnData.push({ year, averagePercentage });
-  // }
+    columnData.push({ year, averagePercentage });
+  }
 
-  const columnData = [
-    { year: '2013', averagePercentage: 90 },
-    { year: '2014', averagePercentage: 85 },
-    { year: '2015', averagePercentage: 92 },
-    { year: '2016', averagePercentage: 91 },
-    { year: '2017', averagePercentage: 88 },
-    { year: '2018', averagePercentage: 90 },
-    { year: '2019', averagePercentage: 87 },
-    { year: '2020', averagePercentage: 89 },
-    { year: '2021', averagePercentage: 88 },
-    { year: '2022', averagePercentage: 90 },
-  ];
+  // const columnData = [
+  //   { year: '2013', averagePercentage: 90 },
+  //   { year: '2014', averagePercentage: 85 },
+  //   { year: '2015', averagePercentage: 92 },
+  //   { year: '2016', averagePercentage: 91 },
+  //   { year: '2017', averagePercentage: 88 },
+  //   { year: '2018', averagePercentage: 90 },
+  //   { year: '2019', averagePercentage: 87 },
+  //   { year: '2020', averagePercentage: 89 },
+  //   { year: '2021', averagePercentage: 88 },
+  //   { year: '2022', averagePercentage: 90 },
+  // ];
 
   const xYear = columnData.map((data) => parseInt(data.year));
   const yPercentage = columnData.map((data) => data.averagePercentage);
