@@ -13,6 +13,7 @@ import {
   TabItemsDirective,
 } from '@syncfusion/ej2-react-navigations';
 import TabsContentPerformance from '../tabs/TabsContentPerformance';
+import { toast } from 'react-toastify';
 
 function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
   const [studentPerformance, setStudentPerformance] = useState();
@@ -41,7 +42,7 @@ function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
       const res = await axios.get(`/api/student/own-performance`, {
         params: { classSubject_id },
       });
-      console.log('res.data: ', res.data);
+
       setStudentPerformance(res);
 
       const tabElement = Object.keys(res?.data.student_records).map(
@@ -63,9 +64,8 @@ function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
       );
       setTabDirectiveElement(tabElement);
       setShowPerformanceModal(true);
-      console.log('DONE SHOWING');
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     } finally {
       // setIsActionInProgress(false);
     }

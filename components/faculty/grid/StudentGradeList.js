@@ -16,7 +16,6 @@ import { DropDownList } from '@syncfusion/ej2/dropdowns';
 import Image from 'next/image';
 
 function StudentGradeList({ students }) {
-  console.log(students.data);
   const templateOptions = {
     create: () => {
       const dd = document.createElement('input');

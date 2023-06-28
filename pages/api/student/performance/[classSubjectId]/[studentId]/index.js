@@ -30,14 +30,10 @@ const handler = async (req, res) => {
     'name email'
   );
 
-  console.log('CRITERIA OVERALL: ', criteriaOverall);
-
   const studentRecord = await StudentRecords.findOne({
     criteriaOverallScores_id: criteriaOverallId,
     student_id: studentId,
   });
-
-  console.log('STUDENT RECORD', studentRecord);
 
   await db.disconnect();
 

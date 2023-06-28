@@ -4,7 +4,7 @@ const studentClassGradeSchema = new mongoose.Schema(
   {
     class_id: {
       type: mongoose.Types.ObjectId,
-      ref: 'ClassSubject',
+      ref: 'Class',
       required: true,
     },
     student_id: {

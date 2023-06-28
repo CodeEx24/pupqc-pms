@@ -21,8 +21,6 @@ function ResetPassword({ type, email }) {
 
   // Submit Handler when click the submit button
   const submitHandler = async ({ password, cpassword }) => {
-    console.log('SENDING POST: ', password, cpassword);
-
     if (password !== cpassword) {
       toast.error('Passwords do not match.');
       return;

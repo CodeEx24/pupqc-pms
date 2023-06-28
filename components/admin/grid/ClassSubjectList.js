@@ -34,7 +34,6 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
       await refetchSubjectClass();
       toast.success(res.message);
     } catch (error) {
-      console.error(error);
       if (error.response && error.response.status === 409) {
         toast.error(error.response.data.message);
       } else {
@@ -101,7 +100,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
 
   const deleteAction = (e, id) => {
     e.preventDefault();
-    console.log('ID OF IT: ', id);
+
     setClassId(id);
     setShowDeleteModal(true);
   };

@@ -19,7 +19,6 @@ const handler = async (req, res) => {
   }
 
   const classSubject_id = req.query.classSubject_id;
-  // console.log('CLASS SUBJECT 2 UPDATE: ', classSubject_id);
 
   const { item, inputValue: value } = req.body;
 
@@ -40,11 +39,7 @@ const handler = async (req, res) => {
       .send({ message: 'The grades have already been finalized.' });
   }
 
-  // console.log('3 VALUES: ', item, value, length);
-
   const itemFormatted = item.toLowerCase().replace(' ', '_');
-
-  console.log('ITEM FORMAT: ', itemFormatted);
 
   const criteriaOverallScores = await CriteriaOverallScores.findOne({
     classSubject_id,
@@ -62,16 +57,9 @@ const handler = async (req, res) => {
 
   await criteriaOverallScores.save();
 
-  // For eact students record length and provide 0 for everytime teacher add something
-
-  // console.log('CLASSD OVERALL ID: ', criteriaOverallScores._id);
-
   const studentRecordsData = await StudentRecords.find({
     criteriaOverallScores_id: criteriaOverallScores._id,
   });
-
-  // Map this students and update their records with initially 0 scores of their score.
-  // console.log('ALL STUDENTS: ', studentRecordsData);
 
   const studentRecordsUpdate = studentRecordsData.map((item) => {
     item.records = {
@@ -94,7 +82,6 @@ const handler = async (req, res) => {
         return [item, accumulatedRes];
       })
     );
-    // console.log('SCORES ACCUMULATED: ', scoresAccumulated);
 
     const overallAccumulatedData = Object.entries(
       criteriaOverallScores.criteria_overall
@@ -103,12 +90,10 @@ const handler = async (req, res) => {
     }));
 
     const overallAccumulated = Object.assign({}, ...overallAccumulatedData);
-    // console.log('OVERALL ACCUMULATED SCORES: ', overallAccumulated);
 
     const criteriaData = await Criteria.findOne({
       _id: classSubject.criteria_id,
     });
-    // console.log('CRITERIA DATA: ', criteriaData);
 
     const criteriaPercentageData = Object.keys(
       criteriaData.criteria.percentage
@@ -130,7 +115,6 @@ const handler = async (req, res) => {
       (acc, obj) => ({ ...acc, ...obj }),
       {}
     );
-    // console.log('CRITERIA PERCENTAGE: ', criteriaPercentage);
 
     const assessmentGrade = Object.entries(scoresAccumulated).reduce(
       (acc, [key, value]) => {
@@ -158,7 +142,6 @@ const handler = async (req, res) => {
       },
       {}
     );
-    // console.log('ASSESSMENT GRADE: ', assessmentGrade);
 
     const criteriaFirstLayer = criteriaData.criteria.percentage;
 
@@ -176,8 +159,6 @@ const handler = async (req, res) => {
         return acc;
       }, {});
 
-    // console.log('GROUP CRITERIA: ', groupCriteria);
-
     //   Add up all the per
     const resultAdded = Object.keys(groupCriteria).reduce((acc, item) => {
       const total = groupCriteria[item].reduce((sum, assessment) => {
@@ -187,13 +168,10 @@ const handler = async (req, res) => {
       return acc;
     }, {});
 
-    // console.log('RESULT ADDED: ', resultAdded);
-
     const percentage = Object.values(resultAdded).reduce(
       (total, current) => total + current,
       0
     );
-    // console.log('PERCENTAGE: ', percentage);
 
     const studentGrade = await StudentClassSubjectGrade.findOne({
       classSubject_id: classSubject._id,
@@ -201,7 +179,6 @@ const handler = async (req, res) => {
     });
 
     studentGrade.grade = getGrade(percentage);
-    // console.log('STUDENT GRADE: ', studentGrade);
 
     await studentGrade.save();
   }

@@ -177,33 +177,6 @@ export const studentLinks = [
   // },
 ];
 
-export const themeColors = [
-  {
-    name: 'blue-theme',
-    color: '#38bdf8',
-  },
-  {
-    name: 'green-theme',
-    color: '#4ade80',
-  },
-  {
-    name: 'purple-theme',
-    color: '#c084fc',
-  },
-  {
-    name: 'red-theme',
-    color: '#f87171',
-  },
-  {
-    name: 'indigo-theme',
-    color: '#818cf8',
-  },
-  {
-    name: 'orange-theme',
-    color: '#fb923c',
-  },
-];
-
 export const data = {
   students: [
     // TESTING DATA

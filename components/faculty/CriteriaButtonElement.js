@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   updateAddItemCriteriaOverallScores,
   updateCriteriaOverallScores,
@@ -54,11 +54,6 @@ function CriteriaButtonElement({
   const [item, setItem] = useState('');
   const [length, setLength] = useState(0);
 
-  useEffect(() => {
-    // Refetch criteriaOverallList whenever it changes
-    console.log('criteriaOverallList:', criteriaOverallList);
-  }, [criteriaOverallList]);
-
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -69,36 +64,6 @@ function CriteriaButtonElement({
     setShowModal(false);
   };
 
-  // const handleDeleteOverallScore = async () => {
-  //   console.log('ITEM: ', item);
-  //   console.log('length: ', length - 1);
-  //   try {
-  //     await updateDeleteItemCriteriaOverallScoresDelete({
-  //       item,
-  //       length,
-  //       classSubject_id,
-  //     });
-  //     await refetchCriteriaOverallList(); // Refetch the criteriaOverallList
-  //     handleDeleteCloseModal();
-  //     toast.success('Overall score item deleted successfully');
-  //   } catch (error) {
-  //     handleDeleteCloseModal();
-  //     toast.error(error);
-  //   }
-  // };
-
-  // const handleDeleteCriteriaClick = (item) => {
-  //   const keyItem = item.toLowerCase().replace(' ', '_');
-  //   setItem(item);
-  //   setLength(
-  //     criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
-  //       .length
-  //   );
-  //   // console.log('ITEM: ', item);
-  //   // console.log('length: ', length);
-  //   handleDeleteModal();
-  // };
-
   // For saving score (Connected to the next function)
   const handleAddCriteriaClick = (item) => {
     const keyItem = item.toLowerCase().replace(' ', '_');
@@ -107,13 +72,11 @@ function CriteriaButtonElement({
       criteriaOverallList.data.criteriaOverallScores.criteria_overall[keyItem]
         .length + 1
     );
-    console.log(item, length);
+
     handleOpenModal();
   };
 
   const handleSubmitOverallScore = async (data) => {
-    console.log('INPUT BVALUE: ', data.number);
-    console.log('ITEM IN SUBMIT: ', item);
     try {
       setIsProcessing(true);
       handleCloseModal();
@@ -171,9 +134,6 @@ function CriteriaButtonElement({
   );
 
   const handleDeleteCriteriaClick = async (assessment, index) => {
-    console.log('handleDeleteCriteriaClick Item: ', assessment, index);
-    // console.log('ASSESSMENT IN CRITERIA CLICK: ', assessment);
-    // console.log('INDEX IN CRITERIA CLICK: ', index);
     try {
       setIsProcessing(true);
       await deleteCriteriaMutation.mutateAsync({

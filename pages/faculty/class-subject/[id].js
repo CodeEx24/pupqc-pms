@@ -25,10 +25,6 @@ function CriteriaManagementIDScreen() {
     }
   );
 
-  if (!isLoading) {
-    console.log(criteriaOverallList);
-  }
-
   // After mapping push in the criteriaOverALL value  (BUTTON)
   // Once click show the modal
 

@@ -11,8 +11,6 @@ import { toast } from 'react-toastify';
 // import { defaultImage } from '../utils/data';
 
 function ChangePassword({ user, setIsChangePassword }) {
-  console.log(user.data.isAdmin);
-
   const {
     handleSubmit,
     register,

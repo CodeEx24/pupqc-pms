@@ -11,7 +11,6 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
-  console.log('teacherPerformance: ', teacherPerformance);
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
     title: 'Percentage',

@@ -11,7 +11,6 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function YearlyAveragePerformance({ average }) {
-  console.log('average: ', average);
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
     title: 'Percentage',

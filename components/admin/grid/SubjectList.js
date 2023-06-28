@@ -20,8 +20,6 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 // import { toast } from 'react-toastify';
 
 function SubjectList({ subjectList }) {
-  console.log('CLASS LIST: ', subjectList);
-
   const subjectListDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
     json: subjectList,

@@ -16,12 +16,11 @@ const handler = async (req, res) => {
   }
 
   const { id: class_id, semester } = req.body;
-  // console.log('DATA2: ', class_id, semester);
 
   await db.connect();
 
   const classSubjects = await ClassSubject.find({ class_id, semester });
-  // console.log('CLASS SUBJECT: ', classSubjects);
+
   // Update isGradeFinalized for all class subjects
   const updatedClassSubjects = await Promise.all(
     classSubjects.map(async (classSubject) => {
@@ -30,7 +29,6 @@ const handler = async (req, res) => {
     })
   );
 
-  // console.log('UPDATEDL ', updatedClassSubjects);
   await db.disconnect();
   res.send(updatedClassSubjects);
 };

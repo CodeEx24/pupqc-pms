@@ -22,7 +22,6 @@ function ResetPassword({ type }) {
 
   // Submit Handler when click the submit button
   const submitHandler = async ({ email }) => {
-    console.log('SENDING POST: ', email, type);
     try {
       const res = await axios.post('/api/forgot-password', {
         email,

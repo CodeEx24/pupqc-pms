@@ -13,8 +13,6 @@ function SubjectScreen() {
     refetch: refetchSubject,
   } = useQuery(['subjectList'], fetchSubjectList);
 
-  console.log(subjectList);
-
   const {
     register,
     handleSubmit,

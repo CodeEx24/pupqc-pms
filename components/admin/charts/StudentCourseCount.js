@@ -11,7 +11,6 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function StudentCourseCount({ courseStudentCount }) {
-  console.log('courseStudentCount: ', courseStudentCount);
   const legendSettings = { visible: true };
   const palettes = [
     '#E94649',

@@ -11,7 +11,6 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function AveragePerformance({ averagePercentage }) {
-  console.log('averagePercentage: ', averagePercentage);
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
     title: 'Percentage',

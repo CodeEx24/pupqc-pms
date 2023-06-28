@@ -38,18 +38,10 @@ export default async function handler(req, res) {
 
       // Fetch classSubjectItem for each class
       const classSubjectPromises = classes.map(async ({ _id: class_id }) => {
-        console.log('==================================');
-        console.log('YEAR: ', year);
-        console.log('class_id: ', class_id);
-
         const classSubjectItem = await ClassSubject.find({
           class_id,
           isGradeFinalized: true,
         }).select('_id');
-
-        if (classSubjectItem) {
-          console.log('classSubjectItem._id: ', classSubjectItem);
-        }
 
         return classSubjectItem.map((item) => item._id.toString()); // Flatten and convert to string
       });
@@ -69,8 +61,6 @@ export default async function handler(req, res) {
     classData.map(({ year, items }) => [year, items])
   );
 
-  console.log(desiredResult);
-
   const accumulateGrade = await Promise.all(
     Object.keys(desiredResult).map(async (year) => {
       const averageClassGrades = await Promise.all(
@@ -78,7 +68,6 @@ export default async function handler(req, res) {
           const averageClassGrade = await AverageClassGrade.findOne({
             classSubject_id: id,
           });
-          console.log('averageClassGrade: ', averageClassGrade);
 
           return averageClassGrade ? averageClassGrade.grade : 0;
         })

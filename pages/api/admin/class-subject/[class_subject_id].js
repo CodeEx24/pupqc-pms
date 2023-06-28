@@ -31,7 +31,6 @@ const handler = async (req, res) => {
 
   // Find the document before deletion
   const classSubject = await ClassSubject.findOne({ _id: class_subject_id });
-  // console.log('classSubject To Delete: ', classSubject);
 
   if (!classSubject.isGradeFinalized) {
     // Delete the document
@@ -50,11 +49,9 @@ const handler = async (req, res) => {
       classSubject_id: class_subject_id,
     });
   } else {
-    res
-      .status(409)
-      .send({
-        message: 'Class subject cannot be deleted because it is finalized',
-      });
+    res.status(409).send({
+      message: 'Class subject cannot be deleted because it is finalized',
+    });
   }
 
   await db.disconnect();
@@ -63,54 +60,3 @@ const handler = async (req, res) => {
 };
 
 export default handler;
-
-// if (classSubject.isGradeFinalized) {
-//   // Recalculate the Average Class Grade if it is Finalized (ALL SUBJECTS IN CLASS)
-//   const classSubjects = await ClassSubject.find({
-//     class_id: classSubject.class_id,
-//     semester: classSubject.semester,
-//   });
-//   // console.log('classSubjects: ', classSubjects);
-
-//   const averageClassSubjectGrade = await Promise.all(
-//     classSubjects.map(async (classSubjectItem) => {
-//       const studentClassSubjectGrade = await StudentClassSubjectGrade.find({
-//         classSubject_id: classSubjectItem._id,
-//       });
-
-//       const gradeSum = studentClassSubjectGrade.reduce(
-//         (sum, grade) => sum + grade.grade,
-//         0
-//       );
-//       const grade = gradeSum / studentClassSubjectGrade.length;
-//       const passed = studentClassSubjectGrade.filter(
-//         (gradeItem) => gradeItem.grade <= 3
-//       ).length;
-//       const failed = studentClassSubjectGrade.filter(
-//         (gradeItem) => gradeItem.grade > 3
-//       ).length;
-
-//       return {
-//         classSubject_id: classSubjectItem._id,
-//         grade,
-//         passed,
-//         failed,
-//       };
-//     })
-//   );
-
-//   // SAVING TO THE DATA BASE
-//   await Promise.all(
-//     averageClassSubjectGrade.map(async (averageClassItem) => {
-//       const averageClassGradeExist = await AverageClassGrade.findOne({
-//         classSubject_id: averageClassItem.classSubject_id,
-//       });
-
-//       averageClassGradeExist.grade = averageClassItem.grade;
-//       averageClassGradeExist.passed = averageClassItem.passed;
-//       averageClassGradeExist.failed = averageClassItem.failed;
-//       await averageClassGradeExist.save();
-//     })
-//   );
-//   console.log('res: ', res);
-// }

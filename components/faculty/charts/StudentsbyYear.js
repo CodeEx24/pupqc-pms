@@ -11,7 +11,6 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function StudentsbyYear({ studentCurrentYearLevel }) {
-  console.log('studentCurrentYearLevel: ', studentCurrentYearLevel);
   const legendSettings = { visible: true };
   const palettes = [
     '#E94649',

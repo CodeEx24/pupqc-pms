@@ -63,16 +63,11 @@ const handler = async (req, res) => {
   });
 
   const criteriaOverallScores = await newCriteriaOverallScores.save();
-  console.log('CRITERIA OVERALL SCORES: ', criteriaOverallScores);
-
-  // Generate for the Students Records
-  console.log('CLASSSUBJECT DATA: ', classSubject);
 
   const classData = await Class.find({ _id: classSubject.class_id });
-  console.log('CLASS DATA: ', classData);
 
   // Students records generate
-  const studentsRecords = await Promise.all(
+  await Promise.all(
     classData[0].student_id.map(async (id) => {
       const newStudentRecords = new StudentRecords({
         student_id: id,
@@ -91,10 +86,6 @@ const handler = async (req, res) => {
       return records;
     })
   );
-
-  console.log('STUDENT RECORDS: ', studentsRecords);
-
-  // Generate the grades for students once added
 
   await db.disconnect();
 

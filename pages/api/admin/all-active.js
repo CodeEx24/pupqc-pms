@@ -16,7 +16,6 @@ export default async function handler(req, res) {
   await db.connect();
 
   const semesterDetails = getCurrentSemesterData();
-  console.log(semesterDetails);
 
   const classData = await Class.find({
     batch:

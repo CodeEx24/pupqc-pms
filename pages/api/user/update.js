@@ -14,20 +14,20 @@ const handler = async (req, res) => {
   }
 
   const { data, type } = req.body;
-  console.log(data);
+
   const userType =
     type === 'Teacher' ? Teacher : type === 'Student' ? Student : Admin;
-  console.log(userType);
+
   await db.connect();
 
   const user = await userType.findOne({ email: session.user.email });
-  console.log(data);
+
   // Update the data document with the new data from the request body
   Object.assign(user, { ...data });
-  console.log(user);
+
   // Save the updated document back to the database
   const result = await user.save();
-  console.log(result);
+
   await db.disconnect;
 
   res.json({ result, message: 'User updated successfully' });

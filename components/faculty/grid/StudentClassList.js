@@ -22,9 +22,9 @@ import {
 
 import axios from 'axios';
 import TabsContentStudentManagement from '../tabs/TabsContentStudentManagement';
+import { toast } from 'react-toastify';
 
 function StudentClassList({ studentClass, refetchStudentClass }) {
-  console.log(studentClass);
   const [showperformanceModal, setShowPerformanceModal] = useState(false);
   const [tabDirectiveElement, setTabDirectiveElement] = useState(() => {});
   const [studentData, setStudentData] = useState({ name: '', email: '' });
@@ -100,13 +100,9 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
         `/api/student/performance/${classSubjectId}/${studentId}`
       );
 
-      console.log(res.data);
-
       const assessment = await res.data.studentRecord.records;
       const criteriaOverall = await res.data.criteriaOverall;
 
-      console.log('CRITERIA OVERALL: ', criteriaOverall);
-      // console.log('ASSESSMENT: ', assessment[0]);
       const tabElement = Object.keys(assessment).map((item, index) => {
         return (
           <TabItemDirective
@@ -134,7 +130,7 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
       setTabDirectiveElement(tabElement);
       setShowPerformanceModal(true);
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 

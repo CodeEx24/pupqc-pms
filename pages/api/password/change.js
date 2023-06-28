@@ -28,13 +28,11 @@ export default async function handler(req, res) {
   const isPasswordMatch = bcrypt.compareSync(password, user.password);
 
   if (!isPasswordMatch) {
-    console.log('Invalid current password');
     return res.status(400).json({ message: 'Invalid current password' });
   }
 
   // Check if the new password and confirm password match
   if (newPassword !== confirmPassword) {
-    console.log('New password and confirm password do not match');
     return res
       .status(400)
       .json({ message: 'New password and confirm password do not match' });

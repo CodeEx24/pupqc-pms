@@ -87,7 +87,7 @@ function FacultyNavbar() {
             title="Logout"
             customFunc={(e) => {
               e.preventDefault();
-              // console.log('LogOut');
+
               signOut();
             }}
             icon={<FiLogOut />}

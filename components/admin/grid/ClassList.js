@@ -48,10 +48,7 @@ function ClassList({ classList, refetchClassList }) {
     setIsActionInProgress(true);
 
     try {
-      console.log('FINALIZED GRADE OF THIS: ', id);
-      const updateFinalizeGrade =
-        await finalizeSomeClassSubjectMutation.mutateAsync({ id, semester });
-      console.log('updateFinalizeGrade: ', updateFinalizeGrade);
+      await finalizeSomeClassSubjectMutation.mutateAsync({ id, semester });
       await refetchClassList();
 
       toast.success('Finalization of grade is successful.');
@@ -68,10 +65,7 @@ function ClassList({ classList, refetchClassList }) {
     toast.dismiss();
     setIsActionInProgress(true);
     try {
-      console.log('REVOKE GRADE OF THIS: ', id);
-      const updateFinalizeGrade =
-        await revokeSomeClassSubjectMutation.mutateAsync({ id, semester });
-      console.log('updateFinalizeGrade: ', updateFinalizeGrade);
+      await revokeSomeClassSubjectMutation.mutateAsync({ id, semester });
       await refetchClassList();
 
       toast.success('Revoke the finalization of grade is successful.');

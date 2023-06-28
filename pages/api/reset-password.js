@@ -13,13 +13,11 @@ export default async function handler(req, res) {
 
   const userType =
     type === 'Faculty' ? Teacher : type === 'Admin' ? Admin : Student;
-  console.log(userType);
+
   await db.connect();
 
   // Check if email exists in the database
   const user = await userType.findOne({ email });
-
-  console.log(user);
 
   user.password = bcrypt.hashSync(password);
 

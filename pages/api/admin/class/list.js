@@ -68,7 +68,6 @@ export default async function handler(req, res) {
       ? 2
       : 3;
 
-  // console.log(semester);
   const newClassData = flattenedData.map((clsItem) => {
     const previousSemester = semester === 1 ? 3 : semester - 1; // Calculate previous semester
     let isRevokable = false;

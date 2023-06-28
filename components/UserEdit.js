@@ -7,8 +7,6 @@ import { toast } from 'react-toastify';
 import { defaultImage } from '../utils/data';
 
 function UserEdit({ user, setEditProfile, refetchUser }) {
-  console.log(user.data.isAdmin);
-
   const {
     handleSubmit,
     register,
@@ -18,8 +16,6 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
 
   const submitHandler = async (data) => {
     data.profile = data.profile1?.length ? data.profile1 : data.profile2;
-    console.log(data);
-    console.log('SUBMITTED DATA PROFILE:', data.profile);
 
     if (user.data.profileImageUrl !== defaultImage && data.profile?.length) {
       try {
@@ -38,7 +34,6 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
       formData.append('upload_preset', 'pupqc_upload_avatar');
 
       try {
-        console.log('RESULT PENDING:');
         const res = await fetch(
           'https://api.cloudinary.com/v1_1/daevedaio/image/upload',
           {
@@ -47,10 +42,6 @@ function UserEdit({ user, setEditProfile, refetchUser }) {
           }
         );
         const file = await res.json();
-
-        if (res) {
-          console.log('RESULT:', res);
-        }
 
         const updatedUser = {
           ...user,

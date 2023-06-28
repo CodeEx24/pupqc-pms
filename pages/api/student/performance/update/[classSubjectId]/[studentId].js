@@ -66,8 +66,6 @@ const handler = async (req, res) => {
     })
   );
 
-  // console.log('SCORES ACCUMULATED: ', scoresAccumulated);
-
   const overallAccumulatedData = Object.entries(
     criteriaOverallData.criteria_overall
   ).map(([item, values]) => ({
@@ -75,8 +73,6 @@ const handler = async (req, res) => {
   }));
 
   const overallAccumulated = Object.assign({}, ...overallAccumulatedData);
-
-  // console.log('OVERALL ACCUMULATED', overallAccumulated);
 
   // With those accumulated I want to know the percentage of it in the criteria table
 
@@ -87,8 +83,6 @@ const handler = async (req, res) => {
   const criteriaData = await Criteria.findOne({
     _id: classSubjectData.criteria_id,
   });
-
-  // console.log('CRITERIA DATA: ', criteriaData);
 
   // Get the percentage in the
   const criteriaPercentageData = Object.keys(
@@ -117,8 +111,6 @@ const handler = async (req, res) => {
       const overAllItem = Object.keys(overallAccumulated).find(
         (item) => item === key
       );
-      // console.log('OVERALL ITEM', overAllItem);
-      // console.log('ITEM SPECIFIC: ', overallAccumulated[overAllItem]);
 
       if (overAllItem) {
         if (overallAccumulated[overAllItem] == 0) {
@@ -139,11 +131,7 @@ const handler = async (req, res) => {
     {}
   );
 
-  // console.log('ASSESSMENT GRADE: ', assessmentGrade);
-
   const criteriaFirstLayer = criteriaData.criteria.percentage;
-
-  // console.log(criteriaFirstLayer);
 
   const groupCriteria = Object.keys(criteriaFirstLayer)
     .reduce((acc, item) => {
@@ -158,8 +146,6 @@ const handler = async (req, res) => {
       acc[key] = acc[key] ? [...acc[key], value] : [value];
       return acc;
     }, {});
-
-  // console.log(groupCriteria);
 
   //   Add up all the per
   const resultAdded = Object.keys(groupCriteria).reduce((acc, item) => {

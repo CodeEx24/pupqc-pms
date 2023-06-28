@@ -7,7 +7,6 @@ import {
   fetchAverageClassGradeYearly,
   fetchHandleClassAndSubject,
   fetchPassedFailedStudent,
-  // fetchPassedFailedStudent,
   fetchStudentsByYearLevel,
 } from '../../components/hooks/FacultySubject/fetch';
 import AveragePerformance from '../../components/faculty/charts/AveragePerformance';

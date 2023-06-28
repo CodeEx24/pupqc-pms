@@ -99,9 +99,9 @@ function TabsContentStudentManagement({
           </button>
           <button
             type="submit"
-            onClick={() => {
-              console.log('HELLO');
-            }}
+            // onClick={() => {
+            //   console.log('HELLO');
+            // }}
             className="bg-sky-500 text-white rounded-md px-4 py-2"
           >
             Submit

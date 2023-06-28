@@ -15,13 +15,11 @@ const handler = async (req, res) => {
   }
 
   const { _id: teacher_id } = session.user;
-  console.log('TEACHER ID:', teacher_id);
 
   await db.connect();
 
   const criteria = await Criteria.find({ teacher_id });
 
-  console.log('CRITERIA LIST: ', criteria);
   await db.disconnect();
 
   res.status(200).json(criteria);

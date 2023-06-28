@@ -67,12 +67,10 @@ const handler = async (req, res) => {
   }
 
   const { teacher_id } = req.query;
-  console.log('TEACHER ID: ', teacher_id);
+
   const { currentYear } = getCurrentSemesterData();
-  console.log('SEMESTER DETAILS: ', currentYear);
 
   const years = Array.from({ length: 10 }, (_, i) => currentYear - i - 1);
-  console.log('YEARS: ', years);
 
   await db.connect();
   const transformedClassBatch = await getClassBatch(years);
@@ -104,29 +102,13 @@ const handler = async (req, res) => {
   const xYear = columnData.map((data) => parseInt(data.year));
   const yPercentage = columnData.map((data) => data.averagePercentage);
 
-  console.log('xYear:', xYear);
-  console.log('yPercentage:', yPercentage);
-
   const regression = new SimpleLinearRegression(xYear, yPercentage);
   const slope = regression.slope;
 
-  console.log('Slope:', slope);
-
-  if (slope > 0) {
-    console.log('The trend is going higher.');
-  } else if (slope < 0) {
-    console.log('The trend is going lower.');
-  } else {
-    console.log('The trend is flat.');
-  }
-
   const json = regression.toJSON();
-
-  console.log('JSON FORMAT: ', json);
 
   const loaded = SimpleLinearRegression.load(json);
 
-  // console.log('Predicted Percentage for 2023:', loaded.predict(2023));
   columnData.push({
     year: `${currentYear}`,
     averagePercentage: Math.round(loaded.predict(Number(currentYear))),

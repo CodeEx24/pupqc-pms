@@ -23,7 +23,6 @@ const handler = async (req, res) => {
   const uniqueSubjectIds = [
     ...new Set(classSubject.map((item) => item.subject_id)),
   ];
-  console.log(uniqueSubjectIds);
 
   const subjects = await Promise.all(
     uniqueSubjectIds.map(async (subjectId) => {

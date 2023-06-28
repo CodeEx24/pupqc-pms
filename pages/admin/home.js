@@ -33,10 +33,6 @@ function HomeScreen() {
     refetchOnWindowFocus: false,
   });
 
-  if (!gradeYearlyQuery.isLoading) {
-    console.log('gradeYearlyQuery.data.data: ', gradeYearlyQuery.data.data);
-  }
-
   return (
     <AdminLayout title="Home">
       <div className="p-5 rounded-xl">

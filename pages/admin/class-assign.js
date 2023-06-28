@@ -49,7 +49,6 @@ function ClassManagementScreen() {
   const {
     data: subjectClass,
     refetch: refetchSubjectClass,
-    isRefetching,
     isLoading,
   } = useQuery(['subjectClass'], fetchSubjectClass, {
     refetchOnWindowFocus: false,
@@ -118,10 +117,6 @@ function ClassManagementScreen() {
     };
   };
 
-  if (isRefetching) {
-    console.log('REFETCHING DATA');
-  }
-
   // Input Change
   const handleInputChange = (name, e) => {
     if (!e) {
@@ -149,8 +144,8 @@ function ClassManagementScreen() {
     try {
       setSubmitting(true); // Disable the submit button
 
-      const res = await addClassSubjectMutation.mutateAsync(data);
-      console.log(res.message);
+      await addClassSubjectMutation.mutateAsync(data);
+
       refetchSubjectClass();
       setSelectedSubject(null);
       setSelectedSemester(null);

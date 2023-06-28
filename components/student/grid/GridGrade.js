@@ -6,8 +6,6 @@ import {
 } from '@syncfusion/ej2-react-grids';
 
 function GridGrade({ title, semester, studentClassGrade, sectionCode }) {
-  console.log('STUDENT CLASS GRADE: ', studentClassGrade);
-
   return (
     <div className=" pb-14 ">
       <h3 className="font-bold text-white bg-sky-400 p-3">

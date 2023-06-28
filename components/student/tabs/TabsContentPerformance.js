@@ -6,7 +6,6 @@ function TabsContentPerformance({
   criteriaOverall,
 }) {
   const assessmentElement = assessmentItem.map((item, index) => {
-    console.log('ITEM: ', item);
     return (
       <div
         className="flex flex-col gap-2 shadow-sm p-5 rounded-md border border-gray-200 text-center mt-5"

@@ -11,8 +11,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
-// import { useEffect } from 'react';
-// import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 import axios from 'axios';
@@ -20,7 +19,6 @@ import TeacherPerformance from '../charts/TeacherPerformance';
 import Processing from '../../Processing';
 
 function TeacherList({ teacherList }) {
-  console.log('teacherList: ', teacherList);
   const [showPerformanceModal, setShowPerformanceModal] = useState(false);
   const [teacherPerformance, setTeacherPerformance] = useState({});
   const [slope, setSlope] = useState(0);
@@ -70,7 +68,7 @@ function TeacherList({ teacherList }) {
         params: { teacher_id },
       });
       setTeacherPerformance(res.data.techerPerformance);
-      console.log('res.data.slope: ', res.data.slope);
+
       setSlope(
         res.data.slope > 0
           ? 'Going higher'
@@ -86,9 +84,8 @@ function TeacherList({ teacherList }) {
       });
 
       setShowPerformanceModal(true);
-      console.log('DONE SHOWING');
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     } finally {
       setIsActionInProgress(false);
     }

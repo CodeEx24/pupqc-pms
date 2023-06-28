@@ -37,8 +37,6 @@ const handler = async (req, res) => {
             classSubject_id,
           });
 
-          console.log(studentGrades);
-
           return {
             subject_id,
             profileImageUrl: studentData.profileImageUrl,

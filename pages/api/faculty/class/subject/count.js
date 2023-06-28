@@ -17,9 +17,6 @@ const handler = async (req, res) => {
   const { _id: teacher_id } = session.user;
   const { year, semester } = req.query;
 
-  console.log('teacher_id: ', teacher_id);
-  console.log('year: ', year, semester);
-
   await db.connect();
   const classList = await Class.find({ batch: year });
 
@@ -30,7 +27,7 @@ const handler = async (req, res) => {
         class_id,
         semester,
       });
-      console.log(classSubjectItems);
+
       return classSubjectItems;
     })
   );
