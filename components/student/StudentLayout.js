@@ -3,15 +3,8 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StudentNavbar from './StudentNavbar';
-import StudentSidebar from './StudentSidebar';
-
-import Store from '@/utils/Store';
 
 function StudentLayout({ title, children }) {
-  const menu = Store((state) => state.menu);
-
-  const { activeMenu } = menu;
-
   return (
     <>
       <Head>
@@ -22,44 +15,69 @@ function StudentLayout({ title, children }) {
       </Head>
 
       <ToastContainer position="bottom-center" limit={1} />
+      <div className="bg-gray-100">
+        <StudentNavbar />
 
-      <div className="flex min-h-screen flex-col justify-between bg-gray-100">
-        <div className="flex relative ">
-          {/* Sidebar Menu Condition */}
-          {activeMenu ? (
-            <div className="w-72 fixed sidebar bg-white">
-              <StudentSidebar />
-            </div>
-          ) : (
-            <div className="w-0 ">
-              <StudentSidebar />
-            </div>
-          )}
-
-          {/* Navbar */}
-          <div
-            className={` bg-main-bg min-h-screen w-full ${
-              activeMenu ? 'md:ml-72 ' : 'flex-2'
-            }`}
-          >
-            <div className="fixed md:static bg-main-bg  navbar w-full">
-              <StudentNavbar />
-            </div>
-            <main className="mt-10 md:mt-0 px-4 md:px-8 pt-6 flex min-h-screen flex-col justify-between rounded-xl">
+        <div className="max-w-screen">
+          <div className="max-w-screen-xl items-center justify-between mx-auto ">
+            <main className="mt-10 md:mt-0 px-4 md:px-8 pt-6 flex min-h-fit flex-col justify-between rounded-xl ">
               {children}
             </main>
-            <div className="flex justify-between align-middle p-2 md:mx-6 relative"></div>
           </div>
         </div>
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          {/* <>
+          <div className="flex relative ">
+      
+            {activeMenu ? (
+              <div className="w-72 fixed sidebar bg-white">
+                <StudentSidebar />
+              </div>
+            ) : (
+              <div className="w-0 ">
+                <StudentSidebar />
+              </div>
+            )}
 
-        {/* <header className="text-gray-600 body-font shadow-md">
-          <StudentNavbar />
-        </header>
-        <StudentSidebar /> */}
-
-        <footer className="flex h-10 justify-center items-center shadow-inner">
-          <p>Copyright ©2023 JBShop</p>
-        </footer>
+     
+            <div
+              className={` bg-main-bg min-h-screen w-full ${
+                activeMenu ? 'md:ml-72 ' : 'flex-2'
+              }`}
+            >
+              <div className="fixed md:static bg-main-bg  navbar w-full">
+                <StudentNavbar />
+              </div>
+              <main className="mt-10 md:mt-0 px-4 md:px-8 pt-6 flex min-h-screen flex-col justify-between rounded-xl">
+                {children}
+              </main>
+              <div className="flex justify-between align-middle p-2 md:mx-6 relative"></div>
+            </div>
+          </div>
+        </> */}
+        </div>
+        <div className="max-w-screen bg-white py-10 ">
+          <footer className="max-w-screen-xl items-center justify-between mx-auto px-12 ">
+            <h1 className="text-secondary text-h5 mb-2">Contact Information</h1>
+            <div className="flex">
+              <div className="w-4/12">
+                <h5 className="text-p font-semibold">Email: </h5>
+                <p className="text-p">quezoncity@pup.edu.ph</p>
+              </div>
+              <div className="w-4/12">
+                <h5 className="text-p font-semibold">Postal Mail: </h5>
+                <p className="text-p">PUP Quezon City Branch</p>
+                <p className="text-p">Don Fabian St., Commonwealth</p>
+                <p className="text-p">Quezon City Philippines</p>
+              </div>
+              <div className="w-4/12">
+                <h5 className="text-p font-semibold">Telephone: </h5>
+                <p className="text-p">(632) 8952-7818</p>
+                <p className="text-p">(632) 8287-8204</p>
+              </div>
+            </div>
+          </footer>{' '}
+        </div>
       </div>
     </>
   );

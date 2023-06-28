@@ -44,9 +44,24 @@ function HomeScreen() {
         <div className="flex lg:flex-nowrap flex-wrap gap-3 mb-5">
           {allActiveDataQuery.isLoading ? (
             <>
-              <Card title={'activeTeacherCount'} value={25} words={'Wew'} />
-              <Card title={'Earnings'} value={25} words={'Wew'} />
-              <Card title={'Earnings'} value={25} words={'Wew'} />
+              <Card
+                title={'Teacher'}
+                value={0}
+                words={'Active Teacher'}
+                image="bg-adminTeacher"
+              />
+              <Card
+                title={'Class'}
+                value={0}
+                words={'Active Class'}
+                image="bg-adminClasses"
+              />
+              <Card
+                title={'Student'}
+                value={0}
+                words={'Active Student'}
+                image="bg-adminStudent"
+              />
             </>
           ) : (
             <>
@@ -54,19 +69,19 @@ function HomeScreen() {
                 title={'Teacher'}
                 value={allActiveDataQuery.data.data.activeTeacherCount}
                 words={'Active Teacher'}
-                image="bg-class"
+                image="bg-adminTeacher"
               />
               <Card
                 title={'Class'}
                 value={allActiveDataQuery.data.data.activeClassCount}
                 words={'Active Class'}
-                image="bg-class"
+                image="bg-adminClasses"
               />
               <Card
                 title={'Student'}
                 value={allActiveDataQuery.data.data.activeStudentCount}
                 words={'Active Student'}
-                image="bg-class"
+                image="bg-adminStudent"
               />
             </>
           )}

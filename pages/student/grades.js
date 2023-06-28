@@ -19,7 +19,7 @@ function StudentGradeScreen() {
 
   return (
     <StudentLayout title="Grades">
-      <div className="bg-white p-10 rounded-xl">
+      <div className="bg-white p-10 rounded-xl shadow-md">
         <h1 className="text-h4 text-primary mb-5">Grades</h1>
 
         <div className="flex gap-10 font-semibold text-gray-600 mb-8">
@@ -27,8 +27,13 @@ function StudentGradeScreen() {
             <h3>Loading</h3>
           ) : (
             <>
-              <h3 className="text-xl">{session?.user.name}</h3>
-              <h3 className="text-xl">{session?.user.email}</h3>
+              <h3 className="text-p font-poppins w-1/2">
+                Name: <span className="font-normal">{session?.user.name}</span>
+              </h3>
+              <h3 className="text-p font-poppins w-1/2">
+                Email:{' '}
+                <span className="font-normal">{session?.user.email}</span>
+              </h3>
             </>
           )}
         </div>
@@ -41,5 +46,9 @@ function StudentGradeScreen() {
     </StudentLayout>
   );
 }
+
+StudentGradeScreen.auth = {
+  role: 'student',
+};
 
 export default StudentGradeScreen;

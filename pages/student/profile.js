@@ -20,7 +20,7 @@ function StudentProfileScreen() {
 
   return (
     <StudentLayout title="Profile">
-      <div className="bg-white p-10 rounded-xl">
+      <div className="bg-white p-10 rounded-xl shadow-md">
         <div className="flex justify-between">
           <h1 className="text-h4 text-primary mb-5">
             {editProfile
@@ -60,22 +60,22 @@ function StudentProfileScreen() {
             </div>
 
             <div className="pl-3 lg:pt-3 lg:p-0 col-span-4 row-span-1 col-start-3 my-auto md:my-0 md:row-span-1 md:col-span-3 md:col-start-3 lg:col-span-4 lg:col-start-2 lg:my-auto lg:pl-4">
-              <h4 className="font-semibold text-lg lg:text-2xl">
+              <h4 className="font-semibold text-h3 lg:text-2xl font-poppins">
                 {user.data.name}
               </h4>
-              <h4 className="mb-3 lg:mb-0 text-sm md:text-lg">
+              <h4 className="mb-3 lg:mb-0 text-sm md:text-lg font-poppins">
                 {user.data.email}
               </h4>
               <div className="flex gap-10">
                 <button
                   onClick={() => setEditProfile(!editProfile)}
-                  className="mb-3 lg:mb-0 text-primary"
+                  className="mb-3 lg:mb-0 text-primary font-poppins"
                 >
                   Edit Profile
                 </button>
                 <button
                   onClick={() => setIsChangePassword(!isChangePassword)}
-                  className="mb-3 lg:mb-0 text-primary"
+                  className="mb-3 lg:mb-0 text-primary font-poppins"
                 >
                   Change Password
                 </button>
@@ -86,22 +86,30 @@ function StudentProfileScreen() {
               <hr className="ml-3 md:m-0" />
               <div className="p-3 lg:pt-3 lg:p-0">
                 <div className=" flex mb-2">
-                  <h3 className="text-gray-700 w-3/6 md:w-2/6">Gender:</h3>
-                  <p className="">{user.data.gender}</p>
+                  <h3 className="text-gray-700 w-3/6 md:w-2/6 font-poppins">
+                    Gender:
+                  </h3>
+                  <p className="font-poppins">{user.data.gender}</p>
                 </div>
                 <div className=" flex mb-2">
-                  <h3 className="text-gray-700 w-3/6 md:w-2/6">
+                  <h3 className="text-gray-700 w-3/6 md:w-2/6 font-poppins">
                     Mobile Phone:
                   </h3>
-                  <p className="">{user.data.mobileNo}</p>
+                  <p className="font-poppins">{user.data.mobileNo}</p>
                 </div>
                 <div className=" flex mb-2">
-                  <h3 className="text-gray-700 w-3/6 md:w-2/6">Birth Date:</h3>
-                  <p className="">{user.data.dateOfBirth}</p>
+                  <h3 className="text-gray-700 w-3/6 md:w-2/6 font-poppins">
+                    Birth Date:
+                  </h3>
+                  <p className="font-poppins">{user.data.dateOfBirth}</p>
                 </div>
                 <div className=" flex mb-2">
-                  <h3 className="text-gray-700 w-3/6 md:w-2/6">Address:</h3>
-                  <p className="w-3/6">{user.data.residentialAddress}</p>
+                  <h3 className="text-gray-700 w-3/6 md:w-2/6 font-poppins">
+                    Address:
+                  </h3>
+                  <p className="w-3/6 font-poppins">
+                    {user.data.residentialAddress}
+                  </p>
                 </div>
               </div>
             </div>

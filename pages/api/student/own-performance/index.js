@@ -18,13 +18,13 @@ const handler = async (req, res) => {
     return res.status(401).send('Signin required');
   }
 
-  const classSubjectId = req.query.id;
+  const { classSubject_id } = req.query;
 
   await db.connect();
 
   const { _id: criteriaOverallScores_id, criteria_overall } =
     await CriteriaOverallScores.findOne({
-      classSubject_id: classSubjectId,
+      classSubject_id: classSubject_id,
     });
 
   const { records: student_records } = await StudentRecords.findOne({
@@ -33,11 +33,11 @@ const handler = async (req, res) => {
   });
 
   const { grade } = await StudentClassSubjectGrade.findOne({
-    classSubject_id: classSubjectId,
+    classSubject_id: classSubject_id,
     student_id: session.user._id,
   });
 
-  const classSubject = await ClassSubject.findOne({ _id: classSubjectId })
+  const classSubject = await ClassSubject.findOne({ _id: classSubject_id })
     .select('subject_id class_id teacher_id semester')
     .populate('subject_id class_id teacher_id semester');
 

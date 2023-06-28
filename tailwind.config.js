@@ -79,6 +79,12 @@ module.exports = {
           "url('https://img.freepik.com/free-psd/education-concept-with-supplies_23-2149935204.jpg?w=1380&t=st=1686931243~exp=1686931843~hmac=dd4ab65c22ba938e8b28c1624265fbb1bcc30148e0aea71e44ecaef38c400592')",
         semester:
           "url('https://img.freepik.com/free-photo/purple-calendar-clock-icon-3d-reminder-notification-concept-website-ui-purple-background-3d-rendering-illustration_56104-1317.jpg?w=996&t=st=1686931396~exp=1686931996~hmac=42f103de9d8e04652beabe3888f7b95fc52f1ab9953223abba92dbac5ad8d8b5')",
+        adminTeacher:
+          "url('https://img.freepik.com/free-vector/young-businesswoman-showing-presenter-white-board-cartoon-illustration_56104-519.jpg?w=996&t=st=1687882354~exp=1687882954~hmac=29bf0723d20130fbdd7ec6611301cd1d94495fd5d0b78bb47876e8927ca3929c')",
+        adminClasses:
+          "url('https://img.freepik.com/free-vector/isometric-class-interior-composition-with-inside-view-classroom-school-with-maps-pupils-teacher-vector-illustration_1284-77546.jpg?w=900&t=st=1687882099~exp=1687882699~hmac=1acdc7366b6a94f0df728d0c58e698acaa12e6b16eee96f71bd10df2cd331945')",
+        adminStudent:
+          "url('https://img.freepik.com/free-vector/young-people-read-books-library-students-study-school-college-university-vector-flat-illustration-men-women-sitting-stack-big-books-reading_107791-9763.jpg?w=1380&t=st=1687882266~exp=1687882866~hmac=4f75c9b56e81bca0f8bb586b92bd33cd69390e758010406784d3e63cb68ad589')",
       },
     },
   },

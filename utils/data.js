@@ -127,11 +127,11 @@ export const studentLinks = [
         icon: <FaUser />,
       },
 
-      {
-        name: 'class subject',
-        href: 'class-subject',
-        icon: <FaAddressBook />,
-      },
+      // {
+      //   name: 'class subject',
+      //   href: 'class-subject',
+      //   icon: <FaAddressBook />,
+      // },
       {
         name: 'grades',
         href: 'grades',

@@ -17,11 +17,14 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import Image from 'next/image';
 import axios from 'axios';
 import TeacherPerformance from '../charts/TeacherPerformance';
+import Processing from '../../Processing';
 
 function TeacherList({ teacherList }) {
   console.log('teacherList: ', teacherList);
   const [showPerformanceModal, setShowPerformanceModal] = useState(false);
   const [teacherPerformance, setTeacherPerformance] = useState({});
+  const [slope, setSlope] = useState(0);
+  const [isActionInProgress, setIsActionInProgress] = useState(false);
 
   const [teacherDetails, setteacherDetails] = useState({
     name: '',
@@ -61,13 +64,21 @@ function TeacherList({ teacherList }) {
     email,
     status
   ) => {
-    console.log('teacher_id: ', teacher_id);
-    console.log('status: ', status);
     try {
+      setIsActionInProgress(true);
       const res = await axios.get(`/api/admin/teacher/performance`, {
         params: { teacher_id },
       });
       setTeacherPerformance(res.data.techerPerformance);
+      console.log('res.data.slope: ', res.data.slope);
+      setSlope(
+        res.data.slope > 0
+          ? 'Going higher'
+          : res.data.slope < 0
+          ? 'Going lower'
+          : 'Flat'
+      );
+
       setteacherDetails({
         name,
         email,
@@ -78,6 +89,8 @@ function TeacherList({ teacherList }) {
       console.log('DONE SHOWING');
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsActionInProgress(false);
     }
   };
 
@@ -181,13 +194,21 @@ function TeacherList({ teacherList }) {
       </GridComponent>
       {showPerformanceModal && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-          <div className="bg-white rounded-md p-10 w-1/2" ref={modalRef}>
+          <div
+            className="bg-white rounded-md p-10 lg:w-1/2 md:w-full"
+            ref={modalRef}
+          >
             <TeacherPerformance
               teacherPerformance={teacherPerformance}
               teacherDetails={teacherDetails}
+              slope={slope}
             />
           </div>
         </div>
+      )}
+
+      {isActionInProgress && (
+        <Processing text="Processing the Teachers Grade" />
       )}
     </>
   );

@@ -20,7 +20,8 @@ function StudentPerformanceScreen() {
   return (
     <StudentLayout title="Performance">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="title">Performance</h1>
+        <h1 className="text-h4 text-primary mb-5">Performance</h1>
+
         <div className="flex gap-10 font-semibold text-gray-600 mb-8">
           {status === 'loading' ? (
             <h3>Loading</h3>

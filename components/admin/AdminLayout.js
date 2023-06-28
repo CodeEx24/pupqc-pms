@@ -3,7 +3,7 @@ import React from 'react';
 import Store from '@/utils/Store';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 
 import AdminSidebar from './AdminSidebar';
 import AdminNavbar from './AdminNavbar';

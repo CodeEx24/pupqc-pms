@@ -1,12 +1,76 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ColumnDirective,
   ColumnsDirective,
   GridComponent,
 } from '@syncfusion/ej2-react-grids';
-import Link from 'next/link';
+// import Link from 'next/link';
+import axios from 'axios';
+
+import {
+  TabComponent,
+  TabItemDirective,
+  TabItemsDirective,
+} from '@syncfusion/ej2-react-navigations';
+import TabsContentPerformance from '../tabs/TabsContentPerformance';
 
 function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
+  const [studentPerformance, setStudentPerformance] = useState();
+  const [showPerformanceModal, setShowPerformanceModal] = useState(false);
+  const [tabDirectiveElement, setTabDirectiveElement] = useState();
+
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowPerformanceModal(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickPerformance = async (classSubject_id) => {
+    try {
+      // setIsActionInProgress(true);
+      const res = await axios.get(`/api/student/own-performance`, {
+        params: { classSubject_id },
+      });
+      console.log('res.data: ', res.data);
+      setStudentPerformance(res);
+
+      const tabElement = Object.keys(res?.data.student_records).map(
+        (item, index) => {
+          return (
+            <TabItemDirective
+              key={index}
+              header={{ text: item.toLocaleUpperCase().replace('_', ' ') }}
+              content={() => (
+                <TabsContentPerformance
+                  assessment={item}
+                  assessmentItem={res.data.student_records[item]}
+                  criteriaOverall={res?.data.criteria_overall[item]}
+                />
+              )}
+            />
+          );
+        }
+      );
+      setTabDirectiveElement(tabElement);
+      setShowPerformanceModal(true);
+      console.log('DONE SHOWING');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // setIsActionInProgress(false);
+    }
+  };
+
   return (
     <div className=" pb-14 ">
       <h3 className="font-bold text-white bg-sky-400 p-3">
@@ -61,17 +125,89 @@ function GridPerformance({ title, semester, studentClassGrade, sectionCode }) {
             width="100"
             format="N2"
             template={(rowData) => (
-              <Link
-                href={`/student/performance/${rowData.classSubject_id}`}
-                className="btn-primary-no-width px-3"
-              >
-                Performamce
-              </Link>
+              <>
+                {/* <Link
+                  href={`/student/performance/${rowData.classSubject_id}`}
+                  className="btn-primary-no-width px-3"
+                >
+                  Performamce
+                </Link> */}
+                <button
+                  className="btn-primary px-3"
+                  onClick={() =>
+                    handleClickPerformance(rowData.classSubject_id)
+                  }
+                >
+                  Performamce
+                </button>
+              </>
             )}
           />
         </ColumnsDirective>
       </GridComponent>
-      {/* <hr className="mt-10  border-sky-500" /> */}
+      {showPerformanceModal && (
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+          <div
+            className="bg-white rounded-md p-10 lg:w-8/12 md:w-10/12 w-11/12"
+            ref={modalRef}
+          >
+            <h1 className="title text-h5 text-primary">Performance</h1>
+            <>
+              <div className="flex mb-6">
+                <div className="w-6/12">
+                  <h4 className="font-bold text-gray-600">
+                    Teacher:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.teacher_name}
+                    </span>
+                  </h4>
+
+                  <h4 className="font-bold text-gray-600">
+                    Subject Code:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.subject_id}
+                    </span>
+                  </h4>
+
+                  <h4 className="font-bold text-gray-600">
+                    Class Year:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.batch}
+                    </span>
+                  </h4>
+                </div>
+                <div className="w-6/12">
+                  <h4 className="font-bold text-gray-600">
+                    Section Code:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.section_code}
+                    </span>
+                  </h4>
+                  <h4 className="font-bold text-gray-600">
+                    Subject:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.subject_name}
+                    </span>
+                  </h4>
+                  <h4 className="font-bold text-gray-600">
+                    Semester:{' '}
+                    <span className="font-normal">
+                      {studentPerformance.data.details.semester === 1
+                        ? '1st Semester'
+                        : studentPerformance.data.details.semester === 2
+                        ? '2nd Semester'
+                        : 'Summer Term'}
+                    </span>
+                  </h4>
+                </div>
+              </div>
+              <TabComponent heightAdjustMode="Content">
+                <TabItemsDirective>{tabDirectiveElement} </TabItemsDirective>
+              </TabComponent>
+            </>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

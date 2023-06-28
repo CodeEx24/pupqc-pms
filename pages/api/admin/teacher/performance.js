@@ -8,6 +8,8 @@ import AverageClassGrade from '@/models/AverageClassGrade';
 import ClassSubject from '@/models/ClassSubject';
 import Class from '@/models/Class';
 
+import SimpleLinearRegression from 'ml-regression-simple-linear';
+
 const getClassBatch = async (years) => {
   const classBatch = await Promise.all(
     years.map(async (year) => {
@@ -75,23 +77,66 @@ const handler = async (req, res) => {
   await db.connect();
   const transformedClassBatch = await getClassBatch(years);
 
-  const columnData = [];
+  // const columnData = [];
 
-  for (const [year, classIds] of Object.entries(transformedClassBatch)) {
-    const averagePercentage = await calculateAveragePercentage(
-      teacher_id,
-      classIds
-    );
+  // for (const [year, classIds] of Object.entries(transformedClassBatch)) {
+  //   const averagePercentage = await calculateAveragePercentage(
+  //     teacher_id,
+  //     classIds
+  //   );
 
-    columnData.push({ year, averagePercentage });
+  //   columnData.push({ year, averagePercentage });
+  // }
+
+  const columnData = [
+    { year: '2013', averagePercentage: 90 },
+    { year: '2014', averagePercentage: 85 },
+    { year: '2015', averagePercentage: 92 },
+    { year: '2016', averagePercentage: 91 },
+    { year: '2017', averagePercentage: 88 },
+    { year: '2018', averagePercentage: 90 },
+    { year: '2019', averagePercentage: 87 },
+    { year: '2020', averagePercentage: 89 },
+    { year: '2021', averagePercentage: 88 },
+    { year: '2022', averagePercentage: 90 },
+  ];
+
+  const xYear = columnData.map((data) => parseInt(data.year));
+  const yPercentage = columnData.map((data) => data.averagePercentage);
+
+  console.log('xYear:', xYear);
+  console.log('yPercentage:', yPercentage);
+
+  const regression = new SimpleLinearRegression(xYear, yPercentage);
+  const slope = regression.slope;
+
+  console.log('Slope:', slope);
+
+  if (slope > 0) {
+    console.log('The trend is going higher.');
+  } else if (slope < 0) {
+    console.log('The trend is going lower.');
+  } else {
+    console.log('The trend is flat.');
   }
 
-  console.log('columnData: ', columnData);
+  const json = regression.toJSON();
+
+  console.log('JSON FORMAT: ', json);
+
+  const loaded = SimpleLinearRegression.load(json);
+
+  // console.log('Predicted Percentage for 2023:', loaded.predict(2023));
+  columnData.push({
+    year: `${currentYear}`,
+    averagePercentage: Math.round(loaded.predict(Number(currentYear))),
+  });
 
   await db.disconnect();
 
   res.status(200).json({
     techerPerformance: columnData,
+    slope,
   });
 };
 

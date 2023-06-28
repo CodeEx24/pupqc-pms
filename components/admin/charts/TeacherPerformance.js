@@ -10,7 +10,7 @@ import {
   DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
-function TeacherPerformance({ teacherPerformance, teacherDetails }) {
+function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
   console.log('teacherPerformance: ', teacherPerformance);
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
@@ -46,7 +46,11 @@ function TeacherPerformance({ teacherPerformance, teacherDetails }) {
             {teacherDetails.email}
           </span>
         </h6>
+        <h6 className="text-lg font-bold w-1/2">
+          Trend: <span className="font-semibold text-gray-700">{slope}</span>
+        </h6>
       </div>
+      {/* <h6 className="text-lg font-bold w-1/2"></h6> */}
 
       <div className="flex-grow-1 w-full">
         <ChartComponent
