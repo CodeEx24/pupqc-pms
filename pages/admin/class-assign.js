@@ -37,21 +37,20 @@ function ClassManagementScreen() {
 
   // FETCHING DATA NEEDED
   const { data: subjects } = useQuery(['subject'], fetchSubjectCode);
+  const { data: teachers } = useQuery(['teacher'], fetchTeacher);
+  const { data: criterias } = useQuery(['criteria'], fetchCriteria);
 
   const currentYear = new Date().getFullYear();
-  const { data: classYears } = useQuery(['class', currentYear], () =>
+  const classQuery = useQuery(['class', currentYear], () =>
     fetchClassYear(currentYear)
   );
-
-  const { data: teachers } = useQuery(['teacher'], fetchTeacher);
-
-  const { data: criterias } = useQuery(['criteria'], fetchCriteria);
 
   const {
     data: subjectClass,
     refetch: refetchSubjectClass,
     isLoading,
   } = useQuery(['subjectClass'], fetchSubjectClass, {
+    enabled: classQuery.isSuccess,
     refetchOnWindowFocus: false,
   });
 
@@ -78,11 +77,11 @@ function ClassManagementScreen() {
   ];
 
   const classOptions = useMemo(() => {
-    return classYears?.data?.map((classItem) => ({
+    return classQuery?.data?.data?.map((classItem) => ({
       value: classItem.id,
       label: classItem.name,
     }));
-  }, [classYears]);
+  }, [classQuery]);
 
   const SubjectClassMemoized = useMemo(
     () => (
