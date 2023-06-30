@@ -5,7 +5,7 @@ export const teachers = [
   // Per teacher must tought 5 subjects per semester
   {
     _id: '609e16f7c2585b8a5f9ddc51',
-    name: 'Jocarl Basco',
+    name: 'John Doe',
     email: 'teacher@gmail.com',
     password: bcrypt.hashSync('teacher123'),
     gender: 'Female',
@@ -18,9 +18,9 @@ export const teachers = [
   },
   {
     _id: '609e16f7c2585b8a5f9ddc52',
-    name: 'Jocarl Basco',
-    email: 'jocarlbasco24@gmail.com',
-    password: bcrypt.hashSync('john123'),
+    name: 'Eugene Privaldos',
+    email: 'eugene.privaldos.9@gmail.com',
+    password: bcrypt.hashSync('eugene123'),
     gender: 'Male',
     dateOfBirth: new Date('1985-08-10'),
     placeOfBirth: 'Seattle',
@@ -44,9 +44,9 @@ export const teachers = [
   },
   {
     _id: '609e16f7c2585b8a5f9ddc82',
-    name: 'Eugene Privaldos',
-    email: 'eugene.privaldos.9@gmail.com',
-    password: bcrypt.hashSync('eugene123'),
+    name: 'Camille Segundo',
+    email: 'millesegundo@gmail.com',
+    password: bcrypt.hashSync('camille123'),
     gender: 'Female',
     dateOfBirth: new Date('1990-03-25'),
     placeOfBirth: 'San Francisco',

@@ -9,7 +9,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc06', '609e16f7c2585b8a5f9ddc07'],
   },
   {
     _id: '60c635b580dae60004cdd002',
@@ -17,7 +17,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc08', '609e16f7c2585b8a5f9ddc09'],
   },
   {
     _id: '60c635b580dae60004cdd003',
@@ -25,7 +25,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc10', '609e16f7c2585b8a5f9ddc11'],
   },
   {
     _id: '60c635b580dae60004cdd004',
@@ -33,7 +33,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc12', '609e16f7c2585b8a5f9ddc13'],
   },
   {
     _id: '60c635b580dae60004cdd005',
@@ -41,7 +41,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc14', '609e16f7c2585b8a5f9ddc15'],
   },
   {
     _id: '60c635b580dae60004cdd006',
@@ -49,7 +49,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc16', '609e16f7c2585b8a5f9ddc17'],
   },
   {
     _id: '60c635b580dae60004cdd007',
@@ -57,7 +57,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc18', '609e16f7c2585b8a5f9ddc19'],
   },
   {
     _id: '60c635b580dae60004cdd008',
@@ -65,7 +65,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc20', '609e16f7c2585b8a5f9ddc21'],
   },
   {
     _id: '60c635b580dae60004cdd009',
@@ -73,7 +73,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc22', '609e16f7c2585b8a5f9ddc23'],
   },
   {
     _id: '60c635b580dae60004cdd010',
@@ -81,7 +81,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc24', '609e16f7c2585b8a5f9ddc25'],
   },
   {
     _id: '60c635b580dae60004cdd011',
@@ -89,7 +89,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc26', '609e16f7c2585b8a5f9ddc27'],
   },
   {
     _id: '60c635b580dae60004cdd012',
@@ -97,7 +97,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2014',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc28', '609e16f7c2585b8a5f9ddc29'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -108,7 +108,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc30', '609e16f7c2585b8a5f9ddc31'],
   },
   {
     _id: '60c635b580dae60004cdd014',
@@ -116,7 +116,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc32', '609e16f7c2585b8a5f9ddc33'],
   },
   {
     _id: '60c635b580dae60004cdd015',
@@ -124,7 +124,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc34', '609e16f7c2585b8a5f9ddc35'],
   },
   {
     _id: '60c635b580dae60004cdd016',
@@ -132,7 +132,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc36', '609e16f7c2585b8a5f9ddc37'],
   },
   {
     _id: '60c635b580dae60004cdd017',
@@ -140,7 +140,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc38', '609e16f7c2585b8a5f9ddc39'],
   },
   {
     _id: '60c635b580dae60004cdd018',
@@ -148,7 +148,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc40', '609e16f7c2585b8a5f9ddc41'],
   },
   {
     _id: '60c635b580dae60004cdd019',
@@ -156,7 +156,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc42', '609e16f7c2585b8a5f9ddc43'],
   },
   {
     _id: '60c635b580dae60004cdd020',
@@ -164,7 +164,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc44', '609e16f7c2585b8a5f9ddc45'],
   },
   {
     _id: '60c635b580dae60004cdd021',
@@ -172,7 +172,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc46', '609e16f7c2585b8a5f9ddc47'],
   },
   {
     _id: '60c635b580dae60004cdd022',
@@ -180,7 +180,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc48', '609e16f7c2585b8a5f9ddc49'],
   },
   {
     _id: '60c635b580dae60004cdd023',
@@ -188,7 +188,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc50', '609e16f7c2585b8a5f9ddc51'],
   },
   {
     _id: '60c635b580dae60004cdd024',
@@ -196,7 +196,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2015',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc52', '609e16f7c2585b8a5f9ddc53'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -207,7 +207,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc54', '609e16f7c2585b8a5f9ddc55'],
   },
   {
     _id: '60c635b580dae60004cdd026',
@@ -215,7 +215,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc56', '609e16f7c2585b8a5f9ddc57'],
   },
   {
     _id: '60c635b580dae60004cdd027',
@@ -223,7 +223,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc58', '609e16f7c2585b8a5f9ddc59'],
   },
   {
     _id: '60c635b580dae60004cdd028',
@@ -231,7 +231,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc60', '609e16f7c2585b8a5f9ddc61'],
   },
   {
     _id: '60c635b580dae60004cdd029',
@@ -239,7 +239,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc62', '609e16f7c2585b8a5f9ddc63'],
   },
   {
     _id: '60c635b580dae60004cdd030',
@@ -247,7 +247,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc64', '609e16f7c2585b8a5f9ddc65'],
   },
   {
     _id: '60c635b580dae60004cdd031',
@@ -255,7 +255,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc66', '609e16f7c2585b8a5f9ddc67'],
   },
   {
     _id: '60c635b580dae60004cdd032',
@@ -263,7 +263,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc68', '609e16f7c2585b8a5f9ddc69'],
   },
   {
     _id: '60c635b580dae60004cdd033',
@@ -271,7 +271,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc70', '609e16f7c2585b8a5f9ddc71'],
   },
   {
     _id: '60c635b580dae60004cdd034',
@@ -279,7 +279,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc72', '609e16f7c2585b8a5f9ddc73'],
   },
   {
     _id: '60c635b580dae60004cdd035',
@@ -287,7 +287,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc74', '609e16f7c2585b8a5f9ddc75'],
   },
   {
     _id: '60c635b580dae60004cdd036',
@@ -295,7 +295,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2016',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc76', '609e16f7c2585b8a5f9ddc77'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -306,7 +306,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc78', '609e16f7c2585b8a5f9ddc79'],
   },
   {
     _id: '60c635b580dae60004cdd038',
@@ -314,7 +314,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc80', '609e16f7c2585b8a5f9ddc81'],
   },
   {
     _id: '60c635b580dae60004cdd039',
@@ -322,7 +322,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc82', '609e16f7c2585b8a5f9ddc83'],
   },
   {
     _id: '60c635b580dae60004cdd040',
@@ -330,7 +330,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc84', '609e16f7c2585b8a5f9ddc85'],
   },
   {
     _id: '60c635b580dae60004cdd041',
@@ -338,7 +338,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc86', '609e16f7c2585b8a5f9ddc87'],
   },
   {
     _id: '60c635b580dae60004cdd042',
@@ -346,7 +346,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc88', '609e16f7c2585b8a5f9ddc89'],
   },
   {
     _id: '60c635b580dae60004cdd043',
@@ -354,7 +354,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc90', '609e16f7c2585b8a5f9ddc91'],
   },
   {
     _id: '60c635b580dae60004cdd044',
@@ -362,7 +362,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc92', '609e16f7c2585b8a5f9ddc93'],
   },
   {
     _id: '60c635b580dae60004cdd045',
@@ -370,7 +370,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc94', '609e16f7c2585b8a5f9ddc95'],
   },
   {
     _id: '60c635b580dae60004cdd046',
@@ -378,7 +378,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc96', '609e16f7c2585b8a5f9ddc97'],
   },
   {
     _id: '60c635b580dae60004cdd047',
@@ -386,7 +386,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f9ddc98', '609e16f7c2585b8a5f9ddc99'],
   },
   {
     _id: '60c635b580dae60004cdd048',
@@ -394,7 +394,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2017',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc01', '609e16f7c2585b8a5f1ddc02'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -405,7 +405,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc03', '609e16f7c2585b8a5f1ddc04'],
   },
   {
     _id: '60c635b580dae60004cdd050',
@@ -413,7 +413,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc05', '609e16f7c2585b8a5f1ddc06'],
   },
   {
     _id: '60c635b580dae60004cdd051',
@@ -421,7 +421,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc07', '609e16f7c2585b8a5f1ddc08'],
   },
   {
     _id: '60c635b580dae60004cdd052',
@@ -429,7 +429,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc09', '609e16f7c2585b8a5f1ddc10'],
   },
   {
     _id: '60c635b580dae60004cdd053',
@@ -437,7 +437,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc11', '609e16f7c2585b8a5f1ddc12'],
   },
   {
     _id: '60c635b580dae60004cdd054',
@@ -445,7 +445,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc13', '609e16f7c2585b8a5f1ddc14'],
   },
   {
     _id: '60c635b580dae60004cdd055',
@@ -453,7 +453,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc15', '609e16f7c2585b8a5f1ddc16'],
   },
   {
     _id: '60c635b580dae60004cdd056',
@@ -461,7 +461,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc17', '609e16f7c2585b8a5f1ddc18'],
   },
   {
     _id: '60c635b580dae60004cdd057',
@@ -469,7 +469,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc19', '609e16f7c2585b8a5f1ddc20'],
   },
   {
     _id: '60c635b580dae60004cdd058',
@@ -477,7 +477,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc21', '609e16f7c2585b8a5f1ddc22'],
   },
   {
     _id: '60c635b580dae60004cdd059',
@@ -485,7 +485,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc23', '609e16f7c2585b8a5f1ddc24'],
   },
   {
     _id: '60c635b580dae60004cdd060',
@@ -493,7 +493,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2018',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc25', '609e16f7c2585b8a5f1ddc26'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -504,7 +504,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc27', '609e16f7c2585b8a5f1ddc28'],
   },
   {
     _id: '60c635b580dae60004cdd062',
@@ -512,7 +512,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc29', '609e16f7c2585b8a5f1ddc30'],
   },
   {
     _id: '60c635b580dae60004cdd063',
@@ -520,7 +520,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc31', '609e16f7c2585b8a5f1ddc32'],
   },
   {
     _id: '60c635b580dae60004cdd064',
@@ -528,7 +528,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc33', '609e16f7c2585b8a5f1ddc34'],
   },
   {
     _id: '60c635b580dae60004cdd065',
@@ -536,7 +536,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc35', '609e16f7c2585b8a5f1ddc36'],
   },
   {
     _id: '60c635b580dae60004cdd066',
@@ -544,7 +544,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc37', '609e16f7c2585b8a5f1ddc38'],
   },
   {
     _id: '60c635b580dae60004cdd067',
@@ -552,7 +552,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc39', '609e16f7c2585b8a5f1ddc40'],
   },
   {
     _id: '60c635b580dae60004cdd068',
@@ -560,7 +560,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc41', '609e16f7c2585b8a5f1ddc42'],
   },
   {
     _id: '60c635b580dae60004cdd069',
@@ -568,7 +568,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc43', '609e16f7c2585b8a5f1ddc44'],
   },
   {
     _id: '60c635b580dae60004cdd070',
@@ -576,7 +576,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc45', '609e16f7c2585b8a5f1ddc46'],
   },
   {
     _id: '60c635b580dae60004cdd071',
@@ -584,7 +584,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc47', '609e16f7c2585b8a5f1ddc48'],
   },
   {
     _id: '60c635b580dae60004cdd072',
@@ -592,7 +592,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2019',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc49', '609e16f7c2585b8a5f1ddc50'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -603,7 +603,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc51', '609e16f7c2585b8a5f1ddc52'],
   },
   {
     _id: '60c635b580dae60004cdd074',
@@ -611,7 +611,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc53', '609e16f7c2585b8a5f1ddc54'],
   },
   {
     _id: '60c635b580dae60004cdd075',
@@ -619,7 +619,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc55', '609e16f7c2585b8a5f1ddc56'],
   },
   {
     _id: '60c635b580dae60004cdd076',
@@ -627,7 +627,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc57', '609e16f7c2585b8a5f1ddc58'],
   },
   {
     _id: '60c635b580dae60004cdd077',
@@ -635,7 +635,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc59', '609e16f7c2585b8a5f1ddc60'],
   },
   {
     _id: '60c635b580dae60004cdd078',
@@ -643,7 +643,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc61', '609e16f7c2585b8a5f1ddc62'],
   },
   {
     _id: '60c635b580dae60004cdd079',
@@ -651,7 +651,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc63', '609e16f7c2585b8a5f1ddc64'],
   },
   {
     _id: '60c635b580dae60004cdd080',
@@ -659,7 +659,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc65', '609e16f7c2585b8a5f1ddc66'],
   },
   {
     _id: '60c635b580dae60004cdd081',
@@ -667,7 +667,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc67', '609e16f7c2585b8a5f1ddc68'],
   },
   {
     _id: '60c635b580dae60004cdd082',
@@ -675,7 +675,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc69', '609e16f7c2585b8a5f1ddc70'],
   },
   {
     _id: '60c635b580dae60004cdd083',
@@ -683,7 +683,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc71', '609e16f7c2585b8a5f1ddc72'],
   },
   {
     _id: '60c635b580dae60004cdd084',
@@ -691,7 +691,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2020',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc73', '609e16f7c2585b8a5f1ddc74'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -702,7 +702,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc75', '609e16f7c2585b8a5f1ddc76'],
   },
   {
     _id: '60c635b580dae60004cdd086',
@@ -710,7 +710,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc77', '609e16f7c2585b8a5f1ddc78'],
   },
   {
     _id: '60c635b580dae60004cdd087',
@@ -718,7 +718,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc79', '609e16f7c2585b8a5f1ddc80'],
   },
   {
     _id: '60c635b580dae60004cdd088',
@@ -726,7 +726,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc81', '609e16f7c2585b8a5f1ddc82'],
   },
   {
     _id: '60c635b580dae60004cdd089',
@@ -734,7 +734,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc83', '609e16f7c2585b8a5f1ddc84'],
   },
   {
     _id: '60c635b580dae60004cdd090',
@@ -742,7 +742,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc85', '609e16f7c2585b8a5f1ddc86'],
   },
   {
     _id: '60c635b580dae60004cdd091',
@@ -750,7 +750,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc87', '609e16f7c2585b8a5f1ddc88'],
   },
   {
     _id: '60c635b580dae60004cdd092',
@@ -758,7 +758,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc89', '609e16f7c2585b8a5f1ddc90'],
   },
   {
     _id: '60c635b580dae60004cdd093',
@@ -766,7 +766,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc91', '609e16f7c2585b8a5f1ddc92'],
   },
   {
     _id: '60c635b580dae60004cdd094',
@@ -774,7 +774,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc93', '609e16f7c2585b8a5f1ddc94'],
   },
   {
     _id: '60c635b580dae60004cdd095',
@@ -782,7 +782,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc95', '609e16f7c2585b8a5f1ddc96'],
   },
   {
     _id: '60c635b580dae60004cdd096',
@@ -790,7 +790,7 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2021',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc97', '609e16f7c2585b8a5f1ddc98'],
   },
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
@@ -801,7 +801,7 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f1ddc99', '609e16f7c2585b8a5f2ddc01'],
   },
   {
     _id: '60c635b580dae60004cdd098',
@@ -809,7 +809,7 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc02', '609e16f7c2585b8a5f2ddc03'],
   },
   {
     _id: '60c635b580dae60004cdd099',
@@ -817,7 +817,7 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc04', '609e16f7c2585b8a5f2ddc05'],
   },
   {
     _id: '60c635b580dae60004cdd100',
@@ -825,7 +825,7 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc06', '609e16f7c2585b8a5f2ddc07'],
   },
   {
     _id: '60c635b580dae60004cdd101',
@@ -833,7 +833,7 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc08', '609e16f7c2585b8a5f2ddc09'],
   },
   {
     _id: '60c635b580dae60004cdd102',
@@ -841,7 +841,7 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc10', '609e16f7c2585b8a5f2ddc11'],
   },
   {
     _id: '60c635b580dae60004cdd103',
@@ -849,7 +849,7 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc12', '609e16f7c2585b8a5f2ddc13'],
   },
   {
     _id: '60c635b580dae60004cdd104',
@@ -857,7 +857,7 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc14', '609e16f7c2585b8a5f2ddc15'],
   },
   {
     _id: '60c635b580dae60004cdd105',
@@ -865,7 +865,7 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc16', '609e16f7c2585b8a5f2ddc17'],
   },
   {
     _id: '60c635b580dae60004cdd106',
@@ -873,7 +873,7 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc18', '609e16f7c2585b8a5f2ddc19'],
   },
   {
     _id: '60c635b580dae60004cdd107',
@@ -881,7 +881,7 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2022',
-    student_id: [],
+    student_id: ['609e16f7c2585b8a5f2ddc20', '609e16f7c2585b8a5f2ddc21'],
   },
   {
     _id: '60c635b580dae60004cdd108',
@@ -889,7 +889,12 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2022',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc22',
+      '609e16f7c2585b8a5f2ddc23',
+      '609e16f7c2585b8a5f2ddc24',
+      '609e16f7c2585b8a5f2ddc25',
+    ],
   },
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -900,7 +905,13 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc26',
+      '609e16f7c2585b8a5f2ddc27',
+      '609e16f7c2585b8a5f2ddc28',
+      '609e16f7c2585b8a5f2ddc29',
+      '609e16f7c2585b8a5f2ddc30',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd110',
@@ -908,7 +919,13 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc31',
+      '609e16f7c2585b8a5f2ddc32',
+      '609e16f7c2585b8a5f2ddc33',
+      '609e16f7c2585b8a5f2ddc34',
+      '609e16f7c2585b8a5f2ddc35',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd111',
@@ -916,7 +933,13 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc36',
+      '609e16f7c2585b8a5f2ddc37',
+      '609e16f7c2585b8a5f2ddc38',
+      '609e16f7c2585b8a5f2ddc39',
+      '609e16f7c2585b8a5f2ddc40',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd112',
@@ -924,7 +947,13 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc41',
+      '609e16f7c2585b8a5f2ddc42',
+      '609e16f7c2585b8a5f2ddc43',
+      '609e16f7c2585b8a5f2ddc44',
+      '609e16f7c2585b8a5f2ddc45',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd113',
@@ -932,7 +961,13 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc46',
+      '609e16f7c2585b8a5f2ddc47',
+      '609e16f7c2585b8a5f2ddc48',
+      '609e16f7c2585b8a5f2ddc49',
+      '609e16f7c2585b8a5f2ddc50',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd114',
@@ -940,7 +975,13 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc51',
+      '609e16f7c2585b8a5f2ddc52',
+      '609e16f7c2585b8a5f2ddc53',
+      '609e16f7c2585b8a5f2ddc54',
+      '609e16f7c2585b8a5f2ddc55',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd115',
@@ -948,7 +989,13 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc56',
+      '609e16f7c2585b8a5f2ddc57',
+      '609e16f7c2585b8a5f2ddc58',
+      '609e16f7c2585b8a5f2ddc59',
+      '609e16f7c2585b8a5f2ddc60',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd116',
@@ -956,7 +1003,13 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc61',
+      '609e16f7c2585b8a5f2ddc62',
+      '609e16f7c2585b8a5f2ddc63',
+      '609e16f7c2585b8a5f2ddc64',
+      '609e16f7c2585b8a5f2ddc65',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd117',
@@ -964,7 +1017,13 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc66',
+      '609e16f7c2585b8a5f2ddc67',
+      '609e16f7c2585b8a5f2ddc68',
+      '609e16f7c2585b8a5f2ddc69',
+      '609e16f7c2585b8a5f2ddc70',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd118',
@@ -972,7 +1031,13 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc71',
+      '609e16f7c2585b8a5f2ddc72',
+      '609e16f7c2585b8a5f2ddc73',
+      '609e16f7c2585b8a5f2ddc74',
+      '609e16f7c2585b8a5f2ddc75',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd119',
@@ -980,7 +1045,13 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc76',
+      '609e16f7c2585b8a5f2ddc77',
+      '609e16f7c2585b8a5f2ddc78',
+      '609e16f7c2585b8a5f2ddc79',
+      '609e16f7c2585b8a5f2ddc80',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd120',
@@ -988,7 +1059,13 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc81',
+      '609e16f7c2585b8a5f2ddc82',
+      '609e16f7c2585b8a5f2ddc83',
+      '609e16f7c2585b8a5f2ddc84',
+      '609e16f7c2585b8a5f2ddc85',
+    ],
   },
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -999,7 +1076,13 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc86',
+      '609e16f7c2585b8a5f2ddc87',
+      '609e16f7c2585b8a5f2ddc88',
+      '609e16f7c2585b8a5f2ddc89',
+      '609e16f7c2585b8a5f2ddc90',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd122',
@@ -1007,7 +1090,13 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc91',
+      '609e16f7c2585b8a5f2ddc92',
+      '609e16f7c2585b8a5f2ddc93',
+      '609e16f7c2585b8a5f2ddc94',
+      '609e16f7c2585b8a5f2ddc95',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd123',
@@ -1015,7 +1104,13 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f2ddc96',
+      '609e16f7c2585b8a5f2ddc97',
+      '609e16f7c2585b8a5f2ddc98',
+      '609e16f7c2585b8a5f2ddc99',
+      '609e16f7c2585b8a5f3ddc01',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd124',
@@ -1023,7 +1118,13 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc02',
+      '609e16f7c2585b8a5f3ddc03',
+      '609e16f7c2585b8a5f3ddc04',
+      '609e16f7c2585b8a5f3ddc05',
+      '609e16f7c2585b8a5f3ddc06',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd125',
@@ -1031,7 +1132,12 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc07',
+      '609e16f7c2585b8a5f3ddc08',
+      '609e16f7c2585b8a5f3ddc09',
+      '609e16f7c2585b8a5f3ddc10',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd126',
@@ -1039,7 +1145,13 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc11',
+      '609e16f7c2585b8a5f3ddc12',
+      '609e16f7c2585b8a5f3ddc13',
+      '609e16f7c2585b8a5f3ddc14',
+      '609e16f7c2585b8a5f3ddc15',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd127',
@@ -1047,7 +1159,13 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc16',
+      '609e16f7c2585b8a5f3ddc17',
+      '609e16f7c2585b8a5f3ddc18',
+      '609e16f7c2585b8a5f3ddc19',
+      '609e16f7c2585b8a5f3ddc20',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd128',
@@ -1055,7 +1173,13 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc21',
+      '609e16f7c2585b8a5f3ddc22',
+      '609e16f7c2585b8a5f3ddc23',
+      '609e16f7c2585b8a5f3ddc24',
+      '609e16f7c2585b8a5f3ddc25',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd129',
@@ -1063,7 +1187,13 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc26',
+      '609e16f7c2585b8a5f3ddc27',
+      '609e16f7c2585b8a5f3ddc28',
+      '609e16f7c2585b8a5f3ddc29',
+      '609e16f7c2585b8a5f3ddc30',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd130',
@@ -1071,7 +1201,13 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc31',
+      '609e16f7c2585b8a5f3ddc32',
+      '609e16f7c2585b8a5f3ddc33',
+      '609e16f7c2585b8a5f3ddc34',
+      '609e16f7c2585b8a5f3ddc35',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd131',
@@ -1079,7 +1215,13 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc36',
+      '609e16f7c2585b8a5f3ddc37',
+      '609e16f7c2585b8a5f3ddc38',
+      '609e16f7c2585b8a5f3ddc39',
+      '609e16f7c2585b8a5f3ddc40',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd132',
@@ -1087,7 +1229,13 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc41',
+      '609e16f7c2585b8a5f3ddc42',
+      '609e16f7c2585b8a5f3ddc43',
+      '609e16f7c2585b8a5f3ddc44',
+      '609e16f7c2585b8a5f3ddc45',
+    ],
   },
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -1098,7 +1246,13 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f9ddc01',
+      '609e16f7c2585b8a5f9ddc02',
+      '609e16f7c2585b8a5f9ddc03',
+      '609e16f7c2585b8a5f9ddc04',
+      '609e16f7c2585b8a5f9ddc05',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd134',
@@ -1106,7 +1260,13 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc46',
+      '609e16f7c2585b8a5f3ddc47',
+      '609e16f7c2585b8a5f3ddc48',
+      '609e16f7c2585b8a5f3ddc49',
+      '609e16f7c2585b8a5f3ddc50',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd135',
@@ -1114,7 +1274,13 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc51',
+      '609e16f7c2585b8a5f3ddc52',
+      '609e16f7c2585b8a5f3ddc53',
+      '609e16f7c2585b8a5f3ddc54',
+      '609e16f7c2585b8a5f3ddc55',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd136',
@@ -1122,7 +1288,13 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc56',
+      '609e16f7c2585b8a5f3ddc57',
+      '609e16f7c2585b8a5f3ddc58',
+      '609e16f7c2585b8a5f3ddc59',
+      '609e16f7c2585b8a5f3ddc60',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd137',
@@ -1130,7 +1302,13 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc61',
+      '609e16f7c2585b8a5f3ddc62',
+      '609e16f7c2585b8a5f3ddc63',
+      '609e16f7c2585b8a5f3ddc64',
+      '609e16f7c2585b8a5f3ddc65',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd138',
@@ -1138,7 +1316,13 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc66',
+      '609e16f7c2585b8a5f3ddc67',
+      '609e16f7c2585b8a5f3ddc68',
+      '609e16f7c2585b8a5f3ddc69',
+      '609e16f7c2585b8a5f3ddc70',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd139',
@@ -1146,7 +1330,13 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc71',
+      '609e16f7c2585b8a5f3ddc72',
+      '609e16f7c2585b8a5f3ddc73',
+      '609e16f7c2585b8a5f3ddc74',
+      '609e16f7c2585b8a5f3ddc75',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd140',
@@ -1154,7 +1344,13 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc76',
+      '609e16f7c2585b8a5f3ddc77',
+      '609e16f7c2585b8a5f3ddc78',
+      '609e16f7c2585b8a5f3ddc79',
+      '609e16f7c2585b8a5f3ddc80',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd141',
@@ -1162,7 +1358,13 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc81',
+      '609e16f7c2585b8a5f3ddc82',
+      '609e16f7c2585b8a5f3ddc83',
+      '609e16f7c2585b8a5f3ddc84',
+      '609e16f7c2585b8a5f3ddc85',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd142',
@@ -1170,7 +1372,13 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc86',
+      '609e16f7c2585b8a5f3ddc87',
+      '609e16f7c2585b8a5f3ddc88',
+      '609e16f7c2585b8a5f3ddc89',
+      '609e16f7c2585b8a5f3ddc90',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd143',
@@ -1178,7 +1386,13 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc91',
+      '609e16f7c2585b8a5f3ddc92',
+      '609e16f7c2585b8a5f3ddc93',
+      '609e16f7c2585b8a5f3ddc94',
+      '609e16f7c2585b8a5f3ddc95',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd144',
@@ -1186,7 +1400,13 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f3ddc96',
+      '609e16f7c2585b8a5f3ddc97',
+      '609e16f7c2585b8a5f3ddc98',
+      '609e16f7c2585b8a5f3ddc99',
+      '609e16f7c2585b8a5f4ddc01',
+    ],
   },
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -1197,7 +1417,13 @@ export const classes = [
     year: 1,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc02',
+      '609e16f7c2585b8a5f4ddc03',
+      '609e16f7c2585b8a5f4ddc04',
+      '609e16f7c2585b8a5f4ddc05',
+      '609e16f7c2585b8a5f4ddc06',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd146',
@@ -1205,7 +1431,13 @@ export const classes = [
     year: 1,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc07',
+      '609e16f7c2585b8a5f4ddc08',
+      '609e16f7c2585b8a5f4ddc09',
+      '609e16f7c2585b8a5f4ddc10',
+      '609e16f7c2585b8a5f4ddc11',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd147',
@@ -1213,7 +1445,13 @@ export const classes = [
     year: 1,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc12',
+      '609e16f7c2585b8a5f4ddc13',
+      '609e16f7c2585b8a5f4ddc14',
+      '609e16f7c2585b8a5f4ddc15',
+      '609e16f7c2585b8a5f4ddc16',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd148',
@@ -1221,7 +1459,13 @@ export const classes = [
     year: 2,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc17',
+      '609e16f7c2585b8a5f4ddc18',
+      '609e16f7c2585b8a5f4ddc19',
+      '609e16f7c2585b8a5f4ddc19',
+      '609e16f7c2585b8a5f4ddc20',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd149',
@@ -1229,7 +1473,13 @@ export const classes = [
     year: 2,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc21',
+      '609e16f7c2585b8a5f4ddc22',
+      '609e16f7c2585b8a5f4ddc23',
+      '609e16f7c2585b8a5f4ddc24',
+      '609e16f7c2585b8a5f4ddc25',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd150',
@@ -1237,7 +1487,13 @@ export const classes = [
     year: 2,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc26',
+      '609e16f7c2585b8a5f4ddc27',
+      '609e16f7c2585b8a5f4ddc28',
+      '609e16f7c2585b8a5f4ddc29',
+      '609e16f7c2585b8a5f4ddc30',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd151',
@@ -1245,7 +1501,13 @@ export const classes = [
     year: 3,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc31',
+      '609e16f7c2585b8a5f4ddc32',
+      '609e16f7c2585b8a5f4ddc33',
+      '609e16f7c2585b8a5f4ddc34',
+      '609e16f7c2585b8a5f4ddc35',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd152',
@@ -1253,7 +1515,13 @@ export const classes = [
     year: 3,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc36',
+      '609e16f7c2585b8a5f4ddc37',
+      '609e16f7c2585b8a5f4ddc38',
+      '609e16f7c2585b8a5f4ddc39',
+      '609e16f7c2585b8a5f4ddc40',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd153',
@@ -1261,7 +1529,13 @@ export const classes = [
     year: 3,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc41',
+      '609e16f7c2585b8a5f4ddc42',
+      '609e16f7c2585b8a5f4ddc43',
+      '609e16f7c2585b8a5f4ddc44',
+      '609e16f7c2585b8a5f4ddc45',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd154',
@@ -1269,7 +1543,13 @@ export const classes = [
     year: 4,
     section: 1,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc46',
+      '609e16f7c2585b8a5f4ddc47',
+      '609e16f7c2585b8a5f4ddc48',
+      '609e16f7c2585b8a5f4ddc49',
+      '609e16f7c2585b8a5f4ddc50',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd155',
@@ -1277,7 +1557,13 @@ export const classes = [
     year: 4,
     section: 2,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc51',
+      '609e16f7c2585b8a5f4ddc52',
+      '609e16f7c2585b8a5f4ddc53',
+      '609e16f7c2585b8a5f4ddc54',
+      '609e16f7c2585b8a5f4ddc55',
+    ],
   },
   {
     _id: '60c635b580dae60004cdd156',
@@ -1285,6 +1571,12 @@ export const classes = [
     year: 4,
     section: 3,
     batch: '2023',
-    student_id: [],
+    student_id: [
+      '609e16f7c2585b8a5f4ddc56',
+      '609e16f7c2585b8a5f4ddc57',
+      '609e16f7c2585b8a5f4ddc58',
+      '609e16f7c2585b8a5f4ddc59',
+      '609e16f7c2585b8a5f4ddc60',
+    ],
   },
 ];

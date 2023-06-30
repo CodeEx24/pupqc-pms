@@ -15,6 +15,7 @@ import {
   fetchSubjectCode,
   fetchTeacher,
 } from '../../components/hooks/Admin/fetch';
+import Processing from '../../components/Processing';
 
 function ClassManagementScreen() {
   // HOOK FORM
@@ -146,12 +147,12 @@ function ClassManagementScreen() {
 
       await addClassSubjectMutation.mutateAsync(data);
 
-      refetchSubjectClass();
       setSelectedSubject(null);
       setSelectedSemester(null);
       setSelectedClass(null);
       setSelectedCriteria(null);
       setSelectedTeacher(null);
+      await refetchSubjectClass();
       toast.success('Subject added successfully');
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -314,6 +315,7 @@ function ClassManagementScreen() {
         <div className="w-full">
           {isLoading ? 'Loading...' : SubjectClassMemoized}
         </div>
+        {submitting && <Processing text="Adding the class" />}
       </div>
     </AdminLayout>
   );

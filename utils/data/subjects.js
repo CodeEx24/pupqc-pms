@@ -1,4 +1,37 @@
-export const subject = [
+// const wew = [
+//   'ITCS-032',
+//   'DSAA-033',
+//   'OSYS-512',
+//   'SENG-516',
+//   'AINT-623',
+//   'DBMS-732',
+//   'NWKS-321',
+//   'SYSP-443',
+//   'WEBD-615',
+//   'DSAI-721',
+//   'CMPN-133',
+//   'SYSC-621',
+//   'PRGR-833',
+//   'PRJC-411',
+//   'SYSC-541',
+//   'MLBD-652',
+//   'INFO-511',
+//   'SECY-711',
+//   'CMPN-622',
+//   'MLBD-611',
+//   'INFO-621',
+//   'EMBS-742',
+//   'GAME-531',
+//   'IOTC-651',
+//   'ROBT-721',
+//   'CSCI-781',
+//   'NLPN-731',
+//   'CLPS-411',
+//   'VISN-621',
+//   'PRGS-611',
+// ];
+
+export const subjects = [
   {
     _id: 'ITCS-032',
     name: 'Introduction to Computer Science',

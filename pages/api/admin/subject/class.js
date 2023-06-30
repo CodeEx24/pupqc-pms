@@ -60,6 +60,10 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
+  classDataRecord.sort((a, b) =>
+    b.classSubject_id.toString().localeCompare(a.classSubject_id.toString())
+  );
+
   const classNameList = [
     ...new Set(classDataRecord.map((item) => item.class_name)),
   ];

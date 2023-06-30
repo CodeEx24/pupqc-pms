@@ -20,16 +20,19 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import { useForm } from 'react-hook-form';
 import { deleteClassSubject } from '../../hooks/Admin/deleteData';
 import { toast } from 'react-toastify';
+import Processing from '../../Processing';
 
 function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [classId, setClassId] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const { handleSubmit } = useForm();
 
   const handleDeletingClass = async () => {
     try {
       setShowDeleteModal(false);
+      setIsProcessing(true);
       const res = await deleteClassSubject(classId);
       await refetchSubjectClass();
       toast.success(res.message);
@@ -39,6 +42,8 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
       } else {
         toast.error('An error occurred while deleting the subject.');
       }
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -214,6 +219,8 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
           </form>
         </div>
       )}
+
+      {isProcessing && <Processing text={'Deleting the class'} />}
     </>
   );
 }
