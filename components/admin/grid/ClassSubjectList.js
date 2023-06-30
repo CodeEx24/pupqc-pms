@@ -11,7 +11,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import { DropDownList } from '@syncfusion/ej2/dropdowns';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 // import { useEffect } from 'react';
@@ -52,10 +52,13 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
     json: subjectClass.classDataRecord,
   });
 
-  const pageOptions = {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
-  };
+  const pageOptions = useMemo(() => {
+    return {
+      pageSize: 10,
+      pageSizes: [10, 25, 50, 100],
+      currentPage: 1,
+    };
+  }, []);
 
   const semesterOptions2 = {
     create: () => {
@@ -116,6 +119,7 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
       grid.pdfExport();
     }
   };
+
   return (
     <>
       <GridComponent

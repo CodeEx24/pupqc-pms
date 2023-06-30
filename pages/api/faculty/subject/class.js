@@ -49,7 +49,8 @@ const handler = async (req, res) => {
     })
   );
 
-  //   const subjects = await Subject.find();
+  // Sort the classDataRecord array in descending order based on the batch
+  classDataRecord.sort((a, b) => b.batch - a.batch);
 
   await db.disconnect();
 
