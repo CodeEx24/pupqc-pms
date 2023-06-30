@@ -36,14 +36,21 @@ function ClassManagementScreen() {
   const [submitting, setSubmitting] = useState(false);
 
   // FETCHING DATA NEEDED
-  const { data: subjects } = useQuery(['subject'], fetchSubjectCode);
-  const { data: teachers } = useQuery(['teacher'], fetchTeacher);
-  const { data: criterias } = useQuery(['criteria'], fetchCriteria);
+  const teacherQuery = useQuery(['teacher'], fetchTeacher);
+  const subjectQuery = useQuery(['subject'], fetchSubjectCode, {
+    enabled: teacherQuery.isSuccess,
+  });
 
   const currentYear = new Date().getFullYear();
-  const classQuery = useQuery(['class', currentYear], () =>
-    fetchClassYear(currentYear)
+  const classQuery = useQuery(
+    ['class', currentYear],
+    () => fetchClassYear(currentYear),
+    { enabled: subjectQuery.isSuccess }
   );
+
+  const criteriaQuery = useQuery(['criteria'], fetchCriteria, {
+    enabled: classQuery.isSuccess,
+  });
 
   const {
     data: subjectClass,
@@ -55,17 +62,17 @@ function ClassManagementScreen() {
   });
 
   // OPTIONS FOR SELECT
-  const subjectOptions = subjects?.data?.map((item) => ({
+  const subjectOptions = subjectQuery?.data?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
-  const teacherOptions = teachers?.data?.map((item) => ({
+  const teacherOptions = teacherQuery?.data?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
-  const criteriaOptions = criterias?.data?.map((item) => ({
+  const criteriaOptions = criteriaQuery?.data?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
