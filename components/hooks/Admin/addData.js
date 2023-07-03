@@ -7,3 +7,7 @@ export const addSubjectData = (data) => {
 export const addSubjectClassData = (data) => {
   return axios.post(`/api/admin/class-subject/insert`, data);
 };
+
+export const addCriteriaData = (data) => {
+  return axios.post(`/api/admin/criteria/insert`, data);
+};

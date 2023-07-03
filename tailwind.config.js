@@ -14,7 +14,14 @@ module.exports = {
       fontFamily: {
         poppins: 'Poppins',
         roboto: 'Roboto',
-      }, // Define custom fonts
+      },
+
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+      },
+      // Define custom fonts
       // fontSize: {}, // Define custom font sizes
       // fontWeight: {}, // Define custom font weights
       // letterSpacing: {}, // Define custom letter spacing

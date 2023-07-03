@@ -6,10 +6,17 @@ import CriteriaList from '../../components/admin/grid/CriteriaList';
 import { fetchCriteria } from '../../components/hooks/Admin/fetch';
 
 // Update this pop-up on admin side
-import CriteriaPopup from '../../components/faculty/CriteriaPopup';
+import CriteriaPopup1 from '../../components/faculty/CriteriaPopup1';
+
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Processing from '../../components/Processing';
+import { MdOutlineCancel } from 'react-icons/md';
 
 function CriteriaScreen() {
   const [showFirstModal, setShowFirstModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
   // const [showSecondModal, setShowSecondModal] = useState(false);
 
   const [criteriaObject, setCriteriaObject] = useState({
@@ -20,18 +27,36 @@ function CriteriaScreen() {
   const {
     data: criteriaList,
     isLoading,
-    // refetch: refetchTeacherList,
+    refetch: refetchCriteriaList,
   } = useQuery(['criteriaList'], fetchCriteria);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    setCriteriaObject({ criteria_code: data.code, amount: data.amount });
-    setShowFirstModal(true);
+  const onSubmit = async (data) => {
+    try {
+      setIsProcessing(true);
+      await axios.get('/api/admin/criteria/code', {
+        params: {
+          name: data.code,
+        },
+      });
+      // Handle successful response
+      setCriteriaObject({ criteria_code: data.code, amount: data.amount });
+      setShowFirstModal(true);
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error.message);
+      }
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -92,7 +117,7 @@ function CriteriaScreen() {
             {isLoading ? (
               'Loading...'
             ) : (
-              <CriteriaList criteria={criteriaList.data} />
+              <CriteriaList criteria={criteriaList?.data} />
             )}
           </div>
         </div>
@@ -100,10 +125,24 @@ function CriteriaScreen() {
       {showFirstModal && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-md p-10 m-8 h-1/2 w-full md:w-10/12 lg:w-6/12 overflow-y-auto">
-            <CriteriaPopup amount={criteriaObject.amount} />
+            <button
+              className="float-right text-2xl"
+              onClick={() => setShowFirstModal(false)}
+            >
+              <MdOutlineCancel />
+            </button>
+
+            <CriteriaPopup1
+              amount={criteriaObject.amount}
+              code={criteriaObject.criteria_code}
+              setShowFirstModal={setShowFirstModal}
+              reset={reset}
+              refetchCriteriaList={refetchCriteriaList}
+            />
           </div>
         </div>
       )}
+      {isProcessing && <Processing text="Checking the criteria code" />}
     </AdminLayout>
   );
 }

@@ -60,7 +60,7 @@ const handler = async (req, res) => {
 
   await db.disconnect();
 
-  classDataRecord.sort((a, b) =>
+  await classDataRecord.sort((a, b) =>
     b.classSubject_id.toString().localeCompare(a.classSubject_id.toString())
   );
 

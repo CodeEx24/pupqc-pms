@@ -122,81 +122,85 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
 
   return (
     <>
-      <GridComponent
-        id="grid2"
-        dataSource={subjectClassDataManager}
-        toolbar={toolbar}
-        allowPdfExport={true}
-        allowPaging={true}
-        toolbarClick={toolbarClick}
-        ref={(g) => (grid = g)}
-        allowSorting={true}
-        allowFiltering={true}
-        pageSettings={pageOptions}
-      >
-        <ColumnsDirective>
-          <ColumnDirective
-            field="teacher"
-            headerText="Teacher"
-            width="100"
-            textAlign="Left"
-          />
-          <ColumnDirective
-            field="class_name"
-            headerText="Class Name"
-            width="70"
-            textAlign="Left"
-            filterBarTemplate={classNameOptions}
-          />
-          <ColumnDirective
-            field="subject_id"
-            headerText="Subject Code"
-            width="70"
-            textAlign="Left"
-            isPrimaryKey={true}
-          />
+      <div className="control-pane">
+        <div className="control-section paging-api">
+          <GridComponent
+            id="grid2"
+            dataSource={subjectClassDataManager}
+            toolbar={toolbar}
+            allowPdfExport={true}
+            allowPaging={true}
+            toolbarClick={toolbarClick}
+            ref={(g) => (grid = g)}
+            allowSorting={true}
+            allowFiltering={true}
+            pageSettings={pageOptions}
+          >
+            <ColumnsDirective>
+              <ColumnDirective
+                field="teacher"
+                headerText="Teacher"
+                width="100"
+                textAlign="Left"
+              />
+              <ColumnDirective
+                field="class_name"
+                headerText="Class Name"
+                width="70"
+                textAlign="Left"
+                filterBarTemplate={classNameOptions}
+              />
+              <ColumnDirective
+                field="subject_id"
+                headerText="Subject Code"
+                width="70"
+                textAlign="Left"
+                isPrimaryKey={true}
+              />
 
-          <ColumnDirective
-            field="criteria"
-            headerText="Criteria"
-            width="70"
-            textAlign="Left"
-          />
-          <ColumnDirective
-            field="semester"
-            headerText="Semester"
-            width="80"
-            textAlign="Left"
-            filterBarTemplate={semesterOptions2}
-          />
-          <ColumnDirective
-            field="batch"
-            headerText="Batch"
-            width="70"
-            textAlign="Left"
-          />
+              <ColumnDirective
+                field="criteria"
+                headerText="Criteria"
+                width="70"
+                textAlign="Left"
+              />
+              <ColumnDirective
+                field="semester"
+                headerText="Semester"
+                width="80"
+                textAlign="Left"
+                filterBarTemplate={semesterOptions2}
+              />
+              <ColumnDirective
+                field="batch"
+                headerText="Batch"
+                width="70"
+                textAlign="Left"
+              />
 
-          <ColumnDirective
-            field="classSubject_id"
-            headerText="Delete"
-            width="100"
-            textAlign="Left"
-            allowSearching={false}
-            template={(rowData) => (
-              <button
-                className={`btn-secondary ${
-                  rowData.isGradeFinalized ? 'opacity-60' : ''
-                }`}
-                disabled={rowData.isGradeFinalized}
-                onClick={(e) => deleteAction(e, rowData.classSubject_id)}
-              >
-                Delete
-              </button>
-            )}
-          />
-        </ColumnsDirective>
-        <Inject services={[Sort, Filter, Page, PdfExport, Toolbar]} />
-      </GridComponent>
+              <ColumnDirective
+                field="classSubject_id"
+                headerText="Delete"
+                width="100"
+                textAlign="Left"
+                allowSearching={false}
+                template={(rowData) => (
+                  <button
+                    className={`btn-secondary ${
+                      rowData.isGradeFinalized ? 'opacity-60' : ''
+                    }`}
+                    disabled={rowData.isGradeFinalized}
+                    onClick={(e) => deleteAction(e, rowData.classSubject_id)}
+                  >
+                    Delete
+                  </button>
+                )}
+              />
+            </ColumnsDirective>
+            <Inject services={[Sort, Filter, Page, PdfExport, Toolbar]} />
+          </GridComponent>
+        </div>
+      </div>
       {showDeleteModal && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <form onSubmit={handleSubmit(handleDeletingClass)}>
@@ -223,7 +227,6 @@ function ClassSubjectList({ subjectClass, refetchSubjectClass }) {
           </form>
         </div>
       )}
-
       {isProcessing && <Processing text={'Deleting the class'} />}
     </>
   );

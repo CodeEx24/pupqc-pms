@@ -12,21 +12,15 @@ import React, { useState } from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import axios from 'axios';
 
-// import { useEffect } from 'react';
-// import { useState } from 'react';
-
-// import { useForm } from 'react-hook-form';
-// import { deleteClassSubject } from '../../hooks/Admin/deleteData';
-// import { toast } from 'react-toastify';
-
-function CriteriaList({ criteriaList }) {
+function CriteriaList({ criteria }) {
   const [showCriteriaModal, setshowCriteriaModal] = useState(false);
   const [criteriaElement, setcriteriaElement] = useState();
 
   const criteriaListDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
-    json: criteriaList,
+    json: criteria,
   });
 
   const pageOptions = {
@@ -35,9 +29,13 @@ function CriteriaList({ criteriaList }) {
   };
 
   const handleViewCriteria = async (criteriaId) => {
-    const data = criteriaList.find((item) => item._id === criteriaId);
+    const criteriaData = await axios.get('/api/admin/criteria/details', {
+      params: { criteriaId },
+    });
 
-    // Get all key of first level in criteria.
+    // Why CRITERIA HERE IS UNDEFINED EVEN IT HAS A VALUE IN THIS
+    const data = criteriaData.data;
+
     const keys = Object.keys(data.criteria.percentage);
 
     // Map the keys to get the child of it (assessment)

@@ -36,43 +36,50 @@ function ClassManagementScreen() {
   const [submitting, setSubmitting] = useState(false);
 
   // FETCHING DATA NEEDED
-  const teacherQuery = useQuery(['teacher'], fetchTeacher);
-  const subjectQuery = useQuery(['subject'], fetchSubjectCode, {
-    enabled: teacherQuery.isSuccess,
-  });
-
-  const currentYear = new Date().getFullYear();
-  const classQuery = useQuery(
-    ['class', currentYear],
-    () => fetchClassYear(currentYear),
-    { enabled: subjectQuery.isSuccess }
+  const { data: teachers, isSuccess: teacherIsSucess } = useQuery(
+    ['teacher'],
+    fetchTeacher
+  );
+  const { data: subjects, isSuccess: subjectIsSucess } = useQuery(
+    ['subject'],
+    fetchSubjectCode,
+    { enabled: teacherIsSucess }
   );
 
-  const criteriaQuery = useQuery(['criteria'], fetchCriteria, {
-    enabled: classQuery.isSuccess,
-  });
+  const currentYear = new Date().getFullYear();
+  const { data: classYears, isSuccess: classIsSucess } = useQuery(
+    ['class', currentYear],
+    () => fetchClassYear(currentYear),
+    { enabled: subjectIsSucess }
+  );
+
+  const { data: criterias, isSuccess: criteriaIsSucess } = useQuery(
+    ['criteria'],
+    fetchCriteria,
+    { enabled: classIsSucess }
+  );
 
   const {
     data: subjectClass,
     refetch: refetchSubjectClass,
     isLoading,
   } = useQuery(['subjectClass'], fetchSubjectClass, {
-    enabled: classQuery.isSuccess,
+    enabled: criteriaIsSucess,
     refetchOnWindowFocus: false,
   });
 
   // OPTIONS FOR SELECT
-  const subjectOptions = subjectQuery?.data?.data?.map((item) => ({
+  const subjectOptions = subjects?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
-  const teacherOptions = teacherQuery?.data?.data?.map((item) => ({
+  const teacherOptions = teachers?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
-  const criteriaOptions = criteriaQuery?.data?.data?.map((item) => ({
+  const criteriaOptions = criterias?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
@@ -84,11 +91,11 @@ function ClassManagementScreen() {
   ];
 
   const classOptions = useMemo(() => {
-    return classQuery?.data?.data?.map((classItem) => ({
+    return classYears?.data?.map((classItem) => ({
       value: classItem.id,
       label: classItem.name,
     }));
-  }, [classQuery]);
+  }, [classYears]);
 
   const SubjectClassMemoized = useMemo(
     () => (
