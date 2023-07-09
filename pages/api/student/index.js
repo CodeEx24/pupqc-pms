@@ -34,7 +34,8 @@ const handler = async (req, res) => {
           return {
             subject_id,
             profileImageUrl: studentData.profileImageUrl,
-            student_id: studentData.name,
+            student_id: studentData._id,
+            name: studentData.name,
             email: studentData.email,
             mobileNo: studentData.mobileNo,
             class_name:

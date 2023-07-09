@@ -37,8 +37,10 @@ function TabsContentStudentManagement({
       if (error.response && error.response.status === 401) {
         await refetchStudentClass();
         setShowPerformanceModal(false);
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred while updating student performance.');
       }
-      toast.error(error.response.data.message); // Show the error message in toast
     } finally {
       setIsProcessing(false);
     }
@@ -47,7 +49,10 @@ function TabsContentStudentManagement({
   const assessmentInputElement = assessmentItem.map((item, index) => {
     const fieldName = `${assessment}${index}`; // Field name for error messages
     return (
-      <div key={index} className="p-3">
+      <div
+        key={`${studentId}${classSubjectId}${fieldName}${index}`}
+        className="p-3"
+      >
         <p className="text-black z-99 w-full font-semibold">
           {assessment.toUpperCase().replace('_', ' ')} {index + 1}:{' '}
           <span className="font-normal">
@@ -77,7 +82,7 @@ function TabsContentStudentManagement({
         />
         {errors[fieldName] && (
           <div className="text-red-600 text-start text-sm mt-2 ml-1">
-            {errors[fieldName].message}
+            <span> {errors[fieldName].message}</span>
           </div>
         )}
       </div>
@@ -85,18 +90,23 @@ function TabsContentStudentManagement({
   });
 
   return (
-    <>
+    <div>
       <form className="h-full" onSubmit={handleSubmit(submitScores)}>
         <div className="grid grid-cols-6">{assessmentInputElement}</div>
 
         <div className="flex justify-end align-bottom h-1/6 mt-4 p-6">
-          <button
+          {/* <button
             type="button"
-            onClick={() => setShowPerformanceModal(false)}
+            onClick={async (e) => {
+              e.preventDefault();
+              await setTabDirectiveElement(null);
+              setShowPerformanceModal(false);
+              await setTabDirectiveElement(null);
+            }}
             className="mr-4 text-gray-500 hover:text-gray-700"
           >
             Cancel
-          </button>
+          </button> */}
           <button
             type="submit"
             // onClick={() => {
@@ -109,7 +119,7 @@ function TabsContentStudentManagement({
         </div>
       </form>
       {isProcessing && <Processing text="Processing the Score" />}
-    </>
+    </div>
   );
 }
 

@@ -19,7 +19,7 @@ function FacultyLayout({ title, children }) {
 
   const { activeMenu } = menu;
   return (
-    <>
+    <div>
       <Head>
         <title>{title ? title + ' - PUPQC' : 'PUPQC'}</title>
         <meta name="description" content="Created by PUPians" />
@@ -80,7 +80,7 @@ function FacultyLayout({ title, children }) {
           <p>Copyright ©2023 PUPQC PMS</p>
         </footer>
       </div>
-    </>
+    </div>
   );
 }
 

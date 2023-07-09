@@ -11,11 +11,13 @@ import AverageClassGrade from '../../../../models/AverageClassGrade';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
-  if (!session) {
+
+  if (session) {
+    if (session.user.isAdmin === 1 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
-  }
-  if (session.user.isAdmin === 1 || session.user.isAdmin === 0) {
-    return res.status(401).send('Unauthorized Access');
   }
 
   const semesterDetails = getCurrentSemesterData();

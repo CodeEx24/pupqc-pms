@@ -86,21 +86,14 @@ const handler = async (req, res) => {
     columnData.push({ year, averagePercentage });
   }
 
-  // const columnData = [
-  //   { year: '2013', averagePercentage: 90 },
-  //   { year: '2014', averagePercentage: 85 },
-  //   { year: '2015', averagePercentage: 92 },
-  //   { year: '2016', averagePercentage: 91 },
-  //   { year: '2017', averagePercentage: 88 },
-  //   { year: '2018', averagePercentage: 90 },
-  //   { year: '2019', averagePercentage: 87 },
-  //   { year: '2020', averagePercentage: 89 },
-  //   { year: '2021', averagePercentage: 88 },
-  //   { year: '2022', averagePercentage: 90 },
-  // ];
+  const columnDataWithoutZeroes = columnData.filter(
+    (item) => item.averagePercentage !== 0
+  );
 
-  const xYear = columnData.map((data) => parseInt(data.year));
-  const yPercentage = columnData.map((data) => data.averagePercentage);
+  const xYear = columnDataWithoutZeroes.map((data) => parseInt(data.year));
+  const yPercentage = columnDataWithoutZeroes.map(
+    (data) => data.averagePercentage
+  );
 
   const regression = new SimpleLinearRegression(xYear, yPercentage);
   const slope = regression.slope;
@@ -109,7 +102,7 @@ const handler = async (req, res) => {
 
   const loaded = SimpleLinearRegression.load(json);
 
-  columnData.push({
+  columnDataWithoutZeroes.push({
     year: `${currentYear}`,
     averagePercentage: Math.round(loaded.predict(Number(currentYear))),
   });
@@ -117,7 +110,7 @@ const handler = async (req, res) => {
   await db.disconnect();
 
   res.status(200).json({
-    techerPerformance: columnData,
+    techerPerformance: columnDataWithoutZeroes,
     slope,
   });
 };

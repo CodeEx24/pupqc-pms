@@ -23,11 +23,15 @@ import {
 import axios from 'axios';
 import TabsContentStudentManagement from '../tabs/TabsContentStudentManagement';
 import { toast } from 'react-toastify';
+import Processing from '../../Processing';
+import { useMemo } from 'react';
+import { MdOutlineCancel } from 'react-icons/md';
 
 function StudentClassList({ studentClass, refetchStudentClass }) {
   const [showperformanceModal, setShowPerformanceModal] = useState(false);
   const [tabDirectiveElement, setTabDirectiveElement] = useState(() => {});
   const [studentData, setStudentData] = useState({ name: '', email: '' });
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const templateOptions = {
     create: () => {
@@ -75,10 +79,13 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
     },
   };
 
-  const pageOptions = {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
-  };
+  const pageOptions = useMemo(() => {
+    return {
+      pageSize: 10,
+      pageSizes: [10, 25, 50, 100],
+      currentPage: 1,
+    };
+  }, []);
 
   const studentsClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
@@ -96,6 +103,7 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
 
   const handleClickManageGrades = async (studentId, classSubjectId) => {
     try {
+      setIsProcessing(true);
       const res = await axios.get(
         `/api/student/performance/${classSubjectId}/${studentId}`
       );
@@ -106,7 +114,7 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
       const tabElement = Object.keys(assessment).map((item, index) => {
         return (
           <TabItemDirective
-            key={index}
+            key={`${studentId}${classSubjectId}${item}${index}`}
             header={{ text: item.toLocaleUpperCase().replace('_', ' ') }}
             content={() => (
               <TabsContentStudentManagement
@@ -117,25 +125,40 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
                 studentId={studentId}
                 classSubjectId={classSubjectId}
                 refetchStudentClass={refetchStudentClass}
+                setTabDirectiveElement={setTabDirectiveElement}
               />
             )}
           />
         );
       });
 
+      const tabDirective = () => {
+        return (
+          <div className="h-full ">
+            <div className="h-5/6 overflow-y-auto">
+              <TabComponent heightAdjustMode="Auto">
+                <TabItemsDirective>{tabElement}</TabItemsDirective>
+              </TabComponent>
+            </div>
+          </div>
+        );
+      };
+
       setStudentData({
         name: res.data.studentRecord.name,
         email: res.data.studentRecord.email,
       });
-      setTabDirectiveElement(tabElement);
+      setTabDirectiveElement(tabDirective);
       setShowPerformanceModal(true);
     } catch (error) {
       toast.error(error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
   return (
-    <>
+    <div>
       <GridComponent
         id="grid"
         dataSource={studentsClassDataManager}
@@ -210,8 +233,26 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
       </GridComponent>
 
       {showperformanceModal && (
-        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-          <div className="bg-white rounded-md p-10 h-1/2">
+        <div
+          id="second-child"
+          className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center "
+        >
+          <div
+            className="bg-white rounded-md p-10 h-1/2"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <button
+              className="float-right text-2xl"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowPerformanceModal(false);
+              }}
+            >
+              <MdOutlineCancel />
+            </button>
+
             <div className="flex gap-10">
               <h2 className="text-lg font-medium mb-2">
                 Name: <span className="font-normal">{studentData.name}</span>
@@ -220,17 +261,13 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
                 Email: <span className="font-normal">{studentData.email}</span>
               </h2>
             </div>
-            <div className="h-full ">
-              <div className="h-5/6 overflow-y-auto">
-                <TabComponent heightAdjustMode="Auto">
-                  <TabItemsDirective>{tabDirectiveElement}</TabItemsDirective>
-                </TabComponent>
-              </div>
-            </div>
+            {tabDirectiveElement}
           </div>
         </div>
       )}
-    </>
+
+      {isProcessing && <Processing text="Getting the scores" />}
+    </div>
   );
 }
 

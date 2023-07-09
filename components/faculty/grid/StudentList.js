@@ -14,6 +14,7 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import { DropDownList } from '@syncfusion/ej2/dropdowns';
 import Image from 'next/image';
+import axios from 'axios';
 
 function StudentList({ students }) {
   const templateOptions = {
@@ -57,6 +58,36 @@ function StudentList({ students }) {
       grid.pdfExport();
     }
   };
+
+  const handlePerformanceClick = async (e, studentId) => {
+    e.preventDefault();
+    console.log('studentId: ', studentId);
+
+    const studentPerformance = await axios.get(
+      '/api/faculty/student/performance',
+      {
+        params: {
+          studentId,
+        },
+      }
+    );
+
+    console.log('studentPerformance: ', studentPerformance);
+    // if (isActionInProgress) return;
+    // toast.dismiss();
+    // setIsActionInProgress(true);
+    // try {
+    //   await revokeSomeClassSubjectMutation.mutateAsync({ id, semester });
+    //   await refetchClassList();
+
+    //   toast.success('Revoke the finalization of grade is successful.');
+    // } catch (error) {
+    //   toast.error('Revoke the finalization of grade is failed.');
+    // } finally {
+    //   setIsActionInProgress(false);
+    // }
+  };
+
   return (
     <GridComponent
       id="grid"
@@ -90,7 +121,7 @@ function StudentList({ students }) {
         />
 
         <ColumnDirective
-          field="student_id"
+          field="name"
           headerText="Name"
           width="130"
           textAlign="Left"
@@ -128,6 +159,26 @@ function StudentList({ students }) {
           width="90"
           format="C2"
           textAlign="Left"
+        />
+        <ColumnDirective
+          field="batch"
+          headerText="Performance"
+          width="90"
+          format="C2"
+          textAlign="Left"
+          template={(rowData) => (
+            <div className="flex gap-3">
+              <button
+                className="btn-primary"
+                onClick={(e) => {
+                  // e.preventDefault();
+                  handlePerformanceClick(e, rowData.student_id);
+                }}
+              >
+                View
+              </button>
+            </div>
+          )}
         />
       </ColumnsDirective>
       <Inject services={[Sort, Filter, Page, PdfExport, Toolbar]} />

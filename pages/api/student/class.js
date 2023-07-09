@@ -62,6 +62,10 @@ const handler = async (req, res) => {
   );
 
   const flattenedStudentsRecordData = allStudentRecords.flat();
+
+  // Sort the flattened array based on the batch in descending order
+  flattenedStudentsRecordData.sort((a, b) => b.batch - a.batch);
+
   const uniqueValues = flattenedStudentsRecordData.reduce(
     (acc, cur) => {
       if (!acc.batches.includes(cur.batch)) {

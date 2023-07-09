@@ -7,10 +7,14 @@ import Course from '../../../../../models/Course';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
-  if (!session) return res.status(401).send('Signin required');
-  if (session.user.isAdmin === 1 || session.user.isAdmin === 0)
-    return res.status(401).send('Unauthorized Access');
 
+  if (session) {
+    if (session.user.isAdmin === 1 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
+    return res.status(401).send('Signin required');
+  }
   const semesterDetails = getCurrentSemesterData();
 
   await db.connect();

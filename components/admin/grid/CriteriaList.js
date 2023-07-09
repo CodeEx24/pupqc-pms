@@ -72,7 +72,8 @@ function CriteriaList({ criteria }) {
     setshowCriteriaModal(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (e) => {
+    e.stopPropagation();
     setshowCriteriaModal(false);
   };
 
@@ -129,7 +130,7 @@ function CriteriaList({ criteria }) {
       {showCriteriaModal && (
         <div
           className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          onClick={handleModalClose}
+          onClick={(e) => handleModalClose(e)}
         >
           <div
             className="bg-white rounded-md p-10 w-4/12 relative"

@@ -29,7 +29,7 @@ function FacultySidebar() {
   return (
     <div className="pl-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 shadow-lg shadow-right">
       {activeMenu && (
-        <>
+        <div>
           <div className="flex justify-between items-center">
             <Link
               href="/"
@@ -69,7 +69,7 @@ function FacultySidebar() {
               </div>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
