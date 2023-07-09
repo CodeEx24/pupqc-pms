@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import Criteria from '../../../models/Criteria';
+import Criteria from '@/models/Criteria';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);

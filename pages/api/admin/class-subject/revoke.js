@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import ClassSubject from '../../../../models/ClassSubject';
+import ClassSubject from '@/models/ClassSubject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);

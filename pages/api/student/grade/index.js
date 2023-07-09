@@ -6,15 +6,18 @@ import ClassSubject from '@/models/ClassSubject';
 import Course from '@/models/Course';
 import Subject from '@/models/Subject';
 import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
-import Teacher from '../../../../models/Teacher';
+import Teacher from '@/models/Teacher';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user) {
+  if (session) {
+    if (session.user.isAdmin === 1 || session.user.isAdmin === 2) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
-
   const studentID = session.user._id;
   await db.connect();
 

@@ -11,7 +11,11 @@ import Course from '@/models/Course';
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (session) {
+    if (session.user.isAdmin === 2 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 
@@ -22,32 +26,50 @@ const handler = async (req, res) => {
   });
 
   const allStudentRecords = await Promise.all(
-    classSubject.map(async ({ class_id, subject_id }) => {
-      const classData = await Class.findOne({ _id: class_id });
-      const { course_code } = await Course.findOne({
-        _id: classData.course_id,
-      });
+    classSubject.map(
+      async ({
+        _id: class_subject_id,
+        class_id,
+        subject_id,
+        semester,
+        isGradeFinalized,
+      }) => {
+        const classData = await Class.findOne({ _id: class_id });
+        const { course_code } = await Course.findOne({
+          _id: classData.course_id,
+        });
+        const semesterString =
+          semester === 1
+            ? '1st Semester'
+            : semester === 2
+            ? '2nd Semester'
+            : 'Summer Term';
 
-      return await Promise.all(
-        classData.student_id.map(async (id) => {
-          const studentData = await Student.findOne({ _id: id });
-          return {
-            subject_id,
-            profileImageUrl: studentData.profileImageUrl,
-            student_id: studentData._id,
-            name: studentData.name,
-            email: studentData.email,
-            mobileNo: studentData.mobileNo,
-            class_name:
-              course_code + ' ' + classData.year + '-' + classData.section,
-            batch: classData.batch,
-          };
-        })
-      );
-    })
+        return await Promise.all(
+          classData.student_id.map(async (id) => {
+            const studentData = await Student.findOne({ _id: id });
+            return {
+              student_name: studentData.name,
+              student_id: studentData._id,
+              subject_id,
+              class_subject_id,
+              class_name:
+                course_code + ' ' + classData.year + '-' + classData.section,
+              batch: classData.batch,
+              semester: semesterString,
+              isGradeFinalized,
+            };
+          })
+        );
+      }
+    )
   );
 
   const flattenedStudentsRecordData = allStudentRecords.flat();
+
+  // Sort the flattened array based on the batch in descending order
+  flattenedStudentsRecordData.sort((a, b) => b.batch - a.batch);
+
   const uniqueValues = flattenedStudentsRecordData.reduce(
     (acc, cur) => {
       if (!acc.batches.includes(cur.batch)) {
@@ -60,6 +82,8 @@ const handler = async (req, res) => {
     },
     { batches: [], classNames: [] }
   );
+
+  await db.disconnect();
 
   res.json({
     data: flattenedStudentsRecordData,

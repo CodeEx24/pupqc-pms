@@ -8,7 +8,7 @@ import ClassSubject from '@/models/ClassSubject';
 import Criteria from '@/models/Criteria';
 import Class from '@/models/Class';
 import Course from '@/models/Course';
-import Teacher from '../../../../models/Teacher';
+import Teacher from '@/models/Teacher';
 
 // Required results:
 // subjectid, className, batch, criteria, semester

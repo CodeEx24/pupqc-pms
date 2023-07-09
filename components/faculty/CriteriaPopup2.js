@@ -19,7 +19,7 @@ function CriteriaPopup2({
   const {
     register: register3,
     handleSubmit: handleSubmit3,
-    // formState: { errors: errors3 },
+    formState: { errors: errors3 },
   } = useForm();
 
   const addCriteriaMutation = useMutation(addCriteriaData);
@@ -132,48 +132,81 @@ function CriteriaPopup2({
         const subFieldDescription = `${item}Description${i}`;
 
         return (
-          <div key={i} className="p-3 flex flex-col lg:flex-row flex-wrap ">
-            <div className="w-full lg:w-6/12 pr-2">
-              <p className="text-black z-99 w-full font-semibold">
-                Name {i + 1}:
-              </p>
-              <input
-                type="text"
-                className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full "
-                id={subFieldName}
-                {...register3(subFieldName, {
-                  required: true,
-                })}
-              />
-            </div>
-            <div className="w-full lg:w-6/12 pl-2">
-              <p className="text-black z-99 w-full font-semibold">
-                Percentage {i + 1}:
-              </p>
-              <input
-                type="number"
-                className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
-                id={subFieldPercentage}
-                {...register3(subFieldPercentage, {
-                  required: true,
-                  pattern: /^[0-9]*$/, // Regular expression to allow only integer values
-                })}
-                step="1"
-              />
-            </div>
+          <div key={i}>
+            <div className="p-3 flex flex-col lg:flex-row flex-wrap ">
+              <div className="w-full lg:w-6/12 pr-2">
+                <p className="text-black z-99 w-full font-semibold">
+                  Name {i + 1}:
+                </p>
+                <input
+                  type="text"
+                  className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full "
+                  id={subFieldName}
+                  {...register3(subFieldName, {
+                    required: 'This field is required',
+                    pattern: {
+                      value: /^[A-Za-z]+$/,
+                      message: 'Only letters are allowed',
+                    },
+                  })}
+                />
+              </div>
+              <div className="w-full lg:w-6/12 pl-2">
+                <p className="text-black z-99 w-full font-semibold">
+                  Percentage {i + 1}:
+                </p>
+                <input
+                  type="number"
+                  className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
+                  id={subFieldPercentage}
+                  {...register3(subFieldPercentage, {
+                    required: 'This field is required',
+                    max: { value: 100, message: 'Max value is 100' },
+                    min: { value: 1, message: 'Minimum value is 1' },
+                  })}
+                  step="1"
+                />
+              </div>
 
-            <div className="w-full lg:w-full">
-              <p className="text-black z-99 w-full font-semibold">
-                Description {i + 1}:
-              </p>
-              <input
-                type="text"
-                className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
-                id={subFieldDescription}
-                {...register3(subFieldDescription, {
-                  required: true,
-                })}
-              />
+              <div className="w-full lg:w-6/12 pr-2">
+                {errors3[subFieldName] && (
+                  <p className="text-sm font-poppins text-red-500 mt-2 ">
+                    {errors3[subFieldName].message}
+                  </p>
+                )}
+              </div>
+              <div className="w-full lg:w-6/12 pl-2">
+                {errors3[subFieldPercentage] && (
+                  <p className="text-sm font-poppins text-red-500 mt-2 ">
+                    {errors3[subFieldPercentage].message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-full lg:w-full">
+                <p className="text-black z-99 w-full font-semibold">
+                  Description {i + 1}:
+                </p>
+                <input
+                  type="text"
+                  className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
+                  id={subFieldDescription}
+                  {...register3(subFieldDescription, {
+                    required: 'This field is required',
+                    pattern: {
+                      value: /^[A-Za-z]+$/,
+                      message: 'Only letters are allowed',
+                    },
+                  })}
+                />
+              </div>
+              <div className="w-full lg:w-full">
+                {errors3[subFieldDescription] && (
+                  <p className="text-sm font-poppins text-red-500 mt-2 ">
+                    {errors3[subFieldDescription].message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         );

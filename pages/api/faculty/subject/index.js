@@ -5,12 +5,16 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
 import Subject from '@/models/Subject';
-import ClassSubject from '../../../../models/ClassSubject';
+import ClassSubject from '@/models/ClassSubject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (session) {
+    if (session.user.isAdmin === 2 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 

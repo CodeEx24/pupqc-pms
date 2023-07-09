@@ -14,7 +14,7 @@ function CriteriaPopup1({
   const {
     register: register2,
     handleSubmit: handleSubmit2,
-    // formState: { errors: errors2 },
+    formState: { errors: errors2 },
   } = useForm();
 
   // console.log(code);
@@ -75,47 +75,78 @@ function CriteriaPopup1({
     const fieldAmount = `critSubfieldAmount${index}`;
 
     return (
-      <div key={index} className="p-3 flex flex-col lg:flex-row gap-3">
-        <div className="w-full lg:w-4/12">
-          <p className="text-black z-99 w-full font-semibold">
-            Name {index + 1}:
-          </p>
-          <input
-            type="text"
-            className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
-            id={fieldName}
-            {...register2(fieldName, {
-              required: true,
-            })}
-          />
+      <div key={index}>
+        <div className="p-3 flex flex-col lg:flex-row gap-3">
+          <div className="w-full lg:w-4/12">
+            <p className="text-black z-99 w-full font-semibold">
+              Name {index + 1}:
+            </p>
+            <input
+              type="text"
+              className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
+              id={fieldName}
+              {...register2(fieldName, {
+                required: 'This field is required',
+                pattern: {
+                  value: /^[A-Za-z]+$/,
+                  message: 'Only letters are allowed',
+                },
+              })}
+            />
+          </div>
+          <div className="w-full lg:w-4/12">
+            <p className="text-black z-99 w-full font-semibold">
+              Percentage {index + 1}:
+            </p>
+            <input
+              type="number"
+              className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
+              id={fieldPercentage}
+              {...register2(fieldPercentage, {
+                required: 'This field is required',
+                max: { value: 100, message: 'Max value is 100' },
+                min: { value: 1, message: 'Minimum value is 1' },
+              })}
+            />
+          </div>
+          <div className="w-full lg:w-4/12">
+            <p className="text-black z-99 w-full font-semibold">
+              Subfield Amount {index + 1}:
+            </p>
+            <input
+              type="number"
+              className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
+              id={fieldAmount}
+              {...register2(fieldAmount, {
+                required: 'This field is required',
+                max: { value: 10, message: 'Max is 10' },
+                min: { value: 1, message: 'Minimum is 1' },
+              })}
+            />
+          </div>
         </div>
-        <div className="w-full lg:w-4/12">
-          <p className="text-black z-99 w-full font-semibold">
-            Percentage {index + 1}:
-          </p>
-          <input
-            type="number"
-            className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
-            id={fieldPercentage}
-            {...register2(fieldPercentage, {
-              required: true,
-            })}
-          />
-        </div>
-        <div className="w-full lg:w-4/12">
-          <p className="text-black z-99 w-full font-semibold">
-            Subfield Amount {index + 1}:
-          </p>
-          <input
-            type="number"
-            className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-none block p-2 w-full"
-            id={fieldAmount}
-            {...register2(fieldAmount, {
-              required: true,
-              // maxLength: 10,
-              // pattern: /^[A-Z]{4}-\d{3}$/,
-            })}
-          />
+        <div className="pl-3 flex flex-col lg:flex-row gap-3">
+          <div className="w-full lg:w-4/12 flex">
+            {errors2[fieldName] && (
+              <p className="text-sm font-poppins text-red-500 ">
+                {errors2[fieldName].message}
+              </p>
+            )}
+          </div>
+          <div className="w-full lg:w-4/12">
+            {errors2[fieldPercentage] && (
+              <p className="text-sm font-poppins text-red-500 ">
+                {errors2[fieldPercentage].message}
+              </p>
+            )}
+          </div>
+          <div className="w-full lg:w-4/12">
+            {errors2[fieldAmount] && (
+              <p className="text-sm font-poppins text-red-500 ">
+                {errors2[fieldAmount].message}
+              </p>
+            )}
+          </div>{' '}
         </div>
       </div>
     );

@@ -4,12 +4,12 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import ClassSubject from '../../../../models/ClassSubject';
-import CriteriaOverallScores from '../../../../models/CriteriaOverallScores';
-import StudentRecords from '../../../../models/StudentRecords';
-import StudentClassSubjectGrade from '../../../../models/StudentClassSubjectGrade';
-import Criteria from '../../../../models/Criteria';
-import { getGrade } from '../../../../utils/data';
+import ClassSubject from '@/models/ClassSubject';
+import CriteriaOverallScores from '@/models/CriteriaOverallScores';
+import StudentRecords from '@/models/StudentRecords';
+import Criteria from '@/models/Criteria';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
+import { getGrade } from '@/utils/data';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -22,16 +22,18 @@ const handler = async (req, res) => {
     return res.status(401).send('Signin required');
   }
 
-  const { classSubject_id, assessment, index } = req.body;
+  const classSubject_id = req.query.classSubject_id;
+
+  const { item, inputValue: value } = req.body;
 
   await db.connect();
 
-  // To check if the user is authorize to delete the assessment
   const classSubject = await ClassSubject.findOne({ _id: classSubject_id });
+
   const teacherId = classSubject.teacher_id.toString();
   if (teacherId !== session.user._id) {
     await db.disconnect();
-    return res.status(401).send('Unauthorized user');
+    return res.status(401).send({ message: 'Unauthorized user' });
   }
 
   if (classSubject.isGradeFinalized) {
@@ -41,6 +43,8 @@ const handler = async (req, res) => {
       .send({ message: 'The grades have already been finalized.' });
   }
 
+  const itemFormatted = item.toLowerCase().replace(' ', '_');
+
   const criteriaOverallScores = await CriteriaOverallScores.findOne({
     classSubject_id,
   });
@@ -48,9 +52,9 @@ const handler = async (req, res) => {
   if (criteriaOverallScores) {
     criteriaOverallScores.criteria_overall = {
       ...criteriaOverallScores.criteria_overall,
-      [assessment]: [
-        ...criteriaOverallScores.criteria_overall[assessment].slice(0, index),
-        ...criteriaOverallScores.criteria_overall[assessment].slice(index + 1),
+      [itemFormatted]: [
+        ...criteriaOverallScores.criteria_overall[itemFormatted],
+        Number(value),
       ],
     };
   }
@@ -61,18 +65,13 @@ const handler = async (req, res) => {
     criteriaOverallScores_id: criteriaOverallScores._id,
   });
 
-  const studentRecordsUpdate = await Promise.all(
-    studentRecordsData.map(async (item) => {
-      item.records = {
-        ...item.records,
-        [assessment]: [
-          ...item.records[assessment].slice(0, index),
-          ...item.records[assessment].slice(index + 1),
-        ],
-      };
-      return item;
-    })
-  );
+  const studentRecordsUpdate = studentRecordsData.map((item) => {
+    item.records = {
+      ...item.records,
+      [itemFormatted]: [...item.records[itemFormatted], 0],
+    };
+    return item;
+  });
 
   for (const record of studentRecordsUpdate) {
     await record.save();

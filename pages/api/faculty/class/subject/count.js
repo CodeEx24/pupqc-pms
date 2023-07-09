@@ -4,13 +4,17 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import Class from '../../../../../models/Class';
-import ClassSubject from '../../../../../models/ClassSubject';
+import Class from '@/models/Class';
+import ClassSubject from '@/models/ClassSubject';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session) {
+  if (session) {
+    if (session.user.isAdmin === 2 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 

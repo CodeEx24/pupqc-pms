@@ -11,6 +11,7 @@ import {
 import React from 'react';
 
 import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
+import { useMemo } from 'react';
 
 // import { useEffect } from 'react';
 // import { useState } from 'react';
@@ -25,10 +26,13 @@ function SubjectList({ subjectList }) {
     json: subjectList,
   });
 
-  const pageOptions = {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
-  };
+  const pageOptions = useMemo(() => {
+    return {
+      pageSize: 10,
+      pageSizes: [10, 25, 50, 100],
+      currentPage: 1,
+    };
+  }, []);
 
   return (
     <>

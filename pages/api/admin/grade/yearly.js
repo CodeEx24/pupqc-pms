@@ -1,13 +1,10 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
-import {
-  convertGradeToPercentage,
-  getCurrentSemesterData,
-} from '../../../../utils/data';
-import Class from '../../../../models/Class';
-import ClassSubject from '../../../../models/ClassSubject';
-import AverageClassGrade from '../../../../models/AverageClassGrade';
+import { convertGradeToPercentage, getCurrentSemesterData } from '@/utils/data';
+import Class from '@/models/Class';
+import ClassSubject from '@/models/ClassSubject';
+import AverageClassGrade from '@/models/AverageClassGrade';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);

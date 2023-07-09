@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
-import Class from '../../../../../models/Class';
-import { getCurrentSemesterData } from '../../../../../utils/data';
-import Course from '../../../../../models/Course';
+import Class from '@/models/Class';
+import { getCurrentSemesterData } from '@/utils/data';
+import Course from '@/models/Course';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);

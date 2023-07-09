@@ -2,7 +2,7 @@
 
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import Subject from '../../../../models/Subject';
+import Subject from '@/models/Subject';
 
 import db from '@/utils/db';
 

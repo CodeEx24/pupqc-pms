@@ -4,11 +4,11 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 import db from '@/utils/db';
-import ClassSubject from '../../../../models/ClassSubject';
-import CriteriaOverallScores from '../../../../models/CriteriaOverallScores';
-import StudentClassSubjectGrade from '../../../../models/StudentClassSubjectGrade';
-import StudentRecords from '../../../../models/StudentRecords';
-import AverageClassGrade from '../../../../models/AverageClassGrade';
+import ClassSubject from '@/models/ClassSubject';
+import CriteriaOverallScores from '@/models/CriteriaOverallScores';
+import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
+import StudentRecords from '@/models/StudentRecords';
+import AverageClassGrade from '@/models/AverageClassGrade';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);

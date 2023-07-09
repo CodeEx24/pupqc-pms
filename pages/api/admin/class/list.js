@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import db from '@/utils/db';
-import Class from '../../../../models/Class';
-import ClassSubject from '../../../../models/ClassSubject';
-import Course from '../../../../models/Course';
+import Class from '@/models/Class';
+import ClassSubject from '@/models/ClassSubject';
+import Course from '@/models/Course';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -107,22 +107,28 @@ export default async function handler(req, res) {
     };
   });
 
-  // if semester is 3 allow itself and 2
-  // if semester is 2 allow itself and 1
-  // if semester is 1 allow the 3
-
-  // Assume that the year is January and semester is 1
-  // const semester = useMemo(() => {
-  //   if (currentMonth >= 10 || (currentMonth >= 1 && currentMonth <= 3)) {
-  //     return 1; // semester 1
-  //   } else if (currentMonth >= 3 && currentMonth <= 7) {
-  //     return 2; // semester 2
-  //   } else {
-  //     return 3; // semestrer 3
-  //   }
-  // }, [currentMonth]);
-
   await db.disconnect();
 
-  return res.status(200).json(newClassData);
+  const sortedNewClassData = newClassData.sort((a, b) => {
+    const aBatch = parseInt(a.batch);
+    const bBatch = parseInt(b.batch);
+    return bBatch - aBatch;
+  });
+
+  return res.status(200).json(sortedNewClassData);
 }
+
+// if semester is 3 allow itself and 2
+// if semester is 2 allow itself and 1
+// if semester is 1 allow the 3
+
+// Assume that the year is January and semester is 1
+// const semester = useMemo(() => {
+//   if (currentMonth >= 10 || (currentMonth >= 1 && currentMonth <= 3)) {
+//     return 1; // semester 1
+//   } else if (currentMonth >= 3 && currentMonth <= 7) {
+//     return 2; // semester 2
+//   } else {
+//     return 3; // semestrer 3
+//   }
+// }, [currentMonth]);

@@ -1,31 +1,16 @@
 import axios from 'axios';
 
 export const fetchStudents = () => {
-  return axios.get(`/api/student`);
+  return axios.get(`/api/faculty/student`);
 };
 
 export const fetchStudentsClass = () => {
-  return axios.get(`/api/student/class`);
+  return axios.get(`/api/faculty/student/class`);
 };
 
 // UPDATED FETCH
 export const fetchAllSubject = () => {
   return axios.get(`/api/faculty/subject`);
-};
-
-// DELETE BELOW
-export const fetchSubjectCode = () => {
-  return axios.get('/api/subject/code');
-};
-
-// DELETE BELOW - DELETED DIRECTORY ALREADY
-export const fetchClassYear = (year) => {
-  return axios.get(`/api/class/year/${year}`);
-};
-
-// DELETE BELOW
-export const fetchCriteria = () => {
-  return axios.get(`/api/criteria/`);
 };
 
 // DELETE BELOW IF NOT USED
@@ -38,20 +23,15 @@ export const fetchSubjectClassforCriteria = () => {
 };
 
 export const fetchCriteriaOverallList = (id) => {
-  return axios.get(`/api/criteria/overall/${id}`);
+  return axios.get(`/api/faculty/criteria/overall/${id}`);
 };
 
 export const fetchStudentsGrade = () => {
-  return axios.get(`/api/student/grade/teacher-list`);
+  return axios.get(`/api/faculty/student/grade/teacher-list`);
 };
 
 export const fetchcriteria = () => {
   return axios.get(`/api/faculty/criteria-list`);
-};
-
-// FACULTY && STUDENT
-export const fetchCurrentUser = () => {
-  return axios.get(`/api/current-user`);
 };
 
 // UPDATED FETCH
@@ -71,4 +51,9 @@ export const fetchHandleClassAndSubject = (year, semester) => {
   return axios.get(`/api/faculty/class/subject/count`, {
     params: { year, semester },
   });
+};
+
+// FACULTY && STUDENT
+export const fetchCurrentUser = () => {
+  return axios.get(`/api/current-user`);
 };

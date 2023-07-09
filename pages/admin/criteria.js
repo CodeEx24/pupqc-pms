@@ -70,45 +70,73 @@ function CriteriaScreen() {
 
         <div className="flex flex-col items-end gap-3">
           <div className="mb-6 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex gap-3">
-              <div className="w-2/6">
-                <input
-                  type="text"
-                  placeholder="Criteria Code (CRIT-001)"
-                  id="code"
-                  // onChange={(e) => setName(e.target.value)}
-                  className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg   outline-none block p-2.5 ${
-                    errors.code
-                      ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
-                      : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
-                  }`}
-                  {...register('code', {
-                    required: true,
-                    maxLength: 10,
-                    pattern: /^[A-Z]{4}-\d{3}$/,
-                  })}
-                />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="w-full flex gap-3">
+                <div className="w-2/6">
+                  <input
+                    type="text"
+                    placeholder="Criteria Code (CRIT-001)"
+                    id="code"
+                    // onChange={(e) => setName(e.target.value)}
+                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg   outline-none block p-2.5 ${
+                      errors.code
+                        ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
+                        : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
+                    }`}
+                    {...register('code', {
+                      required: 'This field is required',
+                      maxLength: { value: 8, message: '8 characters' },
+                      pattern: {
+                        value: /^[A-Z]{4}-\d{3}$/,
+                        message: 'The pattern XXXX-000 is required',
+                      },
+                    })}
+                  />
+                </div>
+                <div className="w-2/6">
+                  <input
+                    type="number"
+                    placeholder="Criteria Amount"
+                    id="amount"
+                    // onChange={(e) => setAmount(e.target.value)}
+                    className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg   outline-none block p-2.5 ${
+                      errors.amount
+                        ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
+                        : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
+                    }`}
+                    {...register('amount', {
+                      required: 'This field is required',
+                      min: {
+                        value: 1,
+                        message: 'Must be a number 1-9',
+                      },
+                      max: {
+                        value: 9,
+                        message: 'Less than 10 only',
+                      },
+                    })}
+                  />
+                </div>
+
+                <div className="w-2/6">
+                  <input type="submit" className="btn-primary" />
+                </div>
               </div>
-              <div className="w-2/6">
-                <input
-                  type="number"
-                  placeholder="Criteria Amount"
-                  id="amount"
-                  max={9}
-                  min={1}
-                  // onChange={(e) => setAmount(e.target.value)}
-                  className={`w-full bg-gray-50 border text-gray-900 text-sm rounded-lg   outline-none block p-2.5 ${
-                    errors.amount
-                      ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
-                      : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
-                  }`}
-                  {...register('amount', {
-                    required: true,
-                  })}
-                />
-              </div>
-              <div className="w-2/6">
-                <input type="submit" className="btn-primary" />
+              <div className="w-full flex gap-3">
+                <div className="w-2/6">
+                  {errors.code && (
+                    <p className="text-sm font-poppins text-red-500 ">
+                      {errors.code.message}
+                    </p>
+                  )}
+                </div>
+                <div className="w-2/6">
+                  {errors.amount && (
+                    <p className="text-sm font-poppins text-red-500 ">
+                      {errors.amount.message}
+                    </p>
+                  )}
+                </div>
               </div>
             </form>
           </div>

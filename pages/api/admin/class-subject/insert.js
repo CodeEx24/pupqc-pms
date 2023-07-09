@@ -10,7 +10,7 @@ import CriteriaOverallScores from '@/models/CriteriaOverallScores';
 import StudentRecords from '@/models/StudentRecords';
 import StudentClassSubjectGrade from '@/models/StudentClassSubjectGrade';
 import Class from '@/models/Class';
-import AverageClassGrade from '../../../../models/AverageClassGrade';
+import AverageClassGrade from '@/models/AverageClassGrade';
 
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
