@@ -51,9 +51,9 @@ function TabsContentStudentManagement({
     return (
       <div
         key={`${studentId}${classSubjectId}${fieldName}${index}`}
-        className="p-3"
+        className="col-span-2 px-3"
       >
-        <p className="text-black z-99 w-full font-semibold">
+        <p className="text-black z-99 w-full font-semibold  my-3">
           {assessment.toUpperCase().replace('_', ' ')} {index + 1}:{' '}
           <span className="font-normal">
             */ {criteriaOverall[assessment][index]}
@@ -94,25 +94,10 @@ function TabsContentStudentManagement({
       <form className="h-full" onSubmit={handleSubmit(submitScores)}>
         <div className="grid grid-cols-6">{assessmentInputElement}</div>
 
-        <div className="flex justify-end align-bottom h-1/6 mt-4 p-6">
-          {/* <button
-            type="button"
-            onClick={async (e) => {
-              e.preventDefault();
-              await setTabDirectiveElement(null);
-              setShowPerformanceModal(false);
-              await setTabDirectiveElement(null);
-            }}
-            className="mr-4 text-gray-500 hover:text-gray-700"
-          >
-            Cancel
-          </button> */}
+        <div className="align-bottom h-1/6 mt-3 px-3">
           <button
             type="submit"
-            // onClick={() => {
-            //   console.log('HELLO');
-            // }}
-            className="bg-sky-500 text-white rounded-md px-4 py-2"
+            className="bg-sky-500 text-white rounded-md px-4 py-2 "
           >
             Submit
           </button>

@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 function FacultySidebar() {
   const router = useRouter();
 
-  const activeLink = router.pathname.substring('/faculty/'.length);
+  const activeLink = router.asPath.split('/')[2];
 
   const menu = Store((state) => state.menu);
   const { activeMenu } = menu;

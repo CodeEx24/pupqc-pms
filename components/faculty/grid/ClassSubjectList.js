@@ -14,30 +14,33 @@ import { DataManager, RemoteSaveAdaptor } from '@syncfusion/ej2/data';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
 import Link from 'next/link';
+import { useMemo } from 'react';
+import { useRef } from 'react';
 
 function ClassSubjectList({ subjectClass }) {
-  // const [key, setKey] = useState(0);
-
-  // useEffect(() => {
-  //   setKey(key + 1);
-  // }, [subjectClass]);
+  const gridRef = useRef(null);
 
   const subjectClassDataManager = new DataManager({
     adaptor: new RemoteSaveAdaptor(),
     json: subjectClass,
   });
 
-  const pageOptions = {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
-  };
+  const pageOptions = useMemo(() => {
+    return {
+      pageSize: 10,
+      pageSizes: [10, 25, 50, 100],
+      currentPage: 1,
+    };
+  }, []);
 
   return (
     <GridComponent
+      ref={gridRef}
       dataSource={subjectClassDataManager}
       pageSettings={pageOptions}
       allowPaging={true}
       allowSorting={true}
+      persistSelection={true} // Set persistSelection property to true
       toolbar={['Search']}
     >
       <ColumnsDirective>

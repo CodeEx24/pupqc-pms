@@ -57,3 +57,9 @@ export const fetchHandleClassAndSubject = (year, semester) => {
 export const fetchCurrentUser = () => {
   return axios.get(`/api/current-user`);
 };
+
+export const fetchStudentPerformance = (studentId, classSubjectId) => {
+  return axios.get('/api/faculty/student/scores', {
+    params: { studentId, classSubjectId },
+  });
+};

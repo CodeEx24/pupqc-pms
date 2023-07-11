@@ -10,12 +10,17 @@ import ClassSubject from '@/models/ClassSubject';
 const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session.user.isAdmin) {
+  if (session) {
+    if (session.user.isAdmin === 2 || session.user.isAdmin === 0) {
+      return res.status(401).send('Unauthorized Access');
+    }
+  } else {
     return res.status(401).send('Signin required');
   }
 
   const { studentId, classSubjectId } = req.query;
-
+  console.log('NOT UNDEFINED');
+  console.log('studentId, classSubjectId : ', studentId, classSubjectId);
   await db.connect();
 
   const { isGradeFinalized } = await ClassSubject.findOne({
@@ -44,7 +49,9 @@ const handler = async (req, res) => {
     isGradeFinalized,
   };
 
-  res.json({ studentRecord: updatedStudentRecord, criteriaOverall });
+  return res
+    .status(201)
+    .send({ studentRecord: updatedStudentRecord, criteriaOverall });
 };
 
 export default handler;

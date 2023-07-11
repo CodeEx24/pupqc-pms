@@ -1,8 +1,9 @@
-import Otp from '../../models/Otp';
-import Student from '../../models/Student';
-import Teacher from '../../models/Teacher';
-import db from '../../utils/db';
-import sendEmail from '../../utils/send-email';
+import Admin from '@/models/Admin';
+import Otp from '@/models/Otp';
+import Student from '@/models/Student';
+import Teacher from '@/models/Teacher';
+import db from '@/utils/db';
+import sendEmail from '@/utils/send-email';
 import bcrypt from 'bcryptjs';
 
 export default async function handler(req, res) {
@@ -12,7 +13,8 @@ export default async function handler(req, res) {
 
   const { email, type } = req.body;
 
-  const userType = type === 'Faculty' ? Teacher : Student;
+  const userType =
+    type === 'Faculty' ? Teacher : type === 'Admin' ? Admin : Student;
 
   await db.connect();
 

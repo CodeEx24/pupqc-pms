@@ -37,7 +37,15 @@ function ResetPassword({ type, email }) {
         toast.error(res.error);
       } else {
         sessionStorage.removeItem('forgotPasswordEmail');
-        router.push(`${type === 'Student' ? '/student' : '/faculty'}`);
+        router.push(
+          `${
+            type === 'Student'
+              ? '/student'
+              : type === 'Admin'
+              ? '/admin'
+              : '/faculty'
+          }`
+        );
       }
     } catch (error) {
       toast.error(getError(error));
@@ -49,7 +57,13 @@ function ResetPassword({ type, email }) {
       <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg w-full">
         RESET
         <Link
-          href={`${type === 'Student' ? '/student' : '/faculty'}`}
+          href={`${
+            type === 'Student'
+              ? '/student'
+              : type === 'Admin'
+              ? '/admin'
+              : '/faculty'
+          }`}
           className="text-white text-left font-medium flex"
         >
           <svg

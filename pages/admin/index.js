@@ -142,7 +142,7 @@ function AdminLoginScreen() {
           </form>
           <div>
             <Link
-              href="/student/forgot-password"
+              href="/admin/forgot-password"
               className=" text-red-600 font-medium mt-3 flex justify-center"
             >
               <svg

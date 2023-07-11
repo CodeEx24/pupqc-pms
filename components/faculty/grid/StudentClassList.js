@@ -13,26 +13,14 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 import { DropDownList } from '@syncfusion/ej2/dropdowns';
-import { useState } from 'react';
-import {
-  TabComponent,
-  TabItemDirective,
-  TabItemsDirective,
-} from '@syncfusion/ej2-react-navigations';
 
-import axios from 'axios';
-import TabsContentStudentManagement from '../tabs/TabsContentStudentManagement';
-import { toast } from 'react-toastify';
-import Processing from '../../Processing';
+// import { toast } from 'react-toastify';
+
 import { useMemo } from 'react';
-import { MdOutlineCancel } from 'react-icons/md';
 
-function StudentClassList({ studentClass, refetchStudentClass }) {
-  const [showperformanceModal, setShowPerformanceModal] = useState(false);
-  const [tabDirectiveElement, setTabDirectiveElement] = useState(() => {});
-  const [studentData, setStudentData] = useState({ name: '', email: '' });
-  const [isProcessing, setIsProcessing] = useState(false);
+import Link from 'next/link';
 
+function StudentClassList({ studentClass }) {
   const templateOptions = {
     create: () => {
       const dd = document.createElement('input');
@@ -101,62 +89,6 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
     }
   };
 
-  const handleClickManageGrades = async (studentId, classSubjectId) => {
-    try {
-      setIsProcessing(true);
-      const res = await axios.get(
-        `/api/student/performance/${classSubjectId}/${studentId}`
-      );
-
-      const assessment = await res.data.studentRecord.records;
-      const criteriaOverall = await res.data.criteriaOverall;
-
-      const tabElement = Object.keys(assessment).map((item, index) => {
-        return (
-          <TabItemDirective
-            key={`${studentId}${classSubjectId}${item}${index}`}
-            header={{ text: item.toLocaleUpperCase().replace('_', ' ') }}
-            content={() => (
-              <TabsContentStudentManagement
-                assessment={item}
-                assessmentItem={[...assessment[item]]}
-                setShowPerformanceModal={setShowPerformanceModal}
-                criteriaOverall={criteriaOverall}
-                studentId={studentId}
-                classSubjectId={classSubjectId}
-                refetchStudentClass={refetchStudentClass}
-                setTabDirectiveElement={setTabDirectiveElement}
-              />
-            )}
-          />
-        );
-      });
-
-      const tabDirective = () => {
-        return (
-          <div className="h-full ">
-            <div className="h-5/6 overflow-y-auto">
-              <TabComponent heightAdjustMode="Auto">
-                <TabItemsDirective>{tabElement}</TabItemsDirective>
-              </TabComponent>
-            </div>
-          </div>
-        );
-      };
-
-      setStudentData({
-        name: res.data.studentRecord.name,
-        email: res.data.studentRecord.email,
-      });
-      setTabDirectiveElement(tabDirective);
-      setShowPerformanceModal(true);
-    } catch (error) {
-      toast.error(error);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
   return (
     <div>
       <GridComponent
@@ -211,62 +143,24 @@ function StudentClassList({ studentClass, refetchStudentClass }) {
             headerText="Performance Management"
             width="150"
             template={(rowData) => (
-              <button
-                // This should open modal with data of the student
-                onClick={() =>
-                  handleClickManageGrades(
-                    rowData.student_id,
-                    rowData.class_subject_id
-                  )
-                }
+              <Link
+                href={`/faculty/performance/student/${rowData.student_id}/${rowData.class_subject_id}`}
+                target="_blank"
                 disabled={rowData.isGradeFinalized}
-                className={`btn-primary px-3 ${
-                  rowData.isGradeFinalized && 'opacity-60'
-                }`}
               >
-                Manage Grades
-              </button>
+                <button
+                  className={`btn-primary px-3 ${
+                    rowData.isGradeFinalized && 'opacity-60'
+                  }`}
+                >
+                  Manage Grades
+                </button>
+              </Link>
             )}
           />
         </ColumnsDirective>
         <Inject services={[Sort, Filter, Page, PdfExport, Toolbar]} />
       </GridComponent>
-
-      {showperformanceModal && (
-        <div
-          id="second-child"
-          className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center "
-        >
-          <div
-            className="bg-white rounded-md p-10 h-1/2"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <button
-              className="float-right text-2xl"
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowPerformanceModal(false);
-              }}
-            >
-              <MdOutlineCancel />
-            </button>
-
-            <div className="flex gap-10">
-              <h2 className="text-lg font-medium mb-2">
-                Name: <span className="font-normal">{studentData.name}</span>
-              </h2>
-              <h2 className="text-lg font-medium mb-2">
-                Email: <span className="font-normal">{studentData.email}</span>
-              </h2>
-            </div>
-            {tabDirectiveElement}
-          </div>
-        </div>
-      )}
-
-      {isProcessing && <Processing text="Getting the scores" />}
     </div>
   );
 }

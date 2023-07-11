@@ -12,6 +12,7 @@ import { getError } from '../../utils/error';
 
 function ResetPassword({ type }) {
   // React Hook Form
+
   const router = useRouter();
 
   const {
@@ -40,6 +41,8 @@ function ResetPassword({ type }) {
           `${
             type === 'Student'
               ? '/student/forgot-password/reset-password'
+              : type === 'Admin'
+              ? '/admin/forgot-password/reset-password'
               : '/faculty/forgot-password/reset-password'
           }`
         );
@@ -53,7 +56,13 @@ function ResetPassword({ type }) {
     <div className=" flex h-screen w-screen items-center px-6 py-20 md:px-28 lg:w-[42rem] lg:pr-0">
       <div className=" bg-black bg-opacity-80 p-10  text-center rounded-lg w-full">
         <Link
-          href={`${type === 'Student' ? '/student' : '/faculty'}`}
+          href={`${
+            type === 'Student'
+              ? '/student'
+              : type === 'Admin'
+              ? '/admin'
+              : '/faculty'
+          }`}
           className="text-white text-left font-medium flex"
         >
           <svg
