@@ -19,8 +19,7 @@ const handler = async (req, res) => {
   }
 
   const { studentId, classSubjectId } = req.query;
-  console.log('NOT UNDEFINED');
-  console.log('studentId, classSubjectId : ', studentId, classSubjectId);
+
   await db.connect();
 
   const { isGradeFinalized } = await ClassSubject.findOne({

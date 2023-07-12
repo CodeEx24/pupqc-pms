@@ -89,10 +89,22 @@ function TabsContentStudentManagement({
     );
   });
 
+  console.log('assessmentItem: ', assessmentItem);
+
   return (
     <div>
       <form className="h-full" onSubmit={handleSubmit(submitScores)}>
-        <div className="grid grid-cols-6">{assessmentInputElement}</div>
+        <div
+          className={`${
+            assessmentItem.length !== 0
+              ? 'grid grid-cols-6'
+              : 'flex text-base p-3'
+          }`}
+        >
+          {assessmentItem.length !== 0
+            ? assessmentInputElement
+            : 'No overall scores to be recorded'}
+        </div>
 
         <div className="align-bottom h-1/6 mt-3 px-3">
           <button

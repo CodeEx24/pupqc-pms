@@ -181,6 +181,10 @@ text-slate-900
   @apply bg-primary bg-opacity-10;
 }
 
+.e-tab.e-focused > .e-tab-header .e-toolbar-item .e-tab-wrap:focus .e-tab-text {
+  @apply text-primary;
+}
+
 /* .e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text,
 .e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-icon {
   @apply bg-primary;
