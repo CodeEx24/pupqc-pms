@@ -128,11 +128,11 @@ export const studentLinks = [
         href: 'grades',
         icon: <AiFillSnippets />,
       },
-      {
-        name: 'performance',
-        href: 'performance',
-        icon: <FaChartBar />,
-      },
+      // {
+      //   name: 'performance',
+      //   href: 'performance',
+      //   icon: <FaChartBar />,
+      // },
     ],
   },
 ];

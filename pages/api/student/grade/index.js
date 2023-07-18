@@ -95,6 +95,19 @@ const handler = async (req, res) => {
     })
   ); // Use flat() to flatten the array of semester objects into a single array
 
+  modifiedClasses.sort((a, b) => {
+    const batchA = a[0].batch;
+    const batchB = b[0].batch;
+
+    if (batchA < batchB) {
+      return 1; // swap a and b
+    } else if (batchA > batchB) {
+      return -1; // do not swap
+    } else {
+      return 0; // leave the order unchanged
+    }
+  });
+
   res.json(modifiedClasses);
 };
 

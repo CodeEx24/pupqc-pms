@@ -6108,3 +6108,30 @@ export const students = [
     isAdmin: 0,
   },
 ];
+
+export const students2 = [
+  {
+    _id: '609e16f7c2585b8a5f4ddc70',
+    name: 'Jane Guadalupe',
+    email: 'janeguadalupe@gmail.com',
+    password: bcrypt.hashSync('student123'),
+    gender: 'Female',
+    dateOfBirth: new Date('1997-05-01'),
+    placeOfBirth: 'Manila, Philippines',
+    mobileNo: '09513173163',
+    residentialAddress: '123 Main Street, Manila, Philippines',
+    isAdmin: 0,
+  },
+  {
+    _id: '609e16f7c2585b8a5f4ddc71',
+    name: 'Jocarl Basco',
+    email: 'jocarlbasco24@gmail.com',
+    password: bcrypt.hashSync('student123'),
+    gender: 'Female',
+    dateOfBirth: new Date('1997-05-01'),
+    placeOfBirth: 'Manila, Philippines',
+    mobileNo: '09513173163',
+    residentialAddress: '123 Main Street, Manila, Philippines',
+    isAdmin: 0,
+  },
+];

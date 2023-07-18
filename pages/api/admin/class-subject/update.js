@@ -42,11 +42,14 @@ const handler = async (req, res) => {
             (sum, grade) => sum + grade.grade,
             0
           );
-          const averageGrade = totalGrade / studentClassSubjectGrades.length;
+          const averageGrade = Number(
+            totalGrade / studentClassSubjectGrades.length
+          );
+
           return {
             class_id: classData._id,
             student_id,
-            grade: averageGrade,
+            grade: averageGrade.toFixed(2),
             semester: semester, // Provide the correct semester value here
           };
         })
@@ -69,11 +72,12 @@ const handler = async (req, res) => {
 
   // SAVING TO THE DATABASE
   studentClassGrades.forEach(async (studentClassGradeItem) => {
-    const { class_id, student_id } = studentClassGradeItem;
+    const { class_id, student_id, semester } = studentClassGradeItem;
 
     const existingGrade = await StudentClassGrade.findOne({
       class_id,
       student_id,
+      semester,
     });
 
     if (existingGrade) {

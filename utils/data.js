@@ -122,6 +122,11 @@ export const studentLinks = [
         icon: <AiFillHome />,
       },
       {
+        name: 'grades',
+        href: 'grades',
+        icon: <AiFillSnippets />,
+      },
+      {
         name: 'profile',
         href: 'profile',
         icon: <FaUser />,
@@ -132,16 +137,12 @@ export const studentLinks = [
       //   href: 'class-subject',
       //   icon: <FaAddressBook />,
       // },
-      {
-        name: 'grades',
-        href: 'grades',
-        icon: <AiFillSnippets />,
-      },
-      {
-        name: 'performance',
-        href: 'performance',
-        icon: <FaChartBar />,
-      },
+
+      // {
+      //   name: 'performance',
+      //   href: 'performance',
+      //   icon: <FaChartBar />,
+      // },
     ],
   },
 

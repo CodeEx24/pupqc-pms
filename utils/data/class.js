@@ -597,6 +597,7 @@ export const classes = [
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
   // 2020
+
   {
     _id: '60c635b580dae60004cdd073',
     course_id: '606c80b0a6d0e64b130e6f03',
@@ -696,6 +697,7 @@ export const classes = [
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
   // 2021
+
   {
     _id: '60c635b580dae60004cdd085',
     course_id: '606c80b0a6d0e64b130e6f04',
@@ -795,6 +797,15 @@ export const classes = [
 
   //ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ//
   // 2022
+
+  {
+    _id: '60c635b580dae60004cdd163',
+    course_id: '606c80b0a6d0e64b130e6f03',
+    year: 3,
+    section: 4,
+    batch: '2020',
+    student_id: ['609e16f7c2585b8a5f9ddc01', '609e16f7c2585b8a5f9ddc02'],
+  },
   {
     _id: '60c635b580dae60004cdd097',
     course_id: '606c80b0a6d0e64b130e6f01',
@@ -899,6 +910,7 @@ export const classes = [
 
   ///////////////////////////////////////////////////////////////////////////////////////
   // 2023 - Bachelor of Science in Business Administration (BSBA)
+
   {
     _id: '60c635b580dae60004cdd109',
     course_id: '606c80b0a6d0e64b130e6f01',
@@ -1578,5 +1590,41 @@ export const classes = [
       '609e16f7c2585b8a5f4ddc59',
       '609e16f7c2585b8a5f4ddc60',
     ],
+  },
+];
+
+export const classes2 = [
+  {
+    _id: '60c635b580dae60004cdd160',
+    course_id: '606c80b0a6d0e64b130e6f03',
+    year: 1,
+    section: 4,
+    batch: '2020',
+    student_id: ['609e16f7c2585b8a5f4ddc70', '609e16f7c2585b8a5f4ddc71'],
+  },
+  {
+    _id: '60c635b580dae60004cdd161',
+    course_id: '606c80b0a6d0e64b130e6f03',
+    year: 2,
+    section: 4,
+    batch: '2021',
+    student_id: ['609e16f7c2585b8a5f4ddc70', '609e16f7c2585b8a5f4ddc71'],
+  },
+
+  {
+    _id: '60c635b580dae60004cdd162',
+    course_id: '606c80b0a6d0e64b130e6f03',
+    year: 3,
+    section: 4,
+    batch: '2022',
+    student_id: ['609e16f7c2585b8a5f4ddc70', '609e16f7c2585b8a5f4ddc71'],
+  },
+  {
+    _id: '60c635b580dae60004cdd163',
+    course_id: '606c80b0a6d0e64b130e6f03',
+    year: 4,
+    section: 4,
+    batch: '2023',
+    student_id: ['609e16f7c2585b8a5f4ddc70', '609e16f7c2585b8a5f4ddc71'],
   },
 ];

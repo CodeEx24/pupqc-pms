@@ -1,6 +1,8 @@
 import React from 'react';
+// What does oop meaning in programming
+// What is the difference between a class and an object
 
-function styling() {
+function Styling() {
   return (
     <div>
       <h1 className="text-8xl font-poppins font-bold text-sky-500">
@@ -54,4 +56,4 @@ function styling() {
   );
 }
 
-export default styling;
+export default Styling;

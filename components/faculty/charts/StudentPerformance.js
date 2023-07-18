@@ -10,7 +10,7 @@ import {
   DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
-function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
+function StudentPerformance({ studentPerformance, studentDetails, slope }) {
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
     title: 'Percentage',
@@ -23,6 +23,8 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
     format: '${point.y}% - ${point.x}',
   };
 
+  console.log('studentPerformance: ', studentPerformance);
+
   return (
     <div className="h-full w-full flex flex-col">
       <h6 className="text-h4 font-bold text-primary mb-3">Performance</h6>
@@ -30,19 +32,14 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
         <h6 className="text-lg font-bold w-1/2">
           Name:{' '}
           <span className="font-semibold text-gray-700">
-            {teacherDetails.name}
+            {studentDetails.name}
           </span>
         </h6>
-        <h6 className="text-lg font-bold w-1/2">
-          Status:{' '}
-          <span className="font-semibold text-gray-700">
-            {teacherDetails.status}
-          </span>
-        </h6>
+
         <h6 className="text-lg font-bold w-1/2">
           Email:{' '}
           <span className="font-semibold text-gray-700">
-            {teacherDetails.email}
+            {studentDetails.email}
           </span>
         </h6>
         <h6 className="text-lg font-bold w-1/2">
@@ -50,14 +47,14 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
         </h6>
         <h6 className="text-lg font-bold w-1/2">
           Prediction (
-          {teacherPerformance.length > 0
-            ? teacherPerformance[teacherPerformance.length - 1].year
+          {studentPerformance.length > 0
+            ? studentPerformance[studentPerformance.length - 1].year
             : ''}
           ):{' '}
           <span className="font-semibold text-gray-700">
-            {teacherPerformance.length > 0
+            {studentPerformance.length > 0
               ? `${
-                  teacherPerformance[teacherPerformance.length - 1]
+                  studentPerformance[studentPerformance.length - 1]
                     .averagePercentage
                 }%`
               : ''}
@@ -68,8 +65,8 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
 
       <div className="flex-grow-1 w-full">
         <ChartComponent
-          id="charts-teacher-performance"
-          title="Teacher Performance"
+          id="charts-student-performance"
+          title="Student Performance"
           primaryXAxis={primaryxAxis}
           primaryYAxis={primaryyAxis}
           tooltip={tooltipSettings}
@@ -86,7 +83,7 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
           />
           <SeriesCollectionDirective>
             <SeriesDirective
-              dataSource={teacherPerformance}
+              dataSource={studentPerformance}
               xName="year"
               yName="averagePercentage"
               name="Performance"
@@ -99,4 +96,4 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
   );
 }
 
-export default TeacherPerformance;
+export default StudentPerformance;
