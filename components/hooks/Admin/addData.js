@@ -11,3 +11,7 @@ export const addSubjectClassData = (data) => {
 export const addCriteriaData = (data) => {
   return axios.post(`/api/admin/criteria/insert`, data);
 };
+
+export const addStudentPassers = (data) => {
+  return axios.post(`/api/admin/student/passers/insert`, data);
+};

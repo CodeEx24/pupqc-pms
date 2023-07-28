@@ -43,3 +43,15 @@ export const fetchCourseStudentCount = () => {
 export const fetchGradeYearly = () => {
   return axios.get(`/api/admin/grade/yearly`);
 };
+
+export const fetchGraduatedStudent = (year) => {
+  return axios.get(`/api/admin/student/graduated/${year}`);
+};
+
+export const fetchStudentPassers = () => {
+  return axios.get(`/api/admin/student/passers`);
+};
+
+export const fetchStudentPassersList = () => {
+  return axios.get(`/api/admin/student/passers/list`);
+};

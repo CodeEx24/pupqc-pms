@@ -84,6 +84,16 @@ export const adminLinks = [
     title: 'Pages',
     links: [
       {
+        name: 'Student',
+        href: 'student',
+        icon: <FaBook />,
+      },
+      {
+        name: 'Faculty',
+        href: 'faculty',
+        icon: <FaBook />,
+      },
+      {
         name: 'subject',
         href: 'subject',
         icon: <FaBook />,

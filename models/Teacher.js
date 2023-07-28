@@ -18,6 +18,11 @@ const teacherSchema = new mongoose.Schema(
       required: true,
       default: defaultImage,
     },
+    facultyType: {
+      type: Number,
+      required: true,
+      default: 1, // Default value set to '1'
+    },
   },
   {
     timestamps: true,
