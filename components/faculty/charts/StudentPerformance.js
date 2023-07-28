@@ -52,7 +52,8 @@ function StudentPerformance({ studentPerformance, studentDetails, slope }) {
             : ''}
           ):{' '}
           <span className="font-semibold text-gray-700">
-            {studentPerformance.length > 0
+            {studentPerformance.length > 0 &&
+            studentPerformance[studentPerformance.length - 1].averagePercentage
               ? `${
                   studentPerformance[studentPerformance.length - 1]
                     .averagePercentage

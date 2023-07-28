@@ -145,8 +145,8 @@ function CriteriaPopup2({
                   {...register3(subFieldName, {
                     required: 'This field is required',
                     pattern: {
-                      value: /^[A-Za-z]+$/,
-                      message: 'Only letters are allowed',
+                      value: /^[A-Za-z\s]+$/,
+                      message: 'Only letters and spaces are allowed',
                     },
                   })}
                 />
@@ -194,8 +194,8 @@ function CriteriaPopup2({
                   {...register3(subFieldDescription, {
                     required: 'This field is required',
                     pattern: {
-                      value: /^[A-Za-z]+$/,
-                      message: 'Only letters are allowed',
+                      value: /^[A-Za-z\s]+$/,
+                      message: 'Only letters and spaces are allowed',
                     },
                   })}
                 />

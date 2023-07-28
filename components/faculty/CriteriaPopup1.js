@@ -88,8 +88,8 @@ function CriteriaPopup1({
               {...register2(fieldName, {
                 required: 'This field is required',
                 pattern: {
-                  value: /^[A-Za-z]+$/,
-                  message: 'Only letters are allowed',
+                  value: /^[A-Za-z\s]+$/,
+                  message: 'Only letters and spaces are allowed',
                 },
               })}
             />

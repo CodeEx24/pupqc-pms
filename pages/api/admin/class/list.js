@@ -107,13 +107,13 @@ export default async function handler(req, res) {
     };
   });
 
-  await db.disconnect();
-
-  const sortedNewClassData = newClassData.sort((a, b) => {
+  const sortedNewClassData = await newClassData.sort((a, b) => {
     const aBatch = parseInt(a.batch);
     const bBatch = parseInt(b.batch);
     return bBatch - aBatch;
   });
+
+  await db.disconnect();
 
   return res.status(200).json(sortedNewClassData);
 }

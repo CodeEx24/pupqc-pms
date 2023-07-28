@@ -55,12 +55,13 @@ function TeacherPerformance({ teacherPerformance, teacherDetails, slope }) {
             : ''}
           ):{' '}
           <span className="font-semibold text-gray-700">
-            {teacherPerformance.length > 0
+            {teacherPerformance.length > 0 &&
+            teacherPerformance[teacherPerformance.length - 1].averagePercentage
               ? `${
                   teacherPerformance[teacherPerformance.length - 1]
                     .averagePercentage
                 }%`
-              : ''}
+              : 'No Data Available'}
           </span>
         </h6>
       </div>

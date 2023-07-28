@@ -134,7 +134,7 @@ function TabsContent({
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-md p-6">
             <h2 className="text-lg font-medium mb-2">
-              Are you sure you want to delete the last item?
+              Are you sure you want to delete the item?
             </h2>
             <div className="flex justify-end mt-4">
               <button

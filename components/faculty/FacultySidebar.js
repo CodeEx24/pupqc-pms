@@ -35,7 +35,7 @@ function FacultySidebar() {
               href="/"
               className="text-h6 items-center gap-3 ml-3 mt-4 flex  font-poppins font-extrabold tracking-tight "
             >
-              <SiShopware /> PUPQC PMS
+              <SiShopware /> iPERFORM
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button

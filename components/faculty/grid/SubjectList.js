@@ -45,14 +45,17 @@ function SubjectList({ subjects }) {
             <MdOutlineCancel />
           </button>
 
-          <p className="text-h6 font-bold text-gray-700 mb-2">
+          <p className="text-base font-bold text-gray-700 mb-2">
             Subject Code: <span className="font-normal">{code}</span>
           </p>
 
-          <p className="text-h6 font-bold text-gray-700 mb-2">
+          <p className="text-base font-bold text-gray-700 mb-2">
             Subject Name: <span className="font-normal">{name}</span>
           </p>
-          <p className="w-full">Subject Description: {description}</p>
+          <p className="w-full text-base font-bold text-gray-700 mb-2">
+            Subject Description:{' '}
+            <span className="font-normal">{description}</span>
+          </p>
         </div>
       );
     };
