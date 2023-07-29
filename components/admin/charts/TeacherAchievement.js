@@ -11,16 +11,13 @@ import {
   ColumnSeries,
 } from '@syncfusion/ej2-react-charts';
 
-function PassedFailed({ passed, highest, interval }) {
-  console.log('passed: ', passed);
-  console.log('highest: ', highest);
-  console.log('interval: ', interval);
-  const primaryxAxis = { valueType: 'Category', title: 'Countries' };
+function TeacherAchievement({ teacherAchievement, highest, interval }) {
+  const primaryxAxis = { valueType: 'Category', title: 'Achievements' };
   const primaryyAxis = {
     minimum: 0,
-    maximum: highest,
+    maximum: highest + interval,
     interval: interval,
-    title: 'Number of Students',
+    title: 'Amount',
   };
 
   const tooltipSettings = {
@@ -35,7 +32,7 @@ function PassedFailed({ passed, highest, interval }) {
           id="charts-column"
           primaryXAxis={primaryxAxis}
           primaryYAxis={primaryyAxis}
-          title="Passed/Failed"
+          title="Achievements"
           tooltip={tooltipSettings}
         >
           <Inject
@@ -43,17 +40,31 @@ function PassedFailed({ passed, highest, interval }) {
           />
           <SeriesCollectionDirective>
             <SeriesDirective
-              dataSource={passed}
+              dataSource={teacherAchievement}
               xName="year"
-              yName="passed"
-              name="Passed"
+              yName="Publish Research"
+              name="Publish Research"
               type="Column"
             ></SeriesDirective>
             <SeriesDirective
-              dataSource={passed}
+              dataSource={teacherAchievement}
               xName="year"
-              yName="failed"
-              name="Failed"
+              yName="PhD"
+              name="PhD"
+              type="Column"
+            ></SeriesDirective>
+            <SeriesDirective
+              dataSource={teacherAchievement}
+              xName="year"
+              yName="Awards"
+              name="Awards"
+              type="Column"
+            ></SeriesDirective>
+            <SeriesDirective
+              dataSource={teacherAchievement}
+              xName="year"
+              yName="Grants"
+              name="Grants"
               type="Column"
             ></SeriesDirective>
           </SeriesCollectionDirective>
@@ -62,4 +73,4 @@ function PassedFailed({ passed, highest, interval }) {
     </div>
   );
 }
-export default PassedFailed;
+export default TeacherAchievement;

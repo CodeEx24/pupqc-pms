@@ -22,6 +22,8 @@ function TeacherList({ teacherList }) {
   const [showPerformanceModal, setShowPerformanceModal] = useState(false);
   const [teacherPerformance, setTeacherPerformance] = useState({});
   const [slope, setSlope] = useState(0);
+  const [predictedYear, setPredictedYear] = useState();
+  const [phdTitle, setPhdTitle] = useState('');
   const [isActionInProgress, setIsActionInProgress] = useState(false);
 
   const [teacherDetails, setteacherDetails] = useState({
@@ -68,7 +70,8 @@ function TeacherList({ teacherList }) {
         params: { teacher_id },
       });
       setTeacherPerformance(res.data.techerPerformance);
-
+      setPredictedYear(res.data.predictedYear);
+      setPhdTitle(res.data.phDTitle);
       setSlope(
         res.data.slope > 0
           ? 'Going higher'
@@ -199,6 +202,8 @@ function TeacherList({ teacherList }) {
               teacherPerformance={teacherPerformance}
               teacherDetails={teacherDetails}
               slope={slope}
+              predictedYear={predictedYear}
+              phdTitle={phdTitle}
             />
           </div>
         </div>

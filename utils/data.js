@@ -11,7 +11,11 @@ import {
   FaFileMedicalAlt,
   FaFolderMinus,
   FaUserTie,
+  FaUserGraduate,
+  FaAward,
 } from 'react-icons/fa';
+
+import { MdPeople } from 'react-icons/md';
 import { IoMdPeople } from 'react-icons/io';
 
 export const teacherLinks = [
@@ -81,18 +85,33 @@ export const adminLinks = [
     ],
   },
   {
-    title: 'Pages',
+    title: 'Passers & Achievement',
     links: [
       {
-        name: 'Student',
-        href: 'student',
-        icon: <FaBook />,
+        name: 'Student Passers',
+        href: 'student-passers',
+        icon: <FaUserGraduate />,
       },
       {
-        name: 'Faculty',
-        href: 'faculty',
-        icon: <FaBook />,
+        name: 'Faculty Achievement',
+        href: 'faculty-achievement',
+        icon: <FaAward />,
       },
+      {
+        name: 'teacher list',
+        href: 'teacher-list',
+        icon: <FaUserTie />,
+      },
+      {
+        name: 'student list',
+        href: 'student-list',
+        icon: <MdPeople />,
+      },
+    ],
+  },
+  {
+    title: 'Class Management',
+    links: [
       {
         name: 'subject',
         href: 'subject',
@@ -112,11 +131,6 @@ export const adminLinks = [
         name: 'class assign',
         href: 'class-assign',
         icon: <FaFolderMinus />,
-      },
-      {
-        name: 'teacher list',
-        href: 'teacher-list',
-        icon: <FaUserTie />,
       },
     ],
   },
@@ -1122,8 +1136,8 @@ export const data = {
     // TESTING DATA
     {
       _id: '609e16f7c2585b8a5f9ddc51',
-      name: 'Jocarl Basco',
-      email: 'teacher@gmail.com',
+      name: 'John Doe',
+      email: 'joymaldonado029@gmail.com',
       password: bcrypt.hashSync('teacher123'),
       gender: 'Female',
       dateOfBirth: new Date('1990-03-25'),
@@ -1132,12 +1146,13 @@ export const data = {
       residentialAddress: '123 Main Street, San Francisco',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Assistant Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9ddc52',
-      name: 'Jocarl Basco',
-      email: 'jocarlbasco24@gmail.com',
-      password: bcrypt.hashSync('john123'),
+      name: 'Eugene Privaldos',
+      email: 'eugene.privaldos.9@gmail.com',
+      password: bcrypt.hashSync('eugene123'),
       gender: 'Male',
       dateOfBirth: new Date('1985-08-10'),
       placeOfBirth: 'Seattle',
@@ -1145,6 +1160,7 @@ export const data = {
       residentialAddress: '456 Elm Street, Seattle',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Assistant Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9ddc81',
@@ -1158,12 +1174,13 @@ export const data = {
       residentialAddress: '321 Pine Street, Los Angeles',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Assistant Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9ddc82',
-      name: 'Eugene Privaldos',
-      email: 'eugene.privaldos.9@gmail.com',
-      password: bcrypt.hashSync('eugene123'),
+      name: 'Camille Segundo',
+      email: 'millesegundo@gmail.com',
+      password: bcrypt.hashSync('camille123'),
       gender: 'Female',
       dateOfBirth: new Date('1990-03-25'),
       placeOfBirth: 'San Francisco',
@@ -1171,6 +1188,7 @@ export const data = {
       residentialAddress: '123 Main Street, San Francisco',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Assistant Professor',
     },
     // END OF TESTING DATA
 
@@ -1186,6 +1204,7 @@ export const data = {
       residentialAddress: '456 Elm Street, San Francisco',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Associate Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd002',
@@ -1199,6 +1218,7 @@ export const data = {
       residentialAddress: '123 Pine Street, Houston',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Associate Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd003',
@@ -1212,6 +1232,7 @@ export const data = {
       residentialAddress: '789 Oak Street, New York',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Associate Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd004',
@@ -1225,6 +1246,7 @@ export const data = {
       residentialAddress: '456 Elm Street, Chicago',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Associate Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd005',
@@ -1238,6 +1260,7 @@ export const data = {
       residentialAddress: '123 Pine Street, Los Angeles',
       isActive: false,
       isAdmin: 1,
+      facultyType: 'Instructor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd006',
@@ -1251,6 +1274,7 @@ export const data = {
       residentialAddress: '789 Elm Street, San Francisco',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Instructor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd007',
@@ -1264,6 +1288,7 @@ export const data = {
       residentialAddress: '456 Oak Street, Houston',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Instructor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd008',
@@ -1277,6 +1302,7 @@ export const data = {
       residentialAddress: '123 Pine Street, New York',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Instructor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd009',
@@ -1290,6 +1316,7 @@ export const data = {
       residentialAddress: '789 Elm Street, Chicago',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd010',
@@ -1303,6 +1330,7 @@ export const data = {
       residentialAddress: '123 Pine Street, Los Angeles',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd011',
@@ -1316,6 +1344,7 @@ export const data = {
       residentialAddress: '789 Oak Street, San Francisco',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Professor',
     },
     {
       _id: '609e16f7c2585b8a5f9dd012',
@@ -1329,6 +1358,7 @@ export const data = {
       residentialAddress: '456 Elm Street, Houston',
       isActive: true,
       isAdmin: 1,
+      facultyType: 'Professor',
     },
   ],
   admins: [

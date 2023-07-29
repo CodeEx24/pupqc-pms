@@ -10,12 +10,10 @@ import {
   DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
-function TeacherPerformance({
-  teacherPerformance,
-  teacherDetails,
-  slope,
-  predictedYear,
-  phdTitle,
+function StudentPerformance({
+  studentPerformance,
+  studentDetails,
+  careerRecommendation,
 }) {
   const primaryxAxis = { valueType: 'Category', title: 'Year' };
   const primaryyAxis = {
@@ -29,6 +27,8 @@ function TeacherPerformance({
     format: '${point.y}% - ${point.x}',
   };
 
+  console.log('studentPerformance: ', studentPerformance);
+
   return (
     <div className="h-full w-full flex flex-col">
       <h6 className="text-h4 font-bold text-primary mb-3">Performance</h6>
@@ -36,58 +36,27 @@ function TeacherPerformance({
         <h6 className="text-lg font-bold w-1/2">
           Name:{' '}
           <span className="font-semibold text-gray-700">
-            {teacherDetails.name}
+            {studentDetails.name}
           </span>
         </h6>
-        <h6 className="text-lg font-bold w-1/2">
-          Status:{' '}
-          <span className="font-semibold text-gray-700">
-            {teacherDetails.status}
-          </span>
-        </h6>
+
         <h6 className="text-lg font-bold w-1/2">
           Email:{' '}
           <span className="font-semibold text-gray-700">
-            {teacherDetails.email}
+            {studentDetails.email}
           </span>
         </h6>
-        <h6 className="text-lg font-bold w-1/2">
-          Trend: <span className="font-semibold text-gray-700">{slope}</span>
-        </h6>
-        {predictedYear ? (
-          <h6 className="text-lg font-bold w-1/2">
-            PhD Year Forecast:{' '}
-            <span className="font-semibold text-gray-700">{predictedYear}</span>
-          </h6>
-        ) : (
-          <h6 className="text-lg font-bold w-1/2">
-            PhD Title:{' '}
-            <span className="font-semibold text-gray-700">{phdTitle}</span>
-          </h6>
-        )}
-        <h6 className="text-lg font-bold w-1/2">
-          Prediction
-          {teacherPerformance?.length > 0
-            ? '(' + teacherPerformance[teacherPerformance.length - 1].year + ')'
-            : ''}
-          :{' '}
-          <span className="font-semibold text-gray-700">
-            {teacherPerformance?.length > 0 &&
-            teacherPerformance[teacherPerformance.length - 1].averagePercentage
-              ? `${
-                  teacherPerformance[teacherPerformance.length - 1]
-                    .averagePercentage
-                }%`
-              : 'No Data Available'}
-          </span>
-        </h6>
+        {/* <h6 className="text-lg font-bold w-full">Career Reccomendation: </h6> */}
+        <span className="font-semibold text-gray-700 mt-2">
+          {careerRecommendation}
+        </span>
       </div>
       {/* <h6 className="text-lg font-bold w-1/2"></h6> */}
 
       <div className="flex-grow-1 w-full">
         <ChartComponent
-          id="charts-teacher-performance"
-          title="Teacher Performance"
+          id="charts-student-performance"
+          title="Graduated Student Performance"
           primaryXAxis={primaryxAxis}
           primaryYAxis={primaryyAxis}
           tooltip={tooltipSettings}
@@ -104,7 +73,7 @@ function TeacherPerformance({
           />
           <SeriesCollectionDirective>
             <SeriesDirective
-              dataSource={teacherPerformance}
+              dataSource={studentPerformance}
               xName="year"
               yName="averagePercentage"
               name="Performance"
@@ -117,4 +86,4 @@ function TeacherPerformance({
   );
 }
 
-export default TeacherPerformance;
+export default StudentPerformance;

@@ -11,16 +11,13 @@ import {
   ColumnSeries,
 } from '@syncfusion/ej2-react-charts';
 
-function PassedFailed({ passed, highest, interval }) {
-  console.log('passed: ', passed);
-  console.log('highest: ', highest);
-  console.log('interval: ', interval);
-  const primaryxAxis = { valueType: 'Category', title: 'Countries' };
+function StudentPassers({ studentsPassers, highest, interval }) {
+  const primaryxAxis = { valueType: 'Category', title: 'Exam Passers' };
   const primaryyAxis = {
     minimum: 0,
     maximum: highest,
     interval: interval,
-    title: 'Number of Students',
+    title: 'Amount',
   };
 
   const tooltipSettings = {
@@ -32,28 +29,28 @@ function PassedFailed({ passed, highest, interval }) {
     <div className="control-pane">
       <div className="control-section">
         <ChartComponent
-          id="charts-column"
+          id="charts-column3"
           primaryXAxis={primaryxAxis}
           primaryYAxis={primaryyAxis}
-          title="Passed/Failed"
+          title="Exam Passers"
           tooltip={tooltipSettings}
         >
           <Inject
             services={[ColumnSeries, Legend, Tooltip, DataLabel, Category]}
           />
           <SeriesCollectionDirective>
-            <SeriesDirective
-              dataSource={passed}
+            {/* <SeriesDirective
+              dataSource={studentsPassers}
               xName="year"
-              yName="passed"
+              yName="year"
               name="Passed"
               type="Column"
-            ></SeriesDirective>
+            ></SeriesDirective> */}
             <SeriesDirective
-              dataSource={passed}
+              dataSource={studentsPassers}
               xName="year"
-              yName="failed"
-              name="Failed"
+              yName="count"
+              name="Passers"
               type="Column"
             ></SeriesDirective>
           </SeriesCollectionDirective>
@@ -62,4 +59,4 @@ function PassedFailed({ passed, highest, interval }) {
     </div>
   );
 }
-export default PassedFailed;
+export default StudentPassers;

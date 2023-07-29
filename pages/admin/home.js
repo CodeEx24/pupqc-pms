@@ -4,10 +4,14 @@ import Card from '@/components/Card';
 import {
   fetchAllActiveData,
   fetchCourseStudentCount,
+  fetchFacultyAchievementCount,
   fetchGradeYearly,
+  fetchStudentPassersChart,
 } from '../../components/hooks/Admin/fetch';
 import StudentCourseCount from '../../components/admin/charts/StudentCourseCount';
 import YearlyAveragePerformance from '../../components/admin/charts/YearlyAveragePerformance';
+import StudentPassers from '../../components/admin/charts/StudentPassersYearly';
+import TeacherAchievement from '../../components/admin/charts/TeacherAchievement';
 
 function HomeScreen() {
   const allActiveDataQuery = useQuery(
@@ -32,6 +36,28 @@ function HomeScreen() {
     refetchOnMount: false, // Avoid refetching on component mount
     refetchOnWindowFocus: false,
   });
+
+  const studentsPassersQuery = useQuery(
+    ['studentPassers'],
+    () => fetchStudentPassersChart(),
+    {
+      refetchOnMount: false, // Avoid refetching on component mount
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const facultyAchievementQuery = useQuery(
+    ['facultyAchievement'],
+    () => fetchFacultyAchievementCount(),
+    {
+      refetchOnMount: false, // Avoid refetching on component mount
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  if (!facultyAchievementQuery.isLoading) {
+    console.log('facultyAchievementQuery.data: ', facultyAchievementQuery.data);
+  }
 
   return (
     <AdminLayout title="Home">
@@ -106,6 +132,31 @@ function HomeScreen() {
               'Loading...'
             ) : (
               <YearlyAveragePerformance average={gradeYearlyQuery.data.data} />
+            )}
+          </div>
+
+          <div className="col-span-12 row-start-1 row-span-4 md:col-span-5 md:row-span-5 rounded-xl p-8 bg-white shadow-md">
+            <h3 className="font-semibold text-h6 md:mb-3">Student Passers</h3>
+            {studentsPassersQuery.isLoading ? (
+              'Loading...'
+            ) : (
+              <StudentPassers
+                studentsPassers={studentsPassersQuery.data.data.result}
+                highest={studentsPassersQuery.data.data.highestCount}
+                lowest={studentsPassersQuery.data.data.lowestCount}
+              />
+            )}
+          </div>
+          <div className="col-span-12 row-span-5  md:col-span-7  rounded-xl p-8 bg-white shadow-md">
+            <h3 className="font-semibold text-h6 mb-3">Achievements</h3>
+            {facultyAchievementQuery.isLoading ? (
+              'Loading...'
+            ) : (
+              <TeacherAchievement
+                teacherAchievement={facultyAchievementQuery.data.data.result}
+                highest={facultyAchievementQuery.data.data.highestCount}
+                interval={facultyAchievementQuery.data.data.interval}
+              />
             )}
           </div>
           {/* <div className="col-span-12 row-span-5 row-start-11 rounded-xl p-8 bg-white shadow-md">

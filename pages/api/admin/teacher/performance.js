@@ -9,6 +9,7 @@ import ClassSubject from '@/models/ClassSubject';
 import Class from '@/models/Class';
 
 import SimpleLinearRegression from 'ml-regression-simple-linear';
+import FacultyAchievement from '../../../../models/FacultyAchievement';
 
 const getClassBatch = async (years) => {
   const classBatch = await Promise.all(
@@ -70,6 +71,85 @@ const handler = async (req, res) => {
 
   const { currentYear } = getCurrentSemesterData();
 
+  const facultyAchievementExist = await FacultyAchievement.findOne({
+    teacher_id,
+    achievementType: 'PhD',
+  });
+
+  // ... (your existing code)
+
+  let predictedYear;
+  let phDTitle;
+
+  if (facultyAchievementExist) {
+    phDTitle = facultyAchievementExist.title;
+  } else {
+    const facultyAchievementPublication = await FacultyAchievement.find({
+      teacher_id,
+      achievementType: 'Publish Research',
+    });
+
+    // Initialize an object to store the counts for each year
+    const yearCounts = {};
+
+    // Iterate through each achievement in the array
+    facultyAchievementPublication.forEach((achievement) => {
+      // Extract the achievementType and year from the current achievement
+      const { year } = achievement;
+
+      // If the year doesn't exist in the yearCounts object, initialize it with a count of 1
+      if (!yearCounts[year]) {
+        yearCounts[year] = 1;
+      } else {
+        // If the year already exists, increment the count
+        yearCounts[year]++;
+      }
+    });
+
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+
+    // Initialize the output array
+    const accumulatedCountsArray = [];
+
+    // Iterate through the years from the current year to the earliest year in the data (2020)
+    for (let year = currentYear; year >= currentYear - 5; year--) {
+      // If the year exists in the yearCounts object, use the count, otherwise use 0
+      const count = yearCounts[year] || 0;
+
+      // Push the year and count as an object to the output array
+      accumulatedCountsArray.push({ year, count });
+    }
+    accumulatedCountsArray.sort((a, b) => a.year - b.year);
+
+    // Extract the year and averagePercentage from the input data
+    const xYearPubRes = accumulatedCountsArray.map((data) =>
+      parseInt(data.year)
+    );
+    const yCount = accumulatedCountsArray.map((data) => data.count);
+    // Output the result
+    console.log('xYearPubRes: ', xYearPubRes);
+    console.log('yCount: ', yCount);
+
+    // Use linear regression to predict when the count will reach 6
+    const regression = new SimpleLinearRegression(xYearPubRes, yCount);
+    const slope = regression.slope;
+    const intercept = regression.intercept;
+
+    // Function to calculate the year when the count will be 6
+    const predictYear = (targetCount) => {
+      const yearsNeeded = (targetCount - intercept) / slope;
+      return Math.ceil(yearsNeeded);
+    };
+
+    // Predict the year when the count will reach 6
+    const targetCount = 2;
+    predictedYear = predictYear(targetCount);
+    console.log(
+      `Predicted year to reach ${targetCount} 'Publish Research' achievements: ${predictedYear}`
+    );
+  }
+
   const years = Array.from({ length: 10 }, (_, i) => currentYear - i - 1);
 
   await db.connect();
@@ -95,6 +175,9 @@ const handler = async (req, res) => {
     (data) => data.averagePercentage
   );
 
+  // console.log('xYear: ', xYear);
+  // console.log('yPercentage: ', yPercentage);
+
   const regression = new SimpleLinearRegression(xYear, yPercentage);
   const slope = regression.slope;
 
@@ -112,6 +195,8 @@ const handler = async (req, res) => {
   res.status(200).json({
     techerPerformance: columnDataWithoutZeroes,
     slope,
+    predictedYear,
+    phDTitle,
   });
 };
 

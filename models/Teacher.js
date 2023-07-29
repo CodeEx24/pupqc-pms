@@ -19,9 +19,8 @@ const teacherSchema = new mongoose.Schema(
       default: defaultImage,
     },
     facultyType: {
-      type: Number,
+      type: String,
       required: true,
-      default: 1, // Default value set to '1'
     },
   },
   {

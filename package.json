@@ -25,6 +25,8 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "js-cookie": "^3.0.1",
+    "mathjs": "^11.9.1",
+    "ml-regression": "^5.0.0",
     "ml-regression-simple-linear": "^2.0.3",
     "mongoose": "^7.0.3",
     "next": "^13.3.4",
@@ -38,6 +40,7 @@
     "react-select": "^5.7.2",
     "react-toastify": "^9.1.2",
     "sharp": "^0.32.0",
+    "spearman-rho": "^1.0.6",
     "typescript": "^5.0.4",
     "zustand": "^4.3.6"
   },

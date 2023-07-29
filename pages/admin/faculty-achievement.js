@@ -6,15 +6,15 @@ import Select from 'react-select';
 import { toast } from 'react-toastify';
 
 import AdminLayout from '../../components/admin/AdminLayout';
-import { addStudentPassers } from '../../components/hooks/Admin/addData';
+import { addFacultyAchievement } from '../../components/hooks/Admin/addData';
 import {
-  fetchGraduatedStudent,
-  fetchStudentPassersList,
+  fetchFacultyAchievementList,
+  fetchFacultyMembers,
 } from '../../components/hooks/Admin/fetch';
 import Processing from '../../components/Processing';
-import StudentPasserList from '../../components/admin/grid/StudentPassersList';
+import FacultyAchievementList from '../../components/admin/grid/FacultyAchievementList';
 
-function StudentScreen() {
+function FacultyScreen() {
   // HOOK FORM
   const {
     register,
@@ -24,46 +24,48 @@ function StudentScreen() {
     formState: { errors },
   } = useForm();
 
-  const { data: studentPassersList, isLoading } = useQuery(
-    ['studentPassersList'],
-    () => fetchStudentPassersList()
-  );
+  const {
+    data: facultyAchievementList,
+    isLoading,
+    refetch: refetchFacultyAchievementList,
+  } = useQuery(['facultyAchievementList'], () => fetchFacultyAchievementList());
 
   if (!isLoading) {
-    console.log('HEREL ', studentPassersList.data);
+    console.log('HEREL ', facultyAchievementList.data);
   }
 
   // USE STATE
-  const [selectedExamType, setSelectedExamType] = useState(null);
-  const [selectedStudentId, setSelectedStudentId] = useState(null);
+  const [selectedAchievementType, setSelectedAchievementType] = useState(null);
+  const [selectedFacultyId, setSelectedFacultyId] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const currentYear = new Date().getFullYear();
-  const { data: graduatedStudent } = useQuery(
-    ['graduatedStudent', currentYear],
-    () => fetchGraduatedStudent(currentYear),
-    {
-      enabled: false, // Disable automatic refetching on mount
-    }
+  //   const currentYear = new Date().getFullYear();
+  const { data: facultyMembers } = useQuery(['facultyMembers'], () =>
+    fetchFacultyMembers()
   );
-  const examTypeOption = [
+
+  const achievementTypeOption = [
     {
-      value: 'Licensure Examination for Professional Teachers',
-      label: 'Licensure Examination for Professional Teachers',
+      value: 'PhD',
+      label: 'PhD',
     },
-    { value: 'Human Resources', label: 'Human Resources' },
+    { value: 'Publish Research', label: 'Publish Research' },
     {
-      value: 'Others (BAR Exam, Engineering, etc.)',
-      label: 'Others (BAR Exam, Engineering, etc.)',
+      value: 'Awards',
+      label: 'Awards',
+    },
+    {
+      value: 'Grants',
+      label: 'Grants',
     },
   ];
 
-  const studentOptions = useMemo(() => {
-    return graduatedStudent?.data?.map((classItem) => ({
-      value: classItem.student_id,
+  const facultyMemberOption = useMemo(() => {
+    return facultyMembers?.data?.map((classItem) => ({
+      value: classItem._id,
       label: classItem.name,
     }));
-  }, [graduatedStudent]);
+  }, [facultyMembers]);
 
   // Select styles
   const selectStyles = (name) => {
@@ -97,34 +99,36 @@ function StudentScreen() {
 
     setValue(name, e.value);
     clearErrors(name);
-    if (name === 'examTypeVal') {
-      setSelectedExamType(e);
+    if (name === 'achievementType') {
+      setSelectedAchievementType(e);
     } else {
-      setSelectedStudentId(e);
+      setSelectedFacultyId(e);
     }
   };
 
-  const addStudentPassersMutation = useMutation(addStudentPassers);
+  const addFacultyAchievementMutation = useMutation(addFacultyAchievement);
 
   const onSubmit = async (data) => {
     try {
       setSubmitting(true); // Disable the submit button
 
-      await addStudentPassersMutation.mutateAsync(data);
+      await addFacultyAchievementMutation.mutateAsync(data);
 
-      setSelectedExamType(null);
-      setSelectedStudentId(null);
-      setValue('scores', '');
+      setSelectedAchievementType(null);
+      setSelectedFacultyId(null);
+      setValue('title', '');
+      setValue('faculty_id', '');
+      setValue('achievementType', '');
 
-      //   await refetchSubjectClass();
-      toast.success('Subject added successfully');
+      await refetchFacultyAchievementList();
+      toast.success('Facullty achievement added successfully');
     } catch (error) {
       if (error.response && error.response.data.message) {
         // Handle backend error message
         toast.error(error.response.data.message);
       } else {
         // Handle other errors
-        toast.error('An error occurred while adding the subject');
+        toast.error('An error occurred while adding the achievement');
       }
     } finally {
       setSubmitting(false); // Enable the submit button
@@ -134,90 +138,85 @@ function StudentScreen() {
   return (
     <AdminLayout title="Class Assign">
       <div className="bg-white p-10 rounded-xl">
-        <h1 className="text-h4 text-primary mb-5">Student Passers</h1>
+        <h1 className="text-h4 text-primary mb-5">Faculty Achievement</h1>
         <div className="flex items-end gap-3">
           <div className="mb-6 w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
               <div className="md:flex gap-3">
                 <Select
-                  value={selectedStudentId}
-                  options={studentOptions}
+                  value={selectedFacultyId}
+                  options={facultyMemberOption}
                   isClearable
-                  placeholder="Select or type to search a student"
-                  id="student_id"
-                  {...register('student_id', {
+                  placeholder="Select or type to search a faculty members"
+                  id="faculty_id"
+                  {...register('faculty_id', {
                     required: {
                       value: true,
-                      message: 'Student is required',
+                      message: 'Faculty is required',
                     },
                   })}
-                  onChange={(e) => handleInputChange('student_id', e)}
+                  onChange={(e) => handleInputChange('faculty_id', e)}
                   className="text-p mb-1 w-full lg:w-4/12 "
-                  styles={selectStyles('student_id')}
+                  styles={selectStyles('faculty_id')}
                 />
 
                 <Select
-                  value={selectedExamType}
-                  options={examTypeOption}
+                  value={selectedAchievementType}
+                  options={achievementTypeOption}
                   isClearable
-                  placeholder="Select or type to search a examination"
-                  id="examTypeVal"
-                  {...register('examTypeVal', {
+                  placeholder="Select or type to search an achievement"
+                  id="achievementType"
+                  {...register('achievementType', {
                     required: {
                       value: true,
-                      message: 'Examination is required',
+                      message: 'Achievement is required',
                     },
                   })}
-                  onChange={(e) => handleInputChange('examTypeVal', e)}
+                  onChange={(e) => handleInputChange('achievementType', e)}
                   className="text-p mb-1 w-full lg:w-4/12 "
-                  styles={selectStyles('examTypeVal')}
+                  styles={selectStyles('achievementType')}
                 />
 
                 <input
-                  type="number" // Set the input type to "number" to allow only numeric values
-                  placeholder="Scores"
-                  id="scores"
+                  placeholder="Title"
+                  id="title"
                   // onChange={(e) => setName(e.target.value)}
                   className={`w-full lg:w-4/12 mb-1 bg-gray-50 border text-gray-900 text-p rounded-lg outline-none block p-2 ${
-                    errors.scores
+                    errors.title
                       ? 'border-red-500/[.55]  focus:ring-red-500 focus:border-red-500 '
                       : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 '
                   }`}
-                  {...register('scores', {
-                    required: 'Scores is required',
+                  {...register('title', {
+                    required: 'Title is required',
                     maxLength: {
                       value: 200,
                       message: 'Name must be a maximum of 200 characters',
                     },
                     // Add custom validation to check if the value is a valid number
-                    pattern: {
-                      value: /^[0-9]+$/, // Regular expression to match only numbers
-                      message: 'Please enter a valid number',
-                    },
                   })}
                 />
               </div>
               <div className="md:flex gap-3 mb-3 pl-1">
                 <div className="w-1/2">
-                  {errors.student_id && (
+                  {errors.faculty_id && (
                     <p className="text-sm font-poppins text-red-500 ">
-                      {errors.student_id.message}
+                      {errors.faculty_id.message}
                     </p>
                   )}
                 </div>
 
                 <div className="w-1/2">
-                  {errors.examTypeVal && (
+                  {errors.achievementType && (
                     <p className="text-sm font-poppins text-red-500 ">
-                      {errors.examTypeVal.message}
+                      {errors.achievementType.message}
                     </p>
                   )}
                 </div>
 
                 <div className="w-1/2">
-                  {errors.scores && (
+                  {errors.title && (
                     <p className="text-sm font-poppins text-red-500 ">
-                      {errors.scores.message}
+                      {errors.title.message}
                     </p>
                   )}
                 </div>
@@ -237,17 +236,19 @@ function StudentScreen() {
           {isLoading ? (
             'Loading...'
           ) : (
-            <StudentPasserList studentPassersList={studentPassersList.data} />
+            <FacultyAchievementList
+              facultyAchievementList={facultyAchievementList.data}
+            />
           )}
         </div>
-        {submitting && <Processing text="Adding the class" />}
+        {submitting && <Processing text="Adding the achievement" />}
       </div>
     </AdminLayout>
   );
 }
 
-StudentScreen.auth = {
+FacultyScreen.auth = {
   role: 'admin',
 };
 
-export default StudentScreen;
+export default FacultyScreen;

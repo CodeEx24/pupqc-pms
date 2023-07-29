@@ -7,12 +7,12 @@ const facultyAchievementSchema = new mongoose.Schema(
       ref: 'Teacher',
       required: true,
     },
-    achievement_type: {
-      type: 'String',
+    achievementType: {
+      type: String,
       required: true,
     },
     title: {
-      type: 'String',
+      type: String,
       required: true,
     },
     year: {

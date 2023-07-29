@@ -55,3 +55,23 @@ export const fetchStudentPassers = () => {
 export const fetchStudentPassersList = () => {
   return axios.get(`/api/admin/student/passers/list`);
 };
+
+export const fetchFacultyMembers = () => {
+  return axios.get(`/api/admin/faculty/members`);
+};
+
+export const fetchFacultyAchievementList = () => {
+  return axios.get(`/api/admin/faculty/achievement/list`);
+};
+
+export const fetchStudentPassersChart = () => {
+  return axios.get('/api/admin/student/passers/count');
+};
+
+export const fetchFacultyAchievementCount = () => {
+  return axios.get('/api/admin/faculty/achievement/count');
+};
+
+export const fetchStudentsPerformance = () => {
+  return axios.get('/api/admin/student/performance');
+};

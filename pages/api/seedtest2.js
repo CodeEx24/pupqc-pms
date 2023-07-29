@@ -1,32 +1,17 @@
-// /api/admin/teacher/facultytype - USED
-
+// import { data } from '@/utils/data';
 import db from '@/utils/db';
 import Teacher from '@/models/Teacher';
+import { teachers } from '@/utils/data/teachers';
 
 const handler = async (req, res) => {
   await db.connect();
 
-  try {
-    // Use the updateMany method to set the default facultyType for all faculty members
-    const updateResult = await Teacher.updateMany(
-      {},
-      { $set: { facultyType: 1 } }
-    );
+  await Teacher.deleteMany();
+  await Teacher.insertMany(teachers);
 
-    console.log('Update result:', updateResult); // Log the update result
+  await db.disconnect();
 
-    res.send({
-      message:
-        'All faculty members updated to have the default faculty type successfully.',
-    });
-  } catch (error) {
-    console.error('Error updating faculty members:', error);
-    res
-      .status(500)
-      .send({ error: 'An error occurred during faculty member update.' });
-  } finally {
-    await db.disconnect();
-  }
+  res.send({ message: '2nd set seeded successfully' });
 };
 
 export default handler;
